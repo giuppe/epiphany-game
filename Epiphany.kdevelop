@@ -8,8 +8,8 @@
     <ignoreparts>
       <part>KDevFileView</part>
     </ignoreparts>
-    <version></version>
-    <description></description>
+    <version/>
+    <description/>
   </general>
   <kdevautoproject>
     <general>
@@ -17,7 +17,8 @@
     </general>
     <run>
       <mainprogram>src/epiphany</mainprogram>
-      <programargs></programargs>
+      <programargs/>
+      <directoryradio>executable</directoryradio>
     </run>
     <makeenvvars>
       <envvar value="1" name="WANT_AUTOCONF_2_5" />
@@ -28,14 +29,18 @@
       <abortonerror>false</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin></makebin>
+      <makebin/>
+      <envvars>
+        <envvar value="1" name="WANT_AUTOCONF_2_5" />
+        <envvar value="1" name="WANT_AUTOMAKE_1_6" />
+      </envvars>
     </make>
   </kdevautoproject>
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs></programargs>
-      <gdbpath></gdbpath>
+      <programargs/>
+      <gdbpath/>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -62,8 +67,8 @@
     </classstore>
     <filetemplates>
       <choosefiles>false</choosefiles>
-      <interfaceURL></interfaceURL>
-      <implementationURL></implementationURL>
+      <interfaceURL/>
+      <implementationURL/>
       <interfacesuffix>.h</interfacesuffix>
       <implementationsuffix>.cpp</implementationsuffix>
       <lowercasefilenames>true</lowercasefilenames>
@@ -77,15 +82,39 @@
     <groups>
       <group pattern="src/*.cpp" name="source" />
       <group pattern="src/*.h" name="headers" />
+      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidenonlocation>false</hidenonlocation>
     </groups>
   </kdevfileview>
   <kdevcvs>
     <cvsoptions>-f</cvsoptions>
-    <commitoptions></commitoptions>
+    <commitoptions/>
     <updateoptions>-dP</updateoptions>
-    <addoptions></addoptions>
+    <addoptions/>
     <removeoptions>-f</removeoptions>
     <diffoptions>-u3 -p</diffoptions>
-    <logoptions></logoptions>
+    <logoptions/>
   </kdevcvs>
+  <kdevcvsservice>
+    <recursivewhenupdate>true</recursivewhenupdate>
+    <prunedirswhenupdate>true</prunedirswhenupdate>
+    <createdirswhenupdate>true</createdirswhenupdate>
+    <recursivewhencommitremove>true</recursivewhencommitremove>
+    <revertoptions>-C</revertoptions>
+  </kdevcvsservice>
+  <kdevcppsupport>
+    <references/>
+    <codecompletion>
+      <includeGlobalFunctions>true</includeGlobalFunctions>
+      <includeTypes>true</includeTypes>
+      <includeEnums>true</includeEnums>
+      <includeTypedefs>false</includeTypedefs>
+      <automaticCodeCompletion>true</automaticCodeCompletion>
+      <automaticArgumentsHint>true</automaticArgumentsHint>
+      <automaticHeaderCompletion>true</automaticHeaderCompletion>
+      <codeCompletionDelay>250</codeCompletionDelay>
+      <argumentsHintDelay>400</argumentsHintDelay>
+      <headerCompletionDelay>250</headerCompletionDelay>
+    </codecompletion>
+  </kdevcppsupport>
 </kdevelop>

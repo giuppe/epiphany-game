@@ -303,6 +303,7 @@ void Level::set_entity(Entity* ntt)
 {
 	m_entities_list.push_back(Ntt_pointer(*ntt));
 	m_entities_matrix[ntt->get_position_x()][ntt->get_position_y()]=ntt->get_id();
+  DEBOUT("setting entity to "<<ntt->get_position_x()<<", "<<ntt->get_position_y()<<"\n");
 }
 
 int Level::get_size_x()

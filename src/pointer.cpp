@@ -8,14 +8,14 @@ Ntt_pointer::Ntt_pointer(): m_referenced(false), m_pointer(0)
 
 Ntt_pointer::Ntt_pointer(Entity& ntt): m_pointer(&ntt), m_referenced(true)
 {
-
+       //DEBOUT("NTT_pointer::constr(Entity&)\n");
 }
 
 Ntt_pointer::Ntt_pointer(const Ntt_pointer& cpy)
 {
     m_pointer = cpy.m_pointer;
     m_referenced = cpy.m_referenced;
-    DEBOUT("NTT_pointer::copyconstr()\n");
+   // DEBOUT("NTT_pointer::copyconstr()\n");
 }
 
 Ntt_pointer::~Ntt_pointer()

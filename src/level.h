@@ -28,6 +28,7 @@
 
 class Entity;
 class Ntt_pointer;
+
 class Screen;
 class Sprite;
 class Entity_Player;

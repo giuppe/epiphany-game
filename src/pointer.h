@@ -5,6 +5,7 @@
 
 class Entity;
 
+
 class Ntt_pointer
 {
 private:
@@ -34,5 +35,5 @@ public:
       return 0;
     }
 };
-
+ 
 #endif // POINTER_H
