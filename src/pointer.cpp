@@ -15,7 +15,7 @@ Ntt_pointer::Ntt_pointer(const Ntt_pointer& cpy)
 {
     m_pointer = cpy.m_pointer;
     m_referenced = cpy.m_referenced;
-//		DEBOUT("NTT_pointer::copyconstr()\n");
+    DEBOUT("NTT_pointer::copyconstr()\n");
 }
 
 Ntt_pointer::~Ntt_pointer()
@@ -28,7 +28,10 @@ Ntt_pointer::~Ntt_pointer()
 Entity* Ntt_pointer::get_pointer()
 {
 	if(m_referenced==true)
+	{
 		return m_pointer;
+	}
+	DEBOUT("Warning: using non-referenced pointer");
 	return 0;
 }
 

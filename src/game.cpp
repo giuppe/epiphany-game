@@ -98,7 +98,7 @@ bool Game::main_loop()
 			{
 				get_keys();
 			}
-#if 0  
+
 			while(CL_System::get_time()-current_frame_time<msec_per_frame);
 			{
 				if(CL_System::get_time()-current_frame_time<msec_per_frame-10)
@@ -106,7 +106,7 @@ bool Game::main_loop()
 					CL_System::sleep(10);
 				}
 			}
-#endif
+
 		CL_System::keep_alive();
 		}
 
