@@ -1,7 +1,7 @@
 #!/bin/sh
-#rm -f config.cache
+rm -f config.cache
 autoheader
 #aclocal 
 autoconf
-automake -a
+automake -a --add-missing
 exit
