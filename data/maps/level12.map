@@ -1,0 +1,66 @@
+set name "level12";
+set author "Giuseppe Martino";
+set maxtime 90;
+line steel (1,10)(30,10);
+put grass (2,10);
+put flintstone (1,11);
+rect empty (1,1)(30,9);
+rect boulder (1,1)(10,9);
+
+#put wood (13,4);
+#put wood (13,6);
+put wood (11,2);
+#put wood (15,3);
+#put wood (15,7);
+#put wood (17,2);
+#put wood (17,8);
+
+#line peperon (30,1)(30,9);
+
+line steel (1,12)(15,12);
+line steel (17,12)(26,12);
+line steel (28,12)(30,12);
+line steel (18,13)(30,13);
+line empty (17,11)(30,11);
+put red_key (27,11);
+
+line steel (15,13)(15,30);
+line steel (17,13)(17,29);
+put red_door (15,21);
+
+rect empty (1,13)(14,18);
+rect brick (2,14)(12,16);
+rect empty (3,15)(10,14);
+
+line peperon (1,13)(1,30);
+put blue_key (7,21);
+
+line boulder (12,18)(12,24);
+line boulder (11,19)(11,23);
+line boulder (10,20)(10,22);
+line grass (10,21)(13,21);
+put sapphire (9,21);
+line flintstone (3,15)(3,28);
+line grass (4,15)(4,28);
+
+
+line steel (19,15)(19,30);
+line steel (21,14)(21,29);
+line steel (23,15)(23,30);
+line steel (25,14)(25,29);
+rect empty (26,14)(3,17);
+line steel (27,15)(27,29);
+put peperon (27,14);
+put peperon (27,30);
+line steel (29,15)(29,30);
+put blue_door (29,14);
+put empty (30,14);
+
+# start player at 27,5
+#rect flintstone (26,1)(5,9);
+#rect brick (27,4)(3,3);
+
+put player (27,5);
+put exit (30,30);
+save;
+set minscore "auto";

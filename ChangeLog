@@ -1,0 +1,156 @@
+
+Version 0.5.1:
+Fixed various bugs;
+
+Version 0.5.0:
+Added new levels (11-13);
+Changed maps format: now a map is a script compiled on-the-fly;
+Added entity Tomato;
+
+Version 0.4.2:
+Added Sample class;
+Fixed "playing a sample several times" bug;
+Several internal fixes;
+
+Version 0.4.1:
+Fixed segfault bug "no direction set";
+
+Version 0.4.0:
+Added class Menu;
+Added Menu gfx;
+General fixing and code cleaning;
+Changed maps management;
+added blue, green and yellow doors&keys;
+changed level 0;
+added time;
+added spriteset (skins) support;
+added sound support;
+added a few samples;
+
+
+Version 0.3.0:
+fixed odd behaviours of flintstones;
+fixed odd behaviours of entity_fallings;
+fixed odd behaviours of entity_peperon;
+changed doors functionality;
+Added new level (level 7);
+Added new level (level 8);
+Added new level (level 9);
+Added new level (level 10);
+Changes affecting gameplay(Player cannot run away when he touches a monster);
+Changed sprites for boulders;
+Changed sprites for emeralds;
+Changed sprites for sapphires;
+Changed sprites for flintstones;
+Changed sprites for exits;
+Added new entity (Steel);
+Added new entity (Wood);
+Changes affecting gameplay(increased frequency of keys acquiring);
+Added a virtual member in Entity (roll_on_me());
+
+
+
+Version 0.2.6:
+Added monster peperon;
+Added configuration file, for storing last unsolved level;
+Changes affecting gameplay (player cannot eat an emerald if it is falling);
+Added new level (level 6);
+
+Version 0.2.5:
+Changed level end policy;
+Added a nice "Credits page" :)
+Doors won't disappear when passed through;
+
+Version 0.2.4:
+Added support for snapping (eg. eating without moving);
+General bugfixing;
+
+Version 0.2.3:
+Added flintstones;
+Added support for score;
+Fixed several bugs ;)
+
+Version 0.2.2:
+Added doors and keys;
+Fixed several bugs;
+
+Version 0.2.1:
+Added basic menu system;
+Added some new levels;
+Fixed "draw_outside_screen" "not implemented feature" ;)
+Fixed several bugs;
+
+Version 0.2.0:
+Fixed "where_is_the_player_at_start?" bug;
+Added new levels;
+
+Version 0.2.0pre6: (not released)
+Changed structure used for object list;
+
+Version 0.2.0pre5: (not released)
+Changed no. of frame per animations (5->8);
+Added better synchronization for frames;
+Changed sprites for Entity::Player;
+Changed sprites for Entity::Boulder;
+Changed sprites for Entity::Exit;
+
+Version 0.2.0pre4: (not released)
+Added explosions (Entity_Explosion);
+Added subsprite support for animations;
+Added some sprite :)
+
+
+Version 0.2.0pre3: (not_released)
+Rewritten level management from scratch;
+Rewritten sprite management from scratch;
+Added support for a level bigger than screen;
+
+Version 0.2.0pre2: (not_released)
+
+Version 0.2.0pre1: (not released)
+
+Version 0.1.8:
+Added ResourceManager support;
+Enhanced demonstration level;
+
+Version 0.1.7:
+Fixed "Piled entity_falling" bug;
+Added a new funny level (Thanks to Giuseppe Martino);
+Heavly slowed the gameplay ;)
+
+Version 0.1.6:
+Added Win32 support (thanks to Kenneth Gangstoe)
+Added level loader (from file "level.map")
+Fixed "Exit-eating" bug
+
+Version 0.1.5:
+Rewritten classes interfaces;
+Added class Screen;
+Fixed "eating" bug;
+General fixing
+
+Version 0.1.4:
+Cleaned objects code;
+Fixed "tentacle-killing boulder" bug
+Fixed "boulder eating" bug
+Fixed and completed object Exit
+Now Entity_Falling objects roll if over others
+
+Version 0.1.3:
+Added collision checking (player vs. Boulder)
+Added objects interaction functions (Player::is_alive(), Emerald::eat(), etc) (done)
+Added Gem::Sapphire (value=3 color="blue")
+Changed Gem::Emerald color to "green"
+Now Player can move boulder
+Added object Exit
+
+Version 0.1.2:
+Added "Level flipping";
+Fixed "indestructible emerald" bug;
+Removed object list from class Game;
+
+Version 0.1.1:
+Added class Sprite for interaction level->screen
+
+Version 0.1.0:
+First release

@@ -1,0 +1,73 @@
+/***************************************************************************
+                          entity_boulder.cpp  -  description
+                             -------------------
+    begin                : Thu Sep 20 2001
+    copyright            : (C) 2001 by Giuseppe D'Aquì
+    email                : kumber@tiscalinet.it
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "dephine.h"
+#include "sprite.h"
+#include "entity.h"
+#include "entity_boulder.h"
+#include "entity_player.h"
+
+
+Entity_Boulder::Entity_Boulder(Level* level, unsigned int x, unsigned int y, Sprite& sprite)
+{
+	current_level=level;
+	m_position_x=x;
+	m_position_y=y;
+	m_type=BOULDER;
+	m_sprite=(sprite);
+	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
+	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
+	m_sprite.set_state(SP_STOP);
+	m_is_falling=false;
+	m_exists=true;
+
+		
+}
+
+void Entity_Boulder::check_and_do()
+{
+  bool was_falling=m_is_falling;
+	Entity_Falling::check_and_do();
+	if((was_falling==true)&&(m_is_falling==false))
+	{
+		current_level->get_sample(SFX_BOULDER_FALL)->play();
+	}
+}
+
+bool Entity_Boulder::pass_on_me(Direction d)
+{
+
+	if(((d==RIGHT)||(d==LEFT))&&(m_is_falling==false))
+	{
+		if((current_level->get_entity_id(get_position_x(), get_position_y(), d))==0)
+		{
+			move(d);
+			m_just_checked=true;
+				if((current_level->get_entity_id(get_position_x(), get_position_y(), DOWN))==0)
+					m_is_falling=true;		
+			return true;
+		}
+	}
+	return false;
+	
+}
+
+bool Entity_Boulder::explode()
+{
+	m_exists=false;
+	return true;
+}

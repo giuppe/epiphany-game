@@ -1,0 +1,129 @@
+/**** FILE UNDER CONSTRUCTION ****/
+
+/**** Epiphany Map File Description ****/
+// by denever
+
+A map file has writed in EMDL:
+
+Epiphany
+Map
+Definition
+Language
+
+EMDL has some easy commands.
+
+<command> <object> [(X,Y)];
+
+
+
+# this is a comment in EMDL
+
+Command set:
+
+set variable value;
+   ^        ^
+how to use variables:
+name      example: set name "ciao"; it sets name of map
+author    example: set author "denever"; it sets author of map 
+minscore  example: set minscore 23; it sets minimum score needed to win level
+maxtime   example: set maxtime 125; it sets countdown timer
+
+The objects that you can put on a map are:
+
+empty
+player
+grass 
+steel
+emerald
+boulder
+sapphire
+exit
+explosion
+red_door
+blue_door
+green_door
+yellow_door
+red_key
+blue_key
+green_key
+yellow_key
+flintstone
+peperon
+peperon_up
+peperon_right
+peperon_down
+peperon_left
+brick
+wood
+tomato
+tomato_up
+tomato_right
+tomato_down
+tomato_left
+
+# How to put an object onto a map
+# x is row number of map matrix
+# y is column number of map matrix 
+
+put <object> (x,y); 
+
+example: 
+
+put player (1,1);
+
+# How to put a line of objects onto a map
+# x1,y1 is the position of the beginning of line
+# x2,y2 is the position of the end of line
+
+line <object> (x1,y1)(x2,y2); 
+
+example: 
+line emerald (1,2)(1,20);
+
+
+# How to put a rect of objects onto a map
+# h is height of rect
+# w is width of rect
+# x y is position of upper left corner
+
+rect <object> (x,y)(h,w); 
+
+example: 
+
+rect peperon (3,3)(4,4);
+
+
+
+You can't use a map without a player or exit or both.
+
+Remember to write:
+
+put player (x,y);
+put exit (x1,y1); 
+
+at the end of map file, because these entities can be unintentionally overwritten
+by others!
+
+But without an overwrite check you can also make strage effects on a map.
+
+Example:
+
+rect grass (2,2)(12,12);
+rect peperon (3,3)(10,10); # note that this line overwrites previous
+rect grass (4,4)(8,8); # idem
+rect sapphire (5,5)(6,6); # idem  
+
+try to write this in a map file and feed it to epiphany....
+:)))
+
+
+Of course, there are some limitations:
+	-	there must be only one player per map;
+	-	there must be only one exit per map;
+	-	map borders are automagically made of steel;
+	-	map width and height must be 32 (but it really no matter, as epiphany 0.5.0 do not use this value);
+	-	the numbar of maps is hardcoded into an header... sorry, I'll fix it in the next release :)
+ciao
+quobod kumber@tiscalinet.it
+denever rdmartin@infinito.it
+PS: Send us your maps!! We want to play them... and maybe to insert them into the game :)
