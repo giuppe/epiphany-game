@@ -4,7 +4,7 @@ LDADD = -lclanSound -lclanDisplay -lclanApp -lclanCore
 bin_PROGRAMS = epiphany
 
 epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
-	levelmap.cpp epiconfig.cpp\
+	levelmap.cpp epiconfig.cpp entity_factory.cpp entity_manager.cpp \
 	spriteset.cpp game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp \
 	entities/entity_gem.cpp entities/entity_door.cpp  entities/entity_wood.cpp 			\
          entities/entity_brick.cpp  entities/entity_player.cpp  entities/entity_falling.cpp 		\

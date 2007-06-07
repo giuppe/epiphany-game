@@ -20,6 +20,7 @@
 #include <cmath>
 #include <fstream>
 #include "entity_type.h"
+#include "entity_factory.h"
 #include "entity.h"
 #include "entities/entity_player.h"
 #include "game.h"
@@ -514,6 +515,8 @@ Game::Game()
 	DEBOUT("Initing Screen...\n");
 	m_screen.init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
 	
+	Entity_Factory* entity_factory = Entity_Factory::instance();
+	entity_factory->set_spriteset(this->m_spriteset);
 	//DEBOUT("Exiting Game ctor... \n");
 	
 }

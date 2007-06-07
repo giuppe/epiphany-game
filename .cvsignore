@@ -1,0 +1,10 @@
+autom4te.cache
+Makefile
+*.in
+config.h
+missing
+depcomp
+install-sh
+config.status
+stamp-h1
+configure

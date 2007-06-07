@@ -117,7 +117,27 @@ bool Entity::set_position(unsigned int x, unsigned int y)
 	
 }
 
+bool Entity::set_initial_position(unsigned int x, unsigned int y)
+{
+	if(((x>=current_level->get_size_x())||(x<0))||((y>=current_level->get_size_y())||(y<0)))
+			return false;	
+//	current_level->get_entities_matrix()[m_position_x][m_position_y]=0;
+				
+//	m_set_position_x(x);
+//	m_set_position_y(y);
+	m_position_x=x;
+	m_position_y=y;
+	
+	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
+	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
+	m_sprite.set_state(SP_STOP);
+	
+	current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
+//	current_level->set_entity(this);
 
+	return true;
+	
+}
 
 	
 //la funzione move() serve a scegliere la funzione adatta a muoversi

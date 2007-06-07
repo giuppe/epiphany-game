@@ -18,6 +18,7 @@
 #include "dephine.h"
 #include "entity.h"
 #include "entity_all.h"
+#include "entity_factory.h"
 #include "level.h"
 #include "levelmap.h"
 #include "screen.h"
@@ -197,6 +198,24 @@ void Level::load_map(const char* map_path)
 
 void Level::set_entity(Entity_Type type, unsigned int x, unsigned int y)
 {
+		if(type==UNKNOWN)
+	{
+		return;
+	}
+	Entity_Factory* entity_factory = Entity_Factory::instance();
+	Entity* entity = entity_factory->create_entity(type, this);
+	entity->set_initial_position(x,y);
+	set_entity(entity);
+	
+	if(type == PLAYER)
+	{
+		m_player = (Entity_Player*)entity;
+	}
+	else if(type == EXIT)
+	{
+		m_exit = (Entity_Exit*) entity;
+	}
+	/*
 	//DEBOUT(type<<"\n");
 	switch(type)
 	{
@@ -289,6 +308,7 @@ void Level::set_entity(Entity_Type type, unsigned int x, unsigned int y)
 		//do nothing
 		break;
 	}
+	*/
 }
 /*
 void Level::set_player(Entity_Player* pl)

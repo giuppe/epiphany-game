@@ -90,6 +90,7 @@ public:
 	
 	bool set_position(unsigned int x, unsigned int y);
 
+	bool set_initial_position(unsigned int x, unsigned int y);
 	// Moving functions - one for every direction
 	
 	void move_up();
