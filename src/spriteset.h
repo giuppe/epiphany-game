@@ -23,7 +23,7 @@
 
 #ifndef SPRITESET_H
 #define SPRITESET_H
-class Game;
+
 
 
 class Spriteset
@@ -32,14 +32,14 @@ private:
 	
 	std::vector <Sprite> m_sprites;
 	
-	Game* m_game;
+
 	
-	CL_String m_spriteset;
+	CL_String m_spriteset_name;
 	
 public:
 	Spriteset();
 	
-	Spriteset(Game* game, CL_String spriteset);
+	Spriteset(CL_String spriteset_name);
 	
 	Sprite& get_sprite(Entity_Type n_sprite);
 	

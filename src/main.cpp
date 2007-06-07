@@ -52,9 +52,9 @@ class Epiphany_App : public CL_ClanApplication
 	//	DEBOUT("Calling CL_Display::set_videomode\n");
 		try
 		{
-			Game game;
+			Game* game = Game::instance();
 		
-			game.go();
+			game->go();
 			DEBOUT("Exiting game::go().\n");
 		}
 		catch(Common_Ex ex)

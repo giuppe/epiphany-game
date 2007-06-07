@@ -21,20 +21,17 @@
 #include <vector>
 #include "game.h"
 
+
 Sampleset::Sampleset()
 {
-}
 
-Sampleset::Sampleset(Game* game)
-{
-	m_game=game;
 	m_samples.resize(25);
 }
 
 void Sampleset::load_samples()
 {
 
-	CL_ResourceManager* res_manager=m_game->get_resource_manager();
+	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
 
 	try
 	{

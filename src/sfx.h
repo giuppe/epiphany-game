@@ -45,11 +45,11 @@ class Sampleset
 {
 private:
 	std::vector<Sample*> m_samples;
-	Game* m_game;
+	
 
 public:
 	Sampleset();
-	Sampleset(Game* game);
+	//Sampleset(Game* game);
 	void load_samples();
 	Sample* get_sample(Sample_Type sfx);
 };

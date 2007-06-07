@@ -25,7 +25,7 @@ class Game;
 class Menu
 {
 private:
-	Game* m_game;
+	//Game* m_game;
 
 	CL_Font* m_menu_font;
 
@@ -41,7 +41,7 @@ private:
 
 public:
 
-	Menu(Game* game, unsigned int total_levels, unsigned int unsolved_level);
+	Menu(unsigned int total_levels, unsigned int unsolved_level);
 
 	~Menu();
 

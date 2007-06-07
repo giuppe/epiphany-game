@@ -332,7 +332,7 @@ void Game::go()
 //	DEBOUT("Entering Game::go()...\n");
 	
 //	DEBOUT("Entering main loop...\n");
-	Menu menu(this, m_max_num_of_levels,m_unsolved_level);
+	Menu menu(m_max_num_of_levels,m_unsolved_level);
 
 	int play=menu.go();
 	
@@ -451,10 +451,10 @@ void Game::set_resource_manager()
 
 }
 
-Game::Game()
+void Game::init()
 {
 
-	DEBOUT("Entering Game ctor...\n");
+	DEBOUT("Entering Game::init()...\n");
 	DEBOUT("Loading default configuration values...\n");
 	m_config = Epiconfig::instance();
 	m_config->set_default_values();
@@ -489,7 +489,7 @@ Game::Game()
 		throw Common_Ex(ex.message.c_str());
 	}
 	
-	m_spriteset=Spriteset(this, "SPT");
+	m_spriteset=Spriteset("SPT");
 	DEBOUT("Loading sprites...\n");
 	try
 	{
@@ -667,6 +667,17 @@ CL_ResourceManager* Game::get_resource_manager()
 }
 
 
+Game* Game::_instance = 0;
 
+Game* Game::instance()
+{
+	if(_instance==0)
+	{
+		_instance=new Game();
+		_instance->init();
+
+	}
+	return _instance;
+}
 
 

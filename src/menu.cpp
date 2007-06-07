@@ -19,9 +19,9 @@
 #include "menu.h"
 #include "game.h"
 
-Menu::Menu(Game* game, unsigned int total_levels, unsigned int unsolved_level)
+Menu::Menu(unsigned int total_levels, unsigned int unsolved_level)
 {
-  m_game=game;
+  
 
   m_total_levels=total_levels;
 
@@ -29,7 +29,7 @@ Menu::Menu(Game* game, unsigned int total_levels, unsigned int unsolved_level)
 
   m_current_level=m_unsolved_level;
 
-	CL_ResourceManager* res_manager=m_game->get_resource_manager();
+	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
 
 	m_menu_font=CL_Font::load("Fonts/FNT_Menu", res_manager);
 

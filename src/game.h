@@ -72,7 +72,9 @@ private:
 
 public:
 
-	Game();
+	Game(){};
+	
+	void init();
 	
 	void go();
 	
@@ -100,7 +102,19 @@ public:
 	void set_resource_manager();
 	
 //	int menu(); //return false if "quit", else set the number of level
-	
+	// begin Singleton stuff
+
+private:
+
+	static Game* _instance;
+
+/*protected:
+
+	Entity_Factory(){};
+*/
+public:
+
+	static Game* instance();
 
 };
 

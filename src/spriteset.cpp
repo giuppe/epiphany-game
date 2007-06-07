@@ -28,12 +28,12 @@ Spriteset::Spriteset()
 
 
 
-Spriteset::Spriteset(Game* game, CL_String spriteset)
+Spriteset::Spriteset(CL_String spriteset)
 {
   DEBOUT("Entering Spriteset ctor...\n");
-	m_game=game;
+
 	
-	m_spriteset=spriteset;
+	m_spriteset_name=spriteset;
 	
 	m_sprites.resize(256);
   DEBOUT("Exiting Spriteset ctor...\n");
@@ -55,9 +55,9 @@ Sprite& Spriteset::get_sprite(Entity_Type n_type)
 void Spriteset::load_sprites()
 {
 	
-	CL_ResourceManager* res_manag=m_game->get_resource_manager();
+	CL_ResourceManager* res_manag=Game::instance()->get_resource_manager();
 	
-	CL_String surface_path=CL_String("Surfaces/")+m_spriteset+CL_String("_");
+	CL_String surface_path=CL_String("Surfaces/")+m_spriteset_name+CL_String("_");
 
 	m_sprites[UNKNOWN]=(Sprite(new CL_Surface(surface_path+"Unknown", res_manag)));
 	
