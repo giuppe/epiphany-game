@@ -18,6 +18,7 @@
 #include "dephine.h"
 #include "direction.h"
 #include "entity_type.h"
+#include "entity_manager.h"
 #include "spriteset.h"
 #include <vector>
 #include "sfx.h"
@@ -39,8 +40,9 @@ class Level
 {
 private:
 
-	std::vector<Ntt_pointer> m_entities_list;
-	std::vector<std::vector<int> > m_entities_matrix;
+	//std::vector<Ntt_pointer> m_entities_list;
+	
+	std::vector<std::vector<Entity_Handle> > m_entities_matrix;
 	Entity_Player* m_player;
 	Entity_Exit* m_exit;
 	Spriteset& m_spriteset;
@@ -51,12 +53,12 @@ private:
 	void set_entity(Entity*);
 public:
 	Level(Spriteset& sprites, Sampleset& samples);
-	int get_entity_id(int x, int y);
-	int get_entity_id(int x, int y, Direction d);
+	//int get_entity_id(int x, int y);
+	//int get_entity_id(int x, int y, Direction d);
 	Entity_Player& get_player();
-	Ntt_pointer& get_entity(int ntt_id);
-	Ntt_pointer& get_entity(int x, int y);
-	Ntt_pointer& get_entity(int x, int y, Direction d);
+	//Ntt_pointer& get_entity(int ntt_id);
+	Entity_Handle get_entity(int x, int y);
+	Entity_Handle get_entity(int x, int y, Direction d);
 	void load_map(const char* path);
 	int get_size_x();
 	int get_size_y();
@@ -64,8 +66,8 @@ public:
 
 	void set_entity(Entity_Type type, unsigned int x, unsigned int y);
 	Sprite& get_sprite(Entity*);
-	std::vector<Ntt_pointer>& get_entities_list();
-	std::vector<std::vector<int> >& get_entities_matrix();
+	//std::vector<Entity_Handle>& get_entities_list();
+	std::vector<std::vector<Entity_Handle> >& get_entities_matrix();
 	void set_key(unsigned int);
 	unsigned int get_acquired_keys();
 	Sprite& get_sprite(Entity_Type entity_type);

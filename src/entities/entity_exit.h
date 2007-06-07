@@ -46,7 +46,7 @@ public:
 	
 	unsigned int get_min_score();
 	
-	bool smash(Ntt_pointer&){return false;};
+	bool smash(Entity_Handle){return false;};
 	
 	bool explode();
 

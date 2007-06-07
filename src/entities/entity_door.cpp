@@ -61,7 +61,7 @@ bool Entity_Door::pass_on_me(Direction d)
 	if(m_is_open)
 	{
 //		kill();
-		if(current_level->get_entity(m_position_x, m_position_y, d).is_referenced()==false)
+		if(current_level->get_entity(m_position_x, m_position_y, d)==0)
 		{
 			current_level->get_player().set_speed(2);
 			current_level->get_player().move(d);

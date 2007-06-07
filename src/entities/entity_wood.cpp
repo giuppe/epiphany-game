@@ -41,7 +41,7 @@ bool Entity_Wood::explode()
 	return true;
 }
 
-bool Entity_Wood::smash(Ntt_pointer&)
+bool Entity_Wood::smash(Entity_Handle)
 {
 	current_level->get_sample(SFX_WOOD_SMASH)->play();
 	return false;

@@ -20,18 +20,23 @@
 #include "entity.h"
 #include "pointer.h"
 
-int glb_curr_id=1;
+//int glb_curr_id=1;
 
 Entity::Entity()
 {
-	m_id=glb_curr_id;
-	glb_curr_id++;
+	//m_id=glb_curr_id;
+	//glb_curr_id++;
 	set_speed(1);
 	m_just_checked=false;
 	
 }
 
-int Entity::get_id()
+void Entity::set_id(Entity_Handle handle)
+{
+	m_id = handle;
+}
+
+Entity_Handle Entity::get_id()
 {
 	return m_id;
 }
@@ -132,7 +137,7 @@ bool Entity::set_initial_position(unsigned int x, unsigned int y)
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	
-	current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
+	//current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
 //	current_level->set_entity(this);
 
 	return true;
@@ -144,7 +149,7 @@ bool Entity::set_initial_position(unsigned int x, unsigned int y)
 void Entity::move(Direction direction)
 {
 	#ifdef DEBUG_MODE
-		if(current_level->get_entity(m_position_x, m_position_y, direction).is_referenced())
+		if(current_level->get_entity(m_position_x, m_position_y, direction)!=0)
 			DEBOUT("Alert: moving over a referenced entity: from ("<<m_position_x<<", "<<m_position_y<<"), dir: "<<direction<<"\n");
 	#endif
 		switch(direction)

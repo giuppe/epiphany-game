@@ -19,6 +19,7 @@
 #include "sprite.h"
 #include "entity.h"
 #include "entity_flintstone.h"
+#include "entity_manager.h"
 #include "entity_player.h"
 
 
@@ -68,7 +69,7 @@ void Entity_Flintstone::check_and_do()
 	}
 
 
-	int down_entity_id=current_level->get_entity_id(m_position_x,m_position_y, DOWN);
+	Entity_Handle down_entity_id=current_level->get_entity(m_position_x,m_position_y, DOWN);
 	if(down_entity_id!=0)
 	{
 		if(m_is_falling)
@@ -93,11 +94,11 @@ bool Entity_Flintstone::pass_on_me(Direction d)
 
 	if(((d==RIGHT)||(d==LEFT))&&(m_is_falling==false))
 	{
-		if((current_level->get_entity_id(get_position_x(), get_position_y(), d))==0)
+		if((current_level->get_entity(get_position_x(), get_position_y(), d))==0)
 		{
 			move(d);
 			m_just_checked=true;
-				if((current_level->get_entity_id(get_position_x(), get_position_y(), DOWN))==0)
+				if((current_level->get_entity(get_position_x(), get_position_y(), DOWN))==0)
 					m_is_falling=true;		
 			return true;
 		}
@@ -105,10 +106,10 @@ bool Entity_Flintstone::pass_on_me(Direction d)
 	return false;
 }
 
-bool Entity_Flintstone::smash(Ntt_pointer& smasher)
+bool Entity_Flintstone::smash(Entity_Handle smasher)
 {
 	//kill();
-	if(smasher->get_type()==BOULDER)
+	if(Entity_Manager::instance()->get_entity(smasher)->get_type()==BOULDER)
 		current_level->explode(m_position_x, m_position_y);
 	return false;
 }

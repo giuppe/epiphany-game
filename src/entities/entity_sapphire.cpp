@@ -19,6 +19,7 @@
 #include "sprite.h"
 #include "entity.h"
 #include "entity_sapphire.h"
+#include "entity_manager.h"
 #include "entity_player.h"
 #include "entity_all.h"
 
@@ -65,11 +66,11 @@ bool Entity_Sapphire::pass_on_me(Direction d)
 	if(m_is_falling==true)
 		return false;
 		
-	int up_entity_id=current_level->get_entity_id(m_position_x, m_position_y, UP);
+	Entity_Handle up_entity_id=current_level->get_entity(m_position_x, m_position_y, UP);
 	if(up_entity_id!=0)
 	{
-		Ntt_pointer up_entity=current_level->get_entity(up_entity_id);
-		Entity_Falling* up_fall_entity=dynamic_cast<Entity_Falling*>(up_entity.get_pointer());
+		//Ntt_pointer up_entity=current_level->get_entity(up_entity_id);
+		Entity_Falling* up_fall_entity=dynamic_cast<Entity_Falling*>(Entity_Manager::instance()->get_entity(up_entity_id));
 		if((up_fall_entity)&&(up_fall_entity->is_falling()))
 			return false;
 	}
@@ -81,9 +82,9 @@ bool Entity_Sapphire::pass_on_me(Direction d)
 	
 }
 
-bool Entity_Sapphire::smash(Ntt_pointer& ntt)
+bool Entity_Sapphire::smash(Entity_Handle ntt)
 {
-	if(ntt->get_type()==BOULDER)
+	if(Entity_Manager::instance()->get_entity(ntt)->get_type()==BOULDER)
 	{
 		current_level->explode(m_position_x,m_position_y);
 

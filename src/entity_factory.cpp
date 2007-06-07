@@ -17,7 +17,7 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 	switch(type)
 	{
 	case UNKNOWN:
-	//do nothing
+		entity = new Entity_Unknown();
 		break;
 	case PLAYER:
 		entity=new Entity_Player(level,x,y,m_spriteset.get_sprite(PLAYER));

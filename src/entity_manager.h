@@ -21,6 +21,9 @@ public:
 	
 	Entity_Handle add_entity(Entity* entity);
 	
+	int size(){return m_entities.size();}
+	
+	void reset();
 	
 	    // begin Singleton stuff
 

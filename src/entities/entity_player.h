@@ -54,7 +54,7 @@ public:
 	
 	unsigned int get_score();		
 	
-	bool smash(Ntt_pointer&);
+	bool smash(Entity_Handle);
 	
 	void inc_score(int score);
 	

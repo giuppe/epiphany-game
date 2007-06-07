@@ -39,7 +39,7 @@ protected:
 
 	bool m_just_checked;
 
-	int m_id;
+	Entity_Handle m_id;
 	
 	Entity_Type m_type;
 	
@@ -62,7 +62,9 @@ public:
 
 	Entity();	
 
-	int get_id();
+	Entity_Handle get_id();
+	
+	void set_id(Entity_Handle handle);
 
 	unsigned int get_position_x();
 	
@@ -112,7 +114,7 @@ public:
 	//and generally it contains some checks and calling to moving_functions
 		virtual void check_and_do()=0;
 		virtual bool pass_on_me(Direction d=STOP)=0;
-		virtual bool smash(Ntt_pointer&)=0;
+		virtual bool smash(Entity_Handle ntt)=0;
 		virtual bool explode()=0;
 		virtual bool roll_on_me()=0;
 };

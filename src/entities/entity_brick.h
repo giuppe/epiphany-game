@@ -37,7 +37,7 @@ public:
 
 	bool pass_on_me(Direction d){return false;}
 	
-	bool smash(Ntt_pointer&){return false;};
+	bool smash(Entity_Handle){return false;};
 	
 	bool explode();
 	

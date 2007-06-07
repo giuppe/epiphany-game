@@ -19,6 +19,7 @@
 #define ENTITY_ALL_H
 
 #include "pointer.h"
+#include "entities/entity_unknown.h"
 #include "entities/entity_player.h"
 #include "entities/entity_gem.h"
 #include "entities/entity_emerald.h"

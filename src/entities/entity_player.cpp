@@ -18,6 +18,7 @@
 #include "dephine.h"
 #include "sprite.h"
 #include "entity.h"
+#include "entity_manager.h"
 
 #include "entity_all.h"
 
@@ -95,12 +96,12 @@ void Entity_Player::check_and_do()
 	{
 		m_sprite.set_state(SP_STOP);
 	}
-	Ntt_pointer neigh_entity;	
+	Entity* neigh_entity;	
 	
-	int neigh_entity_id=current_level->get_entity_id(m_position_x,m_position_y, m_direction);
+	Entity_Handle neigh_entity_id=current_level->get_entity(m_position_x,m_position_y, m_direction);
 	if(neigh_entity_id!=0)
 	{
-		neigh_entity=current_level->get_entity(neigh_entity_id);
+		neigh_entity=Entity_Manager::instance()->get_entity(neigh_entity_id);
 		if(neigh_entity->pass_on_me(m_direction))
 		{
 			if(!m_is_snapping)
@@ -163,7 +164,7 @@ bool Entity_Player::is_exited()
 	
 }
 
-bool Entity_Player::smash(Ntt_pointer& ntt)
+bool Entity_Player::smash(Entity_Handle ntt)
 {
 	current_level->explode(m_position_x,m_position_y);
 

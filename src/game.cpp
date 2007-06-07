@@ -182,8 +182,8 @@ void Game::get_keys()
 
 void Game::move_all()
 {
-	std::vector<Ntt_pointer>& list=m_level->get_entities_list();
-	std::vector< std::vector<int> >& matrix=m_level->get_entities_matrix();
+	//std::vector<Ntt_pointer>& list=m_level->get_entities_list();
+	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
 	m_level->get_player().set_speed(1);
 
@@ -195,23 +195,26 @@ void Game::move_all()
 			matrix[x][y]=0;
 		}
 	}
-	
-	for(i=1; i<list.size(); i++)
+	Entity* curr_entity;
+	for(i=1; i<Entity_Manager::instance()->size(); i++)
 	{	
-		if((list[i].is_referenced())&&(list[i]->exists()))
+		curr_entity = Entity_Manager::instance()->get_entity(i);
+		if(curr_entity->exists())
 		{
-			list[i]->set_checked(false);
-			matrix[list[i]->get_position_x()][list[i]->get_position_y()]=list[i]->get_id();
+			curr_entity->set_checked(false);
+			matrix[curr_entity->get_position_x()][curr_entity->get_position_y()]=i;
 		}
 	}
 	
 	
-	for(i=1; i<list.size(); i++)
+	for(i=1; i<Entity_Manager::instance()->size(); i++)
 	{
-		if((list[i].is_referenced())&&(list[i]->exists()))
+		curr_entity = Entity_Manager::instance()->get_entity(i);
+		
+		if(curr_entity->exists())
 		{
-			if((list[i]->get_type()!=PLAYER)||(list[i]->get_type()!=STEEL))
-				list[i]->check_and_do();
+			if((curr_entity->get_type()!=PLAYER)||(curr_entity->get_type()!=STEEL))
+				curr_entity->check_and_do();
 		}
 	}
 	
@@ -227,10 +230,10 @@ void Game::draw(int frame_number)
 {
 
 
-	std::vector<Ntt_pointer>& list=m_level->get_entities_list();
+	//std::vector<Ntt_pointer>& list=m_level->get_entities_list();
 
-	Ntt_pointer curr_ntt;
-
+	//Ntt_pointer curr_ntt;
+	Entity* curr_ntt;
 
 	CL_Display::clear_display(0.0, 0.0, 0.0, 1.0);
 
@@ -246,10 +249,10 @@ void Game::draw(int frame_number)
 	}
 
 	//draw other entities
-	for(unsigned int i=1; i<list.size(); i++)
+	for(unsigned int i=1; i<Entity_Manager::instance()->size(); i++)
 	{
-		curr_ntt=list[i];
-		if((curr_ntt.is_referenced())&&(curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		curr_ntt=Entity_Manager::instance()->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
 			curr_ntt->get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
 			curr_ntt->get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
@@ -340,6 +343,7 @@ void Game::go()
   {
   	if(play==0)
   	{
+  		
   		m_level=new Level(m_spriteset, m_sampleset);
   		
   		CL_String current_level_path(m_resource_path);
@@ -501,7 +505,7 @@ void Game::init()
 	}
 	DEBOUT("Loading samples...\n");
 	
-	m_sampleset=Sampleset(this);
+	m_sampleset=Sampleset();
 	try
 	{
 		m_sampleset.load_samples();

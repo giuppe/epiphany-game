@@ -31,7 +31,7 @@ public:
 	
 	void check_and_do(){};
 	
-	bool smash(Ntt_pointer&){return false;};
+	bool smash(Entity_Handle){return false;};
 	
 	bool explode();
 	

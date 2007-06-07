@@ -19,6 +19,7 @@
 #include "entity.h"
 #include "entity_monster.h"
 #include "entity_peperon.h"
+#include "entity_manager.h"
 #include "entity_player.h"
 
 Entity_Peperon::Entity_Peperon(Level* level, unsigned int x, unsigned int y, Sprite& sprite, Direction direction)
@@ -52,15 +53,15 @@ void Entity_Peperon::check_and_do()
 		return;
 	}
 	
-	unsigned int up_entity_id=current_level->get_entity_id(m_position_x, m_position_y, UP);	
-	unsigned int right_entity_id=current_level->get_entity_id(m_position_x, m_position_y, RIGHT);
-	unsigned int down_entity_id=current_level->get_entity_id(m_position_x, m_position_y, DOWN);
-	unsigned int left_entity_id=current_level->get_entity_id(m_position_x, m_position_y, LEFT);
+	Entity_Handle up_entity_id=current_level->get_entity(m_position_x, m_position_y, UP);	
+	Entity_Handle right_entity_id=current_level->get_entity(m_position_x, m_position_y, RIGHT);
+	Entity_Handle down_entity_id=current_level->get_entity(m_position_x, m_position_y, DOWN);
+	Entity_Handle left_entity_id=current_level->get_entity(m_position_x, m_position_y, LEFT);
 	
-	if(((up_entity_id!=0)&&(current_level->get_entity(up_entity_id)->get_type()==PLAYER))||
-		((right_entity_id!=0)&&(current_level->get_entity(right_entity_id)->get_type()==PLAYER))||
-		((down_entity_id!=0)&&(current_level->get_entity(down_entity_id)->get_type()==PLAYER))||
-		((left_entity_id!=0)&&(current_level->get_entity(left_entity_id)->get_type()==PLAYER)))
+	if(((up_entity_id!=0)&&(Entity_Manager::instance()->get_entity(up_entity_id)->get_type()==PLAYER))||
+		((right_entity_id!=0)&&(Entity_Manager::instance()->get_entity(right_entity_id)->get_type()==PLAYER))||
+		((down_entity_id!=0)&&(Entity_Manager::instance()->get_entity(down_entity_id)->get_type()==PLAYER))||
+		((left_entity_id!=0)&&(Entity_Manager::instance()->get_entity(left_entity_id)->get_type()==PLAYER)))
 	{
 		kill();
 		current_level->get_player().set_direction(STOP);
@@ -144,7 +145,7 @@ void Entity_Peperon::check_and_do()
 	default:
 		m_sprite.set_state(SP_STOP);
 	}
-	if(current_level->get_entity_id(m_position_x, m_position_y, m_direction)==0)
+	if(current_level->get_entity(m_position_x, m_position_y, m_direction)==0)
 	{
 		if(!(current_level->get_sample(SFX_MONSTER_MOVE)->is_playing()))
 		{
@@ -157,9 +158,9 @@ void Entity_Peperon::check_and_do()
 	m_just_checked=true;
 }
 	
-bool Entity_Peperon::smash(Ntt_pointer& smasher)
+bool Entity_Peperon::smash(Entity_Handle smasher)
 {
-	if(smasher->get_type()==BOULDER)
+	if(Entity_Manager::instance()->get_entity(smasher)->get_type()==BOULDER)
 	{
 		kill();
 		

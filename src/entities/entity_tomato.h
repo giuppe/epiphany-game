@@ -29,7 +29,7 @@ public:
 	
 	void check_and_do();
 	
-	bool smash(Ntt_pointer&);
+	bool smash(Entity_Handle);
 	
 	bool pass_on_me(Direction);
 	

@@ -19,6 +19,7 @@
 #include "entity.h"
 #include "entity_all.h"
 #include "entity_factory.h"
+#include "entity_manager.h"
 #include "level.h"
 #include "levelmap.h"
 #include "screen.h"
@@ -36,13 +37,24 @@ Level::Level(Spriteset& spriteset, Sampleset& sampleset):m_spriteset(spriteset),
 	
 	//pushing back entity with id=0
 	
-	m_entities_list.push_back(Ntt_pointer());
+	//m_entities_list.push_back(Ntt_pointer());
+	
 	m_entities_matrix.resize(Epiconfig::instance()->get_level_size_x());
 	for(int i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
 	{
 		m_entities_matrix[i].resize(Epiconfig::instance()->get_level_size_y());
+		
 	}
-	glb_curr_id=1;
+	
+	for(int x=0; x<Epiconfig::instance()->get_level_size_x(); x++)
+	for(int y=0; y<Epiconfig::instance()->get_level_size_y(); y++)
+	{
+		m_entities_matrix[x][y] = 0;
+	}
+	
+	Entity_Manager::instance()->reset();
+	
+	//glb_curr_id=1;
 	m_acquired_keys=0;
 	m_min_score=0;
 	
@@ -53,7 +65,8 @@ void Level::set_key(unsigned int key)
 	m_acquired_keys=m_acquired_keys|key;
 }
 
-int Level::get_entity_id(int x, int y)
+/*
+ int Level::get_entity_id(int x, int y)
 {
 	//HCKSMTHNGHR
 	//check limits
@@ -112,18 +125,19 @@ int Level::get_entity_id(int x, int y, Direction d)
 	
 	return get_entity_id(x+dx, y+dy);
 }
-
-Ntt_pointer& Level::get_entity(int ntt_id)
+*/
+/*Ntt_pointer& Level::get_entity(int ntt_id)
 {
-	return m_entities_list[ntt_id];
+	//return m_entities_list[ntt_id];
+	return Entity_Manager::instance()->get_entity(ntt_id);
+}*/
+
+Entity_Handle Level::get_entity(int x, int y)
+{
+	return m_entities_matrix[x][y];
 }
 
-Ntt_pointer& Level::get_entity(int x, int y)
-{
-	return m_entities_list[m_entities_matrix[x][y]];
-}
-
-Ntt_pointer& Level::get_entity(int x, int y, Direction d)
+Entity_Handle Level::get_entity(int x, int y, Direction d)
 {
 	int dx, dy;
 	
@@ -172,12 +186,12 @@ Ntt_pointer& Level::get_entity(int x, int y, Direction d)
 
 }
 
-
-std::vector<Ntt_pointer>& Level::get_entities_list()
+/*
+std::vector<Entity_Handle>& Level::get_entities_list()
 {
 	return m_entities_list;
 }
-
+*/
 void Level::load_map(const char* map_path)
 {
 	Entity_Player* pl;	
@@ -321,8 +335,10 @@ void Level::set_player(Entity_Player* pl)
 */
 void Level::set_entity(Entity* ntt)
 {
-	m_entities_list.push_back(Ntt_pointer(*ntt));
-	m_entities_matrix[ntt->get_position_x()][ntt->get_position_y()]=ntt->get_id();
+	//m_entities_list.push_back(Ntt_pointer(*ntt));
+	Entity_Handle e_handle = Entity_Manager::instance()->add_entity(ntt);
+	ntt->set_id(e_handle);
+	m_entities_matrix[ntt->get_position_x()][ntt->get_position_y()]=e_handle;
   //DEBOUT("setting entity to "<<ntt->get_position_x()<<", "<<ntt->get_position_y()<<"\n");
 }
 
@@ -336,7 +352,7 @@ int Level::get_size_y()
 	return Epiconfig::instance()->get_level_size_y();
 }
 
-std::vector<std::vector<int> >& Level::get_entities_matrix()
+std::vector<std::vector<Entity_Handle> >& Level::get_entities_matrix()
 {
 	return m_entities_matrix;
 }
@@ -368,7 +384,7 @@ void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
 {
 
 //	Ntt_pointer& curr_ntt=m_entities_list[m_entities_matrix[x][y]];
-	Ntt_pointer& curr_ntt=get_entity(x,y);
+	Entity_Handle curr_ntt=get_entity(x,y);
  /*
 	if(((curr_ntt.is_referenced())&&(curr_ntt->exists()))&&(!curr_ntt->explode()))
 	{
@@ -378,15 +394,16 @@ void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
 		set_entity(new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION), transform_to));	
 	}
 */	
-	if(curr_ntt.is_referenced())
+	if(curr_ntt != 0)
 	{
+		Entity* curr_entity = Entity_Manager::instance()->get_entity(curr_ntt);
 	//	DEBOUT("Entering Level::explode("<<x<<", "<<y<<")\n");
 	//	DEBOUT("id: "<<m_entities_matrix[x][y]<<"\n");
 	//	DEBOUT("curr_ntt: id="<<curr_ntt->get_id()<<")\n");
-		if(curr_ntt->exists())
+		if(curr_entity->exists())
 		{
 	
-			bool result=curr_ntt->explode();
+			bool result=curr_entity->explode();
 	//		DEBOUT("result of explode="<<result<<"\n");
 			if(result)
 			{
