@@ -21,7 +21,7 @@
 #include "pointer.h"
 #include "entity_type.h"
 
-Entity_Explosion::Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite, Entity_Type transform_to)
+Entity_Explosion::Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite)
 {
 	current_level=level;
 	m_position_x=x;
@@ -33,7 +33,7 @@ Entity_Explosion::Entity_Explosion(Level* level, unsigned int x, unsigned int y,
 //	m_sprite.move_to_pos(m_position_x*k_sprite_size,m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
-	m_transform_to=transform_to;
+	m_transform_to=UNKNOWN;
 	m_existing_count=1;
 
 //	m_is_exploding=false;
@@ -77,4 +77,10 @@ bool Entity_Explosion::explode()
 
 	return true;
 }
+
+void Entity_Explosion::set_transform_to(Entity_Type transform_to)
+{
+	m_transform_to = transform_to;
+}
+
 

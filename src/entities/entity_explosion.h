@@ -32,7 +32,7 @@ private:
 	
 public:
 	
-	Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite, Entity_Type transform_to=UNKNOWN);
+	Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
 		
 	void check_and_do();
 	
@@ -46,6 +46,7 @@ public:
 	
 	bool roll_on_me(){return false;};
 	
+	void set_transform_to(Entity_Type transform_to);
 };
 
 #endif //ENTITY_EXPLOSION

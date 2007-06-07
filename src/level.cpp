@@ -407,17 +407,23 @@ void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
 	//		DEBOUT("result of explode="<<result<<"\n");
 			if(result)
 			{
-				set_entity(new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION), transform_to));
+				Entity_Explosion* explosion = new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION));
+				explosion->set_transform_to(transform_to); 
+				set_entity(explosion);
 			}
 		}
 		else
 		{
-			set_entity(new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION),transform_to));
+			Entity_Explosion* explosion = new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION));
+				explosion->set_transform_to(transform_to); 
+			set_entity(explosion);
 		}
 	}
 	else
 	{
-			set_entity(new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION), transform_to));
+		Entity_Explosion* explosion = new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION));
+				explosion->set_transform_to(transform_to); 
+			set_entity(explosion);
 	}
 		
 }

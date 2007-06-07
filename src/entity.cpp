@@ -115,6 +115,8 @@ bool Entity::set_position(unsigned int x, unsigned int y)
 	m_position_x=x;
 	m_position_y=y;
 	
+	
+	//This fix a bug
 	current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
 //	current_level->set_entity(this);
 
