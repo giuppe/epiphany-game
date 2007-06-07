@@ -18,7 +18,7 @@
 
 
 #include "entity.h"
-#include "pointer.h"
+
 #include "entity_falling.h"
 
 #ifndef ENTITY_FLINTSTONE_H

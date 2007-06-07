@@ -17,7 +17,7 @@
 
 
 #include "entity.h"
-#include "pointer.h"
+
 #include "entity_falling.h"
 
 #ifndef ENTITY_BOULDER_H

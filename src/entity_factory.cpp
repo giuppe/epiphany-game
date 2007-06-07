@@ -102,7 +102,7 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 		entity=new Entity_Tomato(level,x,y,m_spriteset.get_sprite(TOMATO),LEFT);
 		break;
 	case EXPLOSION:
-		//FIXME add explosion
+		entity = new Entity_Explosion(level,x,y,m_spriteset.get_sprite(EXPLOSION));
 	default:
 		//do nothing
 		break;

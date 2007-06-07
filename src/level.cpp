@@ -65,72 +65,7 @@ void Level::set_key(unsigned int key)
 	m_acquired_keys=m_acquired_keys|key;
 }
 
-/*
- int Level::get_entity_id(int x, int y)
-{
-	//HCKSMTHNGHR
-	//check limits
-	if((x<0)||(y<0))
-	{
-		DEBOUT("Something outside limits...\n");
-		return 0;
-	}
-	return m_entities_matrix[x][y];
-}
 
-int Level::get_entity_id(int x, int y, Direction d)
-{
-	int dx, dy;
-	
-	switch(d)
-	{
-	case STOP:
-		dx=0;
-		dy=0;
-		break;
-	case UP:
-		dx=0;
-		dy=-1;
-		break;
-	case UPRIGHT:
-		dx=1;
-		dy=-1;
-		break;	
-	case RIGHT:
-		dx=1;
-		dy=0;
-		break;
-	case DOWNRIGHT:
-		dx=1;
-		dy=1;
-		break;	
-	case DOWN:
-		dx=0;
-		dy=1;
-		break;
-	case DOWNLEFT:
-		dx=-1;
-		dy=1;
-		break;	
-	case LEFT:
-		dx=-1;
-		dy=0;
-		break;
-	case UPLEFT:
-		dx=-1;
-		dy=-1;
-		break;	
-	
-	}
-	
-	return get_entity_id(x+dx, y+dy);
-}
-*/
-/*Ntt_pointer& Level::get_entity(int ntt_id)
-{
-	//return m_entities_list[ntt_id];
-	return Entity_Manager::instance()->get_entity(ntt_id);
-}*/
 
 Entity_Handle Level::get_entity(int x, int y)
 {
@@ -186,12 +121,7 @@ Entity_Handle Level::get_entity(int x, int y, Direction d)
 
 }
 
-/*
-std::vector<Entity_Handle>& Level::get_entities_list()
-{
-	return m_entities_list;
-}
-*/
+
 void Level::load_map(const char* map_path)
 {
 	Entity_Player* pl;	
@@ -229,110 +159,10 @@ void Level::set_entity(Entity_Type type, unsigned int x, unsigned int y)
 	{
 		m_exit = (Entity_Exit*) entity;
 	}
-	/*
-	//DEBOUT(type<<"\n");
-	switch(type)
-	{
-	case UNKNOWN:
-	//do nothing
-		break;
-	case PLAYER:
-		m_player=new Entity_Player(this,x,y,m_spriteset.get_sprite(PLAYER));
-		set_entity(m_player);
-		DEBOUT("Setting player...\n");
-		break;
-	case GRASS:
-		set_entity(new Entity_Grass(this,x,y,m_spriteset.get_sprite(GRASS)));
-		break;
-	case STEEL:
-		set_entity(new Entity_Steel(this,x,y,m_spriteset.get_sprite(STEEL)));
-		break;
-	case EMERALD:
-		set_entity(new Entity_Emerald(this,x,y,m_spriteset.get_sprite(EMERALD)));
-		break;
-	case BOULDER:
-		set_entity(new Entity_Boulder(this,x,y,m_spriteset.get_sprite(BOULDER)));
-		break;
-	case SAPPHIRE:
-		set_entity(new Entity_Sapphire(this,x,y,m_spriteset.get_sprite(SAPPHIRE)));
-		break;
-	case EXIT:
-		m_exit=new Entity_Exit(this,x,y,m_spriteset.get_sprite(EXIT),1);
-		set_entity(m_exit);
-		DEBOUT("Setting Exit...\n");
-		break;
-	case DOOR_RED:
-		set_entity(new Entity_Door(this,x,y,m_spriteset.get_sprite(DOOR),1));
-		break;
-	case DOOR_BLUE:
-		set_entity(new Entity_Door(this,x,y,m_spriteset.get_sprite(DOOR),2));
-		break;
-	case DOOR_GREEN:
-		set_entity(new Entity_Door(this,x,y,m_spriteset.get_sprite(DOOR),4));
-		break;
-	case DOOR_YELLOW:
-		set_entity(new Entity_Door(this,x,y,m_spriteset.get_sprite(DOOR),8));
-		break;
-	case KEY_RED:
-		set_entity(new Entity_Key(this,x,y,m_spriteset.get_sprite(KEY),1));
-		break;
-	case KEY_BLUE:
-		set_entity(new Entity_Key(this,x,y,m_spriteset.get_sprite(KEY),2));
-		break;
-	case KEY_GREEN:
-		set_entity(new Entity_Key(this,x,y,m_spriteset.get_sprite(KEY),4));
-		break;
-	case KEY_YELLOW:
-		set_entity(new Entity_Key(this,x,y,m_spriteset.get_sprite(KEY),8));
-		break;
-	case FLINTSTONE:
-		set_entity(new Entity_Flintstone(this,x,y,m_spriteset.get_sprite(FLINTSTONE)));
-		break;
-	case PEPERON_UP:
-		set_entity(new Entity_Peperon(this,x,y,m_spriteset.get_sprite(PEPERON),UP));
-		break;
-	case PEPERON_RIGHT:
-		set_entity(new Entity_Peperon(this,x,y,m_spriteset.get_sprite(PEPERON),RIGHT));
-		break;
-	case PEPERON_DOWN:
-		set_entity(new Entity_Peperon(this,x,y,m_spriteset.get_sprite(PEPERON),DOWN));
-		break;
-	case PEPERON_LEFT:
-		set_entity(new Entity_Peperon(this,x,y,m_spriteset.get_sprite(PEPERON),LEFT));
-		break;
-	case BRICK:
-		set_entity(new Entity_Brick(this,x,y,m_spriteset.get_sprite(BRICK)));
-		break;
-	case WOOD:
-		set_entity(new Entity_Wood(this,x,y,m_spriteset.get_sprite(WOOD)));
-		break;
-	case TOMATO_UP:
-		set_entity(new Entity_Tomato(this,x,y,m_spriteset.get_sprite(TOMATO),UP));
-		break;
-	case TOMATO_RIGHT:
-		set_entity(new Entity_Tomato(this,x,y,m_spriteset.get_sprite(TOMATO),RIGHT));
-		break;
-	case TOMATO_DOWN:
-		set_entity(new Entity_Tomato(this,x,y,m_spriteset.get_sprite(TOMATO),DOWN));
-		break;
-	case TOMATO_LEFT:
-		set_entity(new Entity_Tomato(this,x,y,m_spriteset.get_sprite(TOMATO),LEFT));
-		break;
-	default:
-		//do nothing
-		break;
-	}
-	*/
+	
 }
-/*
-void Level::set_player(Entity_Player* pl)
-{
-	m_player=pl;
-//	m_entities_list[m_player->get_id()]=Ntt_pointer(*m_player);
-	m_entities_list.push_back(Ntt_pointer(*m_player));
-	m_entities_matrix[pl->get_position_x()][pl->get_position_y()]=m_player->get_id();
-}
-*/
+
+
 void Level::set_entity(Entity* ntt)
 {
 	//m_entities_list.push_back(Ntt_pointer(*ntt));
@@ -385,15 +215,7 @@ void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
 
 //	Ntt_pointer& curr_ntt=m_entities_list[m_entities_matrix[x][y]];
 	Entity_Handle curr_ntt=get_entity(x,y);
- /*
-	if(((curr_ntt.is_referenced())&&(curr_ntt->exists()))&&(!curr_ntt->explode()))
-	{
-	}
-	else
-	{
-		set_entity(new Entity_Explosion(this,x,y,m_spriteset.get_sprite(EXPLOSION), transform_to));	
-	}
-*/	
+ 
 	if(curr_ntt != 0)
 	{
 		Entity* curr_entity = Entity_Manager::instance()->get_entity(curr_ntt);

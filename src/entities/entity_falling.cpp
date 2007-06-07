@@ -17,7 +17,7 @@
 
 #include "dephine.h"
 #include "entity.h"
-#include "pointer.h"
+
 #include "entity_falling.h"
 #include "entity_player.h"
 #include "entity_emerald.h"

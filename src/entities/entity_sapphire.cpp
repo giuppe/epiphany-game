@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "dephine.h"
-#include "pointer.h"
+
 #include "sprite.h"
 #include "entity.h"
 #include "entity_sapphire.h"

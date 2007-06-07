@@ -18,7 +18,7 @@
 #include "dephine.h"
 #include "sprite.h"
 #include "entity.h"
-#include "pointer.h"
+
 
 //int glb_curr_id=1;
 

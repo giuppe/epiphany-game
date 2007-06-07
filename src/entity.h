@@ -19,7 +19,7 @@
 #include "direction.h"
 #include "entity_type.h"
 #include "level.h"
-#include "pointer.h"
+
 #include "sprite.h"
 
 #ifndef ENTITY_H

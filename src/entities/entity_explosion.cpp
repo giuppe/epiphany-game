@@ -18,7 +18,7 @@
 #include "dephine.h"
 #include "entity_explosion.h"
 #include "entity_all.h"
-#include "pointer.h"
+
 #include "entity_type.h"
 
 Entity_Explosion::Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite)

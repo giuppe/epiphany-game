@@ -16,7 +16,7 @@
  ***************************************************************************/
 #include "dephine.h"
 #include "entity.h"
-#include "pointer.h"
+
 #include "entity_type.h"
 
 #ifndef ENTITY_EXPLOSION
