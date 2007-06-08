@@ -33,6 +33,7 @@ Entity_Peperon::Entity_Peperon(Level* level, unsigned int x, unsigned int y, Spr
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
+	m_is_exploding=false;
 	m_direction=direction;
 
 }
