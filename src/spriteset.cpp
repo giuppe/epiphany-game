@@ -29,12 +29,12 @@ Spriteset::Spriteset()
 
 
 
-Spriteset::Spriteset(CL_String spriteset)
+Spriteset::Spriteset(CL_String spriteset_name)
 {
   DEBOUT("Entering Spriteset ctor...\n");
 
 	
-	m_spriteset_name=spriteset;
+	m_spriteset_name=spriteset_name;
 	
 	m_sprites.resize(256);
   DEBOUT("Exiting Spriteset ctor...\n");

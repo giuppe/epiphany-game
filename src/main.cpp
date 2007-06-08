@@ -43,11 +43,22 @@ class Epiphany_App : public CL_ClanApplication
 
 	}
 
-	int main(int, char**)
+	int main(int argc, char* argv[])
 	{
 			
 		init_modules();	
 		
+        if (argc == 2) 
+        {
+			Game game;
+			game.play_level(argv[1]);
+			return 0;
+		}
+		else if (argc > 2)
+		{
+			printf("Cannot supply more than one command line argument.\n");
+			return 1;
+		}
 	
 	//	DEBOUT("Calling CL_Display::set_videomode\n");
 		try

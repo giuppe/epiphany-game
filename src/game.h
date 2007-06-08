@@ -93,6 +93,8 @@ public:
 	
 	void load_surfaces();
 	
+	void play_level(const char *);
+	
 	void move_all();
 	
 	void draw(int frame_number);

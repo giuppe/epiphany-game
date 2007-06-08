@@ -569,6 +569,26 @@ void Game::load_surfaces()
 	surf_man->add_surface(TOMATO, new CL_Surface(surface_path+"Tomato", m_res_manag));
 }
 
+void Game::play_level(const char *level_path)
+{
+        m_level=new Level(m_spriteset, m_sampleset);
+        
+        try
+        {
+                m_level->load_map(level_path);
+                                                        
+        }
+        catch(Common_Ex e)
+        {
+                std::cout<<e.get_message();
+                return;
+		}
+
+        main_loop();
+        return;
+}
+
+
 void Game::load_config()
 {
 	std::ifstream config_file(m_ini_path);
