@@ -117,6 +117,8 @@ public:
 		virtual bool smash(Entity_Handle ntt)=0;
 		virtual bool explode()=0;
 		virtual bool roll_on_me()=0;
+		
+		virtual ~Entity(){}
 };
 	
 

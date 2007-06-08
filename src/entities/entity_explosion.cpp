@@ -83,4 +83,6 @@ void Entity_Explosion::set_transform_to(Entity_Type transform_to)
 	m_transform_to = transform_to;
 }
 
-
+Entity_Explosion::~Entity_Explosion()
+{
+}
