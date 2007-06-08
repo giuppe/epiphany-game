@@ -36,6 +36,7 @@ Entity_Flintstone::Entity_Flintstone(Level* level, unsigned int x, unsigned int 
 	m_is_falling=false;
 	m_exists=true;
 	m_just_checked=false;
+	m_is_exploding=false;
 		
 }
 
