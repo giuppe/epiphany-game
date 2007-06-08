@@ -55,9 +55,6 @@ Sprite& Spriteset::get_sprite(Entity_Type n_type)
 void Spriteset::load_sprites()
 {
 	
-	CL_ResourceManager* res_manag=Game::instance()->get_resource_manager();
-	
-	CL_String surface_path=CL_String("Surfaces/")+m_spriteset_name+CL_String("_");
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
 
