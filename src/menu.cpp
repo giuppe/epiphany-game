@@ -23,19 +23,19 @@ Menu::Menu(unsigned int total_levels, unsigned int unsolved_level)
 {
   
 
-  m_total_levels=total_levels;
+	m_total_levels=total_levels;
 
-  set_unsolved_level(unsolved_level);
+	set_unsolved_level(unsolved_level);
 
-  m_current_level=m_unsolved_level;
+	m_current_level=m_unsolved_level;
 
 	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
-
+	
 	m_menu_font=CL_Font::load("Fonts/FNT_Menu", res_manager);
 
-  m_selector=CL_Surface::load("Surfaces/MNU_Selector", res_manager);
+	m_selector=CL_Surface::load("Surfaces/MNU_Selector", res_manager);
 
-  m_background=CL_Surface::load("Surfaces/MNU_Background", res_manager);
+	m_background=CL_Surface::load("Surfaces/MNU_Background", res_manager);
 }
 
 Menu::~Menu()
