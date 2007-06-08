@@ -50,8 +50,8 @@ class Epiphany_App : public CL_ClanApplication
 		
         if (argc == 2) 
         {
-			Game game;
-			game.play_level(argv[1]);
+			Game* game = Game::instance();
+			game->play_level(argv[1]);
 			return 0;
 		}
 		else if (argc > 2)
