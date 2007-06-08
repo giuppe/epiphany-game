@@ -20,32 +20,9 @@
 #include "entity.h"
 
 
-Screen::Screen(unsigned int resolution_x, unsigned int resolution_y, unsigned int level_size_x, unsigned int level_size_y, unsigned int cell_size)
+Screen::Screen(): m_screen_size_x(0), m_screen_size_y(0), m_cell_size(0) 
 {
-	m_win_pos_x=0;
-	m_win_pos_y=0;
-	m_win_size_x=resolution_x;
-	m_win_size_y=resolution_y;
-	m_cell_size=cell_size;
-	
-	m_screen_size_x=level_size_x*m_cell_size;
-	m_screen_size_y=level_size_y*m_cell_size;
-	
-	try
-	{
-	CL_Display::set_videomode ((int)resolution_x, (int)resolution_y,8, false);
-	}
-	catch(CL_Error ex)
-	{
-		std::cout<<"Error initializing video mode\n";
-	}
-}
 
-Screen::Screen()
-{
-	m_screen_size_x=0;
-	m_screen_size_y=0;
-	m_cell_size=0;
 }
 
 unsigned int Screen::get_screen_size_x()
@@ -94,7 +71,7 @@ void Screen::put(Sprite& sprite)
 	{
 //	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
 	int frame=sprite.get_frame_number();
-	sprite->put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
+	sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
 	}
 	
 }
@@ -148,5 +125,22 @@ void Screen::set_window_center(int x, int y)
 //		m_win_pos_y=(y-(m_win_size_y/2));
 }
 
-	
+void Screen::clear()
+{
+	CL_Display::clear_display(0.0, 0.0, 0.0, 1.0);
+}	
 
+void Screen::flip_display()
+{
+	CL_Display::flip_display(true);
+}
+
+void Screen::fill_rect(int x, int y, unsigned int size_x, unsigned int size_y, float r, float g, float b, float alpha)
+{
+	CL_Display::fill_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
+}
+
+void Screen::draw_rect(int x, int y, unsigned int size_x, unsigned int size_y, float r, float g, float b, float alpha)
+{
+	CL_Display::draw_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
+}
