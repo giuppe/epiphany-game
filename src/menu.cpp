@@ -17,6 +17,7 @@
 
 #include "dephine.h"
 #include "menu.h"
+#include "input.h"
 #include "game.h"
 
 Menu::Menu(unsigned int total_levels, unsigned int unsolved_level)
@@ -102,9 +103,11 @@ int Menu::go()
 	unsigned int current_time;
 	CL_String level_string;
 	int curr_sprite=0;
-	CL_System::keep_alive();
-	while(!(((CL_Keyboard::get_keycode(CL_KEY_ENTER))||
-				(CL_Keyboard::get_keycode(CL_KEY_SPACE)))&&
+	Input* input = Input::instance();
+	//CL_System::keep_alive();
+	input->update();
+	while(!(((input->get_enter())||
+				(input->get_fire()))&&
 				(selected!=1)) )
 
 	{
@@ -120,7 +123,7 @@ int Menu::go()
 		m_menu_font->print_left((config->get_game_size_x()/2)+60, menu_top_point+menu_vertical_distance, level_string);
 		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*2, "Credits");
 		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*3, "Quit");
-		if(CL_Keyboard::get_keycode(CL_KEY_UP))
+		if(input->get_up())
 		{
 			if(selected>0)
 			{
@@ -128,7 +131,7 @@ int Menu::go()
 			}
 		}
 		
-		if(CL_Keyboard::get_keycode(CL_KEY_DOWN))
+		if(input->get_down())
 		{
 			if(selected<3)
 			{
@@ -136,14 +139,14 @@ int Menu::go()
 			}
 		}
 		
-		if((CL_Keyboard::get_keycode(CL_KEY_LEFT))&&
+		if((input->get_left())&&
 				(selected==1)&&
 				(level_number>0))
 		{
 			level_number--;
 		}
 		
-		if((CL_Keyboard::get_keycode(CL_KEY_RIGHT))&&
+		if((input->get_right())&&
 				(selected==1)&&
 				(level_number<m_total_levels-1)&&
 				(level_number<m_unsolved_level))
@@ -174,6 +177,7 @@ int Menu::go()
 			}
 		}
 		while((CL_System::get_time()-current_time)<100);
+		input->update();
 	}	
 	m_current_level=level_number;
 

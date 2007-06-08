@@ -1,5 +1,5 @@
 Version 0.6.0:
-Fixed "random exploding flintstone" bug;
+Fixed "random exploding flintstone/monster" bug;
 Code refactoring;
 Added autotools support;
 

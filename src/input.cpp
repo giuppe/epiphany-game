@@ -44,6 +44,7 @@ void Input::reset_states()
     m_up = false;
     m_down = false;
     m_alt = false;
+    m_pause = false;
     m_fire = false;
     m_enter = false;
 }
@@ -66,7 +67,10 @@ void Input::update()
 		if (CL_Keyboard::get_keycode(CL_KEY_DOWN)) m_down=true;
 		if (CL_Keyboard::get_keycode(CL_KEY_SPACE)) m_fire=true;
 		if (CL_Keyboard::get_keycode(CL_KEY_ESCAPE)) m_die=true;
-		if (CL_Keyboard::get_keycode(CL_KEY_PAUSE)||CL_Keyboard::get_keycode(CL_KEY_P)) m_pause!=m_pause;
+		if (CL_Keyboard::get_keycode(CL_KEY_PAUSE)||CL_Keyboard::get_keycode(CL_KEY_P))
+		{
+			 m_pause = true;
+		}
 		if (CL_Keyboard::get_keycode(CL_KEY_ENTER)) m_enter = true;
 		if (CL_Keyboard::get_keycode(CL_KEY_ESCAPE)) m_quit=true;
 	

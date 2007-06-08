@@ -26,6 +26,7 @@
 #include "surface_manager.h"
 #include "game.h"
 #include "menu.h"
+#include "input.h"
 #include "level.h"
 #include "game_timer.h"
 #include <stdlib.h>
@@ -46,33 +47,43 @@ bool Game::main_loop()
 
 	m_screen.set_window_center(m_level->get_player().get_position_x()*k_sprite_size,m_level->get_player().get_position_y()*k_sprite_size);
 
+	Input* input = Input::instance();
+	
+	input->update();
 
 	while((m_level->get_player().is_alive())||
-				(!CL_Keyboard::get_keycode(CL_KEY_SPACE))
+				(!input->get_fire())
 				
 				)
 	{
-		if((CL_Keyboard::get_keycode(CL_KEY_PAUSE))||(CL_Keyboard::get_keycode(CL_KEY_P)))
+
+		if(input->get_pause())
 		{
 			CL_System::sleep(200);
-			CL_System::keep_alive();
-			while(!((CL_Keyboard::get_keycode(CL_KEY_PAUSE))||(CL_Keyboard::get_keycode(CL_KEY_P))))
+			input->update();
+			while(!input->get_pause())
 			{
-				CL_System::keep_alive();
+				input->update();
 			}
 		}
 		
 		if(m_level->get_player().is_alive())
 		{
+
 			m_time.update();
+
 			if(m_time.get_time()<10)
 			{
 				
 				m_sampleset.get_sample(SFX_GAME_TIMEALARM)->play();
+
 			}
+
 			if(m_time.is_zero())
 			{
+
 				m_level->explode(m_level->get_player().get_position_x(),m_level->get_player().get_position_y());
+
 			}
 
 		}
@@ -109,9 +120,11 @@ bool Game::main_loop()
 				}
 			}
 
-		CL_System::keep_alive();
+			CL_System::keep_alive();
+		
+			input->update();
 		}
-
+		input->update();
 	}
 	
 	exit_state=m_level->get_player().is_exited();	
@@ -126,10 +139,11 @@ void Game::get_keys()
 	
 	//direzione iniziale
 	CL_System::keep_alive();
-	
+	Input* input = Input::instance();
+	input->update();
 	Direction direction=STOP;
 	
-	if((CL_Keyboard::get_keycode(CL_KEY_ESCAPE))&&(m_level->get_player().is_alive()))
+	if((input->get_quit())&&(m_level->get_player().is_alive()))
 	{
 			
 		m_level->explode(m_level->get_player().get_position_x(),m_level->get_player().get_position_y());
@@ -138,25 +152,25 @@ void Game::get_keys()
 	}
 	
   //questi if settano la direzione a seconda del tasto premuto
-	if(CL_Keyboard::get_keycode(CL_KEY_UP))
+	if(input->get_up())
 	{
 			
 		direction=UP;
 				
 	}
-	else if(CL_Keyboard::get_keycode(CL_KEY_DOWN))
+	else if(input->get_down())
 	{
 			
 		direction=DOWN;
 		
 	}
-	else if(CL_Keyboard::get_keycode(CL_KEY_RIGHT))
+	else if(input->get_right())
 	{
 	
 		direction=RIGHT;
 		
 	}
-	else if(CL_Keyboard::get_keycode(CL_KEY_LEFT))
+	else if(input->get_left())
 	{
 	
 		direction=LEFT;
@@ -168,7 +182,7 @@ void Game::get_keys()
 		//DEBOUT("Setting direction: "<<direction<<"\n");
 	}
 	
-	if(CL_Keyboard::get_keycode(CL_KEY_SPACE))
+	if(input->get_fire())
 	{
 		m_level->get_player().set_snap(true);
 	}
@@ -690,10 +704,14 @@ void Game::show_credits()
 	
 	unsigned int i;
 	
-	while(!CL_Keyboard::get_keycode(CL_KEY_ESCAPE))
+	Input* input =Input::instance();
+	input->update(); 
+	
+	while(!input->get_quit())
 	{
 		current_frame_time=CL_System::get_time();
-		CL_Display::clear_display(0,0,0,1);
+		m_screen.clear();
+		
 		for(i=0; i<credits.size(); i++)
 		{
 			m_credits_font->print_center(m_config->get_game_size_x()/2,draw_pos+50*i,credits[i]);
@@ -724,6 +742,7 @@ void Game::show_credits()
 		
 
 		CL_System::keep_alive();
+		input->update();
 	}
 
 }

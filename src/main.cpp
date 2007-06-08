@@ -17,6 +17,7 @@
 
 #include "dephine.h"
 #include "game.h"
+#include "input.h"
 
 
 
@@ -40,6 +41,8 @@ class Epiphany_App : public CL_ClanApplication
 		CL_SetupDisplay::init();
 	
 		CL_SetupSound::init();
+
+		Input::instance()->init();
 
 	}
 
