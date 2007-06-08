@@ -91,13 +91,13 @@ public:
 	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y, unsigned int frame_num);
 	
 	unsigned int get_pos_x()
-  {
-	  return m_pos_x;
-  }
+	{
+		return m_pos_x;
+  	}
 	
 	unsigned int get_pos_y()
 	{
-	  return m_pos_y;
+		return m_pos_y;
   }
 	void set_pos_x(unsigned int x);
 	

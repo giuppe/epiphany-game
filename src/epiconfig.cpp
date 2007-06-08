@@ -30,7 +30,7 @@ void Epiconfig::set_default_values()
 	m_level_size_y=32;
 
 	//it must be a multiple of 2
-	m_max_anim_drawn=4;
+	m_max_anim_drawn=8;
 
 
 
