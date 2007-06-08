@@ -23,6 +23,7 @@
 #include "entity_factory.h"
 #include "entity.h"
 #include "entities/entity_player.h"
+#include "surface_manager.h"
 #include "game.h"
 #include "menu.h"
 #include "level.h"
@@ -480,9 +481,14 @@ void Game::init()
 	#endif
 
 
-
+	
 	DEBOUT("Loading config...\n");
 	load_config();	
+	
+	DEBOUT("Loading Surfaces...\n");
+	load_surfaces();
+	
+	
 	DEBOUT("Loading fonts...\n");
 	try
 	{
@@ -492,6 +498,8 @@ void Game::init()
 	{
 		throw Common_Ex(ex.message.c_str());
 	}
+	
+	
 	
 	m_spriteset=Spriteset("SPT");
 	DEBOUT("Loading sprites...\n");
@@ -523,6 +531,42 @@ void Game::init()
 	entity_factory->set_spriteset(this->m_spriteset);
 	//DEBOUT("Exiting Game ctor... \n");
 	
+}
+
+void Game::load_surfaces()
+{
+	CL_String surface_path=CL_String("Surfaces/SPT_");
+	Surface_Manager* surf_man = Surface_Manager::instance();
+	surf_man->add_surface(UNKNOWN, new CL_Surface(surface_path+"Unknown", m_res_manag));
+	surf_man->add_surface(PLAYER, new CL_Surface(surface_path+"Player", m_res_manag));
+
+	surf_man->add_surface(GRASS, new CL_Surface(surface_path+"Grass", m_res_manag));
+	
+	surf_man->add_surface(STEEL, new CL_Surface(surface_path+"Steel", m_res_manag));
+	
+	surf_man->add_surface(EMERALD, new CL_Surface(surface_path+"Emerald", m_res_manag));
+	
+	surf_man->add_surface(BOULDER, new CL_Surface(surface_path+"Boulder", m_res_manag));
+
+	surf_man->add_surface(SAPPHIRE, new CL_Surface(surface_path+"Sapphire", m_res_manag));
+		
+	surf_man->add_surface(EXIT, new CL_Surface(surface_path+"Exit", m_res_manag));
+	
+	surf_man->add_surface(EXPLOSION, new CL_Surface(surface_path+"Explosion", m_res_manag));
+	
+	surf_man->add_surface(DOOR, new CL_Surface(surface_path+"Door", m_res_manag));
+
+	surf_man->add_surface(KEY, new CL_Surface(surface_path+"Key", m_res_manag));	
+
+	surf_man->add_surface(FLINTSTONE, new CL_Surface(surface_path+"Flintstone", m_res_manag));	
+	
+	surf_man->add_surface(PEPERON, new CL_Surface(surface_path+"Peperon", m_res_manag));	
+	
+	surf_man->add_surface(BRICK, new CL_Surface(surface_path+"Brick", m_res_manag));
+	
+	surf_man->add_surface(WOOD, new CL_Surface(surface_path+"Wood", m_res_manag));
+
+	surf_man->add_surface(TOMATO, new CL_Surface(surface_path+"Tomato", m_res_manag));
 }
 
 void Game::load_config()

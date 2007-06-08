@@ -91,6 +91,8 @@ public:
 	
 	void load_config();
 	
+	void load_surfaces();
+	
 	void move_all();
 	
 	void draw(int frame_number);

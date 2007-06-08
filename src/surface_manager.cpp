@@ -14,6 +14,14 @@ Surface_Handle Surface_Manager::load_surface(string path)
     return s_h;
 }
 
+void Surface_Manager::add_surface(Surface_Handle handle, Surface* surface)
+{
+    //Surface_Handle s_h = m_surfaces.size();
+                        
+    m_surfaces[handle]=surface;
+
+}
+
 Surface* Surface_Manager::get_surface(Surface_Handle surface_handle)
 {
     if(surface_handle<m_surfaces.size())
@@ -43,6 +51,8 @@ Surface_Manager* Surface_Manager::instance()
 	if (_instance == 0)
 	{
 		_instance = new Surface_Manager;
+		//FIXME: this is for enabling random adding of surfaces
+		_instance->m_surfaces.resize(40);
 	}
 	return _instance;
 }

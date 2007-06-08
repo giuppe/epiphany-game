@@ -19,7 +19,7 @@ public:
 
     // Since all surfaces in game should be inited and flushed by Surface_Manager
     // We do not support loading images by others
-    //Surface_Handle add_surface(SDL_Surface* surface);
+	void add_surface(Surface_Handle handle, Surface* surface);
 
     Surface_Handle load_surface(string path);
 

@@ -19,6 +19,7 @@
 #include "spriteset.h"
 #include "sprite.h"
 #include "game.h"
+#include "surface_manager.h"
 
 
 Spriteset::Spriteset()
@@ -51,43 +52,44 @@ Sprite& Spriteset::get_sprite(Entity_Type n_type)
 
 
 
-
 void Spriteset::load_sprites()
 {
 	
 	CL_ResourceManager* res_manag=Game::instance()->get_resource_manager();
 	
 	CL_String surface_path=CL_String("Surfaces/")+m_spriteset_name+CL_String("_");
+	
+	Surface_Manager* surf_man = Surface_Manager::instance();
 
-	m_sprites[UNKNOWN]=(Sprite(new CL_Surface(surface_path+"Unknown", res_manag)));
+	m_sprites[UNKNOWN]=(Sprite(surf_man->get_surface(UNKNOWN)));
 	
-	m_sprites[PLAYER]=(Sprite(new CL_Surface(surface_path+"Player", res_manag)));
+	m_sprites[PLAYER]=(Sprite(surf_man->get_surface(PLAYER)));
 
-	m_sprites[GRASS]=(Sprite(new CL_Surface(surface_path+"Grass", res_manag)));
+	m_sprites[GRASS]=(Sprite(surf_man->get_surface(GRASS)));
 	
-	m_sprites[STEEL]=(Sprite(new CL_Surface(surface_path+"Steel", res_manag)));
+	m_sprites[STEEL]=(Sprite(surf_man->get_surface(STEEL)));
 	
-	m_sprites[EMERALD]=(Sprite(new CL_Surface(surface_path+"Emerald", res_manag)));
+	m_sprites[EMERALD]=(Sprite(surf_man->get_surface(EMERALD)));
 	
-	m_sprites[BOULDER]=(Sprite(new CL_Surface(surface_path+"Boulder", res_manag)));
+	m_sprites[BOULDER]=(Sprite(surf_man->get_surface(BOULDER)));
 
-	m_sprites[SAPPHIRE]=(Sprite(new CL_Surface(surface_path+"Sapphire", res_manag)));
+	m_sprites[SAPPHIRE]=(Sprite(surf_man->get_surface(SAPPHIRE)));
 		
-	m_sprites[EXIT]=(Sprite(new CL_Surface(surface_path+"Exit", res_manag)));
+	m_sprites[EXIT]=(Sprite(surf_man->get_surface(EXIT)));
 	
-	m_sprites[EXPLOSION]=(Sprite(new CL_Surface(surface_path+"Explosion", res_manag)));
+	m_sprites[EXPLOSION]=(Sprite(surf_man->get_surface(EXPLOSION)));
 	
-	m_sprites[DOOR]=(Sprite(new CL_Surface(surface_path+"Door", res_manag)));
+	m_sprites[DOOR]=(Sprite(surf_man->get_surface(DOOR)));
 
-	m_sprites[KEY]=(Sprite(new CL_Surface(surface_path+"Key", res_manag)));	
+	m_sprites[KEY]=(Sprite(surf_man->get_surface(KEY)));	
 
-	m_sprites[FLINTSTONE]=(Sprite(new CL_Surface(surface_path+"Flintstone", res_manag)));	
+	m_sprites[FLINTSTONE]=(Sprite(surf_man->get_surface(FLINTSTONE)));	
 	
-	m_sprites[PEPERON]=(Sprite(new CL_Surface(surface_path+"Peperon", res_manag)));	
+	m_sprites[PEPERON]=(Sprite(surf_man->get_surface(PEPERON)));	
 	
-	m_sprites[BRICK]=(Sprite(new CL_Surface(surface_path+"Brick", res_manag)));
+	m_sprites[BRICK]=(Sprite(surf_man->get_surface(BRICK)));
 	
-	m_sprites[WOOD]=(Sprite(new CL_Surface(surface_path+"Wood", res_manag)));
+	m_sprites[WOOD]=(Sprite(surf_man->get_surface(WOOD)));
 
-	m_sprites[TOMATO]=(Sprite(new CL_Surface(surface_path+"Tomato", res_manag)));
+	m_sprites[TOMATO]=(Sprite(surf_man->get_surface(TOMATO)));
 }
