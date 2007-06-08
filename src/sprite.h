@@ -80,13 +80,15 @@ public:
 	
 //	Sprite& operator=(const Sprite& sprite);
 	
-	void set_surface(Anim_Type type);
+//	void set_surface(Anim_Type type);
 	
 	~Sprite();
 	
 	void set_speed(unsigned int speed);
 	
-	CL_Surface* operator->();
+	//CL_Surface* operator->();
+	
+	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y, unsigned int frame_num);
 	
 	unsigned int get_pos_x()
   {

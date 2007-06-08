@@ -44,7 +44,7 @@ Sprite::Sprite(CL_Surface* surface)
 Sprite::Sprite(const Sprite& sprite)
 {
 
-//  DEBOUT("Entering Sprite cpyctor...\n");
+	//DEBOUT("Entering Sprite cpyctor...\n");
 
 //	CL_Surface temp=*(sprite.m_surface);
 
@@ -112,12 +112,18 @@ Sprite::~Sprite()
 	
 }
 
+void Sprite::put_screen(int x, int y, unsigned int size_x, unsigned int size_y, unsigned int frame_num)
+{
+	m_surface->put_screen(x, y, (int)size_x, (int)size_y, (int)frame_num);
+}
+/*
 CL_Surface* Sprite::operator->()
 {
 	//qui dovrebbe ritornare il frame di m_surface
 	//corrispondente a m_curr_frame
 	return m_surface;
 }
+*/
  /*
 unsigned int Sprite::get_pos_x()
 {
