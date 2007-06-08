@@ -80,6 +80,8 @@ public:
 	
 	bool main_loop();
 	
+	Level* get_current_level(){return m_level;}
+	
 	~Game();
 	
 	void get_keys();
