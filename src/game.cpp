@@ -213,7 +213,7 @@ void Game::move_all()
 		
 		if(curr_entity->exists())
 		{
-			if((curr_entity->get_type()!=PLAYER)||(curr_entity->get_type()!=STEEL))
+			if((curr_entity->get_type()!=PLAYER)||(curr_entity->get_type()!=STEEL)||(curr_entity->get_type()!=GRASS))
 				curr_entity->check_and_do();
 		}
 	}
@@ -235,8 +235,8 @@ void Game::draw(int frame_number)
 	//Ntt_pointer curr_ntt;
 	Entity* curr_ntt;
 
-	CL_Display::clear_display(0.0, 0.0, 0.0, 1.0);
-
+	m_screen.clear();
+	
 	//centering screen on player
 	m_screen.set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
@@ -262,7 +262,7 @@ void Game::draw(int frame_number)
 	
 	draw_score();
 	
-	CL_Display::flip_display(true);
+	m_screen.flip_display();
 
 }
 
@@ -276,7 +276,7 @@ void Game::draw_score()
 	int game_size_x=m_config->get_game_size_x();
 	int game_size_y=m_config->get_game_size_y();
 
-	CL_Display::fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
+	m_screen.fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
 	
 	m_game_font->print_left(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((int)m_level->get_player().get_score()));
 
@@ -314,18 +314,18 @@ void Game::draw_score()
 	
 	
 	if(m_level->get_acquired_keys()&1)
-		m_spriteset.get_sprite(KEY)->put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,0);
+		m_spriteset.get_sprite(KEY).put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,0);
 	
 	if(m_level->get_acquired_keys()&2)
-		m_spriteset.get_sprite(KEY)->put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,8);
+		m_spriteset.get_sprite(KEY).put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,8);
 
 	if(m_level->get_acquired_keys()&4)
-		m_spriteset.get_sprite(KEY)->put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,16);
+		m_spriteset.get_sprite(KEY).put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,16);
 
 	if(m_level->get_acquired_keys()&8)
-		m_spriteset.get_sprite(KEY)->put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,24);
+		m_spriteset.get_sprite(KEY).put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,24);
 
-	CL_Display::draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
+	m_screen.draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
 
 }
 
