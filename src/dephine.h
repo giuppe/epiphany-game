@@ -28,7 +28,7 @@
 #endif  // DEBUG_MODE
 
 typedef unsigned int Uint32;
-typedef int Int32;
+typedef int Sint32;
 
 //Insert standard includes here (used by all files)
 #include <ClanLib/core.h>

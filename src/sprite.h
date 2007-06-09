@@ -64,15 +64,15 @@ private:
 
 	Uint32 m_speed;
 		
-	int m_curr_frame;
+	Sint32 m_curr_frame;
 	
 	bool m_initialized;
 
 	Anim_Type m_state;	
 	
-	void put_screen(int pos_x, int pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
+	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
-	void set_curr_frame(int frame);
+	void set_curr_frame(Sint32 frame);
 	
 	void move(Uint32 n_pixel);
 	
@@ -96,7 +96,7 @@ public:
 	//CL_Surface* operator->();
 	
 	
-	void put_screen(int pos_x, int pos_y, Uint32 size_x, Uint32 size_y);
+	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
 	
 	
 	Uint32 get_pos_x()
@@ -122,7 +122,7 @@ public:
 	
 	void update_frame();
 	
-	int get_frame_number();
+	Sint32 get_frame_number();
 	
 	void init(Surface* surf);
 	

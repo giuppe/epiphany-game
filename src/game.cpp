@@ -291,16 +291,16 @@ void Game::draw(int frame_number)
 void Game::draw_score()
 {
 	
-	int real_game_size_y = m_config->get_game_size_y()-m_config->get_score_size_y();
-	int game_size_x=m_config->get_game_size_x();
-	int game_size_y=m_config->get_game_size_y();
+	Sint32 real_game_size_y = m_config->get_game_size_y()-m_config->get_score_size_y();
+	Sint32 game_size_x=m_config->get_game_size_x();
+	Sint32 game_size_y=m_config->get_game_size_y();
 	Screen* screen = Screen::instance(); 
 	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
 	
-	m_game_font->print_left(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((int)m_level->get_player().get_score()));
+	m_game_font->print_left(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((Sint32)m_level->get_player().get_score()));
 
 	// find how many score to complete level
-	int remaining=(int)(m_level->get_min_score()-m_level->get_player().get_score());
+	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_player().get_score());
 
 	if(remaining>0)
 	{
@@ -364,7 +364,7 @@ void Game::go()
 //	DEBOUT("Entering main loop...\n");
 	Menu menu(m_max_num_of_levels,m_unsolved_level);
 
-	int play=menu.go();
+	Sint32 play=menu.go();
 	
   while(play!=3)
   {
@@ -379,7 +379,7 @@ void Game::go()
   	
 
 
-  		current_level_path=current_level_path+((const int)menu.get_current_level());
+  		current_level_path=current_level_path+((const Sint32)menu.get_current_level());
   		
   		current_level_path+=".map";
   	
@@ -678,7 +678,7 @@ Game::~Game()
 void Game::show_credits()
 {
 	
-	int current_frame_time=0;
+	Sint32 current_frame_time=0;
 
 	vector<CL_String> credits;
 
@@ -710,7 +710,7 @@ void Game::show_credits()
 	//CL_Surface* srf_top = new CL_Surface("Surfaces/MNU_Top", m_res_manag);
 	//CL_Surface* srf_bottom = new CL_Surface("Surfaces/MNU_Bottom", m_res_manag);
 
-	int draw_pos=m_config->get_game_size_y();
+	Sint32 draw_pos=m_config->get_game_size_y();
 
 //standard method: text scrolling
 	
@@ -734,7 +734,7 @@ void Game::show_credits()
 		
     if(draw_pos+50*credits.size()>0)
 		{
-			draw_pos-=(int)(((CL_System::get_time()-current_frame_time)/20)+1);
+			draw_pos-=(Sint32)(((CL_System::get_time()-current_frame_time)/20)+1);
 		}
 		else
 		{

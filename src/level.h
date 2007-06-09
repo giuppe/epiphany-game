@@ -57,11 +57,11 @@ public:
 	//int get_entity_id(int x, int y, Direction d);
 	Entity_Player& get_player();
 	//Ntt_pointer& get_entity(int ntt_id);
-	Entity_Handle get_entity(int x, int y);
-	Entity_Handle get_entity(int x, int y, Direction d);
+	Entity_Handle get_entity(Sint32 x, Sint32 y);
+	Entity_Handle get_entity(Sint32 x, Sint32 y, Direction d);
 	void load_map(const char* path);
-	int get_size_x();
-	int get_size_y();
+	Sint32 get_size_x();
+	Sint32 get_size_y();
 //	void set_player(Entity_Player*);
 
 	void set_entity(Entity_Type type, Uint32 x, Uint32 y);

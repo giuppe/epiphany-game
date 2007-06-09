@@ -117,12 +117,12 @@ Sprite::~Sprite()
 	
 	
 }
-void Sprite::put_screen(int x, int y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
+void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
 {
 	m_surface->put_screen(x, y, (int)size_x, (int)size_y, (int)frame_num);
 }
 
-void Sprite::put_screen(int x, int y, Uint32 size_x, Uint32 size_y)
+void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y)
 {
 	m_surface->put_screen(x, y, (int)size_x, (int)size_y, m_curr_frame+m_state);
 }
@@ -158,7 +158,7 @@ void Sprite::set_pos_y(Uint32 pos_y)
 	m_move_to_pos_y=pos_y;
 }
 
-void Sprite::set_curr_frame(int frame)
+void Sprite::set_curr_frame(Sint32 frame)
 {
 	//FIXME: check should be on mumber of sprite frames
 	if(frame >= Epiconfig::instance()->get_max_anim_drawn())
@@ -233,7 +233,7 @@ void Sprite::move(Uint32 n_pixel)
 void Sprite::move()
 {
 	
-	int n_pixel = k_sprite_size/Epiconfig::instance()->get_max_anim_drawn();
+	Sint32 n_pixel = k_sprite_size/Epiconfig::instance()->get_max_anim_drawn();
 	
 	n_pixel*=m_speed;
 	if(m_pos_x<m_move_to_pos_x)

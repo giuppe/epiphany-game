@@ -40,7 +40,7 @@ Level::Level(Spriteset& spriteset, Sampleset& sampleset):m_spriteset(spriteset),
 	//m_entities_list.push_back(Ntt_pointer());
 	
 	m_entities_matrix.resize(Epiconfig::instance()->get_level_size_x());
-	for(int i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
+	for(Sint32 i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
 	{
 		m_entities_matrix[i].resize(Epiconfig::instance()->get_level_size_y());
 		
@@ -67,14 +67,14 @@ void Level::set_key(Uint32 key)
 
 
 
-Entity_Handle Level::get_entity(int x, int y)
+Entity_Handle Level::get_entity(Sint32 x, Sint32 y)
 {
 	return m_entities_matrix[x][y];
 }
 
-Entity_Handle Level::get_entity(int x, int y, Direction d)
+Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d)
 {
-	int dx, dy;
+	Sint32 dx, dy;
 	
 	switch(d)
 	{
@@ -172,12 +172,12 @@ void Level::set_entity(Entity* ntt)
   //DEBOUT("setting entity to "<<ntt->get_position_x()<<", "<<ntt->get_position_y()<<"\n");
 }
 
-int Level::get_size_x()
+Sint32 Level::get_size_x()
 {
 	return Epiconfig::instance()->get_level_size_x();
 }
 
-int Level::get_size_y()
+Sint32 Level::get_size_y()
 {
 	return Epiconfig::instance()->get_level_size_y();
 }
