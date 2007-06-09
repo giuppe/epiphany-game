@@ -66,7 +66,7 @@ void Game_Timer::start()
 
 
 
-CL_String Game_Timer::get_time_string()
+const char* Game_Timer::get_time_string()
 {
 	CL_String time_string="";
 	

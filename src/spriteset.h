@@ -34,12 +34,12 @@ private:
 	
 
 	
-	CL_String m_spriteset_name;
+	const char* m_spriteset_name;
 	
 public:
 	Spriteset();
 	
-	Spriteset(CL_String spriteset_name);
+	Spriteset(const char* spriteset_name);
 	
 	Sprite& get_sprite(Entity_Type n_sprite);
 	

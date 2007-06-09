@@ -39,13 +39,13 @@ class Game
 
 private:
 
-	CL_String m_resource_path;
+	const char* m_resource_path;
 	
 	Sampleset m_sampleset;
 	
 	Spriteset m_spriteset;
 	
-	Screen m_screen;
+	//Screen m_screen;
 	
 	Game_Timer m_time;
 	
@@ -61,12 +61,11 @@ private:
 
 	Epiconfig* m_config;
 	
-//CL_String m_map_path;
 	unsigned int m_unsolved_level;
 	
 	unsigned int m_max_num_of_levels;
 	
-	CL_String m_ini_path;
+	const char* m_ini_path;
 
 	CL_ResourceManager* m_res_manag;
 

@@ -45,7 +45,7 @@ bool Game::main_loop()
 
 	m_time.start();
 
-	m_screen.set_window_center(m_level->get_player().get_position_x()*k_sprite_size,m_level->get_player().get_position_y()*k_sprite_size);
+	Screen::instance()->set_window_center(m_level->get_player().get_position_x()*k_sprite_size,m_level->get_player().get_position_y()*k_sprite_size);
 
 	Input* input = Input::instance();
 	
@@ -249,11 +249,11 @@ void Game::draw(int frame_number)
 
 	//Ntt_pointer curr_ntt;
 	Entity* curr_ntt;
-
-	m_screen.clear();
+	Screen* screen = Screen::instance();
+	screen->clear();
 	
 	//centering screen on player
-	m_screen.set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
+	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
 	//drawing player
 	if(m_level->get_player().exists())
@@ -262,7 +262,7 @@ void Game::draw(int frame_number)
 		m_level->get_player().get_sprite().update_frame();
 		//m_level->get_player().get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
 		m_level->get_player().get_sprite().move();
-		m_screen.put(m_level->get_player().get_sprite());
+		screen->put(m_level->get_player().get_sprite());
 	}
 
 	//draw other entities
@@ -275,13 +275,13 @@ void Game::draw(int frame_number)
 			//curr_ntt->get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
 			curr_ntt->get_sprite().update_frame();
 			curr_ntt->get_sprite().move();
-			m_screen.put(curr_ntt->get_sprite());
+			screen->put(curr_ntt->get_sprite());
 		}
 	}
 	
 	draw_score();
 	
-	m_screen.flip_display();
+	screen->flip_display();
 
 }
 
@@ -294,8 +294,8 @@ void Game::draw_score()
 	int real_game_size_y = m_config->get_game_size_y()-m_config->get_score_size_y();
 	int game_size_x=m_config->get_game_size_x();
 	int game_size_y=m_config->get_game_size_y();
-
-	m_screen.fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
+	Screen* screen = Screen::instance(); 
+	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
 	
 	m_game_font->print_left(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((int)m_level->get_player().get_score()));
 
@@ -352,7 +352,7 @@ void Game::draw_score()
 		m_spriteset.get_sprite(KEY_YELLOW).put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
-	m_screen.draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
+	screen->draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
 
 }
 
@@ -450,7 +450,7 @@ void Game::set_resource_manager()
 
 	try
 	{
-		m_res_manag=new CL_ResourceManager(m_resource_path+"/sprites.scr", false);
+		m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
 	}
 	catch(CL_Error ex)
 	{
@@ -459,7 +459,7 @@ void Game::set_resource_manager()
 
 		try
 		{
-			m_res_manag=new CL_ResourceManager(m_resource_path+"/sprites.scr", false);
+			m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
 		}
 		catch(CL_Error ex)
 		{
@@ -468,7 +468,7 @@ void Game::set_resource_manager()
 
 			try
 			{
-				m_res_manag=new CL_ResourceManager(m_resource_path+"/sprites.scr", false);
+				m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
 			}
 			catch(CL_Error ex)
 			{
@@ -477,7 +477,7 @@ void Game::set_resource_manager()
 			}
 		}
 	}
-	DEBOUT("Using "<<(m_resource_path+"/sprites.scr")<<" as resource script.\n");
+	DEBOUT("Using "<<m_resource_path<<"/sprites.scr"<<" as resource script.\n");
 
 
 }
@@ -551,7 +551,7 @@ void Game::init()
 	
 
 	DEBOUT("Initing Screen...\n");
-	m_screen.init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
+	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
 	
 	Entity_Factory* entity_factory = Entity_Factory::instance();
 	entity_factory->set_spriteset(this->m_spriteset);
@@ -633,7 +633,7 @@ void Game::load_config()
 	//find max_num_of_levels
 	CL_DirectoryScanner dirscan;
 	unsigned int i=0;
-	if(dirscan.scan(m_resource_path+"/maps", "level*.map"))
+	if(dirscan.scan(CL_String(m_resource_path)+"/maps", "level*.map"))
 	{
 		//;
 		while(dirscan.next()==true)
@@ -719,10 +719,12 @@ void Game::show_credits()
 	Input* input =Input::instance();
 	input->update(); 
 	
+	Screen* screen = Screen::instance();
+	
 	while(!input->get_quit())
 	{
 		current_frame_time=CL_System::get_time();
-		m_screen.clear();
+		screen->clear();
 		
 		for(i=0; i<credits.size(); i++)
 		{
@@ -750,7 +752,7 @@ void Game::show_credits()
 				CL_System::sleep(5);
 			}
 		}
-		m_screen.flip_display();
+		screen->flip_display();
 		
 
 		CL_System::keep_alive();

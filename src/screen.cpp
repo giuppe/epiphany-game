@@ -20,10 +20,6 @@
 #include "entity.h"
 
 
-Screen::Screen(): m_screen_size_x(0), m_screen_size_y(0), m_cell_size(0) 
-{
-
-}
 
 unsigned int Screen::get_screen_size_x()
 {
@@ -145,3 +141,19 @@ void Screen::draw_rect(int x, int y, unsigned int size_x, unsigned int size_y, f
 {
 	CL_Display::draw_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
 }
+
+// begin Singleton stuff
+
+Screen* Screen::_instance = 0;
+
+Screen* Screen::instance()
+{
+	if (_instance == 0)
+	{
+		_instance = new Screen();
+		
+	}
+	return _instance;
+}
+
+//end Singleton stuff

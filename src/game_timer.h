@@ -39,7 +39,7 @@ public:
 	
 	bool is_zero();
 	
-	CL_String get_time_string();
+	const char* get_time_string();
 	
 	unsigned int get_time();
 	

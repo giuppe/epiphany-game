@@ -28,21 +28,21 @@ protected:
 	unsigned int m_version;
 	unsigned int m_size_x;
 	unsigned int m_size_y;
-	CL_String m_name;
-	CL_String m_author;
+	const char* m_name;
+	const char* m_author;
 	unsigned int m_min_score;
 	unsigned int m_max_time;
 	std::vector< std::vector<Entity_Type> > m_map;
 	//bool m_error;
 //	Epimap m_epimap;
 public:
-	Levelmap(CL_String map_path);
+	Levelmap(const char* map_path);
 	Levelmap();
-	void load_map(CL_String map_path);
+	void load_map(const char* map_path);
 	unsigned int get_min_score();
 	unsigned int get_max_time();
-	CL_String get_name();
-	CL_String get_author();
+	const char* get_name();
+	const char* get_author();
 	unsigned int get_size_x();
 	unsigned int get_size_y();
 	//bool error();

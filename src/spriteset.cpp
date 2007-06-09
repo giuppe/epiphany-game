@@ -29,7 +29,7 @@ Spriteset::Spriteset()
 
 
 
-Spriteset::Spriteset(CL_String spriteset_name)
+Spriteset::Spriteset(const char* spriteset_name)
 {
   DEBOUT("Entering Spriteset ctor...\n");
 

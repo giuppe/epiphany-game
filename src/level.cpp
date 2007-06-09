@@ -128,7 +128,7 @@ void Level::load_map(const char* map_path)
 	
 //	Entity_Exit* ex;
 	Levelmap levelmap;
-	levelmap.load_map(CL_String(map_path));
+	levelmap.load_map(map_path);
 	unsigned int i,j;
 	for(j=0; j<levelmap.get_size_y(); j++)
 		for(i=0; i<levelmap.get_size_x(); i++)

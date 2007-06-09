@@ -50,7 +50,7 @@ Surface_Manager* Surface_Manager::instance()
 {
 	if (_instance == 0)
 	{
-		_instance = new Surface_Manager;
+		_instance = new Surface_Manager();
 		//FIXME: this is for enabling random adding of surfaces
 		_instance->m_surfaces.resize(40);
 	}
