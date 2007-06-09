@@ -132,7 +132,7 @@ void Screen::clear()
 
 void Screen::flip_display()
 {
-	CL_Display::flip_display(true);
+	CL_Display::flip_display(false);
 }
 
 void Screen::fill_rect(int x, int y, unsigned int size_x, unsigned int size_y, float r, float g, float b, float alpha)

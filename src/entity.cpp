@@ -137,7 +137,7 @@ bool Entity::set_initial_position(unsigned int x, unsigned int y)
 	
 	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
-	m_sprite.set_state(SP_STOP);
+
 	
 	//current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
 //	current_level->set_entity(this);

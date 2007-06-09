@@ -39,6 +39,8 @@ Sprite::Sprite(CL_Surface* surface)
 	
 	m_speed=1;
 	
+	m_state = SP_STOP;
+	
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -65,6 +67,8 @@ Sprite::Sprite(const Sprite& sprite)
 	m_curr_frame=sprite.m_curr_frame;
 
 	m_speed=sprite.m_speed;
+	
+	m_state = sprite.m_state;
 	
 }
 /*
@@ -103,6 +107,8 @@ void Sprite::init(CL_Surface* surf)
 	m_move_to_pos_y=0;
 
 	m_initialized=true;
+	
+	m_state = SP_STOP;
 	
 }
 	

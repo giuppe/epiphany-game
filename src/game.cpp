@@ -738,7 +738,7 @@ void Game::show_credits()
 				CL_System::sleep(5);
 			}
 		}
-		CL_Display::flip_display(true);
+		m_screen.flip_display();
 		
 
 		CL_System::keep_alive();

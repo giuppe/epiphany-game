@@ -86,6 +86,8 @@ void Entity_Door::check_and_do()
 		m_is_open=true;
 	set_position(m_position_x, m_position_y);
 	
+	
+	
 	m_just_checked=true;
 
 }

@@ -72,7 +72,7 @@ private:
 	
 public:
 	
-	Sprite(){m_initialized=false;};
+	Sprite():m_initialized(false){};
 
 	Sprite(CL_Surface* surface);
 	
