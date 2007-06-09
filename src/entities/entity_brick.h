@@ -29,7 +29,7 @@ class Entity_Brick:public Entity
 {
 public:	
 
-	Entity_Brick(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Brick(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 
 	
 	//it does nothing: its check_and_do is empty.

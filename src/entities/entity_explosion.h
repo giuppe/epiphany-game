@@ -32,7 +32,7 @@ private:
 	
 public:
 	
-	Entity_Explosion(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Explosion(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 		
 	void check_and_do();
 	

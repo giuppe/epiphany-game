@@ -28,7 +28,7 @@ private:
 	
 	bool m_is_exited;
 
-	unsigned int m_score;
+	Uint32 m_score;
 	
 	Direction m_direction;
 	
@@ -36,7 +36,7 @@ private:
 	
 public:
 	
-	Entity_Player(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Player(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 
 	void check_and_do();
 	
@@ -52,7 +52,7 @@ public:
 	
 	void set_snap(bool snap);
 	
-	unsigned int get_score();		
+	Uint32 get_score();		
 	
 	bool smash(Entity_Handle);
 	

@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include "surface_manager.h"
 
 
 #ifndef MENU_H
@@ -29,29 +30,29 @@ private:
 
 	CL_Font* m_menu_font;
 
-	unsigned int m_current_level;
+	Uint32 m_current_level;
 
-	unsigned int m_unsolved_level;
+	Uint32 m_unsolved_level;
 
-	unsigned int m_total_levels;
+	Uint32 m_total_levels;
 
-	CL_Surface* m_selector;
+	Surface* m_selector;
 
-	CL_Surface* m_background;
+	Surface* m_background;
 
 public:
 
-	Menu(unsigned int total_levels, unsigned int unsolved_level);
+	Menu(Uint32 total_levels, Uint32 unsolved_level);
 
 	~Menu();
 
-	void set_unsolved_level(unsigned int unsolved_level);
+	void set_unsolved_level(Uint32 unsolved_level);
 
-	unsigned int get_unsolved_level();
+	Uint32 get_unsolved_level();
 
-	unsigned int get_current_level();
+	Uint32 get_current_level();
 
-	void set_current_level(unsigned int current_level);
+	void set_current_level(Uint32 current_level);
 
 	int go();
 

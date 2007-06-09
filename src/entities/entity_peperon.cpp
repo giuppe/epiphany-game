@@ -22,7 +22,7 @@
 #include "entity_manager.h"
 #include "entity_player.h"
 
-Entity_Peperon::Entity_Peperon(Level* level, unsigned int x, unsigned int y, Sprite& sprite, Direction direction)
+Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Direction direction)
 {
 	current_level=level;
 	m_position_x=x;

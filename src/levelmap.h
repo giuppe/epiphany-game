@@ -25,13 +25,13 @@
 class Levelmap
 {
 protected:
-	unsigned int m_version;
-	unsigned int m_size_x;
-	unsigned int m_size_y;
+	Uint32 m_version;
+	Uint32 m_size_x;
+	Uint32 m_size_y;
 	const char* m_name;
 	const char* m_author;
-	unsigned int m_min_score;
-	unsigned int m_max_time;
+	Uint32 m_min_score;
+	Uint32 m_max_time;
 	std::vector< std::vector<Entity_Type> > m_map;
 	//bool m_error;
 //	Epimap m_epimap;
@@ -39,15 +39,15 @@ public:
 	Levelmap(const char* map_path);
 	Levelmap();
 	void load_map(const char* map_path);
-	unsigned int get_min_score();
-	unsigned int get_max_time();
+	Uint32 get_min_score();
+	Uint32 get_max_time();
 	const char* get_name();
 	const char* get_author();
-	unsigned int get_size_x();
-	unsigned int get_size_y();
+	Uint32 get_size_x();
+	Uint32 get_size_y();
 	//bool error();
 	std::vector< std::vector<Entity_Type> >& get_map();
-	Entity_Type get_map_element(unsigned int x, unsigned int y);
+	Entity_Type get_map_element(Uint32 x, Uint32 y);
 
 };
 

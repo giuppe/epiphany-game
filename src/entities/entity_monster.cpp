@@ -19,7 +19,7 @@
 #include "entity.h"
 #include "entity_monster.h"
 
-Entity_Monster::Entity_Monster(Level* level, unsigned int x, unsigned int y)
+Entity_Monster::Entity_Monster(Level* level, Uint32 x, Uint32 y)
 {
 	current_level=level;
 	m_position_x=x;

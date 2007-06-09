@@ -21,20 +21,20 @@
 
 
 
-unsigned int Screen::get_screen_size_x()
+Uint32 Screen::get_screen_size_x()
 {
 	return m_screen_size_x;
 	
 }
 
-unsigned int Screen::get_screen_size_y()
+Uint32 Screen::get_screen_size_y()
 {
 
 	return m_screen_size_y;
 	
 }
 
-void Screen::init(unsigned int resolution_x, unsigned int resolution_y, unsigned int level_size_x, unsigned int level_size_y, unsigned int cell_size)
+void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size)
 {
 	m_win_pos_x=0;
 	m_win_pos_y=0;
@@ -73,7 +73,7 @@ void Screen::put(Sprite& sprite)
 	
 }
 
-void Screen::set_cell_size(unsigned int cell_size)
+void Screen::set_cell_size(Uint32 cell_size)
 {
 	
 	m_cell_size=cell_size;
@@ -132,12 +132,12 @@ void Screen::flip_display()
 	CL_Display::flip_display(false);
 }
 
-void Screen::fill_rect(int x, int y, unsigned int size_x, unsigned int size_y, float r, float g, float b, float alpha)
+void Screen::fill_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha)
 {
 	CL_Display::fill_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
 }
 
-void Screen::draw_rect(int x, int y, unsigned int size_x, unsigned int size_y, float r, float g, float b, float alpha)
+void Screen::draw_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha)
 {
 	CL_Display::draw_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
 }

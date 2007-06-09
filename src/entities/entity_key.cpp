@@ -19,7 +19,7 @@
 #include "entity.h"
 #include "entity_key.h"
 
-Entity_Key::Entity_Key(Level* level, unsigned int x, unsigned int y, Sprite& sprite, unsigned int id)
+Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
 {
 	current_level=level;
 	m_position_x=x;
@@ -49,7 +49,7 @@ Entity_Key::Entity_Key(Level* level, unsigned int x, unsigned int y, Sprite& spr
 
 }
 
-unsigned int Entity_Key::get_key_id()
+Uint32 Entity_Key::get_key_id()
 {
 	return m_key_id;
 }

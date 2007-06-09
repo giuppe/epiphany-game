@@ -25,23 +25,23 @@ class Game_Timer
 {
 private:
 	//total countdown time
-	unsigned int m_total_time;
+	Uint32 m_total_time;
 	//last acquired time
-	unsigned int m_last_time;
+	Uint32 m_last_time;
 public:
-	Game_Timer(unsigned int total_time = 0);
+	Game_Timer(Uint32 total_time = 0);
 	
 	void update();
 	
 	void start();
 	
-	void set_total_time(unsigned int total_time);
+	void set_total_time(Uint32 total_time);
 	
 	bool is_zero();
 	
 	const char* get_time_string();
 	
-	unsigned int get_time();
+	Uint32 get_time();
 	
 
 

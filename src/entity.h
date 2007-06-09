@@ -31,9 +31,9 @@ class Entity
 {
 private:
 
-	void m_set_position_x(unsigned int x);
+	void m_set_position_x(Uint32 x);
 	
-	void m_set_position_y(unsigned int y);
+	void m_set_position_y(Uint32 y);
 	
 protected:
 
@@ -43,11 +43,11 @@ protected:
 	
 	Entity_Type m_type;
 	
-	unsigned int m_position_x;
+	Uint32 m_position_x;
 	
-	unsigned int m_position_y;
+	Uint32 m_position_y;
 	
-	unsigned int m_speed;
+	Uint32 m_speed;
 	
 	Sprite m_sprite;
 	
@@ -66,9 +66,9 @@ public:
 	
 	void set_id(Entity_Handle handle);
 
-	unsigned int get_position_x();
+	Uint32 get_position_x();
 	
-	unsigned int get_position_y();
+	Uint32 get_position_y();
 	
 	Entity_Type get_type()
   {return m_type;};
@@ -79,7 +79,7 @@ public:
 	
   }
 	
-	void set_speed(unsigned int speed);
+	void set_speed(Uint32 speed);
 	
 	void set_checked(bool check){m_just_checked=check;};
 	
@@ -90,9 +90,9 @@ public:
 	//moving function: calls the correct move_<dir>() function
 	void move(Direction direction);	
 	
-	bool set_position(unsigned int x, unsigned int y);
+	bool set_position(Uint32 x, Uint32 y);
 
-	bool set_initial_position(unsigned int x, unsigned int y);
+	bool set_initial_position(Uint32 x, Uint32 y);
 	// Moving functions - one for every direction
 	
 	void move_up();

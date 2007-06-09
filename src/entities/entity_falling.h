@@ -32,7 +32,7 @@ protected:
 
 public:
 
-	Entity_Falling(Level* level, unsigned int x, unsigned int y);
+	Entity_Falling(Level* level, Uint32 x, Uint32 y);
 
 	Entity_Falling();
 	

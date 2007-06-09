@@ -7,7 +7,7 @@ typedef CL_Surface Surface;
 
 #include <vector>
 
-typedef unsigned int Surface_Handle;
+typedef Uint32 Surface_Handle;
 
 class Surface_Manager
 {

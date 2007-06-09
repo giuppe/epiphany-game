@@ -22,7 +22,7 @@
 #include "entity_player.h"
 #include "level.h"
 
-Entity_Exit::Entity_Exit(Level* level, unsigned int x, unsigned int y, Sprite& sprite,unsigned int min_score)
+Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Sprite& sprite,Uint32 min_score)
 {
 	current_level=level;
 
@@ -83,12 +83,12 @@ bool Entity_Exit::pass_on_me(Direction d)
 	
 }
 
-void Entity_Exit::set_min_score(unsigned int min_score)
+void Entity_Exit::set_min_score(Uint32 min_score)
 {
 	m_min_score=min_score;
 }
 
-unsigned int Entity_Exit::get_min_score()
+Uint32 Entity_Exit::get_min_score()
 {
 
 	return m_min_score;

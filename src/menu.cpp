@@ -18,9 +18,10 @@
 #include "dephine.h"
 #include "menu.h"
 #include "input.h"
+#include "screen.h"
 #include "game.h"
 
-Menu::Menu(unsigned int total_levels, unsigned int unsolved_level)
+Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 {
   
 
@@ -49,12 +50,12 @@ Menu::~Menu()
 }
 
 
-unsigned int Menu::get_current_level()
+Uint32 Menu::get_current_level()
 {
   return m_current_level;
 }
 
-void Menu::set_current_level(unsigned int current_level)
+void Menu::set_current_level(Uint32 current_level)
 {
   if(current_level<m_total_levels)
   {
@@ -66,12 +67,12 @@ void Menu::set_current_level(unsigned int current_level)
     m_current_level=m_unsolved_level;
   }
 }
-unsigned int Menu::get_unsolved_level()
+Uint32 Menu::get_unsolved_level()
 {
   return m_unsolved_level;
 }
 
-void Menu::set_unsolved_level(unsigned int unsolved_level)
+void Menu::set_unsolved_level(Uint32 unsolved_level)
 {
   if(unsolved_level<m_total_levels)
   {
@@ -99,11 +100,12 @@ int Menu::go()
 	DEBOUT("Entering menu()...\n");
 	Epiconfig* config=Epiconfig::instance();
 	int selected=0;
-	unsigned int level_number=m_current_level;
-	unsigned int current_time;
+	Uint32 level_number=m_current_level;
+	Uint32 current_time;
 	CL_String level_string;
 	int curr_sprite=0;
 	Input* input = Input::instance();
+	Screen* screen = Screen::instance();
 	//CL_System::keep_alive();
 	input->update();
 	while(!(((input->get_enter())||
@@ -112,7 +114,7 @@ int Menu::go()
 
 	{
 		current_time=CL_System::get_time();
-		CL_Display::clear_display(0.0, 0.0, 0.0, 1.0);
+		screen->clear();
 		m_background->put_screen(0,0, (int)config->get_game_size_x(), (int)config->get_game_size_y());
 		level_string=(int)level_number;
 		//m_menu_font->print_center(k_game_size_x/2,30,"Epiphany");
@@ -167,7 +169,7 @@ int Menu::go()
 		}
 
 		
-		CL_Display::flip_display();
+		screen->flip_display();
 		do
 		{
 			CL_System::keep_alive();

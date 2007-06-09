@@ -34,7 +34,7 @@ Surface* Surface_Manager::get_surface(Surface_Handle surface_handle)
 void Surface_Manager::deinit()
 {
     DEBOUT("\n\tFlushing all surfaces... ");
-    for(unsigned int i=0; i < m_surfaces.size(); i++)
+    for(Uint32 i=0; i < m_surfaces.size(); i++)
     {
         delete m_surfaces[i];
     }

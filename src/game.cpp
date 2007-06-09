@@ -37,7 +37,7 @@
 
 bool Game::main_loop()
 {
-	unsigned int current_frame_time=0;
+	Uint32 current_frame_time=0;
 	
 	bool exit_state=false;
 	
@@ -97,11 +97,11 @@ bool Game::main_loop()
 		
 		move_all();
 
-//		unsigned int current_frame_time=0;
+//		Uint32 current_frame_time=0;
 
-		unsigned int msec_per_frame=m_config->get_msec_per_frame();
+		Uint32 msec_per_frame=m_config->get_msec_per_frame();
 
-		for(unsigned int j=0;j<m_config->get_max_anim_drawn();j++)
+		for(Uint32 j=0;j<m_config->get_max_anim_drawn();j++)
 		{
 			current_frame_time=CL_System::get_time();
 		
@@ -202,7 +202,7 @@ void Game::move_all()
 
 	m_level->get_player().set_speed(1);
 
-	unsigned int i,x,y;
+	Uint32 i,x,y;
 	for(x=0;x<m_config->get_level_size_x();x++)
 	{
 		for(y=0;y<m_config->get_level_size_y();y++)
@@ -266,7 +266,7 @@ void Game::draw(int frame_number)
 	}
 
 	//draw other entities
-	for(unsigned int i=1; i<Entity_Manager::instance()->size(); i++)
+	for(Uint32 i=1; i<Entity_Manager::instance()->size(); i++)
 	{
 		curr_ntt=Entity_Manager::instance()->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
@@ -632,7 +632,7 @@ void Game::load_config()
 	config_file>>m_unsolved_level;
 	//find max_num_of_levels
 	CL_DirectoryScanner dirscan;
-	unsigned int i=0;
+	Uint32 i=0;
 	if(dirscan.scan(CL_String(m_resource_path)+"/maps", "level*.map"))
 	{
 		//;
@@ -714,7 +714,7 @@ void Game::show_credits()
 
 //standard method: text scrolling
 	
-	unsigned int i;
+	Uint32 i;
 	
 	Input* input =Input::instance();
 	input->update(); 

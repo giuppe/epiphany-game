@@ -36,11 +36,11 @@ public:
 
 	void handle_command_set_str(std::string o, std::string v);
 
-	void handle_command_set_int(std::string o, unsigned int v);
+	void handle_command_set_int(std::string o, Uint32 v);
 
-	void handle_command_line(Entity_Type e, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1);
+	void handle_command_line(Entity_Type e, Uint32 x0, Uint32 y0, Uint32 x1, Uint32 y1);
 
-	void handle_command_rect(Entity_Type e, unsigned int x0, unsigned int y0, unsigned int w, unsigned int h);
+	void handle_command_rect(Entity_Type e, Uint32 x0, Uint32 y0, Uint32 w, Uint32 h);
 
 	void handle_command_view();
 

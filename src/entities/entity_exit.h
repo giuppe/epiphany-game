@@ -30,11 +30,11 @@ private:
 	
 	bool m_is_open;
 	
-	unsigned int m_min_score;
+	Uint32 m_min_score;
 	
 public:
 
-	Entity_Exit(Level* level, unsigned int x, unsigned int y, Sprite& sprite, unsigned int min_score);
+	Entity_Exit(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 min_score);
 	
 	bool is_open();
 	
@@ -42,9 +42,9 @@ public:
 	
 	bool pass_on_me(Direction d);
 	
-	void set_min_score(unsigned int min_score);
+	void set_min_score(Uint32 min_score);
 	
-	unsigned int get_min_score();
+	Uint32 get_min_score();
 	
 	bool smash(Entity_Handle){return false;};
 	

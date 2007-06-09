@@ -24,7 +24,7 @@
 #include "entity_all.h"
 
 
-Entity_Sapphire::Entity_Sapphire(Level* level, unsigned int x, unsigned int y, Sprite& sprite)
+Entity_Sapphire::Entity_Sapphire(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
 {
 
 	current_level=level;

@@ -20,7 +20,7 @@
 
 
 
-Game_Timer::Game_Timer(unsigned int total_time)
+Game_Timer::Game_Timer(Uint32 total_time)
 {
 	
 	m_total_time=total_time;
@@ -30,7 +30,7 @@ Game_Timer::Game_Timer(unsigned int total_time)
 
 
 
-void Game_Timer::set_total_time(unsigned int total_time)
+void Game_Timer::set_total_time(Uint32 total_time)
 {
 	m_total_time=total_time;
 }
@@ -98,7 +98,7 @@ const char* Game_Timer::get_time_string()
 	
 }
 
-unsigned int Game_Timer::get_time()
+Uint32 Game_Timer::get_time()
 {
 	
 	return m_total_time;

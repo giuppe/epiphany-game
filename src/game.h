@@ -61,9 +61,9 @@ private:
 
 	Epiconfig* m_config;
 	
-	unsigned int m_unsolved_level;
+	Uint32 m_unsolved_level;
 	
-	unsigned int m_max_num_of_levels;
+	Uint32 m_max_num_of_levels;
 	
 	const char* m_ini_path;
 

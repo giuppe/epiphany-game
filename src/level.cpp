@@ -60,7 +60,7 @@ Level::Level(Spriteset& spriteset, Sampleset& sampleset):m_spriteset(spriteset),
 	
 }
 
-void Level::set_key(unsigned int key)
+void Level::set_key(Uint32 key)
 {
 	m_acquired_keys=m_acquired_keys|key;
 }
@@ -129,7 +129,7 @@ void Level::load_map(const char* map_path)
 //	Entity_Exit* ex;
 	Levelmap levelmap;
 	levelmap.load_map(map_path);
-	unsigned int i,j;
+	Uint32 i,j;
 	for(j=0; j<levelmap.get_size_y(); j++)
 		for(i=0; i<levelmap.get_size_x(); i++)
 		{
@@ -140,7 +140,7 @@ void Level::load_map(const char* map_path)
 	m_max_time=levelmap.get_max_time();
 }
 
-void Level::set_entity(Entity_Type type, unsigned int x, unsigned int y)
+void Level::set_entity(Entity_Type type, Uint32 x, Uint32 y)
 {
 		if(type==UNKNOWN)
 	{
@@ -201,16 +201,16 @@ Sprite& Level::get_sprite(Entity_Type entity_type)
 
 Level::~Level()
 {
-//	for (unsigned int i=0; i<m_entities_list.size(); i++)
+//	for (Uint32 i=0; i<m_entities_list.size(); i++)
 //		m_entities_list[i].remove();
 }
 	
-unsigned int Level::get_acquired_keys()
+Uint32 Level::get_acquired_keys()
 {
 	return m_acquired_keys;
 }
 
-void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
+void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 {
 
 //	Ntt_pointer& curr_ntt=m_entities_list[m_entities_matrix[x][y]];
@@ -250,12 +250,12 @@ void Level::explode(unsigned int x, unsigned int y, Entity_Type transform_to)
 		
 }
 
-unsigned int Level::get_min_score()
+Uint32 Level::get_min_score()
 {
 	return m_min_score;
 }
 
-unsigned int Level::get_max_time()
+Uint32 Level::get_max_time()
 {
 	return m_max_time;
 }

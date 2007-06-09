@@ -1,12 +1,13 @@
 #ifndef ENTITY_MANAGER_H_
 #define ENTITY_MANAGER_H_
 
+#include "dephine.h"
 #include <vector>
 #include <string>
 
 class Entity;
 
-typedef unsigned int Entity_Handle;
+typedef Uint32 Entity_Handle;
 
 class Entity_Manager
 {

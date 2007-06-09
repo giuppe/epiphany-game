@@ -35,7 +35,7 @@ private:
 
 public:
 
-	Entity_Flintstone(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Flintstone(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 	
 	
 	void check_and_do();

@@ -11,8 +11,8 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 	//DEBOUT(type<<"\n");
 	Entity* entity;
 	
-	unsigned int x=1;
-	unsigned int y = 1;
+	Uint32 x=1;
+	Uint32 y = 1;
 	DEBOUT("Creating entity of type:"<<type<<"\n");
 	switch(type)
 	{

@@ -23,7 +23,7 @@
 #include "entity_all.h"
 
 
-Entity_Player::Entity_Player(Level* level, unsigned int x, unsigned int y, Sprite& sprite)
+Entity_Player::Entity_Player(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
 {
 	
 	m_type=PLAYER;
@@ -144,7 +144,7 @@ bool Entity_Player::is_alive()
 	
 }
 
-unsigned int Entity_Player::get_score()
+Uint32 Entity_Player::get_score()
 {
 
 	return m_score;

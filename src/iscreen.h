@@ -3,21 +3,21 @@
 
 class IScreen{
 public:
-	//virtual void init(unsigned int resolution_x, unsigned int resolution_y, unsigned int level_size_x, unsigned int level_size_y, unsigned int cell_size) =0;
+	//virtual void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size) =0;
 		
-	//virtual void put(Sprite& sprite, unsigned int pos_x, unsigned int pos_y) =0;
+	//virtual void put(Sprite& sprite, Uint32 pos_x, Uint32 pos_y) =0;
 
 	virtual void put(Sprite& sprite) =0;
 		
 	//void put(Entity* entity);
 	
-	virtual unsigned int get_screen_size_x() =0;
+	virtual Uint32 get_screen_size_x() =0;
 	
-	virtual unsigned int get_screen_size_y() =0;
+	virtual Uint32 get_screen_size_y() =0;
 	
-	virtual void init(unsigned int resolution_x, unsigned int resolution_y, unsigned int level_size_x, unsigned int level_size_y, unsigned int cell_size) =0;
+	virtual void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size) =0;
 	
-	virtual void set_cell_size(unsigned int cell_size) =0;
+	virtual void set_cell_size(Uint32 cell_size) =0;
 	
 	virtual void set_window_center(int cell_x, int cell_y) =0;
 	

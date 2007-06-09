@@ -32,7 +32,7 @@ protected:
 
 public:
 
-	Entity_Monster(Level* level, unsigned int x, unsigned int y);
+	Entity_Monster(Level* level, Uint32 x, Uint32 y);
 
 	Entity_Monster();
 	

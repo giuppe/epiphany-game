@@ -61,8 +61,8 @@ Epimap::~Epimap()
 
 bool Epimap::m_exit_on_map()
 {
-	for(unsigned int y=0; y<m_size_y; y++)
-		for(unsigned int x=0; x<m_size_x; x++)
+	for(Uint32 y=0; y<m_size_y; y++)
+		for(Uint32 x=0; x<m_size_x; x++)
 			if(m_map[x][y] == EXIT)
 				return true;
     return false;
@@ -70,29 +70,29 @@ bool Epimap::m_exit_on_map()
 
 bool Epimap::m_player_on_map()
 {
-	for(unsigned int y=0; y<m_size_y; y++)
-		for(unsigned int x=0; x<m_size_x; x++)
+	for(Uint32 y=0; y<m_size_y; y++)
+		for(Uint32 x=0; x<m_size_x; x++)
 			if(m_map[x][y] == PLAYER)
 				return true;
 	return false;
 }
 
-void Epimap::set_map_version(unsigned int v)
+void Epimap::set_map_version(Uint32 v)
 {
 	m_version = v;
 }
 
-unsigned int Epimap::get_map_version()
+Uint32 Epimap::get_map_version()
 {
 	return m_version;
 }
 
-unsigned int Epimap::get_min_score()
+Uint32 Epimap::get_min_score()
 {
 	return m_min_score;
 }
 
-unsigned int Epimap::get_max_time()
+Uint32 Epimap::get_max_time()
 {
 	return m_max_time;
 }
@@ -107,17 +107,17 @@ string Epimap::get_author()
 	return m_author;
 }
 
-unsigned int Epimap::get_size_x()
+Uint32 Epimap::get_size_x()
 {
 	return m_size_x;
 }
 
-unsigned int Epimap::get_size_y()
+Uint32 Epimap::get_size_y()
 {
 	return m_size_y;
 }
 
-Entity_Type Epimap::get_entity(unsigned int x, unsigned int y)
+Entity_Type Epimap::get_entity(Uint32 x, Uint32 y)
 {
 	if((x>m_size_x)||(y>m_size_y))
 		Common_Ex::throw_common("Alert: map element outside map size\n");
@@ -125,7 +125,7 @@ Entity_Type Epimap::get_entity(unsigned int x, unsigned int y)
 	return m_map[x][y];
 }
 
-void Epimap::set_map_size_xy(unsigned int x, unsigned int y)
+void Epimap::set_map_size_xy(Uint32 x, Uint32 y)
 {
 	if( x < 1 || y < 1)
 		Common_Ex::throw_common("Can't set size less than 1");
@@ -135,18 +135,18 @@ void Epimap::set_map_size_xy(unsigned int x, unsigned int y)
 
 	m_map.resize(m_size_x);
 
-	for(unsigned int i=0; i<m_size_x; i++)
+	for(Uint32 i=0; i<m_size_x; i++)
 		m_map[i].resize(m_size_y);
 
-	for(unsigned int i=0; i<m_size_x; i++)
-		for(unsigned int j=0; j<m_size_y; j++)
+	for(Uint32 i=0; i<m_size_x; i++)
+		for(Uint32 j=0; j<m_size_y; j++)
 			m_map[i][j] = GRASS;
 }
 
-/*void Epimap::set_version(unsigned int v)
+/*void Epimap::set_version(Uint32 v)
 {}*/
 
-void Epimap::set_min_score(unsigned int s)
+void Epimap::set_min_score(Uint32 s)
 {  /*
 	if(s<0)
 		Common_Ex::throw_common("Can't set minimum score less than 0");
@@ -154,7 +154,7 @@ void Epimap::set_min_score(unsigned int s)
 	m_min_score = s;
 }
 
-void Epimap::set_max_time(unsigned int t)
+void Epimap::set_max_time(Uint32 t)
 {
 	if(t<1)
 		Common_Ex::throw_common("Can't set max time less than 1");
@@ -177,7 +177,7 @@ void Epimap::set_author(const string& author)
 	m_author = author;
 }
 
-void Epimap::put_entity(Entity_Type e, unsigned int x, unsigned int y)
+void Epimap::put_entity(Entity_Type e, Uint32 x, Uint32 y)
 {
 	if(x>m_size_x || y>m_size_y)
 		Common_Ex::throw_common("Setting an entity out of map");
@@ -185,7 +185,7 @@ void Epimap::put_entity(Entity_Type e, unsigned int x, unsigned int y)
 	m_map[y][x] = e;
 }
 /*
-void put_player(unsigned int x, unsigned int y)
+void put_player(Uint32 x, Uint32 y)
 {
     if(x>m_size_x || y>m_size_y)
         		Common_Ex::throw_common("Putting player out of map");
@@ -193,7 +193,7 @@ void put_player(unsigned int x, unsigned int y)
     m_map[y][x] = PLAYER;
 }
 
-void Epimap::put_exit(unsigned int x, unsigned int y)
+void Epimap::put_exit(Uint32 x, Uint32 y)
 {
     if(x>m_size_x || y>m_size_y)
 		Common_Ex::throw_common("Putting exit out of map");
@@ -204,20 +204,20 @@ void Epimap::put_exit(unsigned int x, unsigned int y)
 
 void Epimap::make_borders()
 {
-	for(unsigned int i=0; i<m_size_y; i++)
+	for(Uint32 i=0; i<m_size_y; i++)
 	{
 		m_map[0][i] =  STEEL;
 		m_map[m_size_x - 1][i] = STEEL;
 	}
 	
-	for(unsigned int i=0; i<m_size_y; i++)
+	for(Uint32 i=0; i<m_size_y; i++)
 	{
 		m_map[i][0] = STEEL;
 		m_map[i][m_size_y-1] = STEEL;
 	}
 }
 
-void Epimap::put_line(Entity_Type t, unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2)
+void Epimap::put_line(Entity_Type t, Uint32 x1, Uint32 y1, Uint32 x2, Uint32 y2)
 {
 	if( (x1 <= 0) || (x2 <= 0) || (y1 <= 0) || (y2 <= 0) )
 		Common_Ex::throw_common("Can't write on borders or out of map!");
@@ -232,9 +232,9 @@ void Epimap::put_line(Entity_Type t, unsigned int x1, unsigned int y1, unsigned 
     
 	if(deltax>1)
 	{
-		unsigned int y = y1;
+		Uint32 y = y1;
 
-		for(unsigned int x=x1; x<=x2; x++)
+		for(Uint32 x=x1; x<=x2; x++)
 		{
 			m_map[y][x] = t;
 
@@ -249,21 +249,21 @@ void Epimap::put_line(Entity_Type t, unsigned int x1, unsigned int y1, unsigned 
 	}
 	else
 		if(deltay>1)
-			for(unsigned int y=y1; y<=y2; y++)
+			for(Uint32 y=y1; y<=y2; y++)
 				m_map[y][x1] = t;
 }
 
-void Epimap::put_rectangle(Entity_Type t, unsigned int x1, unsigned int y1, unsigned int height, unsigned int width)
+void Epimap::put_rectangle(Entity_Type t, Uint32 x1, Uint32 y1, Uint32 height, Uint32 width)
 {
-	for(unsigned int x=x1; x<x1+height; x++)
-		for(unsigned int y=y1; y<y1+width; y++)
+	for(Uint32 x=x1; x<x1+height; x++)
+		for(Uint32 y=y1; y<y1+width; y++)
 			m_map[y][x] = t;
 }
 
-unsigned int Epimap::count_total_score()
+Uint32 Epimap::count_total_score()
 {
-	unsigned int score = 0;
-  unsigned int x,y;
+	Uint32 score = 0;
+  Uint32 x,y;
 	for(x = 0; x<m_size_x; x++)
 	{
 		for(y = 0; y<m_size_y; y++)

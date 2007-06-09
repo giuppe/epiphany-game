@@ -28,7 +28,7 @@ class Entity_Emerald: public Entity_Falling, public Entity_Gem
 {
 public:
 
-	Entity_Emerald(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Emerald(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 
 	void check_and_do();
 	

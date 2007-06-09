@@ -42,7 +42,7 @@ Entity_Handle Entity::get_id()
 }
 
 /*
-void Entity::m_set_position_x(unsigned int x)
+void Entity::m_set_position_x(Uint32 x)
 {
 
 	if((x>=current_level->get_size_x())||(x<0))
@@ -53,7 +53,7 @@ void Entity::m_set_position_x(unsigned int x)
 
 }
 
-void Entity::m_set_position_y(unsigned int y)
+void Entity::m_set_position_y(Uint32 y)
 {
 
 	if((y>=current_level->get_size_y())||(y<0))
@@ -64,14 +64,14 @@ void Entity::m_set_position_y(unsigned int y)
 
 }
 */
-unsigned int Entity::get_position_x()
+Uint32 Entity::get_position_x()
 {
 
 	return m_position_x;	
 
 }
 
-unsigned int Entity::get_position_y()
+Uint32 Entity::get_position_y()
 {
 
 	return m_position_y;	
@@ -91,7 +91,7 @@ void Entity::set_type(Entity_Type type)
 	
 }
 
-void Entity::set_speed(unsigned int speed)
+void Entity::set_speed(Uint32 speed)
 {
 	m_speed=speed;
 	m_sprite.set_speed(m_speed);
@@ -104,7 +104,7 @@ void Entity::kill()
 		current_level->get_entities_matrix()[m_position_x][m_position_y]=0;
 }
 
-bool Entity::set_position(unsigned int x, unsigned int y)
+bool Entity::set_position(Uint32 x, Uint32 y)
 {
 	if(((x>=current_level->get_size_x())||(x<0))||((y>=current_level->get_size_y())||(y<0)))
 			return false;	
@@ -124,7 +124,7 @@ bool Entity::set_position(unsigned int x, unsigned int y)
 	
 }
 
-bool Entity::set_initial_position(unsigned int x, unsigned int y)
+bool Entity::set_initial_position(Uint32 x, Uint32 y)
 {
 	if(((x>=current_level->get_size_x())||(x<0))||((y>=current_level->get_size_y())||(y<0)))
 			return false;	
@@ -185,8 +185,8 @@ void Entity::move(Direction direction)
 //C'è una funzione per ogni movimento poichè poi bisogna aggiungere le animazioni
 void Entity::move_up()
 {
-	unsigned int new_position_x=m_position_x;
-	unsigned int new_position_y=m_position_y-1;	
+	Uint32 new_position_x=m_position_x;
+	Uint32 new_position_y=m_position_y-1;	
 
 	set_position(new_position_x, new_position_y);
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
@@ -197,8 +197,8 @@ void Entity::move_up()
 void Entity::move_down()
 {
 	
-	unsigned int new_position_x=m_position_x;
-	unsigned int new_position_y=m_position_y+1;	
+	Uint32 new_position_x=m_position_x;
+	Uint32 new_position_y=m_position_y+1;	
 
 	set_position(new_position_x, new_position_y);
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
@@ -208,8 +208,8 @@ void Entity::move_down()
 void Entity::move_right()
 {
 	
-	unsigned int new_position_x=m_position_x+1;
-	unsigned int new_position_y=m_position_y;	
+	Uint32 new_position_x=m_position_x+1;
+	Uint32 new_position_y=m_position_y;	
 
 	set_position(new_position_x, new_position_y);
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
@@ -218,8 +218,8 @@ void Entity::move_right()
 
 void Entity::move_left()
 {
-	unsigned int new_position_x=m_position_x-1;
-	unsigned int new_position_y=m_position_y;	
+	Uint32 new_position_x=m_position_x-1;
+	Uint32 new_position_y=m_position_y;	
 
 	set_position(new_position_x, new_position_y);
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);

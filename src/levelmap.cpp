@@ -64,12 +64,12 @@ void Levelmap::load_map(const char* map_path)
 }
 
 
-unsigned int Levelmap::get_min_score()
+Uint32 Levelmap::get_min_score()
 {
 	return m_min_score;
 }
 
-unsigned int Levelmap::get_max_time()
+Uint32 Levelmap::get_max_time()
 {
 	return m_max_time;
 }
@@ -84,12 +84,12 @@ const char* Levelmap::get_author()
 	return m_author;
 }
 
-unsigned int Levelmap::get_size_x()
+Uint32 Levelmap::get_size_x()
 {
 	return m_size_x;
 }
 
-unsigned int Levelmap::get_size_y()
+Uint32 Levelmap::get_size_y()
 {
 	return m_size_y;
 }
@@ -100,7 +100,7 @@ std::vector< std::vector<Entity_Type> >& Levelmap::get_map()
 	return m_map;
 }
 
-Entity_Type Levelmap::get_map_element(unsigned int x, unsigned int y)
+Entity_Type Levelmap::get_map_element(Uint32 x, Uint32 y)
 {
 	if((x>m_size_x)||(y>m_size_y))
 		DEBOUT("Alert: map element outside map size\n");

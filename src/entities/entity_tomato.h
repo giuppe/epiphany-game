@@ -25,7 +25,7 @@
 class Entity_Tomato:public Entity_Monster
 {
 public:
-	Entity_Tomato(Level* level, unsigned int x, unsigned int y, Sprite& sprite, Direction direction);
+	Entity_Tomato(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Direction direction);
 	
 	void check_and_do();
 	

@@ -7,7 +7,7 @@
 class Entity;
 class Level;
 
-//typedef unsigned int Entity_Type;
+//typedef Uint32 Entity_Type;
 
 class Entity_Factory
 {

@@ -48,7 +48,7 @@ void myparser::handle_command_set_str(std::string o, std::string v)
 		m_map.set_min_score(m_map.count_total_score());
 }
 
-void myparser::handle_command_set_int(std::string o, unsigned int v)
+void myparser::handle_command_set_int(std::string o, Uint32 v)
 {
 	DEBOUT("parsing: set "<<o<<" "<<v<<"\n");
 	if(o == "minscore")
@@ -58,12 +58,12 @@ void myparser::handle_command_set_int(std::string o, unsigned int v)
 		m_map.set_max_time(v);
 }
 
-void myparser::handle_command_line(Entity_Type e, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1)
+void myparser::handle_command_line(Entity_Type e, Uint32 x0, Uint32 y0, Uint32 x1, Uint32 y1)
 {
 	    m_map.put_line(e,x0,y0,x1,y1);
 }
 
-void myparser::handle_command_rect(Entity_Type e, unsigned int x0, unsigned int y0, unsigned int w, unsigned int h)
+void myparser::handle_command_rect(Entity_Type e, Uint32 x0, Uint32 y0, Uint32 w, Uint32 h)
 {
 	m_map.put_rectangle(e,x0,y0,w,h);
 }
@@ -79,13 +79,13 @@ void myparser::handle_command_view()
 	const char* wrap_map = " P:#EOS]*DDDD++++*@@@@=o";
 	
 	cout<<"   01234567890123456789012345678901"<<endl;
-	for(unsigned int i = 0; i< 32; i++)
+	for(Uint32 i = 0; i< 32; i++)
 	{
 		cout<<i<<" ";
 		if(i<10)
 		    cout<<" ";
 
-		for(unsigned int y = 0; y<32; y++)
+		for(Uint32 y = 0; y<32; y++)
 			cout<<wrap_map[int(m_map.get_map_element(y,i))];
 		cout<<endl;
 	}

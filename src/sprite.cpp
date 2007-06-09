@@ -117,12 +117,12 @@ Sprite::~Sprite()
 	
 	
 }
-void Sprite::put_screen(int x, int y, unsigned int size_x, unsigned int size_y, unsigned int frame_num)
+void Sprite::put_screen(int x, int y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
 {
 	m_surface->put_screen(x, y, (int)size_x, (int)size_y, (int)frame_num);
 }
 
-void Sprite::put_screen(int x, int y, unsigned int size_x, unsigned int size_y)
+void Sprite::put_screen(int x, int y, Uint32 size_x, Uint32 size_y)
 {
 	m_surface->put_screen(x, y, (int)size_x, (int)size_y, m_curr_frame+m_state);
 }
@@ -136,23 +136,23 @@ CL_Surface* Sprite::operator->()
 }
 */
  /*
-unsigned int Sprite::get_pos_x()
+Uint32 Sprite::get_pos_x()
 {
 	return m_pos_x;
 }
 
-unsigned int Sprite::get_pos_y()
+Uint32 Sprite::get_pos_y()
 {
 	return m_pos_y;
 }
 */
-void Sprite::set_pos_x(unsigned int pos_x)
+void Sprite::set_pos_x(Uint32 pos_x)
 {
 	m_pos_x=pos_x;
 	m_move_to_pos_x=pos_x;
 }
 
-void Sprite::set_pos_y(unsigned int pos_y)
+void Sprite::set_pos_y(Uint32 pos_y)
 {
 	m_pos_y=pos_y;
 	m_move_to_pos_y=pos_y;
@@ -171,12 +171,12 @@ void Sprite::set_curr_frame(int frame)
 	}
 }
 
-void Sprite::set_speed(unsigned int speed)
+void Sprite::set_speed(Uint32 speed)
 {
 	m_speed=speed;
 }
 
-void Sprite::move(unsigned int n_pixel)
+void Sprite::move(Uint32 n_pixel)
 {
 	
 	n_pixel*=m_speed;
@@ -298,19 +298,19 @@ void Sprite::set_state(Anim_Type state)
 	m_state=state;
 }
 
-void Sprite::move_to_pos(unsigned int x, unsigned int y)
+void Sprite::move_to_pos(Uint32 x, Uint32 y)
 {
 	m_move_to_pos_x=x;
 	m_move_to_pos_y=y;
 }
 
 
-void Sprite::move_to_pos_x(unsigned int x)
+void Sprite::move_to_pos_x(Uint32 x)
 {
 	m_move_to_pos_x=x;
 }
 
-void Sprite::move_to_pos_y(unsigned int y)
+void Sprite::move_to_pos_y(Uint32 y)
 {
 	m_move_to_pos_y=y;
 }

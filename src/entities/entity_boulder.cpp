@@ -22,7 +22,7 @@
 #include "entity_player.h"
 
 
-Entity_Boulder::Entity_Boulder(Level* level, unsigned int x, unsigned int y, Sprite& sprite)
+Entity_Boulder::Entity_Boulder(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
 {
 	current_level=level;
 	m_position_x=x;

@@ -50,19 +50,19 @@ private:
 	
 //	CL_Surface* m_eat_anim;
 	
-	unsigned int m_pos_x;
+	Uint32 m_pos_x;
 	
-	unsigned int m_pos_y;
+	Uint32 m_pos_y;
 	
-	unsigned int m_move_to_pos_x;
+	Uint32 m_move_to_pos_x;
 	
-	unsigned int m_move_to_pos_y;
+	Uint32 m_move_to_pos_y;
 	
-	unsigned int m_step_x;
+	Uint32 m_step_x;
 
-	unsigned int m_step_y;
+	Uint32 m_step_y;
 
-	unsigned int m_speed;
+	Uint32 m_speed;
 		
 	int m_curr_frame;
 	
@@ -70,11 +70,11 @@ private:
 
 	Anim_Type m_state;	
 	
-	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y, unsigned int frame_num);
+	void put_screen(int pos_x, int pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
 	void set_curr_frame(int frame);
 	
-	void move(unsigned int n_pixel);
+	void move(Uint32 n_pixel);
 	
 	
 public:
@@ -91,32 +91,32 @@ public:
 	
 	~Sprite();
 	
-	void set_speed(unsigned int speed);
+	void set_speed(Uint32 speed);
 	
 	//CL_Surface* operator->();
 	
 	
-	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y);
+	void put_screen(int pos_x, int pos_y, Uint32 size_x, Uint32 size_y);
 	
 	
-	unsigned int get_pos_x()
+	Uint32 get_pos_x()
 	{
 		return m_pos_x;
   	}
 	
-	unsigned int get_pos_y()
+	Uint32 get_pos_y()
 	{
 		return m_pos_y;
   }
-	void set_pos_x(unsigned int x);
+	void set_pos_x(Uint32 x);
 	
-	void set_pos_y(unsigned int y);
+	void set_pos_y(Uint32 y);
 	
-	void move_to_pos(unsigned int x, unsigned int y);
+	void move_to_pos(Uint32 x, Uint32 y);
 	
-	void move_to_pos_x(unsigned int x);
+	void move_to_pos_x(Uint32 x);
 	
-	void move_to_pos_y(unsigned int y);
+	void move_to_pos_y(Uint32 y);
 	
 	void move();
 	

@@ -26,15 +26,15 @@ class Entity_Door:public Entity
 {
 private:
 
-	unsigned int m_door_id;
+	Uint32 m_door_id;
 	
 	bool m_is_open;
 
 public:
 
-	Entity_Door(Level* level, unsigned int x, unsigned int y, Sprite& sprite, unsigned int id);
+	Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id);
 	
-	unsigned int get_door_id();
+	Uint32 get_door_id();
 	
 	bool pass_on_me(Direction);
 	

@@ -26,13 +26,13 @@ class Entity_Key:public Entity
 {
 private:
 
-	unsigned int m_key_id;
+	Uint32 m_key_id;
 	
 public:
 
-	Entity_Key(Level* level, unsigned int x, unsigned int y, Sprite& sprite, unsigned int id);
+	Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id);
 	
-	unsigned int get_key_id();
+	Uint32 get_key_id();
 	
 	bool pass_on_me(Direction);
 	

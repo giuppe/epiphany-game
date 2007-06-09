@@ -20,6 +20,7 @@
 #ifndef EMDLPARSER_H
 #define EMDLPARSER_H
 
+#include "dephine.h"
 #include <string>
 #include <fstream>
 #include "entity_type.h"
@@ -27,11 +28,11 @@
 class EMDLParser
 {
 private:
-	unsigned int m_x0;
-	unsigned int m_y0;
-	unsigned int m_x1;
-	unsigned int m_y1;
-	unsigned int m_value;
+	Uint32 m_x0;
+	Uint32 m_y0;
+	Uint32 m_x1;
+	Uint32 m_y1;
+	Uint32 m_value;
 
 	std::string m_command;
 	std::string m_object;
@@ -52,9 +53,9 @@ public:
 
 	virtual void handle_command_put(Entity_Type, int x, int y)=0;
 	virtual void handle_command_set_str(std::string, std::string)=0;
-	virtual void handle_command_set_int(std::string, unsigned int)=0;
-	virtual void handle_command_line(Entity_Type, unsigned int, unsigned int, unsigned int, unsigned int)=0;
-	virtual void handle_command_rect(Entity_Type, unsigned int, unsigned int, unsigned int, unsigned int)=0;
+	virtual void handle_command_set_int(std::string, Uint32)=0;
+	virtual void handle_command_line(Entity_Type, Uint32, Uint32, Uint32, Uint32)=0;
+	virtual void handle_command_rect(Entity_Type, Uint32, Uint32, Uint32, Uint32)=0;
 
 	virtual void handle_command_view()=0;
 	virtual void handle_command_write()=0;

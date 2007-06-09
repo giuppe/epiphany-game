@@ -40,17 +40,17 @@ void Epiconfig::set_default_values()
 	m_msec_per_frame=150/m_max_anim_drawn;
 }
 
-unsigned int Epiconfig::get_game_size_x()
+Uint32 Epiconfig::get_game_size_x()
 {
 	return m_game_size_x;
 }
 
-unsigned int Epiconfig::get_game_size_y()
+Uint32 Epiconfig::get_game_size_y()
 {
 	return m_game_size_y;
 }
 
-unsigned int Epiconfig::get_score_size_y()
+Uint32 Epiconfig::get_score_size_y()
 {
 	return m_score_size_y;
 }
@@ -70,22 +70,22 @@ int Epiconfig::get_level_size_y()
 	return m_level_size_y;
 }
 
-unsigned int Epiconfig::get_max_anim_drawn()
+Uint32 Epiconfig::get_max_anim_drawn()
 {
 	return m_max_anim_drawn;
 }
 /*
-unsigned int Epiconfig::get_max_anim()
+Uint32 Epiconfig::get_max_anim()
 {
 	return m_max_anim;
 }
 */
-unsigned int Epiconfig::get_moving_step()
+Uint32 Epiconfig::get_moving_step()
 {
 	return m_moving_step;
 }
 
-unsigned int Epiconfig::get_msec_per_frame()
+Uint32 Epiconfig::get_msec_per_frame()
 {
 	return m_msec_per_frame;
 }

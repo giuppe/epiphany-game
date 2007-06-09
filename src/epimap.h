@@ -16,6 +16,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "dephine.h"
 #include "entity_type.h"
 #include <vector>
 #include <string>
@@ -28,15 +29,15 @@ typedef std::vector< std::vector<Entity_Type> > entity_matrix;
 class Epimap
 {
 private:
-	unsigned int m_version;
-	unsigned int m_size_x;
-	unsigned int m_size_y;
+	Uint32 m_version;
+	Uint32 m_size_x;
+	Uint32 m_size_y;
 
 	std::string m_name;
 	std::string m_author;
 
-	unsigned int m_min_score;
-	unsigned int m_max_time;
+	Uint32 m_min_score;
+	Uint32 m_max_time;
 
 	entity_matrix m_map;
 
@@ -55,15 +56,15 @@ public:
 //	Epimap(const Epimap&);
 	~Epimap();
 
-	void set_map_version(unsigned int);
-	unsigned int get_map_version();
+	void set_map_version(Uint32);
+	Uint32 get_map_version();
 
-	unsigned int count_total_score();
-	unsigned int get_min_score();
-	unsigned int get_max_time();
+	Uint32 count_total_score();
+	Uint32 get_min_score();
+	Uint32 get_max_time();
     
-	void set_min_score(unsigned int);
-	void set_max_time(unsigned int);
+	void set_min_score(Uint32);
+	void set_max_time(Uint32);
     
 	std::string get_name();
 	std::string get_author();
@@ -71,20 +72,20 @@ public:
 	void set_name(const std::string&);
 	void set_author(const std::string&);
     
-	unsigned int get_size_x();
-	unsigned int get_size_y();
+	Uint32 get_size_x();
+	Uint32 get_size_y();
     
-	void set_map_size_xy(unsigned int, unsigned int);
+	void set_map_size_xy(Uint32, Uint32);
        
 	entity_matrix& get_map();
 
-	void put_entity(Entity_Type, unsigned int, unsigned int);
+	void put_entity(Entity_Type, Uint32, Uint32);
 
-	Entity_Type get_entity(unsigned int, unsigned int);
+	Entity_Type get_entity(Uint32, Uint32);
 
-	void put_line(Entity_Type, unsigned int, unsigned int, unsigned int, unsigned int);
+	void put_line(Entity_Type, Uint32, Uint32, Uint32, Uint32);
 
-	void put_rectangle(Entity_Type, unsigned int, unsigned int, unsigned int, unsigned int);
+	void put_rectangle(Entity_Type, Uint32, Uint32, Uint32, Uint32);
 
 };
  /*

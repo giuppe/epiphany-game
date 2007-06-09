@@ -17,7 +17,7 @@
 
 #include "emdlparser.h"
 
-Entity_Type map(const std::string& str)
+Entity_Type map_entity(const std::string& str)
 {
 	if(str == "grass")
 		return	GRASS;
@@ -243,19 +243,19 @@ void EMDLParser::read(char ch)
 	break;
     case 'p':
     {
-	Entity_Type e = map(m_object);
+	Entity_Type e = map_entity(m_object);
 	handle_command_put(e,m_x0,m_y0);
 	break;
     }
     case 'l':
     {
-	Entity_Type e = map(m_object);
+	Entity_Type e = map_entity(m_object);
 	handle_command_line(e, m_x0, m_y0, m_x1, m_y1);
 	break;
     }
     case 'r':
     {
-	Entity_Type e = map(m_object);
+	Entity_Type e = map_entity(m_object);
 	handle_command_rect(e, m_x0, m_y0, m_x1, m_y1);
 	break;
     }

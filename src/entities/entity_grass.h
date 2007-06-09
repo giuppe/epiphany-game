@@ -24,7 +24,7 @@ class Entity_Grass:public Entity
 {
 public:	
 
-	Entity_Grass(Level* level, unsigned int x, unsigned int y, Sprite& sprite);
+	Entity_Grass(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
 
 	
 	bool pass_on_me(Direction d);

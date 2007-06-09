@@ -20,7 +20,7 @@
 #include "entity_door.h"
 #include "entity_all.h"
 
-Entity_Door::Entity_Door(Level* level, unsigned int x, unsigned int y, Sprite& sprite, unsigned int id)
+Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
 {
 	current_level=level;
 	m_position_x=x;
@@ -51,7 +51,7 @@ Entity_Door::Entity_Door(Level* level, unsigned int x, unsigned int y, Sprite& s
 	
 }
 	
-unsigned int Entity_Door::get_door_id()
+Uint32 Entity_Door::get_door_id()
 {
 	return m_door_id;
 }

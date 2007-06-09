@@ -23,11 +23,11 @@
 class Epiconfig
 {
 private:
-	unsigned int m_game_size_x;
+	Uint32 m_game_size_x;
 
-	unsigned int m_game_size_y;
+	Uint32 m_game_size_y;
 
-	unsigned int m_score_size_y;
+	Uint32 m_score_size_y;
 
 //	int m_sprite_size;
 
@@ -35,23 +35,23 @@ private:
 
 	int m_level_size_y;
 
-	unsigned int m_max_anim_drawn;
+	Uint32 m_max_anim_drawn;
 
-//	unsigned int m_max_anim;
+//	Uint32 m_max_anim;
 
-	unsigned int m_moving_step;
+	Uint32 m_moving_step;
 
-	unsigned int m_msec_per_frame;
+	Uint32 m_msec_per_frame;
 
 public:
 
 	void set_default_values();
 
-	unsigned int get_game_size_x();
+	Uint32 get_game_size_x();
 
-	unsigned int get_game_size_y();
+	Uint32 get_game_size_y();
 
-	unsigned int get_score_size_y();
+	Uint32 get_score_size_y();
 
 //	int get_sprite_size();
 
@@ -59,13 +59,13 @@ public:
 
 	int get_level_size_y();
 
-	unsigned int get_max_anim_drawn();
+	Uint32 get_max_anim_drawn();
 
-//	unsigned int get_max_anim();
+//	Uint32 get_max_anim();
 
-	unsigned int get_moving_step();
+	Uint32 get_moving_step();
 
-	unsigned int get_msec_per_frame();
+	Uint32 get_msec_per_frame();
 	
 // begin Singleton stuff
 
