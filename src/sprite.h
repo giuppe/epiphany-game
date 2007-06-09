@@ -17,7 +17,7 @@
 
 
 #include "dephine.h"
-
+#include "surface_manager.h"
 
 #ifndef SPRITE_H
 #define SPRITE_H
@@ -36,7 +36,7 @@ class Sprite
 
 private:
 
-	CL_Surface* m_surface;
+	Surface* m_surface;
 	
 //	CL_Surface* m_up_anim;
 	
@@ -70,11 +70,18 @@ private:
 
 	Anim_Type m_state;	
 	
+	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y, unsigned int frame_num);
+	
+	void set_curr_frame(int frame);
+	
+	void move(unsigned int n_pixel);
+	
+	
 public:
 	
 	Sprite():m_initialized(false){};
 
-	Sprite(CL_Surface* surface);
+	Sprite(Surface* surface);
 	
 	Sprite(const Sprite& sprite);
 	
@@ -88,7 +95,9 @@ public:
 	
 	//CL_Surface* operator->();
 	
-	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y, unsigned int frame_num);
+	
+	void put_screen(int pos_x, int pos_y, unsigned int size_x, unsigned int size_y);
+	
 	
 	unsigned int get_pos_x()
 	{
@@ -109,13 +118,13 @@ public:
 	
 	void move_to_pos_y(unsigned int y);
 	
-	void set_curr_frame(int frame);
+	void move();
 	
-	void move(unsigned int n_pixel);
+	void update_frame();
 	
 	int get_frame_number();
 	
-	void init(CL_Surface* surf);
+	void init(Surface* surf);
 	
 	void set_state(Anim_Type state);
 		

@@ -80,6 +80,21 @@ void Spriteset::load_sprites()
 
 	m_sprites[KEY]=(Sprite(surf_man->get_surface(KEY)));	
 
+	m_sprites[KEY_RED]=(Sprite(surf_man->get_surface(KEY)));
+
+	m_sprites[KEY_BLUE]=(Sprite(surf_man->get_surface(KEY)));
+
+	m_sprites[KEY_BLUE].set_state(SP_UP);
+	
+	m_sprites[KEY_GREEN]=(Sprite(surf_man->get_surface(KEY)));
+
+	m_sprites[KEY_GREEN].set_state(SP_RIGHT);
+	
+	m_sprites[KEY_YELLOW]=(Sprite(surf_man->get_surface(KEY)));
+
+	m_sprites[KEY_YELLOW].set_state(SP_DOWN);
+	
+
 	m_sprites[FLINTSTONE]=(Sprite(surf_man->get_surface(FLINTSTONE)));	
 	
 	m_sprites[PEPERON]=(Sprite(surf_man->get_surface(PEPERON)));	

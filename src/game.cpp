@@ -258,8 +258,10 @@ void Game::draw(int frame_number)
 	//drawing player
 	if(m_level->get_player().exists())
 	{
-		m_level->get_player().get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
-		m_level->get_player().get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
+		//m_level->get_player().get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
+		m_level->get_player().get_sprite().update_frame();
+		//m_level->get_player().get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
+		m_level->get_player().get_sprite().move();
 		m_screen.put(m_level->get_player().get_sprite());
 	}
 
@@ -269,8 +271,10 @@ void Game::draw(int frame_number)
 		curr_ntt=Entity_Manager::instance()->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
-			curr_ntt->get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
-			curr_ntt->get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
+			//curr_ntt->get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
+			//curr_ntt->get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
+			curr_ntt->get_sprite().update_frame();
+			curr_ntt->get_sprite().move();
 			m_screen.put(curr_ntt->get_sprite());
 		}
 	}
@@ -329,17 +333,25 @@ void Game::draw_score()
 	
 	
 	if(m_level->get_acquired_keys()&1)
-		m_spriteset.get_sprite(KEY).put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,0);
+	{
+		m_spriteset.get_sprite(KEY_RED).put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+	}
 	
 	if(m_level->get_acquired_keys()&2)
-		m_spriteset.get_sprite(KEY).put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,8);
-
+	{
+		m_spriteset.get_sprite(KEY_BLUE).put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+	}
+	
 	if(m_level->get_acquired_keys()&4)
-		m_spriteset.get_sprite(KEY).put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,16);
-
+	{
+		m_spriteset.get_sprite(KEY_GREEN).put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+	}
+	
 	if(m_level->get_acquired_keys()&8)
-		m_spriteset.get_sprite(KEY).put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2,24);
-
+	{
+		m_spriteset.get_sprite(KEY_YELLOW).put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+	}
+	
 	m_screen.draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
 
 }

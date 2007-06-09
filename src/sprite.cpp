@@ -20,7 +20,7 @@
 #include "sprite.h"
 //#include <cmath>
 
-Sprite::Sprite(CL_Surface* surface)
+Sprite::Sprite(Surface* surface)
 {
 
 	m_surface=surface;
@@ -93,7 +93,7 @@ Sprite& Sprite::operator=(const Sprite& sprite)
 	
 }*/
 
-void Sprite::init(CL_Surface* surf)
+void Sprite::init(Surface* surf)
 {
 
 	m_surface=surf;
@@ -117,11 +117,16 @@ Sprite::~Sprite()
 	
 	
 }
-
 void Sprite::put_screen(int x, int y, unsigned int size_x, unsigned int size_y, unsigned int frame_num)
 {
 	m_surface->put_screen(x, y, (int)size_x, (int)size_y, (int)frame_num);
 }
+
+void Sprite::put_screen(int x, int y, unsigned int size_x, unsigned int size_y)
+{
+	m_surface->put_screen(x, y, (int)size_x, (int)size_y, m_curr_frame+m_state);
+}
+
 /*
 CL_Surface* Sprite::operator->()
 {
@@ -155,8 +160,15 @@ void Sprite::set_pos_y(unsigned int pos_y)
 
 void Sprite::set_curr_frame(int frame)
 {
-
-	m_curr_frame=frame;
+	//FIXME: check should be on mumber of sprite frames
+	if(frame >= Epiconfig::instance()->get_max_anim_drawn())
+	{
+		m_curr_frame = 0;
+	}
+	else
+	{
+		m_curr_frame=frame;
+	}
 }
 
 void Sprite::set_speed(unsigned int speed)
@@ -166,6 +178,63 @@ void Sprite::set_speed(unsigned int speed)
 
 void Sprite::move(unsigned int n_pixel)
 {
+	
+	n_pixel*=m_speed;
+	if(m_pos_x<m_move_to_pos_x)
+	{
+		if(m_pos_x+n_pixel>m_move_to_pos_x)
+		{
+			m_pos_x=m_move_to_pos_x;
+		}
+		else
+		{
+			m_pos_x+=n_pixel;
+		}
+	}
+	else if(m_pos_x>m_move_to_pos_x)
+	{
+		if(m_pos_x-n_pixel<m_move_to_pos_x)
+		{
+			m_pos_x=m_move_to_pos_x;
+		}
+		else
+		{
+			m_pos_x-=n_pixel;
+		}
+	}
+
+	if(m_pos_y<m_move_to_pos_y)
+	{
+		if(m_pos_y+n_pixel>m_move_to_pos_y)
+		{
+			m_pos_y=m_move_to_pos_y;
+		}
+		else
+		{
+			m_pos_y+=n_pixel;
+		}
+	}
+	else if(m_pos_y>m_move_to_pos_y)
+	{
+		if(m_pos_y-n_pixel<m_move_to_pos_y)
+		{
+			m_pos_y=m_move_to_pos_y;
+		}
+		else
+		{
+			m_pos_y-=n_pixel;
+		}
+	}
+
+
+
+}
+
+void Sprite::move()
+{
+	
+	int n_pixel = k_sprite_size/Epiconfig::instance()->get_max_anim_drawn();
+	
 	n_pixel*=m_speed;
 	if(m_pos_x<m_move_to_pos_x)
 	{
@@ -220,8 +289,8 @@ void Sprite::move(unsigned int n_pixel)
 int Sprite::get_frame_number()
 {
 
-	return m_curr_frame+m_state;
-
+	//return m_curr_frame+m_state;
+	return m_curr_frame;
 }
 
 void Sprite::set_state(Anim_Type state)
@@ -244,4 +313,10 @@ void Sprite::move_to_pos_x(unsigned int x)
 void Sprite::move_to_pos_y(unsigned int y)
 {
 	m_move_to_pos_y=y;
+}
+
+
+void Sprite::update_frame()
+{
+	set_curr_frame(m_curr_frame+1);
 }
