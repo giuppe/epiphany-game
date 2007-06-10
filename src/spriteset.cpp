@@ -76,7 +76,13 @@ void Spriteset::load_sprites()
 	
 	m_sprites[EXPLOSION]=(Sprite(surf_man->get_surface(EXPLOSION)));
 	
-	m_sprites[DOOR]=(Sprite(surf_man->get_surface(DOOR)));
+	m_sprites[DOOR_RED]=(Sprite(surf_man->get_surface(DOOR_RED)));
+
+	m_sprites[DOOR_BLUE]=(Sprite(surf_man->get_surface(DOOR_BLUE)));
+
+	m_sprites[DOOR_GREEN]=(Sprite(surf_man->get_surface(DOOR_GREEN)));
+
+	m_sprites[DOOR_YELLOW]=(Sprite(surf_man->get_surface(DOOR_GREEN)));
 
 	m_sprites[KEY]=(Sprite(surf_man->get_surface(KEY)));	
 

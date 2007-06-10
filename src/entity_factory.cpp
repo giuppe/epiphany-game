@@ -45,16 +45,16 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 		DEBOUT("Setting Exit...\n");
 		break;
 	case DOOR_RED:
-		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR),1);
+		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR_RED),1);
 		break;
 	case DOOR_BLUE:
-		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR),2);
+		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR_BLUE),2);
 		break;
 	case DOOR_GREEN:
-		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR),4);
+		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR_GREEN),4);
 		break;
 	case DOOR_YELLOW:
-		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR),8);
+		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR_YELLOW),8);
 		break;
 	case KEY_RED:
 		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY),1);

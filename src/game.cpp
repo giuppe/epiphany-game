@@ -586,7 +586,13 @@ void Game::load_surfaces()
 	
 	surf_man->add_surface(EXPLOSION, new Surface(new CL_Surface(surface_path+"Explosion", m_res_manag)));
 	
-	surf_man->add_surface(DOOR, new Surface(new CL_Surface(surface_path+"Door", m_res_manag)));
+	surf_man->add_surface(DOOR_RED, new Surface(new CL_Surface(surface_path+"Door_Red", m_res_manag)));
+	
+	surf_man->add_surface(DOOR_BLUE, new Surface(new CL_Surface(surface_path+"Door_Blue", m_res_manag)));
+
+	surf_man->add_surface(DOOR_GREEN, new Surface(new CL_Surface(surface_path+"Door_Green", m_res_manag)));
+	
+	surf_man->add_surface(DOOR_YELLOW, new Surface(new CL_Surface(surface_path+"Door_Yellow", m_res_manag)));
 
 	surf_man->add_surface(KEY, new Surface(new CL_Surface(surface_path+"Key", m_res_manag)));	
 

@@ -13,6 +13,10 @@ section Surfaces{
 	SPT_Brick = gfx/brick.tga (type=surface, x=0, y=0, width=32, height=32, array=8x1);	
 	SPT_Explosion = gfx/explosion.tga (type=surface, x=0, y=0, width=32, height=32, array=8x5);
 	SPT_Door = gfx/door.pcx (type=surface, x=0, y=0, width=32, height=32, array=8x5, tcol=4);
+	SPT_Door_Red = gfx/door_red.pcx (type=surface, x=0, y=0, width=32, height=32, array=8x1, tcol=1);
+	SPT_Door_Blue = gfx/door_blue.pcx (type=surface, x=0, y=0, width=32, height=32, array=8x1, tcol=2);
+	SPT_Door_Green = gfx/door_green.pcx (type=surface, x=0, y=0, width=32, height=32, array=8x1, tcol=0);
+	SPT_Door_Yellow = gfx/door_yellow.pcx (type=surface, x=0, y=0, width=32, height=32, array=8x1, tcol=0);
 	SPT_Key = gfx/key.tga (type=surface, x=0, y=0, width=32, height=32, array=8x5);
 	SPT_Flintstone = gfx/flintstone.tga (type=surface, x=0, y=0, width=32, height=32, array=8x5);
 	SPT_Peperon = gfx/peperon.tga (type=surface, x=0, y=0, width=32, height=32, array=8x5);
