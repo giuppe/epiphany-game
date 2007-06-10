@@ -21,6 +21,7 @@
 #include <fstream>
 #include "entity_type.h"
 #include "entity_factory.h"
+#include "font_factory.h"
 #include "entity.h"
 #include "entities/entity_player.h"
 #include "surface_manager.h"
@@ -297,7 +298,13 @@ void Game::draw_score()
 	Screen* screen = Screen::instance(); 
 	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
 	
-	m_game_font->print_left(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((Sint32)m_level->get_player().get_score()));
+	Font_Manager* font_man = Font_Manager::instance();
+	
+	Font* game_font = font_man->get_font(m_game_font);
+	
+	Font* time_font = font_man->get_font(m_time_font);
+	
+	game_font->write(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((Sint32)m_level->get_player().get_score()));
 
 	// find how many score to complete level
 	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_player().get_score());
@@ -305,30 +312,30 @@ void Game::draw_score()
 	if(remaining>0)
 	{
 
-		m_game_font->print_left(200,real_game_size_y+5, CL_String("Remaining:   ")+CL_String(remaining));
+		game_font->write(200,real_game_size_y+5, CL_String("Remaining:   ")+CL_String(remaining));
 
 	}
 	else
 	{
     if(m_level->get_player().is_exited())
 		{
-			m_game_font->print_left(200,real_game_size_y+5, CL_String("Well done!"));
+			game_font->write(200,real_game_size_y+5, CL_String("Well done!"));
 		}
 		else
 		{
-			m_game_font->print_left(200,real_game_size_y+5, CL_String("Find Exit"));
+			game_font->write(200,real_game_size_y+5, CL_String("Find Exit"));
 		}
 
 	}
 
 	//draw_time
 	CL_String time_string=m_time.get_time_string();
-	m_time_font->print_left(game_size_x-k_sprite_size*2,game_size_y-k_sprite_size, time_string);
+	time_font->write(game_size_x-k_sprite_size*2,game_size_y-k_sprite_size, time_string);
 
 	
 	if(!m_level->get_player().is_alive())
 	{
-		m_game_font->print_left(380,real_game_size_y+5, CL_String("Press Space"));
+		game_font->write(380,real_game_size_y+5, CL_String("Press Space"));
 	}
 	
 	
@@ -647,14 +654,16 @@ void Game::load_config()
 
 void Game::load_fonts()
 {
+	Font_Factory::instance()->set_resource_manager(m_res_manag);
+	
 	DEBOUT("Loading fonts... ");
 	try
 	{
-		m_game_font=CL_Font::load("Fonts/FNT_Game", m_res_manag);
+		m_game_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::GAME_FONT));
 
-		m_time_font=CL_Font::load("Fonts/FNT_Time", m_res_manag);
+		m_time_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::TIME_FONT));
 
-		m_credits_font=CL_Font::load("Fonts/FNT_Credits", m_res_manag);
+		m_credits_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::CREDITS_FONT));
 	}
 	catch(CL_Error ex)
 	{
@@ -668,9 +677,7 @@ void Game::load_fonts()
 Game::~Game()
 {
 
-	delete m_game_font;
-
-	delete m_credits_font;
+	
 
 }
 
@@ -721,6 +728,8 @@ void Game::show_credits()
 	
 	Screen* screen = Screen::instance();
 	
+	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
+	
 	while(!input->get_quit())
 	{
 		current_frame_time=CL_System::get_time();
@@ -728,7 +737,7 @@ void Game::show_credits()
 		
 		for(i=0; i<credits.size(); i++)
 		{
-			m_credits_font->print_center(m_config->get_game_size_x()/2,draw_pos+50*i,credits[i]);
+			credits_font->write_center(draw_pos+50*i,credits[i]);
 			
 		}
 		

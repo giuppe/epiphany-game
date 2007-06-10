@@ -17,6 +17,9 @@
 
 #include "dephine.h"
 #include "menu.h"
+#include "font.h"
+#include "font_manager.h"
+#include "font_factory.h"
 #include "input.h"
 #include "screen.h"
 #include "game.h"
@@ -33,7 +36,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
 	
-	m_menu_font=CL_Font::load("Fonts/FNT_Menu", res_manager);
+	m_menu_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_FONT));
 
 	m_selector=CL_Surface::load("Surfaces/MNU_Selector", res_manager);
 
@@ -42,7 +45,6 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 Menu::~Menu()
 {
-	delete m_menu_font;
 	
 	delete m_selector;
 
@@ -106,6 +108,7 @@ int Menu::go()
 	int curr_sprite=0;
 	Input* input = Input::instance();
 	Screen* screen = Screen::instance();
+	Font* menu_font =Font_Manager::instance()->get_font(m_menu_font); 
 	//CL_System::keep_alive();
 	input->update();
 	while(!(((input->get_enter())||
@@ -120,11 +123,11 @@ int Menu::go()
 		//m_menu_font->print_center(k_game_size_x/2,30,"Epiphany");
 		int menu_top_point=config->get_game_size_y()/2;
 		int menu_vertical_distance=config->get_game_size_y()/10;
-		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point, "Start");
-		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance, "Level:");
-		m_menu_font->print_left((config->get_game_size_x()/2)+60, menu_top_point+menu_vertical_distance, level_string);
-		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*2, "Credits");
-		m_menu_font->print_left((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*3, "Quit");
+		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point, "Start");
+		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance, "Level:");
+		menu_font->write((config->get_game_size_x()/2)+60, menu_top_point+menu_vertical_distance, level_string);
+		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*2, "Credits");
+		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*3, "Quit");
 		if(input->get_up())
 		{
 			if(selected>0)

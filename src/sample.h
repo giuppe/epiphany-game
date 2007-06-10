@@ -20,6 +20,8 @@
 #ifndef SAMPLE_H
 #define SAMPLE_H
 
+#include <ClanLib/sound.h>
+
 class Sample
 {
 private:

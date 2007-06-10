@@ -1,4 +1,5 @@
 #include "dephine.h"
+#include <ClanLib/display.h>
 #include "input.h"
 
 

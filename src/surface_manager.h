@@ -3,6 +3,8 @@
 
 #include "dephine.h"
 
+class CL_Surface;
+
 typedef CL_Surface Surface;
 
 #include <vector>

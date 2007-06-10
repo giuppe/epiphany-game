@@ -2,17 +2,22 @@
 #define FONT_MANAGER_H_
 #include "dephine.h"
 #include "surface_manager.h"
-#include <string>
+#include "font.h"
+#include <vector>
+
+typedef Uint32 Font_Handle;
 
 class Font_Manager
 {
 private:
-    SFont_Font* m_font;
+
+    std::vector<Font*> m_fonts;
+
 public:
-    void init(string font_surface_path);
-    void deinit();
-    void write(Uint32 x, Uint32 y, const char* text);
-    void write_center(Uint32 y, const char* text);
+ 
+	Font_Handle add_font(Font* font);
+
+	Font* get_font(Font_Handle);
 
 // begin Singleton stuff
 

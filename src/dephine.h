@@ -32,9 +32,9 @@ typedef int Sint32;
 
 //Insert standard includes here (used by all files)
 #include <ClanLib/core.h>
-#include <ClanLib/application.h>
-#include <ClanLib/display.h>
-#include <ClanLib/sound.h>
+
+
+
 #include "except.h"
 #include "epiconfig.h"
 

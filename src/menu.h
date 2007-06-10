@@ -16,6 +16,8 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include <ClanLib/display.h>
+#include "font_manager.h"
 #include "surface_manager.h"
 
 
@@ -28,7 +30,7 @@ class Menu
 private:
 	//Game* m_game;
 
-	CL_Font* m_menu_font;
+	Font_Handle m_menu_font;
 
 	Uint32 m_current_level;
 

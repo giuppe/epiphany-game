@@ -17,6 +17,7 @@
 
 
 #include "dephine.h"
+#include <ClanLib/display.h>
 #include "sprite.h"
 //#include <cmath>
 
@@ -119,12 +120,12 @@ Sprite::~Sprite()
 }
 void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
 {
-	m_surface->put_screen(x, y, (int)size_x, (int)size_y, (int)frame_num);
+	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, (Sint32)frame_num);
 }
 
 void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y)
 {
-	m_surface->put_screen(x, y, (int)size_x, (int)size_y, m_curr_frame+m_state);
+	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, m_curr_frame+m_state);
 }
 
 /*
@@ -293,7 +294,7 @@ int Sprite::get_frame_number()
 	return m_curr_frame;
 }
 
-void Sprite::set_state(Anim_Type state)
+void Sprite::set_state(Anim_State state)
 {
 	m_state=state;
 }

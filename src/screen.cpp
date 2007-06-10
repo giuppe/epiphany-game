@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "dephine.h"
+#include <ClanLib/display.h>
 #include "screen.h"
 #include "sprite.h"
 #include "entity.h"

@@ -16,8 +16,11 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include <ClanLib/display.h>
 #include "sprite.h"
 #include "direction.h"
+#include "font.h"
+#include "font_manager.h"
 #include "entity_type.h"
 #include "entity.h"
 #include "entity_all.h"
@@ -49,15 +52,15 @@ private:
 	
 	Game_Timer m_time;
 	
-	CL_InputBuffer m_input_buffer;
+	//CL_InputBuffer m_input_buffer;
 	
 	Level* m_level;
 	
-	CL_Font* m_game_font;
+	Font_Handle m_game_font;
 	
-	CL_Font* m_time_font;
+	Font_Handle m_time_font;
 	
-	CL_Font* m_credits_font;
+	Font_Handle m_credits_font;
 
 	Epiconfig* m_config;
 	

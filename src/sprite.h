@@ -23,7 +23,7 @@
 #define SPRITE_H
 
 
-enum Anim_Type{ SP_STOP=0,
+enum Anim_State{ SP_STOP=0,
 				 SP_UP=k_max_anim,
 				 SP_RIGHT=k_max_anim*2,
 				 SP_DOWN=k_max_anim*3,
@@ -68,7 +68,7 @@ private:
 	
 	bool m_initialized;
 
-	Anim_Type m_state;	
+	Anim_State m_state;	
 	
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
@@ -126,7 +126,7 @@ public:
 	
 	void init(Surface* surf);
 	
-	void set_state(Anim_Type state);
+	void set_state(Anim_State state);
 		
 };
 	
