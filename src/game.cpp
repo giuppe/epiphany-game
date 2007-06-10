@@ -120,8 +120,6 @@ bool Game::main_loop()
 					CL_System::sleep(10);
 				}
 			}
-
-			CL_System::keep_alive();
 		
 			input->update();
 		}
@@ -139,7 +137,7 @@ void Game::get_keys()
 
 	
 	//direzione iniziale
-	CL_System::keep_alive();
+	
 	Input* input = Input::instance();
 	input->update();
 	Direction direction=STOP;
@@ -198,7 +196,7 @@ void Game::get_keys()
 
 void Game::move_all()
 {
-	//std::vector<Ntt_pointer>& list=m_level->get_entities_list();
+
 	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
 	m_level->get_player().set_speed(1);
@@ -764,7 +762,6 @@ void Game::show_credits()
 		screen->flip_display();
 		
 
-		CL_System::keep_alive();
 		input->update();
 	}
 
