@@ -51,6 +51,7 @@ private:
 	Uint32 m_min_score;
 	Uint32 m_max_time;
 	void set_entity(Entity*);
+
 public:
 	Level(Spriteset& sprites, Sampleset& samples);
 	//int get_entity_id(int x, int y);
@@ -65,12 +66,12 @@ public:
 //	void set_player(Entity_Player*);
 
 	void set_entity(Entity_Type type, Uint32 x, Uint32 y);
-	Sprite& get_sprite(Entity*);
+	//Sprite& get_sprite(Entity*);
 	//std::vector<Entity_Handle>& get_entities_list();
 	std::vector<std::vector<Entity_Handle> >& get_entities_matrix();
 	void set_key(Uint32);
 	Uint32 get_acquired_keys();
-	Sprite& get_sprite(Entity_Type entity_type);
+
 	Sample* get_sample(Sample_Type sample_type);
 	~Level();
 	void explode(Uint32 x, Uint32 y, Entity_Type transform_to=UNKNOWN);

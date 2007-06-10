@@ -20,6 +20,7 @@
 #include "entity_all.h"
 #include "entity_factory.h"
 #include "entity_manager.h"
+#include "surface_manager.h"
 #include "level.h"
 #include "levelmap.h"
 #include "screen.h"
@@ -192,13 +193,6 @@ Entity_Player& Level::get_player()
 	return *m_player;
 }
 
-Sprite& Level::get_sprite(Entity_Type entity_type)
-{
-
-	return m_spriteset.get_sprite(entity_type);
-	
-}
-
 Level::~Level()
 {
 //	for (Uint32 i=0; i<m_entities_list.size(); i++)
@@ -222,6 +216,8 @@ void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 	//	DEBOUT("Entering Level::explode("<<x<<", "<<y<<")\n");
 	//	DEBOUT("id: "<<m_entities_matrix[x][y]<<"\n");
 	//	DEBOUT("curr_ntt: id="<<curr_ntt->get_id()<<")\n");
+	
+		Surface_Manager* surf_man = Surface_Manager::instance();
 		if(curr_entity->exists())
 		{
 	
