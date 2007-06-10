@@ -31,7 +31,7 @@ Sampleset::Sampleset()
 void Sampleset::load_samples()
 {
 
-	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
+	Resource_Factory* res_manager=Game::instance()->get_resource_manager();
 
 	try
 	{

@@ -1,4 +1,6 @@
 #include "surface_manager.h"
+#include "surface.h"
+#include "resource_factory.h"
 #include "game.h"
 #include <cassert>
 
@@ -6,9 +8,11 @@ Surface_Handle Surface_Manager::load_surface(string path)
 {
     Surface_Handle s_h = m_surfaces.size();
     
-    CL_ResourceManager* res_manag=Game::instance()->get_resource_manager();
+    Resource_Factory* res_manag=Game::instance()->get_resource_manager();
 
-    CL_Surface* temp = new CL_Surface(path, res_manag);
+    Surface* temp;
+    
+    temp->init(new CL_Surface(path, res_manag));
                      
     m_surfaces.push_back(temp);
     return s_h;

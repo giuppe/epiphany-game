@@ -2,9 +2,10 @@
 #define FONT_H_
 
 #include "dephine.h"
+#include "resource.h"
 #include <ClanLib/display.h>
 
-class Font
+class Font : public Resource
 {
 private:
 	CL_Font* m_font;

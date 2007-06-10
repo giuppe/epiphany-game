@@ -21,6 +21,7 @@
 #include "direction.h"
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
+#include "resource_factory.h"
 #include "entity_type.h"
 #include "entity.h"
 #include "entity_all.h"
@@ -70,7 +71,7 @@ private:
 	
 	const char* m_ini_path;
 
-	CL_ResourceManager* m_res_manag;
+	Resource_Factory* m_res_manag;
 
 public:
 
@@ -105,7 +106,7 @@ public:
 	
 	void show_credits();
 	
-	CL_ResourceManager* get_resource_manager();
+	Resource_Factory* get_resource_manager();
 
 	void set_resource_manager();
 	

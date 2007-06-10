@@ -1,7 +1,7 @@
 #ifndef FONT_FACTORY_H_
 #define FONT_FACTORY_H_
 
-#include "resource_manager.h"
+#include "resource_factory.h"
 
 class Font;
 
@@ -11,7 +11,7 @@ class Font_Factory
 {
 private:
 
-	Resource_Manager* m_res_manager;
+	Resource_Factory* m_res_factory;
 	
 public:
 
@@ -26,7 +26,7 @@ public:
 
 	Font* create_font(Font_Type type);
 
-	void set_resource_manager(Resource_Manager* res_manager){m_res_manager=res_manager;};
+	void set_resource_factory(Resource_Factory* res_factory){m_res_factory=res_factory;};
 
 // begin Singleton stuff
 

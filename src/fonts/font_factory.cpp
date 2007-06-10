@@ -1,6 +1,6 @@
 #include "font_factory.h"
 #include "font.h"
-#include "resource_manager.h"
+#include "resource_factory.h"
 #include <cassert>
 
 Font* Font_Factory::create_font(Font_Type type)
@@ -9,16 +9,16 @@ Font* Font_Factory::create_font(Font_Type type)
 	switch(type)
 	{
 		case GAME_FONT:
-			font->init(CL_Font::load("Fonts/FNT_Game", m_res_manager));
+			font->init(CL_Font::load("Fonts/FNT_Game", m_res_factory));
 			break;
 		case TIME_FONT:
-			font->init(CL_Font::load("Fonts/FNT_Time", m_res_manager));
+			font->init(CL_Font::load("Fonts/FNT_Time", m_res_factory));
 			break;
 		case CREDITS_FONT:
-			font->init(CL_Font::load("Fonts/FNT_Credits", m_res_manager));
+			font->init(CL_Font::load("Fonts/FNT_Credits", m_res_factory));
 			break;
 		case MENU_FONT:
-			font->init(CL_Font::load("Fonts/FNT_Menu", m_res_manager));
+			font->init(CL_Font::load("Fonts/FNT_Menu", m_res_factory));
 			break;
 		default:
 			assert(0 && "Error: Selected non-existing font type.");

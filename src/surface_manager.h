@@ -2,10 +2,11 @@
 #define SURFACE_MANAGER_H_
 
 #include "dephine.h"
+#include "surface.h"
 
-class CL_Surface;
 
-typedef CL_Surface Surface;
+
+
 
 #include <vector>
 
@@ -13,6 +14,7 @@ typedef Uint32 Surface_Handle;
 
 class Surface_Manager
 {
+
 private:
     std::vector <Surface*> m_surfaces;
 public:

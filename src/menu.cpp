@@ -17,6 +17,7 @@
 
 #include "dephine.h"
 #include "menu.h"
+#include "surface.h"
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
@@ -38,9 +39,13 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	
 	m_menu_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_FONT));
 
-	m_selector=CL_Surface::load("Surfaces/MNU_Selector", res_manager);
+	m_selector = new Surface();
+	
+	m_background = new Surface();
 
-	m_background=CL_Surface::load("Surfaces/MNU_Background", res_manager);
+	m_selector->init(CL_Surface::load("Surfaces/MNU_Selector", res_manager));
+
+	m_background->init(CL_Surface::load("Surfaces/MNU_Background", res_manager));
 }
 
 Menu::~Menu()
@@ -118,7 +123,7 @@ int Menu::go()
 	{
 		current_time=CL_System::get_time();
 		screen->clear();
-		m_background->put_screen(0,0, (int)config->get_game_size_x(), (int)config->get_game_size_y());
+		m_background->put_screen(0,0, config->get_game_size_x(), config->get_game_size_y());
 		level_string=(int)level_number;
 		//m_menu_font->print_center(k_game_size_x/2,30,"Epiphany");
 		int menu_top_point=config->get_game_size_y()/2;
