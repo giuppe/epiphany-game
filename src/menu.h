@@ -17,7 +17,7 @@
 
 #include "dephine.h"
 #include <ClanLib/display.h>
-#include "font_manager.h"
+#include "fonts/font_manager.h"
 #include "surface_manager.h"
 
 

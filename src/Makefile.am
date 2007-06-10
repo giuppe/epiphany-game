@@ -12,7 +12,7 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	 entities/entity_flintstone.cpp  entities/entity_explosion.cpp  entities/entity_monster.cpp 	\
 	 entities/entity_boulder.cpp  entities/entity_tomato.cpp				\
          entities/entity_steel.cpp  entities/entity_grass.cpp  entities/entity_exit.cpp  entities/entity_key.cpp \
-	screen.cpp sprite.cpp menu.cpp game.cpp surface_manager.cpp input.cpp font.cpp \
-	font_factory.cpp font_manager.cpp
+	screen.cpp sprite.cpp menu.cpp game.cpp surface_manager.cpp input.cpp fonts/font.cpp \
+	fonts/font_factory.cpp fonts/font_manager.cpp
 
 EXTRA_DISTS = entities/Makefile.am

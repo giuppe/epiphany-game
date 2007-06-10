@@ -21,7 +21,7 @@
 #include <fstream>
 #include "entity_type.h"
 #include "entity_factory.h"
-#include "font_factory.h"
+#include "fonts/font_factory.h"
 #include "entity.h"
 #include "entities/entity_player.h"
 #include "surface_manager.h"
@@ -38,6 +38,7 @@
 
 bool Game::main_loop()
 {
+	
 	Uint32 current_frame_time=0;
 	
 	bool exit_state=false;
@@ -54,7 +55,6 @@ bool Game::main_loop()
 
 	while((m_level->get_player().is_alive())||
 				(!input->get_fire())
-				
 				)
 	{
 

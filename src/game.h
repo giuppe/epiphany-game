@@ -19,8 +19,8 @@
 #include <ClanLib/display.h>
 #include "sprite.h"
 #include "direction.h"
-#include "font.h"
-#include "font_manager.h"
+#include "fonts/font.h"
+#include "fonts/font_manager.h"
 #include "entity_type.h"
 #include "entity.h"
 #include "entity_all.h"

@@ -17,9 +17,9 @@
 
 #include "dephine.h"
 #include "menu.h"
-#include "font.h"
-#include "font_manager.h"
-#include "font_factory.h"
+#include "fonts/font.h"
+#include "fonts/font_manager.h"
+#include "fonts/font_factory.h"
 #include "input.h"
 #include "screen.h"
 #include "game.h"
