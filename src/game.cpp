@@ -25,6 +25,7 @@
 #include "entity.h"
 #include "entities/entity_player.h"
 #include "surface_manager.h"
+#include "surface_factory.h"
 #include "game.h"
 #include "menu.h"
 #include "input.h"
@@ -568,6 +569,10 @@ void Game::load_surfaces()
 {
 	CL_String surface_path=CL_String("Surfaces/SPT_");
 	Surface_Manager* surf_man = Surface_Manager::instance();
+	surf_man->init();
+	/*
+	Surface_Factory* surf_factory = Surface_Factory::instance();
+	
 	surf_man->add_surface(UNKNOWN, new Surface(new CL_Surface(surface_path+"Unknown", m_res_manag)));
 	
 	surf_man->add_surface(PLAYER, new Surface(new CL_Surface(surface_path+"Player", m_res_manag)));
@@ -594,7 +599,14 @@ void Game::load_surfaces()
 	
 	surf_man->add_surface(DOOR_YELLOW, new Surface(new CL_Surface(surface_path+"Door_Yellow", m_res_manag)));
 
-	surf_man->add_surface(KEY, new Surface(new CL_Surface(surface_path+"Key", m_res_manag)));	
+	surf_man->add_surface(KEY_RED, new Surface(new CL_Surface(surface_path+"Key_Red", m_res_manag)));	
+
+	surf_man->add_surface(KEY_BLUE, new Surface(new CL_Surface(surface_path+"Key_Blue", m_res_manag)));	
+
+	surf_man->add_surface(KEY_GREEN, new Surface(new CL_Surface(surface_path+"Key_Green", m_res_manag)));	
+
+	surf_man->add_surface(KEY_YELLOW, new Surface(new CL_Surface(surface_path+"Key_Yellow", m_res_manag)));	
+
 
 	surf_man->add_surface(FLINTSTONE, new Surface(new CL_Surface(surface_path+"Flintstone", m_res_manag)));	
 	
@@ -605,6 +617,7 @@ void Game::load_surfaces()
 	surf_man->add_surface(WOOD, new Surface(new CL_Surface(surface_path+"Wood", m_res_manag)));
 
 	surf_man->add_surface(TOMATO, new Surface(new CL_Surface(surface_path+"Tomato", m_res_manag)));
+*/
 }
 
 void Game::play_level(const char *level_path)

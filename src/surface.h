@@ -1,5 +1,6 @@
 #ifndef SURFACE_H_
 #define SURFACE_H_
+#include "dephine.h"
 #include <ClanLib/display.h>
 
 //typedef CL_Surface Surface;

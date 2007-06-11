@@ -1,7 +1,9 @@
 #include "surface_manager.h"
+#include "surface_factory.h"
 #include "surface.h"
 #include "resource_factory.h"
 #include "game.h"
+
 #include <cassert>
 
 Surface_Handle Surface_Manager::load_surface(string path)
@@ -33,6 +35,68 @@ Surface* Surface_Manager::get_surface(Surface_Handle surface_handle)
         return m_surfaces[surface_handle];
     }
     assert(!"Error: Trying to access a non-initialized surface");
+}
+
+void Surface_Manager::init()
+{
+	DEBOUT("Loading all surfaces...");
+	
+	CL_String surface_path=CL_String("Surfaces/SPT_");
+
+	
+	Surface_Factory* surf_factory = Surface_Factory::instance();
+	
+	
+	
+	add_surface(Surface_Factory::SRF_UNKNOWN, surf_factory->create_surface(Surface_Factory::SRF_UNKNOWN));
+	
+	add_surface(Surface_Factory::SRF_PLAYER, surf_factory->create_surface(Surface_Factory::SRF_PLAYER));
+
+	add_surface(Surface_Factory::SRF_GRASS, surf_factory->create_surface(Surface_Factory::SRF_GRASS));
+	
+	add_surface(Surface_Factory::SRF_STEEL, surf_factory->create_surface(Surface_Factory::SRF_STEEL));
+	
+	add_surface(Surface_Factory::SRF_EMERALD, surf_factory->create_surface(Surface_Factory::SRF_EMERALD));
+	
+	add_surface(Surface_Factory::SRF_BOULDER, surf_factory->create_surface(Surface_Factory::SRF_BOULDER));
+
+	add_surface(Surface_Factory::SRF_SAPPHIRE, surf_factory->create_surface(Surface_Factory::SRF_SAPPHIRE));
+		
+	add_surface(Surface_Factory::SRF_EXIT, surf_factory->create_surface(Surface_Factory::SRF_EXIT));
+	
+	add_surface(Surface_Factory::SRF_EXPLOSION, surf_factory->create_surface(Surface_Factory::SRF_EXPLOSION));
+	
+	add_surface(Surface_Factory::SRF_DOOR_RED, surf_factory->create_surface(Surface_Factory::SRF_DOOR_RED));
+	
+	add_surface(Surface_Factory::SRF_DOOR_BLUE, surf_factory->create_surface(Surface_Factory::SRF_DOOR_BLUE));
+
+	add_surface(Surface_Factory::SRF_DOOR_GREEN, surf_factory->create_surface(Surface_Factory::SRF_DOOR_GREEN));
+	
+	add_surface(Surface_Factory::SRF_DOOR_YELLOW, surf_factory->create_surface(Surface_Factory::SRF_DOOR_YELLOW));
+
+	add_surface(Surface_Factory::SRF_KEY_RED, surf_factory->create_surface(Surface_Factory::SRF_KEY_RED));	
+
+	add_surface(Surface_Factory::SRF_KEY_BLUE, surf_factory->create_surface(Surface_Factory::SRF_KEY_BLUE));	
+
+	add_surface(Surface_Factory::SRF_KEY_GREEN, surf_factory->create_surface(Surface_Factory::SRF_KEY_GREEN));	
+
+	add_surface(Surface_Factory::SRF_KEY_YELLOW, surf_factory->create_surface(Surface_Factory::SRF_KEY_YELLOW));	
+
+
+	add_surface(Surface_Factory::SRF_FLINTSTONE, surf_factory->create_surface(Surface_Factory::SRF_FLINTSTONE));	
+	
+	add_surface(Surface_Factory::SRF_PEPERON, surf_factory->create_surface(Surface_Factory::SRF_PEPERON));	
+	
+	add_surface(Surface_Factory::SRF_BRICK, surf_factory->create_surface(Surface_Factory::SRF_BRICK));
+	
+	add_surface(Surface_Factory::SRF_WOOD, surf_factory->create_surface(Surface_Factory::SRF_WOOD));
+
+	add_surface(Surface_Factory::SRF_TOMATO, surf_factory->create_surface(Surface_Factory::SRF_TOMATO));
+	
+	add_surface(Surface_Factory::SRF_MENU_BACKGROUND, surf_factory->create_surface(Surface_Factory::SRF_MENU_BACKGROUND));
+	
+	add_surface(Surface_Factory::SRF_MENU_SELECTOR, surf_factory->create_surface(Surface_Factory::SRF_MENU_SELECTOR));
+	
 }
 
 void Surface_Manager::deinit()

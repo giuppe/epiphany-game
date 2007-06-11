@@ -18,6 +18,8 @@
 #include "dephine.h"
 #include "menu.h"
 #include "surface.h"
+#include "surface_manager.h"
+#include "surface_factory.h"
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
@@ -39,21 +41,20 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	
 	m_menu_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_FONT));
 
-	m_selector = new Surface();
+	Surface_Manager* surf_man= Surface_Manager::instance();
+
+	m_selector = surf_man->get_surface(Surface_Factory::SRF_MENU_SELECTOR);
 	
-	m_background = new Surface();
+	m_background = surf_man->get_surface(Surface_Factory::SRF_MENU_BACKGROUND);
 
-	m_selector->init(CL_Surface::load("Surfaces/MNU_Selector", res_manager));
+//	m_selector->init(CL_Surface::load("Surfaces/MNU_Selector", res_manager));
 
-	m_background->init(CL_Surface::load("Surfaces/MNU_Background", res_manager));
+//	m_background->init(CL_Surface::load("Surfaces/MNU_Background", res_manager));
 }
 
 Menu::~Menu()
 {
-	
-	delete m_selector;
 
-	delete m_background;
 }
 
 

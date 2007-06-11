@@ -18,6 +18,7 @@
 #include "dephine.h"
 #include "entity.h"
 #include "entity_key.h"
+#include <cassert>
 
 Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
 {
@@ -25,10 +26,30 @@ Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 
 	m_position_x=x;
 	m_position_y=y;
 	m_type=KEY;
-	m_sprite=sprite;
+	Surface_Manager* surf_man = Surface_Manager::instance();
+	
+	m_key_id=id;	
+	switch(m_key_id)
+	{
+	case 1:
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_KEY_RED));
+		break;
+	case 2:
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_KEY_BLUE));
+		break;
+	case 4:
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_KEY_GREEN));
+		break;
+	case 8:
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_KEY_YELLOW));
+		break;
+	default:
+		assert(!"Error: Selected non existent key type.");
+	}
+	
+
 	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
-	m_key_id=id;	
 	
 	m_exists=true;
 

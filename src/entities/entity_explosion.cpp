@@ -27,7 +27,8 @@ Entity_Explosion::Entity_Explosion(Level* level, Uint32 x, Uint32 y, Sprite& spr
 	m_position_x=x;
 	m_position_y=y;
 	m_type=EXPLOSION;
-	m_sprite=(sprite);
+	Surface_Manager* surf_man = Surface_Manager::instance();
+	m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_EXPLOSION));
 	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 //	m_sprite.move_to_pos(m_position_x*k_sprite_size,m_position_y*k_sprite_size);

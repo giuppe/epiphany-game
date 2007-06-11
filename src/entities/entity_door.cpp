@@ -19,6 +19,7 @@
 #include "entity.h"
 #include "entity_door.h"
 #include "entity_all.h"
+#include <cassert>
 
 Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
 {
@@ -26,28 +27,32 @@ Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint3
 	m_position_x=x;
 	m_position_y=y;
 	m_type=DOOR;
-	m_sprite=sprite;
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
+	Surface_Manager* surf_man = Surface_Manager::instance();
+	
+
 	m_door_id=id;
-	m_sprite.set_state(SP_STOP);
-/*
+
+
 	switch(m_door_id)
 	{
 	case 1:
-		m_sprite.set_state(SP_STOP);
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_RED));
 		break;
 	case 2:
-		//m_sprite.set_state(SP_UP);
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_BLUE));
 		break;
 	case 4:
-		m_sprite.set_state(SP_RIGHT);
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_GREEN));
 		break;
 	case 8:
-		m_sprite.set_state(SP_DOWN);
+		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_YELLOW));
 		break;
+	default:
+		assert(!"Error: Selected non existent door type.");
 	}
-	*/
+	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
+	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
+	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	m_is_open=false;
 

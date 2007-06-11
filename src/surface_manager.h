@@ -3,6 +3,7 @@
 
 #include "dephine.h"
 #include "surface.h"
+#include "surface_factory.h"
 
 
 
@@ -17,15 +18,20 @@ class Surface_Manager
 
 private:
     std::vector <Surface*> m_surfaces;
+    
+    void add_surface(Surface_Handle handle, Surface* surface);
+
+    Surface_Handle load_surface(string path);
+    
 public:
 
+	void init();
+	
     Surface* get_surface(Surface_Handle handle);
 
     // Since all surfaces in game should be inited and flushed by Surface_Manager
     // We do not support loading images by others
-	void add_surface(Surface_Handle handle, Surface* surface);
-
-    Surface_Handle load_surface(string path);
+	
 
     // this should free all surfaces
     void deinit();

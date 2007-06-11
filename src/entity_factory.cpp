@@ -57,16 +57,16 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 		entity=new Entity_Door(level,x,y,m_spriteset.get_sprite(DOOR_YELLOW),8);
 		break;
 	case KEY_RED:
-		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY),1);
+		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY_RED),1);
 		break;
 	case KEY_BLUE:
-		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY),2);
+		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY_BLUE),2);
 		break;
 	case KEY_GREEN:
-		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY),4);
+		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY_GREEN),4);
 		break;
 	case KEY_YELLOW:
-		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY),8);
+		entity=new Entity_Key(level,x,y,m_spriteset.get_sprite(KEY_YELLOW),8);
 		break;
 	case FLINTSTONE:
 		entity=new Entity_Flintstone(level,x,y,m_spriteset.get_sprite(FLINTSTONE));
