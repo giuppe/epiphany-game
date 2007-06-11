@@ -21,6 +21,9 @@
 /* Define to 1 if you have the `Hermes' library (-lHermes). */
 #undef HAVE_LIBHERMES
 
+/* Define to 1 if you have the `SDL' library (-lSDL). */
+#undef HAVE_LIBSDL
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
