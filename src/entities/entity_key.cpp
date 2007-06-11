@@ -29,21 +29,6 @@ Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 
 	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_key_id=id;	
-	switch(m_key_id)
-	{
-	case 1:
-		m_sprite.set_state(SP_STOP);
-		break;
-	case 2:
-		m_sprite.set_state(SP_UP);
-		break;
-	case 4:
-		m_sprite.set_state(SP_RIGHT);
-		break;
-	case 8:
-		m_sprite.set_state(SP_DOWN);
-		break;
-	}
 	
 	m_exists=true;
 
