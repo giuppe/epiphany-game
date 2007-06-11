@@ -337,25 +337,26 @@ void Game::draw_score()
 		game_font->write(380,real_game_size_y+5, CL_String("Press Space"));
 	}
 	
+	Surface_Manager* surf_man = Surface_Manager::instance();
 	
 	if(m_level->get_acquired_keys()&1)
 	{
-		m_spriteset.get_sprite(KEY_RED).put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+		surf_man->get_surface(KEY_RED)->put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
 	if(m_level->get_acquired_keys()&2)
 	{
-		m_spriteset.get_sprite(KEY_BLUE).put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+		surf_man->get_surface(KEY_BLUE)->put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
 	if(m_level->get_acquired_keys()&4)
 	{
-		m_spriteset.get_sprite(KEY_GREEN).put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+		surf_man->get_surface(KEY_GREEN)->put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
 	if(m_level->get_acquired_keys()&8)
 	{
-		m_spriteset.get_sprite(KEY_YELLOW).put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
+		surf_man->get_surface(KEY_YELLOW)->put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
 	screen->draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
@@ -377,7 +378,7 @@ void Game::go()
   	if(play==0)
   	{
   		
-  		m_level=new Level(m_spriteset, m_sampleset);
+  		m_level=new Level(m_sampleset);
   		
   		CL_String current_level_path(m_resource_path);
   		
@@ -532,7 +533,7 @@ void Game::init()
 	}
 	
 	
-	
+	/*
 	m_spriteset=Spriteset("SPT");
 	DEBOUT("Loading sprites...\n");
 	try
@@ -543,6 +544,7 @@ void Game::init()
 	{
 		throw Common_Ex(ex.message.c_str());
 	}
+	*/
 	DEBOUT("Loading samples...\n");
 	
 	m_sampleset=Sampleset();
@@ -558,9 +560,10 @@ void Game::init()
 
 	DEBOUT("Initing Screen...\n");
 	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
-	
+	/*
 	Entity_Factory* entity_factory = Entity_Factory::instance();
 	entity_factory->set_spriteset(this->m_spriteset);
+	*/
 	//DEBOUT("Exiting Game ctor... \n");
 	
 }
@@ -622,7 +625,7 @@ void Game::load_surfaces()
 
 void Game::play_level(const char *level_path)
 {
-        m_level=new Level(m_spriteset, m_sampleset);
+        m_level=new Level(m_sampleset);
         
         try
         {

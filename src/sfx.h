@@ -19,7 +19,7 @@
 #include <ClanLib/sound.h>
 #include "sample.h"
 #include <vector>
-//#include "game.h"
+
 
 #ifndef SFX_H
 #define SFX_H
@@ -53,6 +53,11 @@ public:
 	//Sampleset(Game* game);
 	void load_samples();
 	Sample* get_sample(Sample_Type sfx);
+	void init();
+	
+	void play(Sample_Type type);
+	
+	void stop(Sample_Type type);
 };
 
 #endif //SFX_H

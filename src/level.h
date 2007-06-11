@@ -19,7 +19,6 @@
 #include "direction.h"
 #include "entity_type.h"
 #include "entity_manager.h"
-#include "spriteset.h"
 #include <vector>
 #include "sfx.h"
 
@@ -45,7 +44,7 @@ private:
 	std::vector<std::vector<Entity_Handle> > m_entities_matrix;
 	Entity_Player* m_player;
 	Entity_Exit* m_exit;
-	Spriteset& m_spriteset;
+//	Spriteset& m_spriteset;
 	Sampleset& m_sampleset;
 	Uint32 m_acquired_keys;
 	Uint32 m_min_score;
@@ -53,7 +52,7 @@ private:
 	void set_entity(Entity*);
 
 public:
-	Level(Spriteset& sprites, Sampleset& samples);
+	Level(Sampleset& samples);
 	//int get_entity_id(int x, int y);
 	//int get_entity_id(int x, int y, Direction d);
 	Entity_Player& get_player();

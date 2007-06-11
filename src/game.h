@@ -26,7 +26,7 @@
 #include "entity.h"
 #include "entity_all.h"
 #include "game_timer.h"
-#include "spriteset.h"
+
 #include "sfx.h"
 #include "level.h"
 #include <vector>
@@ -46,8 +46,6 @@ private:
 	const char* m_resource_path;
 	
 	Sampleset m_sampleset;
-	
-	Spriteset m_spriteset;
 	
 	//Screen m_screen;
 	

@@ -25,7 +25,7 @@
 #include "levelmap.h"
 #include "screen.h"
 #include "sprite.h"
-#include "spriteset.h"
+
 #include "sfx.h"
 #include <vector>
 //#include <map>
@@ -33,7 +33,7 @@
 
 extern int glb_curr_id;
 
-Level::Level(Spriteset& spriteset, Sampleset& sampleset):m_spriteset(spriteset),m_sampleset(sampleset)
+Level::Level(Sampleset& sampleset):m_sampleset(sampleset)
 {
 	
 	//pushing back entity with id=0
