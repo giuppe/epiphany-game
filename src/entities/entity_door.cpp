@@ -21,7 +21,7 @@
 #include "entity_all.h"
 #include <cassert>
 
-Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
+Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)
 {
 	current_level=level;
 	m_position_x=x;

@@ -19,7 +19,7 @@
 #include "entity.h"
 #include "entity_brick.h"
 
-Entity_Brick::Entity_Brick(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
+Entity_Brick::Entity_Brick(Level* level, Uint32 x, Uint32 y)
 {
 	current_level=level;
 	m_position_x=x;

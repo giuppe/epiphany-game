@@ -32,7 +32,7 @@ private:
 
 public:
 
-	Entity_Door(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id);
+	Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id);
 	
 	Uint32 get_door_id();
 	

@@ -21,7 +21,7 @@
 #include "entity.h"
 #include "entity_wood.h"
 
-Entity_Wood::Entity_Wood(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
+Entity_Wood::Entity_Wood(Level* level, Uint32 x, Uint32 y)
 {
 	current_level=level;
 	m_position_x=x;

@@ -25,7 +25,7 @@
 class Entity_Peperon:public Entity_Monster
 {
 public:
-	Entity_Peperon(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Direction direction);
+	Entity_Peperon(Level* level, Uint32 x, Uint32 y, Direction direction);
 	
 	void check_and_do();
 	

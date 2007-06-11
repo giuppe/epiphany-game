@@ -26,7 +26,7 @@ class Entity_Sapphire: /*public Entity,*/public Entity_Falling, public Entity_Ge
 {
 public:
 
-	Entity_Sapphire(Level* level,Uint32 x, Uint32 y, Sprite& sprite);
+	Entity_Sapphire(Level* level,Uint32 x, Uint32 y);
 
 	//valore dello smeraldo quando preso dal giocatore
 	//static const Uint32 value=1;

@@ -24,7 +24,7 @@
 #include "entity_falling.h"
 
 
-Entity_Emerald::Entity_Emerald(Level* level,Uint32 x, Uint32 y, Sprite& sprite)
+Entity_Emerald::Entity_Emerald(Level* level,Uint32 x, Uint32 y)
 {
 	
 	current_level=level;

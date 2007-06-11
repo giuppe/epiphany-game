@@ -21,7 +21,7 @@
 
 #include "entity_type.h"
 
-Entity_Explosion::Entity_Explosion(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
+Entity_Explosion::Entity_Explosion(Level* level, Uint32 x, Uint32 y)
 {
 	current_level=level;
 	m_position_x=x;

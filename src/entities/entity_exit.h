@@ -34,7 +34,7 @@ private:
 	
 public:
 
-	Entity_Exit(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 min_score);
+	Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score);
 	
 	bool is_open();
 	

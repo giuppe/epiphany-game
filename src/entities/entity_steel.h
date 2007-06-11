@@ -30,7 +30,7 @@ class Entity_Steel:public Entity
 {
 public:	
 
-	Entity_Steel(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
+	Entity_Steel(Level* level, Uint32 x, Uint32 y);
 
 	
 	//it does nothing: its check_and_do is empty.

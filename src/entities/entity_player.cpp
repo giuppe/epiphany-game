@@ -23,7 +23,7 @@
 #include "entity_all.h"
 
 
-Entity_Player::Entity_Player(Level* level, Uint32 x, Uint32 y, Sprite& sprite)
+Entity_Player::Entity_Player(Level* level, Uint32 x, Uint32 y)
 {
 	
 	m_type=PLAYER;

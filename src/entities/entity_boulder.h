@@ -29,7 +29,7 @@ class Entity_Boulder: public Entity_Falling
 {
 public:
 
-	Entity_Boulder(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
+	Entity_Boulder(Level* level, Uint32 x, Uint32 y);
 	
 	
 	void check_and_do();

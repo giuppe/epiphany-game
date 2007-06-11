@@ -36,7 +36,7 @@ private:
 	
 public:
 	
-	Entity_Player(Level* level, Uint32 x, Uint32 y, Sprite& sprite);
+	Entity_Player(Level* level, Uint32 x, Uint32 y);
 
 	void check_and_do();
 	

@@ -30,7 +30,7 @@ private:
 	
 public:
 
-	Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id);
+	Entity_Key(Level* level, Uint32 x, Uint32 y, Uint32 id);
 	
 	Uint32 get_key_id();
 	

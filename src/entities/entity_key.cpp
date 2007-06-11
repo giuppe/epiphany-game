@@ -20,7 +20,7 @@
 #include "entity_key.h"
 #include <cassert>
 
-Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Uint32 id)
+Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Uint32 id)
 {
 	current_level=level;
 	m_position_x=x;

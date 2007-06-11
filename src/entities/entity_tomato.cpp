@@ -22,7 +22,7 @@
 #include "entity_tomato.h"
 #include "entity_player.h"
 
-Entity_Tomato::Entity_Tomato(Level* level, Uint32 x, Uint32 y, Sprite& sprite, Direction direction)
+Entity_Tomato::Entity_Tomato(Level* level, Uint32 x, Uint32 y, Direction direction)
 {
 	current_level=level;
 	m_position_x=x;
