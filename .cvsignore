@@ -9,4 +9,5 @@ config.status
 stamp-h1
 configure
 .cdtproject
+.project
 .settings
