@@ -17,14 +17,14 @@
 
 #include "dephine.h"
 #include "sprite.h"
-#include "iscreen.h"
+
 #ifndef SCREEN_H
 #define SCREEN_H
 
 
 class Entity;
 
-class Screen : public IScreen
+class Screen
 {
 private:
 	Uint32 m_screen_size_x;
