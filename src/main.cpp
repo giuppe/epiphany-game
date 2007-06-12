@@ -18,6 +18,9 @@
 #include "dephine.h"
 #include <ClanLib/application.h>
 #include <ClanLib/display.h>
+#include "surface_manager.h"
+#include "sfx.h"
+#include "fonts/font_manager.h"
 #include "game.h"
 #include "input.h"
 
@@ -67,18 +70,22 @@ class Epiphany_App : public CL_ClanApplication
 		}
 	
 	//	DEBOUT("Calling CL_Display::set_videomode\n");
+		Game* game = Game::instance();
 		try
 		{
-			Game* game = Game::instance();
+			
 		
 			game->go();
 			DEBOUT("Exiting game::go().\n");
+			
 		}
 		catch(Common_Ex ex)
 		{
 			std::cout<<ex.get_message();
 		}		
 		deinit_modules();
+		
+		delete game;
 		
 		DEBOUT("\tExiting.\n");
 		return 0;
@@ -87,7 +94,13 @@ class Epiphany_App : public CL_ClanApplication
 	
 	void deinit_modules()
 	{
-
+		
+		Surface_Manager::instance()->deinit();
+		
+		Sample_Manager::instance()->deinit();
+		
+		Font_Manager::instance()->deinit();
+		
 		CL_SetupSound::deinit();
 
 		CL_SetupDisplay::deinit();		

@@ -56,6 +56,8 @@ public:
 	
 	void init();
 	
+	void deinit();
+	
 	void play(Sample_Type type);
 	
 	void stop(Sample_Type type);

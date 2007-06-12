@@ -2,5 +2,7 @@ Known bugs:
 
 A flintstone *sometimes* auto-explodes at start (fixed);
 
+Player is not killed when he touch a monster;
+
 
 

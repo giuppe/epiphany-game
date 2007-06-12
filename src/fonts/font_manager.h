@@ -18,6 +18,8 @@ public:
 	Font_Handle add_font(Font* font);
 
 	Font* get_font(Font_Handle);
+	
+	void deinit();
 
 // begin Singleton stuff
 

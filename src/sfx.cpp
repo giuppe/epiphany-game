@@ -57,6 +57,24 @@ void Sample_Manager::load_samples()
 
 }
 
+void Sample_Manager::deinit()
+{
+	delete m_samples[SFX_BOULDER_FALL];
+	delete 	m_samples[SFX_EMERALD_EAT];
+	delete 	m_samples[SFX_SAPPHIRE_EAT];
+	delete 	m_samples[SFX_GAME_GAMEOVER];
+	delete 	m_samples[SFX_DOOR_PASS];
+	delete 	m_samples[SFX_EMERALD_FALL];
+	delete 	m_samples[SFX_SAPPHIRE_FALL];
+	delete 	m_samples[SFX_GRASS_EAT];
+	delete 	m_samples[SFX_KEY_EAT];
+	delete 	m_samples[SFX_PLAYER_MOVE];
+	delete 	m_samples[SFX_MONSTER_MOVE];
+	delete 	m_samples[SFX_WOOD_SMASH];
+	delete 	m_samples[SFX_GAME_TIMEALARM];
+	delete 	m_samples[SFX_EXPLOSION];
+}
+
 Sample* Sample_Manager::get_sample(Sample_Type sfx)
 {
 	//FIXME: it should assert the existence of sample

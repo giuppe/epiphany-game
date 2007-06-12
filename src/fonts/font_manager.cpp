@@ -14,6 +14,22 @@ Font* Font_Manager::get_font(Font_Handle handle)
 	return m_fonts[handle];
 }
 
+void Font_Manager::deinit()
+{
+	if(m_fonts.size()>1)
+	{
+		// start from the beginning of the array
+  		vector<Font*>::iterator itPos = m_fonts.begin();
+  
+  		// clear all elements from the array
+  		for(; itPos < m_fonts.end(); itPos++)
+    		delete *itPos;    // free the element from memory
+   
+   		// finally, clear all elements from the array
+  		m_fonts.clear();
+	}
+}
+
 // begin Singleton stuff
 
 Font_Manager* Font_Manager::_instance = 0;
