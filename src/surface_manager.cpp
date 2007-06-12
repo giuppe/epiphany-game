@@ -20,6 +20,7 @@ Surface_Handle Surface_Manager::load_surface(string path)
     return s_h;
 }
 
+
 void Surface_Manager::add_surface(Surface_Handle handle, Surface* surface)
 {
     //Surface_Handle s_h = m_surfaces.size();

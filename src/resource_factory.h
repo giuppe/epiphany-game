@@ -20,7 +20,27 @@ public:
 		RES_MUSIC
 		};
 		
-		virtual Resource* create_resource(Resource_Type type, const char* resource_id) = 0;
+	//virtual Resource* create_resource(Resource_Type type, const char* resource_id) = 0;
+		
+	void init();
+		
+	const char* get_resource_path(Resource_Type type);
+		
+	// begin Singleton stuff
+
+private:
+
+    static Resource_Factory* _instance;
+
+protected:
+
+	Resource_Factory(){};
+
+public:
+
+    static Resource_Factory* instance();
+
+// end Singleton stuff
 		
 };
 */
