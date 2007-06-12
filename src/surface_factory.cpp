@@ -11,7 +11,7 @@ Surface* Surface_Factory::create_surface(Surface_Type type)
 	
 	CL_String surface_path=CL_String("Surfaces/SPT_");
 	
-	Resource_Factory* m_res_factory = Game::instance()->get_resource_manager();
+	CL_ResourceManager* m_res_factory = Resource_Factory::instance()->get_resource_manager();
 	
 	Surface* surface = new Surface();
 	

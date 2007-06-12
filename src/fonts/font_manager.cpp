@@ -1,6 +1,8 @@
 #include "font_manager.h"
 #include <cassert>
 
+	
+
 Font_Handle Font_Manager::add_font(Font* font)
 {
 	Font_Handle f_handle = m_fonts.size();

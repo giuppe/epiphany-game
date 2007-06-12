@@ -37,7 +37,6 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 	m_current_level=m_unsolved_level;
 
-	CL_ResourceManager* res_manager=Game::instance()->get_resource_manager();
 	
 	m_menu_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_FONT));
 

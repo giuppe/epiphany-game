@@ -43,7 +43,7 @@ class Game
 
 private:
 
-	const char* m_resource_path;
+	//const char* m_resource_path;
 	
 	
 	//Screen m_screen;
@@ -68,7 +68,7 @@ private:
 	
 	const char* m_ini_path;
 
-	Resource_Factory* m_res_manag;
+	//Resource_Factory* m_res_manag;
 
 public:
 
@@ -103,9 +103,9 @@ public:
 	
 	void show_credits();
 	
-	Resource_Factory* get_resource_manager();
+	//Resource_Factory* get_resource_manager();
 
-	void set_resource_manager();
+	//void set_resource_manager();
 	
 //	int menu(); //return false if "quit", else set the number of level
 	// begin Singleton stuff

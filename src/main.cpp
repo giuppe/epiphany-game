@@ -19,6 +19,7 @@
 #include <ClanLib/application.h>
 #include <ClanLib/display.h>
 #include "surface_manager.h"
+#include "resource_factory.h"
 #include "sfx.h"
 #include "fonts/font_manager.h"
 #include "game.h"
@@ -100,6 +101,8 @@ class Epiphany_App : public CL_ClanApplication
 		Sample_Manager::instance()->deinit();
 		
 		Font_Manager::instance()->deinit();
+		
+		Resource_Factory::instance()->deinit();
 		
 		CL_SetupSound::deinit();
 

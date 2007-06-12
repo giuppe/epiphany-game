@@ -10,7 +10,7 @@ Surface_Handle Surface_Manager::load_surface(string path)
 {
     Surface_Handle s_h = m_surfaces.size();
     
-    Resource_Factory* res_manag=Game::instance()->get_resource_manager();
+    CL_ResourceManager* res_manag=Resource_Factory::instance()->get_resource_manager();
 
     Surface* temp;
     

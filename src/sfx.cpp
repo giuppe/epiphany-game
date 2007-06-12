@@ -31,7 +31,9 @@ void Sample_Manager::init()
 void Sample_Manager::load_samples()
 {
 
-	Resource_Factory* res_manager=Game::instance()->get_resource_manager();
+	Resource_Factory* res_factory=Resource_Factory::instance();
+
+	CL_ResourceManager* res_manager = res_factory->get_resource_manager();
 
 	try
 	{

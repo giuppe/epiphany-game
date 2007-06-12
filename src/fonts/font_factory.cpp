@@ -5,6 +5,8 @@
 
 Font* Font_Factory::create_font(Font_Type type)
 {
+	CL_ResourceManager* m_res_factory = Resource_Factory::instance()->get_resource_manager();
+	
 	Font* font = new Font();
 	switch(type)
 	{

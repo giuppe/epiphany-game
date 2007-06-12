@@ -380,7 +380,7 @@ void Game::go()
   		
   		m_level=new Level();
   		
-  		CL_String current_level_path(m_resource_path);
+  		CL_String current_level_path(Resource_Factory::instance()->get_resource_path());
   		
   		current_level_path=current_level_path+"/maps/level";
   	
@@ -445,49 +445,7 @@ void Game::go()
   }
 }
 
-void Game::set_resource_manager()
-{
-	//portability "quick hack" :)
-	#ifdef _WIN32
-	m_resource_path=".";
-	#else
-	m_resource_path= RESOURCE_PATH;
-	#endif
-	DEBOUT("Resource_path: "<<m_resource_path<<"\n");
 
-	try
-	{
-		m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-	}
-	catch(CL_Error ex)
-	{
-		std::cout<<ex.message<<"\n";
-		m_resource_path="./data";
-
-		try
-		{
-			m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-		}
-		catch(CL_Error ex)
-		{
-			throw Common_Ex(ex.message.c_str() );
-			m_resource_path="../data";
-
-			try
-			{
-				m_res_manag=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-			}
-			catch(CL_Error ex)
-			{
-				throw Common_Ex(ex.message.c_str());
-				exit(1);
-			}
-		}
-	}
-	DEBOUT("Using "<<m_resource_path<<"/sprites.scr"<<" as resource script.\n");
-
-
-}
 
 void Game::init()
 {
@@ -497,7 +455,7 @@ void Game::init()
 	m_config = Epiconfig::instance();
 	m_config->set_default_values();
 
-	set_resource_manager();
+	
 	
 	#ifdef _WIN32
 	m_ini_path="./epiphany.ini";
@@ -661,7 +619,7 @@ void Game::load_config()
 	//find max_num_of_levels
 	CL_DirectoryScanner dirscan;
 	Uint32 i=0;
-	if(dirscan.scan(CL_String(m_resource_path)+"/maps", "level*.map"))
+	if(dirscan.scan(CL_String(Resource_Factory::instance()->get_resource_path())+"/maps", "level*.map"))
 	{
 		//;
 		while(dirscan.next()==true)
@@ -675,7 +633,7 @@ void Game::load_config()
 
 void Game::load_fonts()
 {
-	Font_Factory::instance()->set_resource_factory(m_res_manag);
+	
 	
 	DEBOUT("Loading fonts... ");
 	try
@@ -790,12 +748,12 @@ void Game::show_credits()
 
 }
 
-
+/*
 Resource_Factory* Game::get_resource_manager()
 {
 	return m_res_manag;
 }
-
+*/
 
 Game* Game::_instance = 0;
 
