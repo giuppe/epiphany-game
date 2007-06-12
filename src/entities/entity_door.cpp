@@ -19,6 +19,7 @@
 #include "entity.h"
 #include "entity_door.h"
 #include "entity_all.h"
+#include "sfx.h"
 #include <cassert>
 
 Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)
@@ -74,7 +75,7 @@ bool Entity_Door::pass_on_me(Direction d)
 			current_level->get_player().set_speed(2);
 			current_level->get_player().move(d);
 			//current_level->get_player().set_direction(d);
-			current_level->get_sample(SFX_DOOR_PASS)->play();
+			Sample_Manager::instance()->play(SFX_DOOR_PASS);
 			return true;
 		}
 	}

@@ -44,7 +44,7 @@ bool Entity_Wood::explode()
 
 bool Entity_Wood::smash(Entity_Handle)
 {
-	current_level->get_sample(SFX_WOOD_SMASH)->play();
+	Sample_Manager::instance()->play(SFX_WOOD_SMASH);
 	return false;
 }
 

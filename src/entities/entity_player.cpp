@@ -118,7 +118,7 @@ void Entity_Player::check_and_do()
 	{
 		if(!m_is_snapping)
 		{
-			current_level->get_sample(SFX_PLAYER_MOVE)->play();
+			Sample_Manager::instance()->play(SFX_PLAYER_MOVE);
 			move(m_direction);
 		}
 	}
@@ -185,7 +185,7 @@ void Entity_Player::kill()
 	m_is_alive=false;
 	if(!m_is_exited)
 	{
-		current_level->get_sample(SFX_GAME_GAMEOVER)->play();
+		Sample_Manager::instance()->play(SFX_GAME_GAMEOVER);
 	}
 //	set_position(0,0);
 

@@ -51,10 +51,10 @@ void Entity_Explosion::check_and_do()
 		{
 			current_level->set_entity(m_transform_to,m_position_x, m_position_y);
 		}
-		if(!(current_level->get_sample(SFX_EXPLOSION)->is_playing()))
-		{
-			current_level->get_sample(SFX_EXPLOSION)->play();
-		}
+		//if(!(current_level->get_sample(SFX_EXPLOSION)->is_playing()))
+		//{
+			Sample_Manager::instance()->play(SFX_EXPLOSION);
+		//}
 
 		m_exists=false;
 

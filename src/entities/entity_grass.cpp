@@ -40,7 +40,7 @@ bool Entity_Grass::pass_on_me(Direction d)
 {
 
 	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");
-	current_level->get_sample(SFX_GRASS_EAT)->play();
+	Sample_Manager::instance()->play(SFX_GRASS_EAT);
 	kill();
 	return true;
 }

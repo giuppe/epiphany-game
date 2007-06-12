@@ -33,7 +33,7 @@
 
 extern int glb_curr_id;
 
-Level::Level(Sampleset& sampleset):m_sampleset(sampleset)
+Level::Level()
 {
 	
 	//pushing back entity with id=0
@@ -256,9 +256,9 @@ Uint32 Level::get_max_time()
 {
 	return m_max_time;
 }
-
+/*
 Sample* Level::get_sample(Sample_Type sample_type)
 {
 	return m_sampleset.get_sample(sample_type);
 }
-
+*/

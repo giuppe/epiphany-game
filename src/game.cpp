@@ -77,7 +77,7 @@ bool Game::main_loop()
 			if(m_time.get_time()<10)
 			{
 				
-				m_sampleset.get_sample(SFX_GAME_TIMEALARM)->play();
+				Sample_Manager::instance()->play(SFX_GAME_TIMEALARM);
 
 			}
 
@@ -378,7 +378,7 @@ void Game::go()
   	if(play==0)
   	{
   		
-  		m_level=new Level(m_sampleset);
+  		m_level=new Level();
   		
   		CL_String current_level_path(m_resource_path);
   		
@@ -547,10 +547,10 @@ void Game::init()
 	*/
 	DEBOUT("Loading samples...\n");
 	
-	m_sampleset=Sampleset();
+	Sample_Manager* m_sampleset=Sample_Manager::instance();
 	try
 	{
-		m_sampleset.load_samples();
+		m_sampleset->load_samples();
 	}
 	catch(CL_Error ex)
 	{
@@ -625,7 +625,7 @@ void Game::load_surfaces()
 
 void Game::play_level(const char *level_path)
 {
-        m_level=new Level(m_sampleset);
+        m_level=new Level();
         
         try
         {

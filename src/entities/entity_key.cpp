@@ -63,7 +63,7 @@ Uint32 Entity_Key::get_key_id()
 bool Entity_Key::pass_on_me(Direction d)
 {
 	current_level->set_key(m_key_id);
-	current_level->get_sample(SFX_KEY_EAT)->play();
+	Sample_Manager::instance()->play(SFX_KEY_EAT);
 	kill();
 	return true;
 }

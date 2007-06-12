@@ -45,14 +45,14 @@ private:
 	Entity_Player* m_player;
 	Entity_Exit* m_exit;
 //	Spriteset& m_spriteset;
-	Sampleset& m_sampleset;
+//	Sampleset& m_sampleset;
 	Uint32 m_acquired_keys;
 	Uint32 m_min_score;
 	Uint32 m_max_time;
 	void set_entity(Entity*);
 
 public:
-	Level(Sampleset& samples);
+	Level();
 	//int get_entity_id(int x, int y);
 	//int get_entity_id(int x, int y, Direction d);
 	Entity_Player& get_player();
@@ -71,7 +71,7 @@ public:
 	void set_key(Uint32);
 	Uint32 get_acquired_keys();
 
-	Sample* get_sample(Sample_Type sample_type);
+//	Sample* get_sample(Sample_Type sample_type);
 	~Level();
 	void explode(Uint32 x, Uint32 y, Entity_Type transform_to=UNKNOWN);
 	Uint32 get_min_score();

@@ -45,7 +45,6 @@ private:
 
 	const char* m_resource_path;
 	
-	Sampleset m_sampleset;
 	
 	//Screen m_screen;
 	

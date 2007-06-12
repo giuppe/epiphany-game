@@ -149,10 +149,10 @@ void Entity_Tomato::check_and_do()
 	}
 	if(current_level->get_entity(m_position_x, m_position_y, m_direction)==0)
 	{
-		if(!(current_level->get_sample(SFX_MONSTER_MOVE)->is_playing()))
-		{
-			current_level->get_sample(SFX_MONSTER_MOVE)->play();
-		}
+		//if(!(current_level->get_sample(SFX_MONSTER_MOVE)->is_playing()))
+		//{
+			Sample_Manager::instance()->play(SFX_MONSTER_MOVE);
+		//}
 		move(m_direction);
 
 	}

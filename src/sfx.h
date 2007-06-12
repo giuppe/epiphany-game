@@ -42,22 +42,40 @@ enum Sample_Type{	SFX_BOULDER_FALL,
 									SFX_EXPLOSION
 								};
 
-class Sampleset
+class Sample_Manager
 {
 private:
 	std::vector<Sample*> m_samples;
 	
-
+	Sample* get_sample(Sample_Type sfx);
+	
 public:
-	Sampleset();
+	
 	//Sampleset(Game* game);
 	void load_samples();
-	Sample* get_sample(Sample_Type sfx);
+	
 	void init();
 	
 	void play(Sample_Type type);
 	
 	void stop(Sample_Type type);
+	
+		    // begin Singleton stuff
+
+private:
+
+    static Sample_Manager* _instance;
+
+protected:
+
+	Sample_Manager(){};
+
+public:
+
+    static Sample_Manager* instance();
+
+// end Singleton stuff
+	
 };
 
 #endif //SFX_H

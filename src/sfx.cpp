@@ -22,13 +22,13 @@
 #include "game.h"
 
 
-Sampleset::Sampleset()
+void Sample_Manager::init()
 {
-
+	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
 }
 
-void Sampleset::load_samples()
+void Sample_Manager::load_samples()
 {
 
 	Resource_Factory* res_manager=Game::instance()->get_resource_manager();
@@ -57,9 +57,32 @@ void Sampleset::load_samples()
 
 }
 
-Sample* Sampleset::get_sample(Sample_Type sfx)
+Sample* Sample_Manager::get_sample(Sample_Type sfx)
 {
-	
+	//FIXME: it should assert the existence of sample
 	return m_samples[sfx];
 	
 }
+
+void Sample_Manager::play(Sample_Type type)
+{
+	m_samples[type]->play();
+}
+
+void Sample_Manager::stop(Sample_Type type)
+{
+	m_samples[type]->stop();
+}
+
+Sample_Manager* Sample_Manager::_instance = 0;
+
+Sample_Manager* Sample_Manager::instance()
+{
+	if(_instance==0)
+	{
+		_instance=new Sample_Manager();
+		_instance->init();
+	}
+	return _instance;
+}
+

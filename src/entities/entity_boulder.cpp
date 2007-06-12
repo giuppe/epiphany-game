@@ -46,7 +46,7 @@ void Entity_Boulder::check_and_do()
 	Entity_Falling::check_and_do();
 	if((was_falling==true)&&(m_is_falling==false))
 	{
-		current_level->get_sample(SFX_BOULDER_FALL)->play();
+		Sample_Manager::instance()->play(SFX_BOULDER_FALL);
 	}
 }
 
