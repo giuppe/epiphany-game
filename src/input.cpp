@@ -64,7 +64,8 @@ void Input::init()
 void Input::update()
 {
     SDL_Event event;
-    SDL_PollEvent(&event);
+    while(SDL_PollEvent(&event))
+    {
 	switch( event.type )
     {
 	case SDL_KEYDOWN:
@@ -107,7 +108,7 @@ void Input::update()
 		m_quit=true;
 
 	}
-
+    }
 }
 
 

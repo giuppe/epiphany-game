@@ -49,5 +49,5 @@ void Surface::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int f
 
 Surface::~Surface()
 {
-	//SDL_FreeSurface(m_surface);
+	SDL_FreeSurface(m_surface);
 }

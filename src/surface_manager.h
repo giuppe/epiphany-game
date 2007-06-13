@@ -17,6 +17,8 @@ class Surface_Manager
 {
 
 private:
+	bool m_is_initialized;
+	
     std::vector <Surface*> m_surfaces;
     
     void add_surface(Surface_Handle handle, Surface* surface);
@@ -45,7 +47,7 @@ private:
 
 protected:
 
-    Surface_Manager(){};
+    Surface_Manager():m_is_initialized(false){};
 
 public:
 

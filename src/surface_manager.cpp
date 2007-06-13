@@ -45,6 +45,10 @@ Surface* Surface_Manager::get_surface(Surface_Handle surface_handle)
 
 void Surface_Manager::init()
 {
+	assert(!m_is_initialized&&"Error: attempting to reload surfaces.");
+	
+	m_is_initialized = true;
+	
 	DEBOUT("Loading all surfaces...");
 	
 	
@@ -103,7 +107,7 @@ void Surface_Manager::init()
 
 void Surface_Manager::deinit()
 {
-    DEBOUT("\n\tFlushing all surfaces... ");
+    DEBOUT("\nFlushing all surfaces... ");
     for(Uint32 i=0; i < m_surfaces.size(); i++)
     {
         delete m_surfaces[i];
