@@ -81,8 +81,8 @@ void Input::update()
         if (event.key.keysym.sym==SDLK_RETURN) {m_enter=true;}
 		if (event.key.keysym.sym==SDLK_p) m_pause!=m_pause;
 		if (event.key.keysym.sym==SDLK_x && m_alt) m_quit=true;
-		if (((event.key.keysym.sym==SDLK_q) && m_alt)||
-			(event.key.keysym.sym==SDLK_ESCAPE)) m_quit=true;
+		if ((event.key.keysym.sym==SDLK_q) && m_alt) m_quit=true;
+		if	(event.key.keysym.sym==SDLK_ESCAPE) m_quit=true;
 		if ((event.key.keysym.sym==SDLK_F4) && m_alt) m_quit=true;
         if ((event.key.keysym.sym==SDLK_RETURN) && m_alt) m_fullscreen!=m_fullscreen;        
 		break;
@@ -97,6 +97,7 @@ void Input::update()
 		if (event.key.keysym.sym==SDLK_SPACE) m_fire=false;
 		if (event.key.keysym.sym==SDLK_RETURN) m_enter=false;
 		if (event.key.keysym.sym==SDLK_ESCAPE) m_die=false;
+		if	(event.key.keysym.sym==SDLK_ESCAPE) m_quit=false;
 		if (event.key.keysym.sym==SDLK_LALT) m_alt=false;
 		if (event.key.keysym.sym==SDLK_RALT) m_alt=false;
 		break;

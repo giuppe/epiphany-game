@@ -3,11 +3,11 @@
 #include "screen.h"
 #include "surface.h"
 
-void Surface::init(SDL_Surface* surface)
+void Surface::init(SDL_Surface* surface, Uint32 frame_size_x=32, Uint32 frame_size_y=32)
 {
 	m_surface = surface;
-	m_frame_size_x=32;
-	m_frame_size_y=32;
+	m_frame_size_x=frame_size_x;
+	m_frame_size_y=frame_size_y;
 }
 
 void Surface::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int frame_no)
@@ -28,8 +28,8 @@ void Surface::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int f
 	}
 	else
 	{
-	src.x = frame_no*m_frame_size_x;
-	src.y = frame_no*m_frame_size_y;
+	src.x = (frame_no%k_max_anim)*m_frame_size_x;
+	src.y = (frame_no/k_max_anim)*m_frame_size_y;
 	
 	src.w = m_frame_size_x;
 	src.h = m_frame_size_y;

@@ -17,6 +17,10 @@ Surface* Surface_Factory::create_surface(Surface_Type type)
 	
 	Surface* surface = new Surface();
 	
+	Uint32 frame_size_x = 32;
+	Uint32 frame_size_y = 32;
+	
+	
 	switch(type)
 	{
 		case SRF_UNKNOWN:
@@ -103,7 +107,7 @@ Surface* Surface_Factory::create_surface(Surface_Type type)
 		assert(0);
 	}
 	
-	surface->init(temp);
+	surface->init(temp, frame_size_x, frame_size_y);
 	
 	//SDL_FreeSurface(temp);
 	

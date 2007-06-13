@@ -142,12 +142,14 @@ void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 
 void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
+	/*
 	SDL_Rect dest;
 	dest.x = x;
 	dest.y = y;
 	dest.w = size_x;
 	dest.h = size_y;
 	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
+	*/
 }
 
 // begin Singleton stuff

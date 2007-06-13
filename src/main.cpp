@@ -16,8 +16,6 @@
  ***************************************************************************/
 
 #include "dephine.h"
-//#include <ClanLib/application.h>
-//#include <ClanLib/display.h>
 #include <SDL/SDL.h>
 #include "surface_manager.h"
 #include "resource_factory.h"
