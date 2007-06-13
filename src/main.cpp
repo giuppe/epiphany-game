@@ -23,6 +23,7 @@
 #include "fonts/font_manager.h"
 #include "game.h"
 #include "input.h"
+#include "screen.h"
 
 
 
@@ -40,6 +41,8 @@
 
 		Input::instance()->init();
 		
+		Screen::instance();
+		
 		Resource_Factory::instance();
 		
 		Surface_Manager::instance();
@@ -47,6 +50,8 @@
 		Sample_Manager::instance();
 		
 		Font_Manager::instance();
+		
+		SDL_WM_SetCaption(get_title(), NULL);
 	
 	}
 	
@@ -85,18 +90,11 @@
 	
 	//	DEBOUT("Calling CL_Display::set_videomode\n");
 		Game* game = Game::instance();
-		try
-		{
-			
-		
+	
 			game->go();
 			DEBOUT("Exiting game::go().\n");
 			
-		}
-		catch(Common_Ex ex)
-		{
-			std::cout<<ex.get_message();
-		}		
+	
 		deinit_modules();
 		
 		delete game;
