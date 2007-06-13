@@ -581,15 +581,15 @@ void Game::show_credits()
 	credits.push_back("Epiphany");
 	credits.push_back(" ");
 	credits.push_back("Coding:");
-	credits.push_back("Giuseppe D'Aquì");
+	credits.push_back("Giuseppe D'Aqui'");
 	credits.push_back("Giuseppe Martino");
 	credits.push_back(" ");
 	credits.push_back("Level Designing:");
-	credits.push_back("Giuseppe D'Aquì");
+	credits.push_back("Giuseppe D'Aqui'");
 	credits.push_back("Giuseppe Martino");
 	credits.push_back(" ");
 	credits.push_back("Graphics:");
-	credits.push_back("Giuseppe D'Aquì");
+	credits.push_back("Giuseppe D'Aqui'");
 	credits.push_back("Antonio Malara");
 	credits.push_back(" ");
 	credits.push_back("Epiphany Map Definition Language:");
@@ -598,9 +598,9 @@ void Game::show_credits()
 	credits.push_back("Thanks to:");
 	credits.push_back("Antonio Malara");
 	credits.push_back("Giuseppe Martino");
-	credits.push_back("Kenneth Gangstoe");
+	//credits.push_back("Kenneth Gangstoe");
 	credits.push_back("Joerg Jaspert");
-	credits.push_back("All ClanLib developers");
+	//credits.push_back("All ClanLib developers");
 	
 	//alpha blending too slow
 	//CL_Surface* srf_top = new CL_Surface("Surfaces/MNU_Top", m_res_manag);

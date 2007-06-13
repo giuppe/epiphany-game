@@ -6,21 +6,6 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the `clanApp' library (-lclanApp). */
-#undef HAVE_LIBCLANAPP
-
-/* Define to 1 if you have the `clanCore' library (-lclanCore). */
-#undef HAVE_LIBCLANCORE
-
-/* Define to 1 if you have the `clanDisplay' library (-lclanDisplay). */
-#undef HAVE_LIBCLANDISPLAY
-
-/* Define to 1 if you have the `clanSound' library (-lclanSound). */
-#undef HAVE_LIBCLANSOUND
-
-/* Define to 1 if you have the `Hermes' library (-lHermes). */
-#undef HAVE_LIBHERMES
-
 /* Define to 1 if you have the `SDL' library (-lSDL). */
 #undef HAVE_LIBSDL
 

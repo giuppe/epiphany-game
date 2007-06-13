@@ -11,12 +11,12 @@ int Input::event_filter(const SDL_Event *event)
 	switch( event->type )
     {
 	case SDL_KEYDOWN:
-        std::cout<<"Keydown event\n";
+       // std::cout<<"Keydown event\n";
         return 1;
         break;
   
 	case SDL_KEYUP:
-        std::cout<<"Keyup event\n";
+        //std::cout<<"Keyup event\n";
         return 1;
         break;
 

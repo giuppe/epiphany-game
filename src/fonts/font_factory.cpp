@@ -13,16 +13,16 @@ Font* Font_Factory::create_font(Font_Type type)
 	switch(type)
 	{
 		case GAME_FONT:
-			m_res_factory += "/gfx/14P_Arial_Blue_0.bmp";
+			m_res_factory += "/gfx/game_font.bmp";
 			break;
 		case TIME_FONT:
-			m_res_factory += "/gfx/epifont.bmp";
+			m_res_factory += "/gfx/time_font.bmp";
 			break;
 		case CREDITS_FONT:
-			m_res_factory += "/gfx/epifont.bmp";
+			m_res_factory += "/gfx/credits_font.bmp";
 			break;
 		case MENU_FONT:
-			m_res_factory += "/gfx/epifont.bmp";
+			m_res_factory += "/gfx/credits_font.bmp";
 			break;
 		default:
 			assert(!"Error: Selected non-existing font type.");
