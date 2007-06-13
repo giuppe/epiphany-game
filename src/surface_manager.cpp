@@ -123,6 +123,7 @@ Surface_Manager* Surface_Manager::instance()
 		_instance = new Surface_Manager();
 		//FIXME: this is for enabling random adding of surfaces
 		_instance->m_surfaces.resize(40);
+		_instance->init();
 	}
 	return _instance;
 }

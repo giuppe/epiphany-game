@@ -483,10 +483,8 @@ void Game::init()
 	load_config();	
 	
 	
-	
 	DEBOUT("Loading fonts...\n");
 	load_fonts();
-	
 	
 
 	DEBOUT("Initing Screen...\n");
