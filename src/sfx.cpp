@@ -35,6 +35,7 @@ void Sample_Manager::init()
 	m_samples.resize(25);
 	// allocate 16 mixing channels
 	Mix_AllocateChannels(32);
+	load_samples();
 }
 
 void Sample_Manager::load_samples()

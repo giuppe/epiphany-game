@@ -48,10 +48,12 @@ private:
 	
 	Sample* get_sample(Sample_Type sfx);
 	
+		void load_samples();
+	
 public:
 	
 	//Sampleset(Game* game);
-	void load_samples();
+
 	
 	void init();
 	

@@ -482,30 +482,25 @@ void Game::init()
 	DEBOUT("Loading config...\n");
 	load_config();	
 	
-	DEBOUT("Loading Surfaces...\n");
-	load_surfaces();
 	
 	
 	DEBOUT("Loading fonts...\n");
 	load_fonts();
 	
-	DEBOUT("Loading samples...\n");
-	
-	Sample_Manager* m_sampleset=Sample_Manager::instance();
-	m_sampleset->load_samples();
 	
 
 	DEBOUT("Initing Screen...\n");
 	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
 	
 }
-
+/*
 void Game::load_surfaces()
 {
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	surf_man->init();
 	
 }
+*/
 
 void Game::play_level(const char *level_path)
 {
