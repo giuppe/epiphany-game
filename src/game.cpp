@@ -632,7 +632,7 @@ void Game::show_credits()
 		
     if(draw_pos+50*credits.size()>0)
 		{
-			draw_pos-=(Sint32)(((SDL_GetTicks()-current_frame_time)/20)+1);
+			draw_pos-=1;//(Sint32)(((SDL_GetTicks()-current_frame_time)/20)+1);
 		}
 		else
 		{
@@ -647,7 +647,7 @@ void Game::show_credits()
 		{
 			if(SDL_GetTicks()-current_frame_time<15)
 			{
-				SDL_Delay(5);
+				SDL_Delay(10);
 			}
 		}
 		screen->flip_display();

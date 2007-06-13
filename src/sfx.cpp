@@ -34,7 +34,7 @@ void Sample_Manager::init()
 	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
 	// allocate 16 mixing channels
-	Mix_AllocateChannels(16);
+	Mix_AllocateChannels(32);
 }
 
 void Sample_Manager::load_samples()
@@ -52,8 +52,8 @@ void Sample_Manager::load_samples()
 	m_samples[SFX_SAPPHIRE_EAT]=new Sample(Mix_LoadWAV((res_path+"sapphire_eat.wav").c_str()));
 	m_samples[SFX_GAME_GAMEOVER]=new Sample(Mix_LoadWAV((res_path+"gameover.wav").c_str()));
 	m_samples[SFX_DOOR_PASS]=new Sample(Mix_LoadWAV((res_path+"door_pass.wav").c_str()));
-	m_samples[SFX_EMERALD_FALL]=new Sample(Mix_LoadWAV((res_path+"emerald_fall.wav").c_str()));
-	m_samples[SFX_SAPPHIRE_FALL]=new Sample(Mix_LoadWAV((res_path+"sapphire_fall.wav").c_str()));
+	m_samples[SFX_EMERALD_FALL]=new Sample(Mix_LoadWAV((res_path+"gem_fall.wav").c_str()));
+	m_samples[SFX_SAPPHIRE_FALL]=new Sample(Mix_LoadWAV((res_path+"gem_fall.wav").c_str()));
 	m_samples[SFX_GRASS_EAT]=new Sample(Mix_LoadWAV((res_path+"grass_eat.wav").c_str()));
 	m_samples[SFX_KEY_EAT]=new Sample(Mix_LoadWAV((res_path+"key_eat.wav").c_str()));
 	m_samples[SFX_PLAYER_MOVE]=new Sample(Mix_LoadWAV((res_path+"player_move.wav").c_str()));
