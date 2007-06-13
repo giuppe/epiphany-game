@@ -13,7 +13,7 @@ Font* Font_Factory::create_font(Font_Type type)
 	switch(type)
 	{
 		case GAME_FONT:
-			m_res_factory += "/gfx/epifont.bmp";
+			m_res_factory += "/gfx/14P_Arial_Blue_0.bmp";
 			break;
 		case TIME_FONT:
 			m_res_factory += "/gfx/epifont.bmp";

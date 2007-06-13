@@ -33,8 +33,8 @@
 #include "game_timer.h"
 #include <cstdlib>
 #include <SDL/SDL.h>
-#include <cstring>
-
+#include <string>
+#include <cassert>
 #include "sfx.h"
 
 
@@ -305,40 +305,46 @@ void Game::draw_score()
 	
 	Font* time_font = font_man->get_font(m_time_font);
 	
-	std::string text("Score: ");
-	text+=(Sint32)m_level->get_player().get_score();
-	game_font->write(4,real_game_size_y+5, text.c_str());
+	char text[255];
+	
+	sprintf(text, "%s",("Score: "));
+	
+	sprintf(text, "%s%d", text,(Sint32)m_level->get_player().get_score());
+	
+	game_font->write(4,real_game_size_y+5, text);
 
 	// find how many score to complete level
 	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_player().get_score());
 
 	if(remaining>0)
 	{
-
-		game_font->write(200,real_game_size_y+5, CL_String("Remaining:   ")+CL_String(remaining));
+		sprintf(text,"%s","Remaining:   ");
+		sprintf(text,"%s%d", text, remaining);
+		game_font->write(200,real_game_size_y+5, text);
 
 	}
 	else
 	{
     if(m_level->get_player().is_exited())
 		{
-			game_font->write(200,real_game_size_y+5, CL_String("Well done!"));
+			game_font->write(200,real_game_size_y+5, "Well done!");
 		}
 		else
 		{
-			game_font->write(200,real_game_size_y+5, CL_String("Find Exit"));
+			game_font->write(200,real_game_size_y+5, "Find Exit");
 		}
 
 	}
 
 	//draw_time
-	CL_String time_string=m_time.get_time_string();
+	char time_string[10];
+	sprintf(time_string, "%s", m_time.get_time_string());
 	time_font->write(game_size_x-k_sprite_size*2,game_size_y-k_sprite_size, time_string);
 
 	
 	if(!m_level->get_player().is_alive())
 	{
-		game_font->write(380,real_game_size_y+5, CL_String("Press Space"));
+		game_font->write(380,real_game_size_y+5, "Press Space");
 	}
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
@@ -384,33 +390,28 @@ void Game::go()
   		
   		m_level=new Level();
   		
-  		CL_String current_level_path(Resource_Factory::instance()->get_resource_path());
+  		char current_level_path[255];
+  		sprintf(current_level_path, "%s", (Resource_Factory::instance()->get_resource_path().c_str()));
   		
-  		current_level_path=current_level_path+"/maps/level";
+  		sprintf(current_level_path, "%s%s", current_level_path, "/maps/level");
   	
 
 
-  		current_level_path=current_level_path+((const Sint32)menu.get_current_level());
+  		sprintf(current_level_path, "%s%d", current_level_path, (menu.get_current_level()));
   		
-  		current_level_path+=".map";
+  		sprintf(current_level_path, "%s%s", current_level_path, ".map");
   	
-     	try
-  		{
-  			m_level->load_map(current_level_path);
+  		DEBOUT("Loading map: "<<current_level_path<<"\n");
+  	
+     	m_level->load_map(current_level_path);
   			
-  		}
-  		catch(Common_Ex e)
-  		{
-  			std::cout<<e.get_message();
-  			return;
-  		}
   	
   		bool result=main_loop();
   	
   		SDL_Delay(500);
     	
  	
-  		//HACKSOMETHINGHERE
+  		//APOI
   		//Might add some Hiscores here...
   		delete m_level;
   		
@@ -426,14 +427,14 @@ void Game::go()
        if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
        {
 
-           ofstream update_config(m_ini_path);
+           std::ofstream update_config(m_ini_path);
            update_config<<menu.get_unsolved_level();
            menu.set_current_level(menu.get_unsolved_level());
            play=0;
        }
        else
        {
-         //do nothing.. maybe a congratulation screen
+         //FIXME: maybe a congratulation screen
          play=menu.go();
        }
   			
@@ -464,14 +465,15 @@ void Game::init()
 	#ifdef _WIN32
 	m_ini_path="./epiphany.ini";
 	#else
-	CL_String user_home=getenv("HOME");
+	std::string user_home(getenv("HOME"));
 	if(user_home=="")
 	{
-		throw Common_Ex("Unable to find HOME environment variable");
+		assert(!"Unable to find HOME environment variable");
 	}
 	else
 	{
-		m_ini_path=user_home+"/.epiphany";
+		user_home+="/.epiphany";
+		m_ini_path=user_home.c_str();
 	}
 	#endif
 
@@ -485,121 +487,33 @@ void Game::init()
 	
 	
 	DEBOUT("Loading fonts...\n");
-	try
-	{
-		load_fonts();
-	}
-	catch(CL_Error ex)
-	{
-		throw Common_Ex(ex.message.c_str());
-	}
+	load_fonts();
 	
-	
-	/*
-	m_spriteset=Spriteset("SPT");
-	DEBOUT("Loading sprites...\n");
-	try
-	{
-		m_spriteset.load_sprites();
-	}
-	catch(CL_Error ex)
-	{
-		throw Common_Ex(ex.message.c_str());
-	}
-	*/
 	DEBOUT("Loading samples...\n");
 	
 	Sample_Manager* m_sampleset=Sample_Manager::instance();
-	try
-	{
-		m_sampleset->load_samples();
-	}
-	catch(CL_Error ex)
-	{
-		throw Common_Ex(ex.message.c_str()) ;
-	}
+	m_sampleset->load_samples();
 	
 
 	DEBOUT("Initing Screen...\n");
 	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
-	/*
-	Entity_Factory* entity_factory = Entity_Factory::instance();
-	entity_factory->set_spriteset(this->m_spriteset);
-	*/
-	//DEBOUT("Exiting Game ctor... \n");
 	
 }
 
 void Game::load_surfaces()
 {
-	CL_String surface_path=CL_String("Surfaces/SPT_");
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	surf_man->init();
-	/*
-	Surface_Factory* surf_factory = Surface_Factory::instance();
 	
-	surf_man->add_surface(UNKNOWN, new Surface(new CL_Surface(surface_path+"Unknown", m_res_manag)));
-	
-	surf_man->add_surface(PLAYER, new Surface(new CL_Surface(surface_path+"Player", m_res_manag)));
-
-	surf_man->add_surface(GRASS, new Surface(new CL_Surface(surface_path+"Grass", m_res_manag)));
-	
-	surf_man->add_surface(STEEL, new Surface(new CL_Surface(surface_path+"Steel", m_res_manag)));
-	
-	surf_man->add_surface(EMERALD, new Surface(new CL_Surface(surface_path+"Emerald", m_res_manag)));
-	
-	surf_man->add_surface(BOULDER, new Surface(new CL_Surface(surface_path+"Boulder", m_res_manag)));
-
-	surf_man->add_surface(SAPPHIRE, new Surface(new CL_Surface(surface_path+"Sapphire", m_res_manag)));
-		
-	surf_man->add_surface(EXIT, new Surface(new CL_Surface(surface_path+"Exit", m_res_manag)));
-	
-	surf_man->add_surface(EXPLOSION, new Surface(new CL_Surface(surface_path+"Explosion", m_res_manag)));
-	
-	surf_man->add_surface(DOOR_RED, new Surface(new CL_Surface(surface_path+"Door_Red", m_res_manag)));
-	
-	surf_man->add_surface(DOOR_BLUE, new Surface(new CL_Surface(surface_path+"Door_Blue", m_res_manag)));
-
-	surf_man->add_surface(DOOR_GREEN, new Surface(new CL_Surface(surface_path+"Door_Green", m_res_manag)));
-	
-	surf_man->add_surface(DOOR_YELLOW, new Surface(new CL_Surface(surface_path+"Door_Yellow", m_res_manag)));
-
-	surf_man->add_surface(KEY_RED, new Surface(new CL_Surface(surface_path+"Key_Red", m_res_manag)));	
-
-	surf_man->add_surface(KEY_BLUE, new Surface(new CL_Surface(surface_path+"Key_Blue", m_res_manag)));	
-
-	surf_man->add_surface(KEY_GREEN, new Surface(new CL_Surface(surface_path+"Key_Green", m_res_manag)));	
-
-	surf_man->add_surface(KEY_YELLOW, new Surface(new CL_Surface(surface_path+"Key_Yellow", m_res_manag)));	
-
-
-	surf_man->add_surface(FLINTSTONE, new Surface(new CL_Surface(surface_path+"Flintstone", m_res_manag)));	
-	
-	surf_man->add_surface(PEPERON, new Surface(new CL_Surface(surface_path+"Peperon", m_res_manag)));	
-	
-	surf_man->add_surface(BRICK, new Surface(new CL_Surface(surface_path+"Brick", m_res_manag)));
-	
-	surf_man->add_surface(WOOD, new Surface(new CL_Surface(surface_path+"Wood", m_res_manag)));
-
-	surf_man->add_surface(TOMATO, new Surface(new CL_Surface(surface_path+"Tomato", m_res_manag)));
-*/
 }
 
 void Game::play_level(const char *level_path)
 {
         m_level=new Level();
         
-        try
-        {
-                m_level->load_map(level_path);
+        m_level->load_map(level_path);
                                                         
-        }
-        catch(Common_Ex e)
-        {
-                std::cout<<e.get_message();
-                return;
-		}
-
+        
         main_loop();
         return;
 }
@@ -620,7 +534,7 @@ void Game::load_config()
 		return;
 	}
 	config_file>>m_unsolved_level;
-	//find max_num_of_levels
+	//FIXME: find max_num_of_levels
 /*	CL_DirectoryScanner dirscan;
 	Uint32 i=0;
 	if(dirscan.scan(CL_String(Resource_Factory::instance()->get_resource_path())+"/maps", "level*.map"))
@@ -631,7 +545,7 @@ void Game::load_config()
 			i++;
 		}
 	}*/
-	m_max_num_of_levels=12;
+	m_max_num_of_levels=13;
 }
 	
 
@@ -640,17 +554,10 @@ void Game::load_fonts()
 	
 	
 	DEBOUT("Loading fonts... ");
-	try
-	{
 		m_game_font=Font_Factory::GAME_FONT;
 
 		m_time_font=Font_Factory::TIME_FONT;
 		m_credits_font=Font_Factory::CREDITS_FONT;
-	}
-	catch(CL_Error ex)
-	{
-		throw Common_Ex(ex.message.c_str());
-	}
 	
 	DEBOUT("done.\n");
 
@@ -669,7 +576,7 @@ void Game::show_credits()
 	
 	Sint32 current_frame_time=0;
 
-	vector<CL_String> credits;
+	std::vector<std::string> credits;
 
 	credits.push_back("Epiphany");
 	credits.push_back(" ");
@@ -719,7 +626,7 @@ void Game::show_credits()
 		
 		for(i=0; i<credits.size(); i++)
 		{
-			credits_font->write_center(draw_pos+50*i,credits[i]);
+			credits_font->write_center(draw_pos+50*i,credits[i].c_str());
 			
 		}
 		
@@ -751,12 +658,7 @@ void Game::show_credits()
 
 }
 
-/*
-Resource_Factory* Game::get_resource_manager()
-{
-	return m_res_manag;
-}
-*/
+
 
 Game* Game::_instance = 0;
 

@@ -73,38 +73,35 @@ const char* Game_Timer::get_time_string()
 {
 	char  time_string[10];
 	
-	int minutes=m_total_time/60;
+	Sint32 minutes=m_total_time/60;
 	
-	int seconds=m_total_time%60;
+	Sint32 seconds=m_total_time%60;
 	
+	char minutes_string[3];
+		
 	if(minutes<10)
 	{
 		
-		strcat(time_string,"0");
+		sprintf(minutes_string, "%d", 0);
 		
 	}
 	
-	char minutes_string[2];
 	
 	sprintf(minutes_string, "%d", minutes);
 	
-	strcat(time_string, minutes_string);
-	
-	strcat(time_string,":");
+	char seconds_string[3];
 	
 	if(seconds<10)
 	{
 		
-		strcat(time_string,"0");
+		sprintf(seconds_string, "%d", 0);
 		
 	}
-	
-	char seconds_string[2];
+		
 	
 	sprintf(seconds_string, "%d", seconds);
 	
-	
-	strcat(time_string, seconds_string);
+	sprintf(time_string, "%s:%s", minutes_string,seconds_string);
 	
 	return time_string;
 	

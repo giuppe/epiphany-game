@@ -24,6 +24,7 @@
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
 #include <SDL/SDL.h>
+#include <string>
 #include "input.h"
 #include "screen.h"
 #include "game.h"
@@ -103,15 +104,15 @@ bool Menu::increase_unsolved_level()
 }
 
 
-int Menu::go()
+Sint32 Menu::go()
 {
 	DEBOUT("Entering menu()...\n");
 	Epiconfig* config=Epiconfig::instance();
-	int selected=0;
+	Sint32 selected=0;
 	Uint32 level_number=m_current_level;
 	Uint32 current_time;
-	CL_String level_string;
-	int curr_sprite=0;
+	char level_string[3];
+	Sint32 curr_sprite=0;
 	Input* input = Input::instance();
 	Screen* screen = Screen::instance();
 	Font* menu_font =Font_Manager::instance()->get_font(m_menu_font); 
@@ -125,7 +126,7 @@ int Menu::go()
 		current_time=SDL_GetTicks();
 		screen->clear();
 		m_background->put_screen(0,0, config->get_game_size_x(), config->get_game_size_y());
-		level_string=(int)level_number;
+		sprintf(level_string, "%d",level_number);
 		//m_menu_font->print_center(k_game_size_x/2,30,"Epiphany");
 		int menu_top_point=config->get_game_size_y()/2;
 		int menu_vertical_distance=config->get_game_size_y()/10;

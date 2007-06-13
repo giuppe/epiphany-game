@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include <ClanLib/sound.h>
 #include "sample.h"
 #include <vector>
 

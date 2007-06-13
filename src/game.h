@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include <ClanLib/display.h>
+
 #include "sprite.h"
 #include "direction.h"
 #include "fonts/font.h"
