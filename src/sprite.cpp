@@ -17,9 +17,9 @@
 
 
 #include "dephine.h"
-#include <ClanLib/display.h>
+
 #include "sprite.h"
-//#include <cmath>
+
 
 Sprite::Sprite(Surface* surface)
 {
@@ -72,27 +72,7 @@ Sprite::Sprite(const Sprite& sprite)
 	m_state = sprite.m_state;
 	
 }
-/*
-Sprite& Sprite::operator=(const Sprite& sprite)
-{
 
-	CL_Surface temp=*(sprite.m_surface);
-
-	m_surface=new CL_Surface(temp);
-	
-	m_pos_x=sprite.m_pos_x;
-	
-	m_pos_y=sprite.m_pos_y;
-	
-	m_move_to_pos_x=sprite.m_move_to_pos_x;
-	
-	m_move_to_pos_y=sprite.m_move_to_pos_y;
-	
-	m_initialized=true;
-	
-	return (*this);
-	
-}*/
 
 void Sprite::init(Surface* surf)
 {
@@ -128,25 +108,7 @@ void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y)
 	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, m_curr_frame+m_state);
 }
 
-/*
-CL_Surface* Sprite::operator->()
-{
-	//qui dovrebbe ritornare il frame di m_surface
-	//corrispondente a m_curr_frame
-	return m_surface;
-}
-*/
- /*
-Uint32 Sprite::get_pos_x()
-{
-	return m_pos_x;
-}
 
-Uint32 Sprite::get_pos_y()
-{
-	return m_pos_y;
-}
-*/
 void Sprite::set_pos_x(Uint32 pos_x)
 {
 	m_pos_x=pos_x;
@@ -161,7 +123,7 @@ void Sprite::set_pos_y(Uint32 pos_y)
 
 void Sprite::set_curr_frame(Sint32 frame)
 {
-	//FIXME: check should be on mumber of sprite frames
+	//FIXME: check should be on number of sprite frames
 	if(frame >= Epiconfig::instance()->get_max_anim_drawn())
 	{
 		m_curr_frame = 0;

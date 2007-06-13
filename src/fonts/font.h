@@ -3,18 +3,18 @@
 
 #include "dephine.h"
 #include "resource.h"
-#include <ClanLib/display.h>
+#include "SFont.h"
 
 class Font : public Resource
 {
 private:
-	CL_Font* m_font;
+	SFont_Font* m_font;
 	bool m_initialized;
 public:
 	Font(): m_initialized(false){};
 	~Font(){deinit();};
-	void init(CL_Font* font){m_font = font;};
-    void deinit(){if(m_initialized==true) delete m_font;};
+	void init(SFont_Font* font);
+    void deinit(){if(m_initialized==true) SFont_FreeFont(m_font);};
     void write(Sint32 x, Sint32 y, const char* text);
     void write_center(Sint32 y, const char* text);
 };

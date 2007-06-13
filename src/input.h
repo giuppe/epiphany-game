@@ -1,5 +1,6 @@
 #ifndef INPUT_H_
 #define INPUT_H_
+#include <SDL/SDL.h>
 class Input
 {
 private:
@@ -18,7 +19,7 @@ private:
 
 public:
 
-    //int event_filter(const SDL_Event *event);
+    int event_filter(const SDL_Event *event);
     bool get_left(){return m_left;}
     bool get_right(){return m_right;}
     bool get_up(){return m_up;}

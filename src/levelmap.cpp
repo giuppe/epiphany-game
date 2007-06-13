@@ -37,7 +37,7 @@ Levelmap::Levelmap(const char* map_path)
 
 void Levelmap::load_map(const char* map_path)
 {
-	ifstream scriptfile(map_path);
+	std::ifstream scriptfile(map_path);
 
 	myparser parsy;
 	parsy<<scriptfile;

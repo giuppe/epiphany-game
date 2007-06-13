@@ -31,8 +31,10 @@
 #include "input.h"
 #include "level.h"
 #include "game_timer.h"
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <SDL/SDL.h>
+#include <cstring>
+
 #include "sfx.h"
 
 
@@ -61,7 +63,7 @@ bool Game::main_loop()
 
 		if(input->get_pause())
 		{
-			CL_System::sleep(200);
+			SDL_Delay(200);
 			input->update();
 			while(!input->get_pause())
 			{
@@ -91,7 +93,7 @@ bool Game::main_loop()
 		}
 		
 
-		current_frame_time=CL_System::get_time();
+		current_frame_time=SDL_GetTicks();
 		
 		//m_level->get_player().set_direction(STOP);
 		
@@ -105,7 +107,7 @@ bool Game::main_loop()
 
 		for(Uint32 j=0;j<m_config->get_max_anim_drawn();j++)
 		{
-			current_frame_time=CL_System::get_time();
+			current_frame_time=SDL_GetTicks();
 		
 			draw(j);
 
@@ -114,11 +116,11 @@ bool Game::main_loop()
 				get_keys();
 			}
 
-			while(CL_System::get_time()-current_frame_time<msec_per_frame);
+			while(SDL_GetTicks()-current_frame_time<msec_per_frame);
 			{
-				if(CL_System::get_time()-current_frame_time<msec_per_frame-10)
+				if(SDL_GetTicks()-current_frame_time<msec_per_frame-10)
 				{
-					CL_System::sleep(10);
+					SDL_Delay(10);
 				}
 			}
 		
@@ -295,7 +297,7 @@ void Game::draw_score()
 	Sint32 game_size_x=m_config->get_game_size_x();
 	Sint32 game_size_y=m_config->get_game_size_y();
 	Screen* screen = Screen::instance(); 
-	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0,1.0);
+	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0);
 	
 	Font_Manager* font_man = Font_Manager::instance();
 	
@@ -303,7 +305,9 @@ void Game::draw_score()
 	
 	Font* time_font = font_man->get_font(m_time_font);
 	
-	game_font->write(4,real_game_size_y+5, CL_String("Score:   ")+CL_String((Sint32)m_level->get_player().get_score()));
+	std::string text("Score: ");
+	text+=(Sint32)m_level->get_player().get_score();
+	game_font->write(4,real_game_size_y+5, text.c_str());
 
 	// find how many score to complete level
 	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_player().get_score());
@@ -359,7 +363,7 @@ void Game::draw_score()
 		surf_man->get_surface(KEY_YELLOW)->put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
-	screen->draw_rect(0, real_game_size_y, game_size_x, game_size_y,1,0.5,0,1.0);
+	screen->draw_rect(0, real_game_size_y, game_size_x, game_size_y,100,50,10);
 
 }
 
@@ -403,9 +407,9 @@ void Game::go()
   	
   		bool result=main_loop();
   	
-  		CL_System::sleep(500);
+  		SDL_Delay(500);
     	
-  		CL_System::keep_alive();	
+ 	
   		//HACKSOMETHINGHERE
   		//Might add some Hiscores here...
   		delete m_level;
@@ -617,7 +621,7 @@ void Game::load_config()
 	}
 	config_file>>m_unsolved_level;
 	//find max_num_of_levels
-	CL_DirectoryScanner dirscan;
+/*	CL_DirectoryScanner dirscan;
 	Uint32 i=0;
 	if(dirscan.scan(CL_String(Resource_Factory::instance()->get_resource_path())+"/maps", "level*.map"))
 	{
@@ -626,8 +630,8 @@ void Game::load_config()
 		{
 			i++;
 		}
-	}
-	m_max_num_of_levels=i;
+	}*/
+	m_max_num_of_levels=12;
 }
 	
 
@@ -638,11 +642,10 @@ void Game::load_fonts()
 	DEBOUT("Loading fonts... ");
 	try
 	{
-		m_game_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::GAME_FONT));
+		m_game_font=Font_Factory::GAME_FONT;
 
-		m_time_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::TIME_FONT));
-
-		m_credits_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::CREDITS_FONT));
+		m_time_font=Font_Factory::TIME_FONT;
+		m_credits_font=Font_Factory::CREDITS_FONT;
 	}
 	catch(CL_Error ex)
 	{
@@ -711,7 +714,7 @@ void Game::show_credits()
 	
 	while(!input->get_quit())
 	{
-		current_frame_time=CL_System::get_time();
+		current_frame_time=SDL_GetTicks();
 		screen->clear();
 		
 		for(i=0; i<credits.size(); i++)
@@ -722,7 +725,7 @@ void Game::show_credits()
 		
     if(draw_pos+50*credits.size()>0)
 		{
-			draw_pos-=(Sint32)(((CL_System::get_time()-current_frame_time)/20)+1);
+			draw_pos-=(Sint32)(((SDL_GetTicks()-current_frame_time)/20)+1);
 		}
 		else
 		{
@@ -733,11 +736,11 @@ void Game::show_credits()
 //		srf_top->put_screen(0,0);
 //		srf_bottom->put_screen(0,k_game_size_y-100);
 
-		while(CL_System::get_time()-current_frame_time<20)
+		while(SDL_GetTicks()-current_frame_time<20)
 		{
-			if(CL_System::get_time()-current_frame_time<15)
+			if(SDL_GetTicks()-current_frame_time<15)
 			{
-				CL_System::sleep(5);
+				SDL_Delay(5);
 			}
 		}
 		screen->flip_display();

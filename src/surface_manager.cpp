@@ -2,24 +2,29 @@
 #include "surface_factory.h"
 #include "surface.h"
 #include "resource_factory.h"
+#include <SDL/SDL.h>
+#include <string>
 #include "game.h"
 
 #include <cassert>
-
-Surface_Handle Surface_Manager::load_surface(string path)
+/*
+Surface_Handle Surface_Manager::load_surface(const char* path)
 {
     Surface_Handle s_h = m_surfaces.size();
     
-    CL_ResourceManager* res_manag=Resource_Factory::instance()->get_resource_manager();
+    //std::string res_path=Resource_Factory::instance()->get_resource_path();
 
-    Surface* temp;
+    Surface* temp = new Surface();
     
-    temp->init(new CL_Surface(path, res_manag));
+    SDL_Surface temp2 = SDL_LoadBMP(path)
+    
+    temp->init();
                      
     m_surfaces.push_back(temp);
+    
     return s_h;
 }
-
+*/
 
 void Surface_Manager::add_surface(Surface_Handle handle, Surface* surface)
 {
@@ -42,13 +47,9 @@ void Surface_Manager::init()
 {
 	DEBOUT("Loading all surfaces...");
 	
-	CL_String surface_path=CL_String("Surfaces/SPT_");
-
 	
 	Surface_Factory* surf_factory = Surface_Factory::instance();
-	
-	
-	
+		
 	add_surface(Surface_Factory::SRF_UNKNOWN, surf_factory->create_surface(Surface_Factory::SRF_UNKNOWN));
 	
 	add_surface(Surface_Factory::SRF_PLAYER, surf_factory->create_surface(Surface_Factory::SRF_PLAYER));

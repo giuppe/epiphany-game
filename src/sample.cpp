@@ -16,60 +16,28 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include <SDL/SDL_mixer.h>
 #include "sample.h"
 
-Sample::Sample(CL_SoundBuffer* soundbuffer, bool dont_play_several)
+Sample::Sample(Mix_Chunk* soundbuffer)
 {
 	m_soundbuffer=soundbuffer;
-	m_dont_play_several=dont_play_several;
+	
+}
+
+Sample::~Sample()
+{
+	Mix_FreeChunk(m_soundbuffer);
 }
 
 void Sample::play()
 {
-	if(m_dont_play_several==true)
+	
+  	if(Mix_PlayChannel(-1, m_soundbuffer, 0) == -1)
 	{
-		if(!(this->is_playing()))
-		{
-			try
-			{
-				m_soundbuffer_session = m_soundbuffer->play();
-			}
-			catch(CL_Error ex)
-			{
-				std::cout<<ex.message<<endl;
-			}
-		}
+		printf("Mix_PlayChannel: %s\n",Mix_GetError());
 	}
-	else
-	{
-		try
-		{
-			m_soundbuffer_session = m_soundbuffer->play();
-		}
-		catch(CL_Error ex)
-		{
-			std::cout<<ex.message<<endl;
-		}
-  }
+	
 }
 
-void Sample::stop()
-{
-	m_soundbuffer->stop();
-}
-
-bool Sample::is_playing()
-{
-	return m_soundbuffer_session.is_playing();
-}
-
-bool Sample::set_frequency(int frequency)
-{
-	return m_soundbuffer->set_frequency(frequency);
-}
-
-int Sample::get_frequency()
-{
-	return m_soundbuffer->get_frequency();
-}
 

@@ -19,13 +19,22 @@
 #include "sfx.h"
 #include "sample.h"
 #include <vector>
+#include <string>
+#include "SDL/SDL_mixer.h"
 #include "game.h"
 
 
 void Sample_Manager::init()
 {
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
+    printf("Mix_OpenAudio: %s\n", Mix_GetError());
+    exit(2);
+}
+	
 	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
+	// allocate 16 mixing channels
+	Mix_AllocateChannels(16);
 }
 
 void Sample_Manager::load_samples()
@@ -33,29 +42,26 @@ void Sample_Manager::load_samples()
 
 	Resource_Factory* res_factory=Resource_Factory::instance();
 
-	CL_ResourceManager* res_manager = res_factory->get_resource_manager();
+	std::string res_path(res_factory->get_resource_path());
 
-	try
-	{
-		m_samples[SFX_BOULDER_FALL]=new Sample(CL_SoundBuffer::load("Samples/SFX_Boulder_Fall", res_manager),true);
-		m_samples[SFX_EMERALD_EAT]=new Sample(CL_SoundBuffer::load("Samples/SFX_Emerald_Eat", res_manager));
-		m_samples[SFX_SAPPHIRE_EAT]=new Sample(CL_SoundBuffer::load("Samples/SFX_Sapphire_Eat", res_manager));
-		m_samples[SFX_GAME_GAMEOVER]=new Sample(CL_SoundBuffer::load("Samples/SFX_Gameover", res_manager));
-		m_samples[SFX_DOOR_PASS]=new Sample(CL_SoundBuffer::load("Samples/SFX_Door_Pass", res_manager));
-		m_samples[SFX_EMERALD_FALL]=new Sample(CL_SoundBuffer::load("Samples/SFX_Emerald_Fall", res_manager));
-		m_samples[SFX_SAPPHIRE_FALL]=new Sample(CL_SoundBuffer::load("Samples/SFX_Sapphire_Fall", res_manager));
-		m_samples[SFX_GRASS_EAT]=new Sample(CL_SoundBuffer::load("Samples/SFX_Grass_Eat", res_manager));
-		m_samples[SFX_KEY_EAT]=new Sample(CL_SoundBuffer::load("Samples/SFX_Key_Eat", res_manager));
-		m_samples[SFX_PLAYER_MOVE]=new Sample(CL_SoundBuffer::load("Samples/SFX_Player_Move", res_manager));
-		m_samples[SFX_MONSTER_MOVE]=new Sample(CL_SoundBuffer::load("Samples/SFX_Monster_Move", res_manager),true);
-		m_samples[SFX_WOOD_SMASH]=new Sample(CL_SoundBuffer::load("Samples/SFX_Wood_Smash", res_manager));
-		m_samples[SFX_GAME_TIMEALARM]=new Sample(CL_SoundBuffer::load("Samples/SFX_Timealarm", res_manager),true);
-		m_samples[SFX_EXPLOSION]=new Sample(CL_SoundBuffer::load("Samples/SFX_Explosion", res_manager), true);
-	}
-	catch(CL_Error ex)
-	{
-		std::cout<<ex.message;
-	}
+	res_path+= "/sfx/";
+	
+
+	m_samples[SFX_BOULDER_FALL]=new Sample(Mix_LoadWAV((res_path+"boulder_fall.wav").c_str()));
+	m_samples[SFX_EMERALD_EAT]=new Sample(Mix_LoadWAV((res_path+"emerald_eat.wav").c_str()));
+	m_samples[SFX_SAPPHIRE_EAT]=new Sample(Mix_LoadWAV((res_path+"sapphire_eat.wav").c_str()));
+	m_samples[SFX_GAME_GAMEOVER]=new Sample(Mix_LoadWAV((res_path+"gameover.wav").c_str()));
+	m_samples[SFX_DOOR_PASS]=new Sample(Mix_LoadWAV((res_path+"door_pass.wav").c_str()));
+	m_samples[SFX_EMERALD_FALL]=new Sample(Mix_LoadWAV((res_path+"emerald_fall.wav").c_str()));
+	m_samples[SFX_SAPPHIRE_FALL]=new Sample(Mix_LoadWAV((res_path+"sapphire_fall.wav").c_str()));
+	m_samples[SFX_GRASS_EAT]=new Sample(Mix_LoadWAV((res_path+"grass_eat.wav").c_str()));
+	m_samples[SFX_KEY_EAT]=new Sample(Mix_LoadWAV((res_path+"key_eat.wav").c_str()));
+	m_samples[SFX_PLAYER_MOVE]=new Sample(Mix_LoadWAV((res_path+"player_move.wav").c_str()));
+	m_samples[SFX_MONSTER_MOVE]=new Sample(Mix_LoadWAV((res_path+"monster_move.wav").c_str()));
+	m_samples[SFX_WOOD_SMASH]=new Sample(Mix_LoadWAV((res_path+"wood_smash.wav").c_str()));
+	m_samples[SFX_GAME_TIMEALARM]=new Sample(Mix_LoadWAV((res_path+"timealarm.wav").c_str()));
+	m_samples[SFX_EXPLOSION]=new Sample(Mix_LoadWAV((res_path+"explosion.wav").c_str()));
+
 
 }
 
@@ -89,10 +95,7 @@ void Sample_Manager::play(Sample_Type type)
 	m_samples[type]->play();
 }
 
-void Sample_Manager::stop(Sample_Type type)
-{
-	m_samples[type]->stop();
-}
+
 
 Sample_Manager* Sample_Manager::_instance = 0;
 

@@ -30,7 +30,7 @@ void Entity_Manager::reset()
 	if(m_entities.size()>1)
 	{
 	// start from the beginning of the array
-  vector<Entity*>::iterator itPos = m_entities.begin();
+  std::vector<Entity*>::iterator itPos = m_entities.begin();
   // clear all elements from the array
   for(; itPos < m_entities.end(); itPos++)
     delete *itPos;    // free the element from memory

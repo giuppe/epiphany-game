@@ -60,7 +60,7 @@ public:
 	
 	void play(Sample_Type type);
 	
-	void stop(Sample_Type type);
+
 	
 		    // begin Singleton stuff
 

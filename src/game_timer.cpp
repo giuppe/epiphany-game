@@ -16,6 +16,9 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include "SDL/SDL.h"
+#include <cstdlib>
+#include <cstdio>
 #include "game_timer.h"
 
 
@@ -40,9 +43,9 @@ void Game_Timer::set_total_time(Uint32 total_time)
 
 void Game_Timer::update()
 {
-	if(CL_System::get_time()-m_last_time>1000)
+	if(SDL_GetTicks()-m_last_time>1000)
 	{
-		m_last_time=CL_System::get_time();
+		m_last_time=SDL_GetTicks();
 		m_total_time--;
 	}
 	
@@ -61,14 +64,14 @@ bool Game_Timer::is_zero()
 
 void Game_Timer::start()
 {
-	m_last_time=CL_System::get_time();
+	m_last_time=SDL_GetTicks();
 }
 
 
 
 const char* Game_Timer::get_time_string()
 {
-	CL_String time_string="";
+	char  time_string[10];
 	
 	int minutes=m_total_time/60;
 	
@@ -77,22 +80,31 @@ const char* Game_Timer::get_time_string()
 	if(minutes<10)
 	{
 		
-		time_string+="0";
+		strcat(time_string,"0");
 		
 	}
 	
-	time_string+=minutes;
+	char minutes_string[2];
 	
-	time_string+=":";
+	sprintf(minutes_string, "%d", minutes);
+	
+	strcat(time_string, minutes_string);
+	
+	strcat(time_string,":");
 	
 	if(seconds<10)
 	{
 		
-		time_string+="0";
+		strcat(time_string,"0");
 		
 	}
 	
-	time_string+=seconds;
+	char seconds_string[2];
+	
+	sprintf(seconds_string, "%d", seconds);
+	
+	
+	strcat(time_string, seconds_string);
 	
 	return time_string;
 	

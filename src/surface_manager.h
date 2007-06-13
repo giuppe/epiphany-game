@@ -21,7 +21,7 @@ private:
     
     void add_surface(Surface_Handle handle, Surface* surface);
 
-    Surface_Handle load_surface(string path);
+    Surface_Handle load_surface(const char* path);
     
 public:
 

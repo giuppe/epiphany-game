@@ -1,5 +1,7 @@
 #include "resource_factory.h"
 #include "dephine.h"
+#include <cstdio>
+#include <cassert>
 
 
 
@@ -13,41 +15,47 @@ void Resource_Factory::init()
 	#endif
 	DEBOUT("Resource_path: "<<m_resource_path<<"\n");
 
-	try
-	{
-		m_res_manager=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-	}
-	catch(CL_Error ex)
-	{
-		std::cout<<ex.message<<"\n";
-		m_resource_path="./data";
+	FILE * pFile;
+	
+	std::string res_path_string(m_resource_path);
+	
+	
+  	pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+ 	 if (pFile==NULL)
+  	{
+   		std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+		res_path_string="./data";
+		pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+ 	 	if (pFile==NULL)
+  		{
+   			std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+			res_path_string="../data";
+			pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+ 	 		if (pFile==NULL)
+  			{
+   				std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+				assert(!"Error: sprites.scr not found.\n");
+  			}
+  		}
+  	}
+  	
+  	if(pFile!=NULL)
+  	{
+  		fclose(pFile);
+  	}
+  	else
+  	{
+  		assert(!"Error: sprites.scr not found.\n");
+  	}
+  	
+  	m_resource_path = res_path_string.c_str();
 
-		try
-		{
-			m_res_manager=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-		}
-		catch(CL_Error ex)
-		{
-			throw Common_Ex(ex.message.c_str() );
-			m_resource_path="../data";
-
-			try
-			{
-				m_res_manager=new CL_ResourceManager(CL_String(m_resource_path)+"/sprites.scr", false);
-			}
-			catch(CL_Error ex)
-			{
-				throw Common_Ex(ex.message.c_str());
-				exit(1);
-			}
-		}
-	}
 	DEBOUT("Using "<<m_resource_path<<"/sprites.scr"<<" as resource script.\n");
 }
 
 void Resource_Factory::deinit()
 {
-	delete m_res_manager;
+	
 }
 
 // begin Singleton stuff

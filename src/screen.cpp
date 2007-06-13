@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "dephine.h"
-#include <ClanLib/display.h>
+#include <SDL/SDL.h>
 #include "screen.h"
 #include "sprite.h"
 #include "entity.h"
@@ -46,13 +46,10 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	m_screen_size_x=level_size_x*m_cell_size;
 	m_screen_size_y=level_size_y*m_cell_size;
 	
-	try
+	m_screen = SDL_SetVideoMode(resolution_x, resolution_y, 0, SDL_HWSURFACE|SDL_DOUBLEBUF);
+	if(m_screen == NULL)
 	{
-	CL_Display::set_videomode ((int)resolution_x, (int)resolution_y,16, false);
-	}
-	catch(CL_Error ex)
-	{
-		std::cout<<"Error initializing video mode\n";
+		printf("Unable to set %d x %d video mode: %s\n", resolution_x, resolution_y, SDL_GetError());
 	}
 }
 
@@ -125,22 +122,32 @@ void Screen::set_window_center(int x, int y)
 
 void Screen::clear()
 {
-	CL_Display::clear_display(0.0, 0.0, 0.0, 1.0);
+	SDL_FillRect(m_screen, NULL, SDL_MapRGB(m_screen->format, 0, 0, 0));
 }	
 
 void Screen::flip_display()
 {
-	CL_Display::flip_display(false);
+	SDL_Flip(m_screen);
 }
 
-void Screen::fill_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha)
+void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
-	CL_Display::fill_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	dest.w = size_x;
+	dest.h = size_y;
+	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
 }
 
-void Screen::draw_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha)
+void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
-	CL_Display::draw_rect(x, y, (int)size_x, (int)size_y, r, g, b, alpha);
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	dest.w = size_x;
+	dest.h = size_y;
+	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
 }
 
 // begin Singleton stuff

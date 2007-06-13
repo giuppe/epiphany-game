@@ -14,6 +14,8 @@ private:
     std::vector<Font*> m_fonts;
 
 public:
+
+	void init();
  
 	Font_Handle add_font(Font* font);
 

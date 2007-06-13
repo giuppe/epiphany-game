@@ -23,6 +23,7 @@
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
+#include <SDL/SDL.h>
 #include "input.h"
 #include "screen.h"
 #include "game.h"
@@ -38,7 +39,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	m_current_level=m_unsolved_level;
 
 	
-	m_menu_font=Font_Manager::instance()->add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_FONT));
+	m_menu_font=Font_Factory::MENU_FONT;
 
 	Surface_Manager* surf_man= Surface_Manager::instance();
 
@@ -121,7 +122,7 @@ int Menu::go()
 				(selected!=1)) )
 
 	{
-		current_time=CL_System::get_time();
+		current_time=SDL_GetTicks();
 		screen->clear();
 		m_background->put_screen(0,0, config->get_game_size_x(), config->get_game_size_y());
 		level_string=(int)level_number;
@@ -180,13 +181,13 @@ int Menu::go()
 		screen->flip_display();
 		do
 		{
-			CL_System::keep_alive();
-			if((CL_System::get_time()-current_time)<90)
+			
+			if((SDL_GetTicks()-current_time)<90)
 			{
-				CL_System::sleep(10);
+				SDL_Delay(10);
 			}
 		}
-		while((CL_System::get_time()-current_time)<100);
+		while((SDL_GetTicks()-current_time)<100);
 		input->update();
 	}	
 	m_current_level=level_number;

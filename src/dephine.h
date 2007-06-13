@@ -20,7 +20,7 @@
 #include <fstream>
 
 #define DEBUG(x) {x;}
-#define DEBOUT(x) {cout<<x;}
+#define DEBOUT(x) {std::cout<<x;}
 #else
 #define DEBUG(x)
 #define DEBOUT(x)
@@ -31,7 +31,7 @@ typedef unsigned int Uint32;
 typedef int Sint32;
 
 //Insert standard includes here (used by all files)
-#include <ClanLib/core.h>
+
 
 
 

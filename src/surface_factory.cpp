@@ -3,96 +3,109 @@
 #include "surface.h"
 #include "game.h"
 #include <cassert>
+#include <cstring>
 
 
 
 Surface* Surface_Factory::create_surface(Surface_Type type)
 {
 	
-	CL_String surface_path=CL_String("Surfaces/SPT_");
 	
-	CL_ResourceManager* m_res_factory = Resource_Factory::instance()->get_resource_manager();
+	std::string surface_path(Resource_Factory::instance()->get_resource_path());
+	
+	surface_path+= "/gfx/";
 	
 	Surface* surface = new Surface();
 	
 	switch(type)
 	{
 		case SRF_UNKNOWN:
-			surface->init(new CL_Surface(surface_path+"Unknown", m_res_factory));
+			surface_path+= "unknown.bmp";
 			break;
 		case SRF_PLAYER:
-			surface->init(new CL_Surface(surface_path+"Player", m_res_factory));
+			surface_path+= "player.bmp";
 			break;
 	case SRF_GRASS:
-			surface->init(new CL_Surface(surface_path+"Grass", m_res_factory));
+			surface_path+=  "grass.bmp";
 			break;
 	case SRF_STEEL:
-			surface->init(new CL_Surface(surface_path+"Steel", m_res_factory));
+			surface_path+= "steel.bmp";
 			break;
 	case SRF_EMERALD:
-			surface->init(new CL_Surface(surface_path+"Emerald", m_res_factory));
+			surface_path+= "emerald.bmp";
 			break;
 	case SRF_BOULDER:
-			surface->init(new CL_Surface(surface_path+"Boulder", m_res_factory));
+			surface_path+= "boulder.bmp";
 		break;
 	case SRF_SAPPHIRE:
-			surface->init(new CL_Surface(surface_path+"Sapphire", m_res_factory));
+			surface_path+= "sapphire.bmp";
 				break;
 	case SRF_EXIT:
-			surface->init(new CL_Surface(surface_path+"Exit", m_res_factory));
+			surface_path+= "exit.bmp";
 			break;
 	case SRF_EXPLOSION:
-			surface->init(new CL_Surface(surface_path+"Explosion", m_res_factory));
+			surface_path+=  "explosion.bmp";
 			break;
 	case SRF_DOOR_RED:
-			surface->init(new CL_Surface(surface_path+"Door_Red", m_res_factory));
+			surface_path+=  "door_red.bmp";
 			break;
 	case SRF_DOOR_BLUE:
-			surface->init(new CL_Surface(surface_path+"Door_Blue", m_res_factory));
+			surface_path+=  "door_blue.bmp";
 		break;
 	case SRF_DOOR_GREEN:
-			surface->init(new CL_Surface(surface_path+"Door_Green", m_res_factory));
+			surface_path+=  "door_green.bmp";
 			break;
 	case SRF_DOOR_YELLOW:
-			surface->init(new CL_Surface(surface_path+"Door_Yellow", m_res_factory));
+			surface_path+=  "door_yellow.bmp";
 		break;
 	case SRF_KEY_RED:
-			surface->init(new CL_Surface(surface_path+"Key_Red", m_res_factory));	
+			surface_path+=  "key_red.bmp";
 		break;
 	case SRF_KEY_BLUE:
-			surface->init(new CL_Surface(surface_path+"Key_Blue", m_res_factory));	
+			surface_path+=  "key_blue.bmp";
 		break;
 	case SRF_KEY_GREEN:
-			surface->init(new CL_Surface(surface_path+"Key_Green", m_res_factory));	
+			surface_path+=  "key_green.bmp";
 		break;
 	case SRF_KEY_YELLOW:
-			surface->init(new CL_Surface(surface_path+"Key_Yellow", m_res_factory));	
+			surface_path+=  "key_yellow.bmp";
 		break;
-
 	case SRF_FLINTSTONE:
-			surface->init(new CL_Surface(surface_path+"Flintstone", m_res_factory));	
+			surface_path+=  "flintstone.bmp";
 			break;
 	case SRF_PEPERON:
-			surface->init(new CL_Surface(surface_path+"Peperon", m_res_factory));	
+			surface_path+=  "peperon.bmp";
 			break;
 	case SRF_BRICK:
-			surface->init(new CL_Surface(surface_path+"Brick", m_res_factory));
+			surface_path+=  "brick.bmp";
 			break;
 	case SRF_WOOD:
-			surface->init(new CL_Surface(surface_path+"Wood", m_res_factory));
+			surface_path+=  "wood.bmp";
 		break;
 	case SRF_TOMATO:
-			surface->init(new CL_Surface(surface_path+"Tomato", m_res_factory));
+			surface_path+=  "tomato.bmp";
 		break;
 	case SRF_MENU_SELECTOR:
-	surface->init(new CL_Surface("Surfaces/MNU_Selector", m_res_factory));
+	surface_path+=  "menu_selector.bmp";
 		break;
 	case SRF_MENU_BACKGROUND:
-	surface->init(new CL_Surface("Surfaces/MNU_Background", m_res_factory));
+	surface_path+=  "menu_background.bmp";
 		break;
 	default:
 		assert(!"Trying to access a missing surface.");
 	}
+	
+	SDL_Surface* temp = SDL_LoadBMP(surface_path.c_str());
+	
+	if(temp==NULL)
+	{
+		DEBOUT("Error: "<<surface_path<<" is not a surface bitmap.\n");
+		assert(0);
+	}
+	
+	surface->init(temp);
+	
+	//SDL_FreeSurface(temp);
 	
 	return surface;
 }

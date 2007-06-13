@@ -16,27 +16,23 @@
  ***************************************************************************/
 
 #include "dephine.h"
-
+#include "SDL/SDL_mixer.h"
+ 
 #ifndef SAMPLE_H
 #define SAMPLE_H
 
-#include <ClanLib/sound.h>
 
 class Sample
 {
 private:
-	CL_SoundBuffer* m_soundbuffer;
-	CL_SoundBuffer_Session m_soundbuffer_session;
-	int m_frequency;
-	bool m_dont_play_several;
+	Mix_Chunk* m_soundbuffer;
+	
 public:
 //	Sample(){};
-	Sample(CL_SoundBuffer* soundbuffer, bool dont_play_several=false);
+	Sample(Mix_Chunk* soundbuffer);
+	~Sample();
 	void play();
-	void stop();
-	bool is_playing();
-	bool set_frequency(int frequency);
-	int get_frequency();
+	
 };
 
 #endif //SAMPLE_H

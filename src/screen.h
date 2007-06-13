@@ -36,6 +36,7 @@ private:
 	Uint32 m_win_size_x;
 	Uint32 m_win_size_y;
 	
+	SDL_Surface* m_screen;
 	
 public:
 
@@ -58,9 +59,11 @@ public:
 	
 	void flip_display();
 	
-	void draw_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha);
+	void draw_rect(int x, int y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
-	void fill_rect(int x, int y, Uint32 size_x, Uint32 size_y, float r, float g, float b, float alpha);
+	void fill_rect(int x, int y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
+	
+	SDL_Surface* get_screen(){return m_screen;}
 	
 // begin Singleton stuff
 

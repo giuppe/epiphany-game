@@ -16,8 +16,9 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include <ClanLib/application.h>
-#include <ClanLib/display.h>
+//#include <ClanLib/application.h>
+//#include <ClanLib/display.h>
+#include <SDL/SDL.h>
 #include "surface_manager.h"
 #include "resource_factory.h"
 #include "sfx.h"
@@ -27,12 +28,7 @@
 
 
 
-class Epiphany_App : public CL_ClanApplication
-{
-	//class Epiphany_App: contiene tutti i membri necessari all'applicazione
-	//come main() e get_title()
-	
-	char* get_title()
+	const char* get_title()
 	{
 		
 		return PACKAGE;
@@ -42,16 +38,35 @@ class Epiphany_App : public CL_ClanApplication
 	void init_modules()
 	{
 	
-		CL_SetupCore::init();
-		
-		CL_SetupDisplay::init();
-	
-		CL_SetupSound::init();
+		SDL_Init ( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER );
 
 		Input::instance()->init();
 		
-
+		Resource_Factory::instance();
+		
+		Surface_Manager::instance();
+		
+		Sample_Manager::instance();
+		
+		Font_Manager::instance();
+	
 	}
+	
+	void deinit_modules()
+	{
+		
+		Surface_Manager::instance()->deinit();
+		
+		Sample_Manager::instance()->deinit();
+		
+		Font_Manager::instance()->deinit();
+		
+		Resource_Factory::instance()->deinit();
+		
+		SDL_Quit();
+	
+	}	
+		
 
 	int main(int argc, char* argv[])
 	{
@@ -93,27 +108,5 @@ class Epiphany_App : public CL_ClanApplication
 	
 	}
 	
-	void deinit_modules()
-	{
-		
-		Surface_Manager::instance()->deinit();
-		
-		Sample_Manager::instance()->deinit();
-		
-		Font_Manager::instance()->deinit();
-		
-		Resource_Factory::instance()->deinit();
-		
-		CL_SetupSound::deinit();
-
-		CL_SetupDisplay::deinit();		
 	
-		CL_SetupCore::deinit();
-	
-	}	
-	
-
-	
-
-}app;
 

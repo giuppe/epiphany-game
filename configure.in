@@ -7,6 +7,7 @@ AC_PROG_INSTALL
 AC_CHECK_HEADER(Hermes/Hermes.h,, [echo "Please install Hermes from http://hermes.clanlib.org";exit])
 #AC_CHECK_HEADER(ClanLib/core.h,, [echo "Please get ClanLib from http://www.clanlib.org"; exit])
 AC_CHECK_HEADER(SDL/SDL.h,, [echo "Please install SDL from http://www.libsdl.org";exit])
+AC_CHECK_HEADER(SDL/SDL_mixer.h,, [echo "Please install SDL_mixer from http://www.libsdl.org/projects/SDL_mixer/";exit])
 AC_CHECK_LIB(Hermes,   main,,)
 
 AC_CHECK_LIB( clanCore,   main,, [
@@ -23,7 +24,14 @@ AC_CHECK_LIB( clanSound,   main)
 
 
 AC_CHECK_LIB( SDL,   main,, [
-        echo "SDL installed, but -lSDLe not found, run 'ldconfig' and try again,"
+        echo "SDL installed, but -lSDL not found, run 'ldconfig' and try again,"
+        echo "if that doesn't help have a look at the file config.log and look into"
+        echo "the FAQ."
+        exit
+        ])
+ 
+ AC_CHECK_LIB( SDL_mixer,   main,, [
+        echo "SDL_mixer installed, but -lSDL_mixer not found, run 'ldconfig' and try again,"
         echo "if that doesn't help have a look at the file config.log and look into"
         echo "the FAQ."
         exit

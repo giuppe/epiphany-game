@@ -1,12 +1,32 @@
 #include "font.h"
+#include "SFont.h"
+#include "screen.h"
 #include "epiconfig.h"
+#include <cassert>
 
 void Font::write(Sint32 x, Sint32 y, const char* text)
 {
-	m_font->print_left((int)x, (int)y, text);
+	assert(m_initialized && "Error: using a non initialized font.");	
+	SFont_Write(Screen::instance()->get_screen(), m_font, x, y, text);
 }
 
 void Font::write_center(Sint32 y, const char* text)
 {
-	m_font->print_center(Epiconfig::instance()->get_game_size_x()/2, (int)y, text);
+	assert(m_initialized && "Error: using a non initialized font.");
+	SFont_WriteCenter(Screen::instance()->get_screen(), m_font, y, text);
 }
+
+void Font::init(SFont_Font* font)
+{
+	if(font!=NULL)
+	{
+		m_font = font;
+		m_initialized = true;
+	}
+	else
+	{
+		DEBOUT("Warning: trying to initialize a font with NULL\n");
+	}
+}
+
+
