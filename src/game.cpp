@@ -404,7 +404,7 @@ void Game::go()
   		SDL_Delay(500);
     	
  	
-  		//APOI
+  		//APOI:
   		//Might add some Hiscores here...
   		delete m_level;
   		
@@ -507,23 +507,13 @@ void Game::load_config()
 		DEBOUT("No "<<m_ini_path<<"; Creating...\n");
 		std::ofstream new_config(m_ini_path);
 		if(!new_config)
-			throw Common_Ex("Unable to write config file!...\n");
+			DEBOUT("Unable to write config file!...\n");
 		m_unsolved_level=0;
 		new_config<<m_unsolved_level;
 		return;
 	}
 	config_file>>m_unsolved_level;
-	//FIXME: find max_num_of_levels
-/*	CL_DirectoryScanner dirscan;
-	Uint32 i=0;
-	if(dirscan.scan(CL_String(Resource_Factory::instance()->get_resource_path())+"/maps", "level*.map"))
-	{
-		//;
-		while(dirscan.next()==true)
-		{
-			i++;
-		}
-	}*/
+
 	m_max_num_of_levels=find_levels_in_dir();
 }
 
