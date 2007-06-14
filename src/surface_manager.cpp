@@ -50,8 +50,7 @@ void Surface_Manager::init()
 	m_is_initialized = true;
 	
 	DEBOUT("Loading all surfaces...");
-	
-	
+		
 	Surface_Factory* surf_factory = Surface_Factory::instance();
 		
 	add_surface(Surface_Factory::SRF_UNKNOWN, surf_factory->create_surface(Surface_Factory::SRF_UNKNOWN));
@@ -88,7 +87,6 @@ void Surface_Manager::init()
 
 	add_surface(Surface_Factory::SRF_KEY_YELLOW, surf_factory->create_surface(Surface_Factory::SRF_KEY_YELLOW));	
 
-
 	add_surface(Surface_Factory::SRF_FLINTSTONE, surf_factory->create_surface(Surface_Factory::SRF_FLINTSTONE));	
 	
 	add_surface(Surface_Factory::SRF_PEPERON, surf_factory->create_surface(Surface_Factory::SRF_PEPERON));	
@@ -102,6 +100,14 @@ void Surface_Manager::init()
 	add_surface(Surface_Factory::SRF_MENU_BACKGROUND, surf_factory->create_surface(Surface_Factory::SRF_MENU_BACKGROUND));
 	
 	add_surface(Surface_Factory::SRF_MENU_SELECTOR, surf_factory->create_surface(Surface_Factory::SRF_MENU_SELECTOR));
+	
+	add_surface(Surface_Factory::SRF_KEY_RED_THUMB, surf_factory->create_surface(Surface_Factory::SRF_KEY_RED_THUMB));	
+
+	add_surface(Surface_Factory::SRF_KEY_BLUE_THUMB, surf_factory->create_surface(Surface_Factory::SRF_KEY_BLUE_THUMB));	
+
+	add_surface(Surface_Factory::SRF_KEY_GREEN_THUMB, surf_factory->create_surface(Surface_Factory::SRF_KEY_GREEN_THUMB));	
+
+	add_surface(Surface_Factory::SRF_KEY_YELLOW_THUMB, surf_factory->create_surface(Surface_Factory::SRF_KEY_YELLOW_THUMB));	
 	
 }
 
