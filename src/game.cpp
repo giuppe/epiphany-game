@@ -32,6 +32,7 @@
 #include "level.h"
 #include "game_timer.h"
 #include <cstdlib>
+#include <cstdio>
 #include <SDL/SDL.h>
 #include <string>
 #include <cassert>
@@ -246,10 +247,6 @@ void Game::move_all()
 void Game::draw(int frame_number)
 {
 
-
-	//std::vector<Ntt_pointer>& list=m_level->get_entities_list();
-
-	//Ntt_pointer curr_ntt;
 	Entity* curr_ntt;
 	Screen* screen = Screen::instance();
 	screen->clear();
@@ -260,9 +257,7 @@ void Game::draw(int frame_number)
 	//drawing player
 	if(m_level->get_player().exists())
 	{
-		//m_level->get_player().get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
 		m_level->get_player().get_sprite().update_frame();
-		//m_level->get_player().get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
 		m_level->get_player().get_sprite().move();
 		screen->put(m_level->get_player().get_sprite());
 	}
@@ -273,8 +268,6 @@ void Game::draw(int frame_number)
 		curr_ntt=Entity_Manager::instance()->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
-			//curr_ntt->get_sprite().set_curr_frame(frame_number*(k_sprite_size/m_config->get_max_anim_drawn())/4);
-			//curr_ntt->get_sprite().move(k_sprite_size/m_config->get_max_anim_drawn());
 			curr_ntt->get_sprite().update_frame();
 			curr_ntt->get_sprite().move();
 			screen->put(curr_ntt->get_sprite());
@@ -491,14 +484,7 @@ void Game::init()
 	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
 	
 }
-/*
-void Game::load_surfaces()
-{
-	Surface_Manager* surf_man = Surface_Manager::instance();
-	surf_man->init();
-	
-}
-*/
+
 
 void Game::play_level(const char *level_path)
 {
@@ -538,9 +524,28 @@ void Game::load_config()
 			i++;
 		}
 	}*/
-	m_max_num_of_levels=13;
+	m_max_num_of_levels=find_levels_in_dir();
 }
+
+Uint32 Game::find_levels_in_dir()
+{
+	Uint32 result = 0;
+	char base_path[255];
+	char level_path[255];
 	
+	sprintf(base_path, "%s%s", Resource_Factory::instance()->get_resource_path().c_str(), "/maps/level");
+	
+	sprintf(level_path, "%s%d%s", base_path, result, ".map");
+	FILE* pFile = fopen (level_path,"r");
+	while(pFile != NULL)
+	{
+		DEBOUT("Found "<<level_path<<".\n");
+		result++;
+		sprintf(level_path, "%s%d%s", base_path, result, ".map");
+		pFile = fopen (level_path,"r");
+	}
+	return result;
+}
 
 void Game::load_fonts()
 {

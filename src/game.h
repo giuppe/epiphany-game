@@ -69,6 +69,8 @@ private:
 	const char* m_ini_path;
 
 	//Resource_Factory* m_res_manag;
+	
+	Uint32 find_levels_in_dir();
 
 public:
 
