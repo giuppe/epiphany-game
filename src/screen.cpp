@@ -58,10 +58,10 @@ void Screen::put(Sprite& sprite)
 {
 	int curr_pos_x=sprite.get_pos_x();
 	int curr_pos_y=sprite.get_pos_y();
-	if(	((curr_pos_x+48>m_win_pos_x)&&
+/*	if(	((curr_pos_x+48>m_win_pos_x)&&
 			(curr_pos_x<(m_win_pos_x+m_win_size_x)))&&
 			((curr_pos_y+48>m_win_pos_y)&&
-			(curr_pos_y<(m_win_pos_y+m_win_size_y))))
+			(curr_pos_y<(m_win_pos_y+m_win_size_y))))*/
 	{
 //	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
 	//int frame=sprite.get_frame_number();

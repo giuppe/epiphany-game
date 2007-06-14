@@ -70,6 +70,8 @@ private:
 
 	Anim_State m_state;	
 	
+	Uint32 m_total_frames; 
+	
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
 	void set_curr_frame(Sint32 frame);
@@ -79,7 +81,7 @@ private:
 	
 public:
 	
-	Sprite():m_initialized(false){};
+	Sprite():m_initialized(false), m_total_frames(8){};
 
 	Sprite(Surface* surface);
 	

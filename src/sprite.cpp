@@ -42,6 +42,9 @@ Sprite::Sprite(Surface* surface)
 	
 	m_state = SP_STOP;
 	
+	//FIXME: we should obtain this number from Surface
+	m_total_frames = 8;
+	
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -70,6 +73,8 @@ Sprite::Sprite(const Sprite& sprite)
 	m_speed=sprite.m_speed;
 	
 	m_state = sprite.m_state;
+	
+	m_total_frames = sprite.m_total_frames;
 	
 }
 
@@ -124,7 +129,7 @@ void Sprite::set_pos_y(Uint32 pos_y)
 void Sprite::set_curr_frame(Sint32 frame)
 {
 	//FIXME: check should be on number of sprite frames
-	if(frame >= Epiconfig::instance()->get_max_anim_drawn())
+	if(frame >= m_total_frames)
 	{
 		m_curr_frame = 0;
 	}
@@ -196,9 +201,11 @@ void Sprite::move(Uint32 n_pixel)
 void Sprite::move()
 {
 	
-	Sint32 n_pixel = k_sprite_size/Epiconfig::instance()->get_max_anim_drawn();
+	Sint32 n_pixel = k_sprite_size/m_total_frames;
 	
 	n_pixel*=m_speed;
+	if(m_pos_x!=m_move_to_pos_x)
+	{
 	if(m_pos_x<m_move_to_pos_x)
 	{
 		if(m_pos_x+n_pixel>m_move_to_pos_x)
@@ -210,7 +217,7 @@ void Sprite::move()
 			m_pos_x+=n_pixel;
 		}
 	}
-	else if(m_pos_x>m_move_to_pos_x)
+	else
 	{
 		if(m_pos_x-n_pixel<m_move_to_pos_x)
 		{
@@ -221,6 +228,11 @@ void Sprite::move()
 			m_pos_x-=n_pixel;
 		}
 	}
+	
+	}
+
+	if(m_pos_y!=m_move_to_pos_y)
+	{
 
 	if(m_pos_y<m_move_to_pos_y)
 	{
@@ -233,7 +245,7 @@ void Sprite::move()
 			m_pos_y+=n_pixel;
 		}
 	}
-	else if(m_pos_y>m_move_to_pos_y)
+	else
 	{
 		if(m_pos_y-n_pixel<m_move_to_pos_y)
 		{
@@ -243,6 +255,7 @@ void Sprite::move()
 		{
 			m_pos_y-=n_pixel;
 		}
+	}
 	}
 
 
