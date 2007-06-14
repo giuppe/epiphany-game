@@ -34,7 +34,11 @@ public:
 									SRF_WOOD=20,
 									SRF_TOMATO=21,
 									SRF_MENU_SELECTOR=22,
-									SRF_MENU_BACKGROUND=23
+									SRF_MENU_BACKGROUND=23,
+									SRF_KEY_RED_THUMB=24,
+									SRF_KEY_BLUE_THUMB=25,
+									SRF_KEY_GREEN_THUMB=26,
+									SRF_KEY_YELLOW_THUMB=27
 									};
 									
 	Surface* create_surface(Surface_Type type);

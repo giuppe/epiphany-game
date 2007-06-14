@@ -95,6 +95,18 @@ Surface* Surface_Factory::create_surface(Surface_Type type)
 	case SRF_MENU_BACKGROUND:
 	surface_path+=  "menu_background.bmp";
 		break;
+	case SRF_KEY_RED_THUMB:
+			surface_path+=  "key_red_thumb.bmp";
+		break;
+	case SRF_KEY_BLUE_THUMB:
+			surface_path+=  "key_blue_thumb.bmp";
+		break;
+	case SRF_KEY_GREEN_THUMB:
+			surface_path+=  "key_green_thumb.bmp";
+		break;
+	case SRF_KEY_YELLOW_THUMB:
+			surface_path+=  "key_yellow_thumb.bmp";
+		break;
 	default:
 		assert(!"Trying to access a missing surface.");
 	}
