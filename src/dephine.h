@@ -13,10 +13,12 @@
 #include <config.h>
 #endif
 
+#include <iostream>
+
 #ifdef DEBUG_MODE
 
 //Standard includes needed by DebugMode
-#include <iostream>
+
 #include <fstream>
 
 #define DEBUG(x) {x;}
@@ -27,7 +29,7 @@
 
 #endif  // DEBUG_MODE
 
-#define DEBWARN(x){printf(x);}
+#define DEBWARN(x){std::cout<<x;}
 
 //typedef unsigned int Uint32;
 //typedef int Sint32;
