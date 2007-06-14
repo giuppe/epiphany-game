@@ -71,7 +71,7 @@ void Game_Timer::start()
 
 const char* Game_Timer::get_time_string()
 {
-	char  time_string[6];
+	char*  time_string = new char[6];
 	
 	Sint32 minutes=m_total_time/60;
 	
@@ -82,32 +82,32 @@ const char* Game_Timer::get_time_string()
 	if(minutes<10)
 	{
 		
-		sprintf(minutes_string, "%d", 0);
+		sprintf(minutes_string, "%d%d", 0,minutes);
 		
 	}
+	else
+	{
 	
-	
-	sprintf(minutes_string, "%d", minutes);
+		sprintf(minutes_string, "%d", minutes);
+	}
 	
 	char seconds_string[3];
 	
 	if(seconds<10)
 	{
 		
-		sprintf(seconds_string, "%d", 0);
+		sprintf(seconds_string, "%d%d", 0,seconds);
 		
 	}
-		
+	else
+	{
 	
-	sprintf(seconds_string, "%d", seconds);
+		sprintf(seconds_string, "%d", seconds);
+	}
 	
 	sprintf(time_string, "%s:%s", minutes_string,seconds_string);
-	
-	char* result = new char[6];
-	
-	strcpy(result, time_string);
-	
-	return result;
+		
+	return time_string;
 	
 }
 
