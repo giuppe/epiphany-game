@@ -540,6 +540,7 @@ Uint32 Game::find_levels_in_dir()
 	while(pFile != NULL)
 	{
 		DEBOUT("Found "<<level_path<<".\n");
+		fclose(pFile);
 		result++;
 		sprintf(level_path, "%s%d%s", base_path, result, ".map");
 		pFile = fopen (level_path,"r");
