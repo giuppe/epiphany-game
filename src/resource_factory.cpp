@@ -20,21 +20,21 @@ void Resource_Factory::init()
 	std::string res_path_string(m_resource_path);
 	
 	
-  	pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+  	pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 if (pFile==NULL)
   	{
    		std::cout<<"Warning: "<<res_path_string<<" not found.\n";
 		res_path_string="./data";
-		pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+		pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 	if (pFile==NULL)
   		{
    			std::cout<<"Warning: "<<res_path_string<<" not found.\n";
 			res_path_string="../data";
-			pFile = fopen ((res_path_string+"/sprites.scr").c_str(),"r");
+			pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 		if (pFile==NULL)
   			{
    				std::cout<<"Warning: "<<res_path_string<<" not found.\n";
-				assert(!"Error: sprites.scr not found.\n");
+				assert(!"Error: epiphany.scr not found.\n");
   			}
   		}
   	}
@@ -50,7 +50,7 @@ void Resource_Factory::init()
   	
   	m_resource_path = res_path_string.c_str();
 
-	DEBOUT("Using "<<m_resource_path<<"/sprites.scr"<<" as resource script.\n");
+	DEBOUT("Using "<<m_resource_path<<"/epiphany.scr"<<" as resource script.\n");
 }
 
 void Resource_Factory::deinit()
