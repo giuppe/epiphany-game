@@ -23,17 +23,17 @@ void Resource_Factory::init()
   	pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 if (pFile==NULL)
   	{
-   		std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+   		DEBWARN("Warning: %s not found.\n", res_path_string);
 		res_path_string="./data";
 		pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 	if (pFile==NULL)
   		{
-   			std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+   			DEBWARN("Warning: %s not found.\n", res_path_string);
 			res_path_string="../data";
 			pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
  	 		if (pFile==NULL)
   			{
-   				std::cout<<"Warning: "<<res_path_string<<" not found.\n";
+   				DEBWARN("Warning: %s not found.\n", res_path_string);
 				assert(!"Error: epiphany.scr not found.\n");
   			}
   		}

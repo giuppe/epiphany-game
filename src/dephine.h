@@ -27,6 +27,8 @@
 
 #endif  // DEBUG_MODE
 
+#define DEBWARN(x){printf(x);}
+
 //typedef unsigned int Uint32;
 //typedef int Sint32;
 
