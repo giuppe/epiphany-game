@@ -27,15 +27,15 @@
 
 #endif  // DEBUG_MODE
 
-typedef unsigned int Uint32;
-typedef int Sint32;
+//typedef unsigned int Uint32;
+//typedef int Sint32;
 
 //Insert standard includes here (used by all files)
 
 
+#include <SDL/SDL.h>
 
-
-#include "except.h"
+//#include "except.h"
 #include "epiconfig.h"
 
 
