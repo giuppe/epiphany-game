@@ -26,15 +26,25 @@
 
 void Sample_Manager::init()
 {
-	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) {
-    printf("Mix_OpenAudio: %s\n", Mix_GetError());
-    exit(2);
-}
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) 
+	{
+    	printf("Mix_OpenAudio: %s\n", Mix_GetError());
+    	exit(2);
+	}
+	
+
+	
 	
 	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
 	// allocate 16 mixing channels
 	Mix_AllocateChannels(32);
+	Mix_GroupChannels(0, 1, m_channels_monsters);
+	Mix_GroupChannels(2, 3, m_channels_boulders);
+	Mix_GroupChannels(4, 5, m_channels_gems);
+	Mix_GroupChannels(6, 7, m_channels_explosions);
+	Mix_GroupChannel(8, m_channels_timealarm);
+	
 	load_samples();
 }
 
@@ -93,7 +103,32 @@ Sample* Sample_Manager::get_sample(Sample_Type sfx)
 
 void Sample_Manager::play(Sample_Type type)
 {
-	m_samples[type]->play();
+	Sint32 channel_group=-1;
+	switch(type)
+	{
+		case SFX_BOULDER_FALL:
+			channel_group = m_channels_boulders;
+			break;
+		case SFX_MONSTER_MOVE:
+			channel_group = m_channels_monsters;
+			break;
+		case SFX_EXPLOSION:
+			channel_group = m_channels_explosions;
+			break;
+		case SFX_EMERALD_FALL:
+		case SFX_SAPPHIRE_FALL:
+			channel_group = m_channels_gems;
+			break;
+		case SFX_GAME_TIMEALARM:
+			channel_group = m_channels_timealarm;
+			break;
+	}
+	
+	Sint32 available_channel = Mix_GroupAvailable(channel_group);
+	if(available_channel >=0)
+	{
+		m_samples[type]->play(available_channel);
+	}
 }
 
 

@@ -49,6 +49,15 @@ private:
 	Sample* get_sample(Sample_Type sfx);
 	
 		void load_samples();
+		
+	enum{
+			m_channels_monsters,
+			 m_channels_boulders,
+			 m_channels_gems,
+			 m_channels_explosions,
+			 m_channels_timealarm
+	};
+	
 	
 public:
 	

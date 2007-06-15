@@ -411,11 +411,11 @@ void Game::go()
   		switch(result)
   		{
    		case false:
-  			DEBOUT("Game_over!...");
+  			DEBWARN("Game_over!...");
   			play=menu.go();
   			break;
   		case true:
-  			DEBOUT("Winner! ;)");
+  			DEBWARN("Winner! ;)");
   			
        if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
        {
@@ -504,10 +504,10 @@ void Game::load_config()
 	
 	if(!config_file)
 	{
-		DEBOUT("No "<<m_ini_path<<"; Creating...\n");
+		DEBWARN("No "<<m_ini_path<<"; Creating...\n");
 		std::ofstream new_config(m_ini_path);
 		if(!new_config)
-			DEBOUT("Unable to write config file!...\n");
+			DEBWARN("Unable to write config file!...\n");
 		m_unsolved_level=0;
 		new_config<<m_unsolved_level;
 		return;
@@ -581,19 +581,10 @@ void Game::show_credits()
 	credits.push_back("Giuseppe D'Aqui'");
 	credits.push_back("Antonio Malara");
 	credits.push_back(" ");
-	credits.push_back("Epiphany Map Definition Language:");
-	credits.push_back("Giuseppe Martino");
-	credits.push_back(" ");
 	credits.push_back("Thanks to:");
-	credits.push_back("Antonio Malara");
-	credits.push_back("Giuseppe Martino");
-	//credits.push_back("Kenneth Gangstoe");
 	credits.push_back("Joerg Jaspert");
-	//credits.push_back("All ClanLib developers");
+	credits.push_back("Eric Mangold");
 	
-	//alpha blending too slow
-	//CL_Surface* srf_top = new CL_Surface("Surfaces/MNU_Top", m_res_manag);
-	//CL_Surface* srf_bottom = new CL_Surface("Surfaces/MNU_Bottom", m_res_manag);
 
 	Sint32 draw_pos=m_config->get_game_size_y();
 
@@ -625,12 +616,15 @@ void Game::show_credits()
 		}
 		else
 		{
-			draw_pos=m_config->get_game_size_y();
+			draw_pos=m_config->get_game_size_y()-50;
 		}
 
-  //alpha blending too slow
-//		srf_top->put_screen(0,0);
-//		srf_bottom->put_screen(0,k_game_size_y-100);
+
+		// draws two black movie-like bands
+
+		screen->fill_rect(0,0, m_config->get_game_size_x(), 50,0,0,0);
+
+		screen->fill_rect(0,m_config->get_game_size_y()-50, m_config->get_game_size_x(), 50,0,0,0);
 
 		while(SDL_GetTicks()-current_frame_time<20)
 		{

@@ -30,10 +30,10 @@ Sample::~Sample()
 	Mix_FreeChunk(m_soundbuffer);
 }
 
-void Sample::play()
+void Sample::play(Uint32 channel)
 {
 	
-  	if(Mix_PlayChannel(-1, m_soundbuffer, 0) == -1)
+  	if(Mix_PlayChannel(channel, m_soundbuffer, 0) == -1)
 	{
 		printf("Mix_PlayChannel: %s\n",Mix_GetError());
 	}

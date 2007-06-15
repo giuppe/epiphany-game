@@ -31,7 +31,7 @@ public:
 //	Sample(){};
 	Sample(Mix_Chunk* soundbuffer);
 	~Sample();
-	void play();
+	void play(Uint32 channel);
 	
 };
 

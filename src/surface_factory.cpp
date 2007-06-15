@@ -118,6 +118,8 @@ Surface* Surface_Factory::create_surface(Surface_Type type)
 		DEBOUT("Error: "<<surface_path<<" is not a surface bitmap.\n");
 		assert(0);
 	}
+	//Set pink as transparent color
+	SDL_SetColorKey(temp, SDL_SRCCOLORKEY, SDL_MapRGB(temp->format, 255, 0, 255));
 	
 	surface->init(temp, frame_size_x, frame_size_y);
 	

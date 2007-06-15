@@ -12,3 +12,6 @@ configure
 .project
 .settings
 aclocal.m4
+*.deb
+description-pak
+doc-pak
