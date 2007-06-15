@@ -11,3 +11,4 @@ configure
 .cdtproject
 .project
 .settings
+aclocal.m4

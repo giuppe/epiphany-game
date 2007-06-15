@@ -2,6 +2,8 @@ Version 0.6.0:
 Fixed "random exploding flintstone/monster" bug;
 Code refactoring;
 Added autotools support;
+Removed ClanLib, now using libSDL;
+Added 10 new (tutorial-)levels;
 
 Version 0.5.1:
 Fixed various bugs;

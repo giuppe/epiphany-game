@@ -11,9 +11,9 @@ void Resource_Factory::init()
 	#ifdef _WIN32
 	m_resource_path=".";
 	#else
-	m_resource_path= RESOURCE_PATH;
+	m_resource_path=RESOURCE_PATH;
 	#endif
-	DEBOUT("Resource_path: "<<m_resource_path<<"\n");
+	DEBWARN("Resource_path: "<<m_resource_path<<"\n");
 
 	FILE * pFile;
 	

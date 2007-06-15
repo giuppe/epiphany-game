@@ -1,6 +1,6 @@
 #!/bin/sh
 rm -f config.cache
-aclocal -I aclocal
+aclocal 
 autoheader
 autoconf
 automake -a --add-missing
