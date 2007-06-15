@@ -12,13 +12,17 @@ The player must collect all valuable minerals scattered in levels,
 avoiding being hit by a falling boulder, or (worst :) by a bomb.
 
 
-Current version: 0.5.1
+Current version: 0.6.0
 Tested under Linux and Win32, on i386 systems;
 
-It is a semi-alpha version, but it is playable.
-It uses ClanLib 0.6.x (http://www.clanlib.org), so make sure it is properly installed before compiling Epiphany.
+It is a alpha version, but it is playable.
+It uses SDL 1.2 and SDL_mixer 1.2 (http://www.libsdl.org), so make sure it is properly installed
+before compiling Epiphany.
 
 Read "Tech" file for informations about how to write new maps.
+
+If you want to play contributed maps, just launch epiphany with the new map in the command line, e.g.:
+epiphany ./mylevel.map
 
 Keys:
 Arrow keys -> move player;
@@ -32,9 +36,15 @@ Savannah:							http://freesoftware.fsf.org/download/epiphany
 Debian binary package:				http://packages.debian.org/epiphany
 
 ---
+
+Eric Mangold made a level editor (using python). 
+You can find it on epiphany-editor project page, hosted by Berlios:
+[http://developer.berlios.de/projects/epiphany-editor/]
+
+---
 See COPYING for license.
 ---
 
 For any comment, bugs, ideas or <whatever you want>, write to:
-Giuseppe D'Aqui' <kumber@tiscalinet.it>
+Giuseppe D'Aqui' <giuseppe.da@gmail.com>
 

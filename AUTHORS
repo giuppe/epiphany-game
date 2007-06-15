@@ -1,20 +1,20 @@
 Coding:
-Giuseppe D'Aqui' <kumber@tiscalinet.it>
+Giuseppe D'Aqui' <giuseppe.da@gmail.com>
 Giuseppe Martino <rdmartin@infinito.it>
 
 
 Level Designing:
-Giuseppe D'Aqui' <kumber@tiscalinet.it>
+Giuseppe D'Aqui' <giuseppe.da@gmail.com>
 Giuseppe Martino <rdmartin@infinito.it>
 
 
 Graphics:
-Giuseppe D'Aqui' <kumber@tiscalinet.it>
-Antonio Malara <be.happy@maialone.com>
+Giuseppe D'Aqui' <giuseppe.da@gmail.com>
+Antonio Malara <antonio.malara@gmail.com>
 
 Debian package by:
 Joerg Jaspert <joerg@debian.org>
 
 Thanks to:
-Kenneth Gangstoe
-All ClanLib developers <www.clanlib.org>
+Eric Mangold for its Epiphany Level Editor [http://developer.berlios.de/projects/epiphany-editor/]
+Karl Bartel for the SFont Library (included in Epiphany)

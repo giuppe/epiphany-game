@@ -1,21 +1,19 @@
-Epiphany 0.5 Install:
+Epiphany 0.6 Install:
 
 *This is an alpha version. Use at your own risk ;)*
 
-To compile, simply run 'make'.
+To compile and install, simply run 
+./autogen.sh
+./configure
+make
+make install
 
-If you want to store resources in a <path> different of that of executable,
-you should change the RESOURCE_PATH variable in the makefile, and rebuild all.
-
-
-
-There isn't, at the moment, any "make install":
-you can manually copy the executable "epiphany" into /usr/local/bin;
-sprites.scr, gfx/, sfx/ and maps/ should go into RESOURCE_PATH.
+Resources are usually installed in "${datadir}/epiphany", that should be "${prefix}/share/epiphany" 
+on most GNU/Linux systems.
 
 
-Epiphany needs ClanLib 0.6.x installed:
-Go to http://www.clanlib.org
+Epiphany needs libSDL 1.2 and libSDL_mixer 1.2 installed:
+Go to http://www.libsdl.org
 
-And it needs Directx on MS Windows systems.
+It needs Directx on MS Windows systems.
 

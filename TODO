@@ -2,11 +2,8 @@ Simple Todo list
 
 
 Short term:
- add key thumbnails (added);
- auto map-directory scan (added);
- automagic help screen pressing "h" or "F1"
- fix game time, adding zeros for padding (fixed)
- add transparency in surfaces
+  automagic help screen pressing "h" or "F1"
+  add transparency in surfaces
 .
 .
 Medium term:
