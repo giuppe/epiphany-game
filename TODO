@@ -2,16 +2,14 @@ Simple Todo list
 
 
 Short term:
-  automagic help screen pressing "h" or "F1"
-  add transparency in surfaces
-.
-.
+  - automagic help screen pressing "h" or "F1"
+
+
 Medium term:
  - adjustable sound volume;
  - Add music;
  - add and change samples;
  - add new levels;
- - add new entities;
  - add level editor
 
 Long term:
