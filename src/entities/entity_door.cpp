@@ -37,16 +37,16 @@ Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)
 	switch(m_door_id)
 	{
 	case 1:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_RED));
+		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_DOOR_RED));
 		break;
 	case 2:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_BLUE));
+		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_DOOR_BLUE));
 		break;
 	case 4:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_GREEN));
+		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_DOOR_GREEN));
 		break;
 	case 8:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_DOOR_YELLOW));
+		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_DOOR_YELLOW));
 		break;
 	default:
 		assert(!"Error: Selected non existent door type.");

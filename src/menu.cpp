@@ -19,7 +19,6 @@
 #include "menu.h"
 #include "surface.h"
 #include "surface_manager.h"
-#include "surface_factory.h"
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
@@ -44,9 +43,9 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 	Surface_Manager* surf_man= Surface_Manager::instance();
 
-	m_selector = surf_man->get_surface(Surface_Factory::SRF_MENU_SELECTOR);
+	m_selector = surf_man->get_surface(Surface_Manager::SRF_MENU_SELECTOR);
 	
-	m_background = surf_man->get_surface(Surface_Factory::SRF_MENU_BACKGROUND);
+	m_background = surf_man->get_surface(Surface_Manager::SRF_MENU_BACKGROUND);
 
 //	m_selector->init(CL_Surface::load("Surfaces/MNU_Selector", res_manager));
 

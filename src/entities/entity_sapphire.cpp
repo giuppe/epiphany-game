@@ -36,7 +36,7 @@ Entity_Sapphire::Entity_Sapphire(Level* level, Uint32 x, Uint32 y)
 	m_type=SAPPHIRE;
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Factory::SRF_SAPPHIRE));
+	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_SAPPHIRE));
 	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
 	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
