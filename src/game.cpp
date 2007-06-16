@@ -361,7 +361,7 @@ void Game::draw_score()
 		surf_man->get_surface(Surface_Manager::SRF_KEY_YELLOW_THUMB)->put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2, k_sprite_size/2,k_sprite_size/2);
 	}
 	
-	screen->draw_rect(0, real_game_size_y, game_size_x, game_size_y,100,50,10);
+	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,100,50,10);
 
 }
 
