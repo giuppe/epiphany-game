@@ -1,5 +1,4 @@
 #SUBDIRS = entities
-LDADD = -lSDL -lSDL_mixer
 
 bin_PROGRAMS = epiphany
 
@@ -14,5 +13,7 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
          entities/entity_steel.cpp  entities/entity_grass.cpp  entities/entity_exit.cpp  entities/entity_key.cpp \
 	screen.cpp sprite.cpp menu.cpp game.cpp surface_manager.cpp input.cpp fonts/font.cpp \
 	fonts/font_factory.cpp fonts/font_manager.cpp surface.cpp resource_factory.cpp
+
+epiphany_LDADD = -lSDL -lSDL_mixer
 
 EXTRA_DISTS = entities/Makefile.am
