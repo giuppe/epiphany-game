@@ -38,6 +38,8 @@ void Epiconfig::set_default_values()
 
 	//m_msec_per_frame=176/m_max_anim_drawn;
 	m_msec_per_frame=150/m_max_anim_drawn;
+	//m_msec_per_frame=240/m_max_anim_drawn;
+	//m_msec_per_frame=120/m_max_anim_drawn;
 }
 
 Uint32 Epiconfig::get_game_size_x()

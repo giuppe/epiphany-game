@@ -45,7 +45,9 @@ public:
 	
 	void put(Sprite& sprite);
 		
-	void put(Entity* entity);
+	//void put(Entity* entity);
+	
+	//void put(Surface* surface, Sint32 x, Sint32 y);
 	
 	Uint32 get_screen_size_x();
 	

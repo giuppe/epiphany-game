@@ -110,15 +110,15 @@ bool Game::main_loop()
 			current_frame_time=SDL_GetTicks();
 		
 			draw(j);
-
+/*
 			if(j==m_config->get_max_anim_drawn()/2)
 			{
 				get_keys();
 			}
-
-			while(SDL_GetTicks()-current_frame_time<msec_per_frame);
+*/
+			while(SDL_GetTicks()-current_frame_time<msec_per_frame)
 			{
-				if(SDL_GetTicks()-current_frame_time<msec_per_frame-10)
+				if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-10))
 				{
 					SDL_Delay(10);
 				}

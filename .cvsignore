@@ -15,3 +15,4 @@ aclocal.m4
 *.deb
 description-pak
 doc-pak
+*.bz2

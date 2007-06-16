@@ -4,7 +4,7 @@
 
 
 
-int Input::event_filter(const SDL_Event *event)
+Sint32 Input::event_filter(const SDL_Event *event)
 {
 
 	switch( event->type )
@@ -30,7 +30,7 @@ int Input::event_filter(const SDL_Event *event)
 	return 1;
 }
 
-int sdl_event_filter(const SDL_Event *event)
+Sint32 sdl_event_filter(const SDL_Event *event)
 {
     return Input::instance()->event_filter(event);
 }
