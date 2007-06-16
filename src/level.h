@@ -39,13 +39,12 @@ class Level
 {
 private:
 
-	//std::vector<Ntt_pointer> m_entities_list;
+
 	
 	std::vector<std::vector<Entity_Handle> > m_entities_matrix;
 	Entity_Player* m_player;
 	Entity_Exit* m_exit;
-//	Spriteset& m_spriteset;
-//	Sampleset& m_sampleset;
+
 	Uint32 m_acquired_keys;
 	Uint32 m_min_score;
 	Uint32 m_max_time;
@@ -53,29 +52,35 @@ private:
 
 public:
 	Level();
-	//int get_entity_id(int x, int y);
-	//int get_entity_id(int x, int y, Direction d);
+	
 	Entity_Player& get_player();
-	//Ntt_pointer& get_entity(int ntt_id);
+	
 	Entity_Handle get_entity(Sint32 x, Sint32 y);
+	
 	Entity_Handle get_entity(Sint32 x, Sint32 y, Direction d);
+	
 	void load_map(const char* path);
-	Sint32 get_size_x();
-	Sint32 get_size_y();
-//	void set_player(Entity_Player*);
+	
+	Uint32 get_size_x();
+	
+	Uint32 get_size_y();
 
 	void set_entity(Entity_Type type, Uint32 x, Uint32 y);
-	//Sprite& get_sprite(Entity*);
-	//std::vector<Entity_Handle>& get_entities_list();
+
 	std::vector<std::vector<Entity_Handle> >& get_entities_matrix();
+
 	void set_key(Uint32);
+
 	Uint32 get_acquired_keys();
 
-//	Sample* get_sample(Sample_Type sample_type);
 	~Level();
+
 	void explode(Uint32 x, Uint32 y, Entity_Type transform_to=UNKNOWN);
+
 	Uint32 get_min_score();
+
 	Uint32 get_max_time();
+
 };
 
 #endif //LEVEL_H

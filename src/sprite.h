@@ -38,18 +38,6 @@ private:
 
 	Surface* m_surface;
 	
-//	CL_Surface* m_up_anim;
-	
-//	CL_Surface* m_right_anim;
-	
-//	CL_Surface* m_down_anim;
-	
-//	CL_Surface* m_left_anim;
-	
-//	CL_Surface* m_stop_surf;
-	
-//	CL_Surface* m_eat_anim;
-	
 	Uint32 m_pos_x;
 	
 	Uint32 m_pos_y;
@@ -64,7 +52,7 @@ private:
 
 	Uint32 m_speed;
 		
-	Sint32 m_curr_frame;
+	Uint32 m_curr_frame;
 	
 	bool m_initialized;
 
@@ -74,7 +62,7 @@ private:
 	
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
-	void set_curr_frame(Sint32 frame);
+	void set_curr_frame(Uint32 frame);
 	
 	void move(Uint32 n_pixel);
 	
@@ -87,17 +75,10 @@ public:
 	
 	Sprite(const Sprite& sprite);
 	
-//	Sprite& operator=(const Sprite& sprite);
-	
-//	void set_surface(Anim_Type type);
-	
 	~Sprite();
 	
 	void set_speed(Uint32 speed);
-	
-	//CL_Surface* operator->();
-	
-	
+		
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
 	
 	
@@ -109,7 +90,8 @@ public:
 	Uint32 get_pos_y()
 	{
 		return m_pos_y;
-  }
+ 	}
+ 	
 	void set_pos_x(Uint32 x);
 	
 	void set_pos_y(Uint32 y);
@@ -124,7 +106,7 @@ public:
 	
 	void update_frame();
 	
-	Sint32 get_frame_number();
+	Uint32 get_frame_number();
 	
 	void init(Surface* surf);
 	

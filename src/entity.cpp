@@ -108,10 +108,7 @@ bool Entity::set_position(Uint32 x, Uint32 y)
 {
 	if(((x>=current_level->get_size_x())||(x<0))||((y>=current_level->get_size_y())||(y<0)))
 			return false;	
-//	current_level->get_entities_matrix()[m_position_x][m_position_y]=0;
-				
-//	m_set_position_x(x);
-//	m_set_position_y(y);
+
 	m_position_x=x;
 	m_position_y=y;
 	

@@ -9,7 +9,11 @@
     
     
     
+    
+    
 
+    
+    
     
     
     
@@ -19,7 +23,15 @@
       
       
       
+      
+      
+      
+      
       <autodiscovery enabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile" problemReportingEnabled="true"/>
+      
+      
+      
+      
       
       
       
@@ -29,7 +41,15 @@
         
         
         
+        
+        
+        
+        
         <buildOutputProvider>
+          
+          
+          
+          
           
           
           
@@ -39,12 +59,24 @@
           
           
           
+          
+          
+          
+          
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </buildOutputProvider>
+        
+        
+        
+        
         
         
         
@@ -54,7 +86,15 @@
           
           
           
+          
+          
+          
+          
           <runAction useDefault="true" command="gcc" arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"/>
+          
+          
+          
+          
           
           
           
@@ -62,14 +102,26 @@
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </scannerInfoProvider>
         
         
+        
+        
+      
+      
       
       
       </profile>
+      
+      
+      
+      
       
       
       
@@ -79,7 +131,15 @@
         
         
         
+        
+        
+        
+        
         <buildOutputProvider>
+          
+          
+          
+          
           
           
           
@@ -89,12 +149,24 @@
           
           
           
+          
+          
+          
+          
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </buildOutputProvider>
+        
+        
+        
+        
         
         
         
@@ -104,7 +176,15 @@
           
           
           
+          
+          
+          
+          
           <runAction useDefault="true" command="make" arguments="-f ${project_name}_scd.mk"/>
+          
+          
+          
+          
           
           
           
@@ -112,14 +192,26 @@
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </scannerInfoProvider>
         
         
+        
+        
+      
+      
       
       
       </profile>
+      
+      
+      
+      
       
       
       
@@ -129,7 +221,15 @@
         
         
         
+        
+        
+        
+        
         <buildOutputProvider>
+          
+          
+          
+          
           
           
           
@@ -139,12 +239,24 @@
           
           
           
+          
+          
+          
+          
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </buildOutputProvider>
+        
+        
+        
+        
         
         
         
@@ -154,7 +266,15 @@
           
           
           
+          
+          
+          
+          
           <runAction useDefault="true" command="gcc" arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"/>
+          
+          
+          
+          
           
           
           
@@ -162,14 +282,26 @@
           <parser enabled="false"/>
           
           
+          
+          
+        
+        
         
         
         </scannerInfoProvider>
         
         
+        
+        
+      
+      
       
       
       </profile>
+      
+      
+      
+      
       
       
       
@@ -179,7 +311,15 @@
         
         
         
+        
+        
+        
+        
         <buildOutputProvider>
+          
+          
+          
+          
           
           
           
@@ -189,12 +329,24 @@
           
           
           
+          
+          
+          
+          
           <parser enabled="true"/>
           
           
+          
+          
+        
+        
         
         
         </buildOutputProvider>
+        
+        
+        
+        
         
         
         
@@ -204,7 +356,15 @@
           
           
           
+          
+          
+          
+          
           <runAction useDefault="true" command="gcc" arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"/>
+          
+          
+          
+          
           
           
           
@@ -212,16 +372,28 @@
           <parser enabled="false"/>
           
           
+          
+          
+        
+        
         
         
         </scannerInfoProvider>
         
         
+        
+        
+      
+      
       
       
       </profile>
       
       
+      
+      
+    
+    
     
     
     </item>
@@ -230,7 +402,11 @@
     
     
     
+    
+    
 
+    
+    
     
     
     
@@ -245,7 +421,11 @@
     
     
     
+    
+    
 
+  
+  
   
   
   

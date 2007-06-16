@@ -62,8 +62,7 @@ void Entity_Falling::check_and_do()
 	//WIN32 complains if these are set as references,
 	//while in linux it runs smoothly
 	Entity_Handle down_entity=current_level->get_entity(m_position_x,m_position_y, DOWN);
-	Entity_Handle up_entity=current_level->get_entity(m_position_x,m_position_y, UP);
-
+	
 	if(down_entity!=0)
 	{
 		if(m_is_falling)

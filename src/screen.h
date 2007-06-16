@@ -53,15 +53,15 @@ public:
 		
 	void set_cell_size(Uint32 cell_size);
 	
-	void set_window_center(int cell_x, int cell_y);
+	void set_window_center(Uint32 cell_x, Uint32 cell_y);
 	
 	void clear();
 	
 	void flip_display();
 	
-	void draw_rect(int x, int y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
+	void draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
-	void fill_rect(int x, int y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
+	void fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
 	SDL_Surface* get_screen(){return m_screen;}
 	

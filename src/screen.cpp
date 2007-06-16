@@ -16,6 +16,7 @@
  ***************************************************************************/
 #include "dephine.h"
 #include <SDL/SDL.h>
+#include <cassert>
 #include "screen.h"
 #include "sprite.h"
 #include "entity.h"
@@ -78,7 +79,7 @@ void Screen::set_cell_size(Uint32 cell_size)
 	
 }
 
-void Screen::set_window_center(int x, int y)
+void Screen::set_window_center(Uint32 x, Uint32 y)
 {
 
 	if(x>(m_win_size_x/2))
@@ -142,6 +143,7 @@ void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 
 void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
+	assert(!"Error: Screen::draw_rect() not implemented.");
 	/*
 	SDL_Rect dest;
 	dest.x = x;

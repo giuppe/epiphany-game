@@ -35,28 +35,28 @@ extern int glb_curr_id;
 
 Level::Level()
 {
-	
-	//pushing back entity with id=0
-	
-	//m_entities_list.push_back(Ntt_pointer());
-	
+
 	m_entities_matrix.resize(Epiconfig::instance()->get_level_size_x());
-	for(Sint32 i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
+
+	for(Uint32 i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
 	{
+
 		m_entities_matrix[i].resize(Epiconfig::instance()->get_level_size_y());
 		
 	}
 	
-	for(int x=0; x<Epiconfig::instance()->get_level_size_x(); x++)
-	for(int y=0; y<Epiconfig::instance()->get_level_size_y(); y++)
+	for(Uint32 x=0; x<Epiconfig::instance()->get_level_size_x(); x++)
+	for(Uint32 y=0; y<Epiconfig::instance()->get_level_size_y(); y++)
 	{
+
 		m_entities_matrix[x][y] = 0;
+
 	}
 	
 	Entity_Manager::instance()->reset();
 	
-	//glb_curr_id=1;
 	m_acquired_keys=0;
+
 	m_min_score=0;
 	
 }
@@ -125,9 +125,7 @@ Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d)
 
 void Level::load_map(const char* map_path)
 {
-	Entity_Player* pl;	
 	
-//	Entity_Exit* ex;
 	Levelmap levelmap;
 	levelmap.load_map(map_path);
 	Uint32 i,j;
@@ -173,12 +171,12 @@ void Level::set_entity(Entity* ntt)
   //DEBOUT("setting entity to "<<ntt->get_position_x()<<", "<<ntt->get_position_y()<<"\n");
 }
 
-Sint32 Level::get_size_x()
+Uint32 Level::get_size_x()
 {
 	return Epiconfig::instance()->get_level_size_x();
 }
 
-Sint32 Level::get_size_y()
+Uint32 Level::get_size_y()
 {
 	return Epiconfig::instance()->get_level_size_y();
 }
@@ -195,8 +193,6 @@ Entity_Player& Level::get_player()
 
 Level::~Level()
 {
-//	for (Uint32 i=0; i<m_entities_list.size(); i++)
-//		m_entities_list[i].remove();
 }
 	
 Uint32 Level::get_acquired_keys()
@@ -207,22 +203,17 @@ Uint32 Level::get_acquired_keys()
 void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 {
 
-//	Ntt_pointer& curr_ntt=m_entities_list[m_entities_matrix[x][y]];
 	Entity_Handle curr_ntt=get_entity(x,y);
  
 	if(curr_ntt != 0)
 	{
 		Entity* curr_entity = Entity_Manager::instance()->get_entity(curr_ntt);
-	//	DEBOUT("Entering Level::explode("<<x<<", "<<y<<")\n");
-	//	DEBOUT("id: "<<m_entities_matrix[x][y]<<"\n");
-	//	DEBOUT("curr_ntt: id="<<curr_ntt->get_id()<<")\n");
 	
-		Surface_Manager* surf_man = Surface_Manager::instance();
+		
 		if(curr_entity->exists())
 		{
 	
 			bool result=curr_entity->explode();
-	//		DEBOUT("result of explode="<<result<<"\n");
 			if(result)
 			{
 				Entity_Explosion* explosion = new Entity_Explosion(this,x,y);
@@ -256,9 +247,3 @@ Uint32 Level::get_max_time()
 {
 	return m_max_time;
 }
-/*
-Sample* Level::get_sample(Sample_Type sample_type)
-{
-	return m_sampleset.get_sample(sample_type);
-}
-*/

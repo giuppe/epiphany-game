@@ -60,12 +60,12 @@ int Epiconfig::get_sprite_size()
 	return m_sprite_size;
 }
 */
-int Epiconfig::get_level_size_x()
+Uint32 Epiconfig::get_level_size_x()
 {
 	return m_level_size_x;
 }
 
-int Epiconfig::get_level_size_y()
+Uint32 Epiconfig::get_level_size_y()
 {
 	return m_level_size_y;
 }

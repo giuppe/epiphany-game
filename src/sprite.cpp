@@ -126,7 +126,7 @@ void Sprite::set_pos_y(Uint32 pos_y)
 	m_move_to_pos_y=pos_y;
 }
 
-void Sprite::set_curr_frame(Sint32 frame)
+void Sprite::set_curr_frame(Uint32 frame)
 {
 	//FIXME: check should be on number of sprite frames
 	if(frame >= m_total_frames)
@@ -262,11 +262,11 @@ void Sprite::move()
 
 }
 
-int Sprite::get_frame_number()
+Uint32 Sprite::get_frame_number()
 {
 
-	//return m_curr_frame+m_state;
 	return m_curr_frame;
+
 }
 
 void Sprite::set_state(Anim_State state)

@@ -122,6 +122,8 @@ void Sample_Manager::play(Sample_Type type)
 		case SFX_GAME_TIMEALARM:
 			channel_group = m_channels_timealarm;
 			break;
+		default:
+			break;
 	}
 	
 	Sint32 available_channel = Mix_GroupAvailable(channel_group);

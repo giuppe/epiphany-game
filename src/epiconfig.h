@@ -55,9 +55,9 @@ public:
 
 //	int get_sprite_size();
 
-	int get_level_size_x();
+	Uint32 get_level_size_x();
 
-	int get_level_size_y();
+	Uint32 get_level_size_y();
 
 	Uint32 get_max_anim_drawn();
 

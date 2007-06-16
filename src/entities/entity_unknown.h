@@ -19,7 +19,7 @@ public:
 	
 	bool smash(Entity_Handle){return false;};
 	
-	bool explode(){};
+	bool explode(){return false;};
 	
 	bool roll_on_me(){return false;};
 	
