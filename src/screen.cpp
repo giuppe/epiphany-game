@@ -55,6 +55,7 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 }
 
 
+
 void Screen::put(Sprite& sprite)
 {
 	int curr_pos_x=sprite.get_pos_x();
@@ -71,6 +72,8 @@ void Screen::put(Sprite& sprite)
 	}
 	
 }
+
+
 
 void Screen::set_cell_size(Uint32 cell_size)
 {
