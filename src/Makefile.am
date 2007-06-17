@@ -16,4 +16,4 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 
 epiphany_LDADD = -lSDL -lSDL_mixer
 
-#EXTRA_DISTS = entities/Makefile.am
+#EXTRA_DISTS = dephine.h sfx.h game.h

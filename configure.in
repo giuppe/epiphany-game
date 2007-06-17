@@ -53,7 +53,6 @@ AC_ARG_ENABLE(static, AC_HELP_STRING([--enable-static],[Enable static compiling]
 AC_OUTPUT(	Makefile		\
 		src/Makefile		\
 		data/Makefile		\
-		src/entities/Makefile	\
 		data/gfx/Makefile	\
 		data/sfx/Makefile	\
 		data/maps/Makefile
