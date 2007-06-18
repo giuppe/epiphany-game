@@ -16,3 +16,4 @@ aclocal.m4
 description-pak
 doc-pak
 *.bz2
+*.gz

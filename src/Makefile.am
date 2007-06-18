@@ -17,3 +17,17 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 epiphany_LDADD = -lSDL -lSDL_mixer
 
 #EXTRA_DISTS = dephine.h sfx.h game.h
+
+noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
+	game.h screen.h menu.h sfx.h except.h level.h entity_factory.h \
+	fonts/font_manager.h fonts/font_factory.h fonts/font.h fonts/SFont.h \
+	input.h sample.h myparser.h epiconfig.h entity_all.h resource.h \
+	game_timer.h map_editor.h entity_manager.h direction.h \
+	surface_manager.h surface.h dephine.h entities/entity_explosion.h \
+	entities/entity_boulder.h entities/entity_wood.h entities/entity_exit.h \
+	entities/entity_steel.h entities/entity_key.h entities/entity_sapphire.h \
+	entities/entity_unknown.h entities/entity_flintstone.h entities/entity_falling.h \
+	entities/entity_grass.h entities/entity_monster.h entities/entity_peperon.h \
+	entities/entity_player.h entities/entity_brick.h entities/entity_door.h \
+	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
+	resource_factory.h sprite.h epimap.h entity.h
