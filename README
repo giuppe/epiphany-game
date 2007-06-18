@@ -12,7 +12,7 @@ The player must collect all valuable minerals scattered in levels,
 avoiding being hit by a falling boulder, or (worst :) by a bomb.
 
 
-Current version: 0.6.0
+Current version: 0.6.1
 Tested under Linux and Win32, on i386 systems;
 
 It is a alpha version, but it is playable.

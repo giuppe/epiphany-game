@@ -1,3 +1,7 @@
+Version 0.6.1:
+Fixed bug that prevented saving game progresses;
+Small fixes in autotools configuration, now "make distcheck" works. 
+
 Version 0.6.0:
 Fixed "random exploding flintstone/monster" bug;
 Code refactoring;
