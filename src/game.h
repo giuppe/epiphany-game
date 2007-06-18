@@ -65,7 +65,7 @@ private:
 	
 	Uint32 m_max_num_of_levels;
 	
-	const char* m_ini_path;
+	char m_ini_path[255];
 
 	//Resource_Factory* m_res_manag;
 	
@@ -104,11 +104,9 @@ public:
 	
 	void show_credits();
 	
-	//Resource_Factory* get_resource_manager();
-
-	//void set_resource_manager();
+	void save_last_level(Uint32 last_level);
 	
-//	int menu(); //return false if "quit", else set the number of level
+
 	// begin Singleton stuff
 
 private:

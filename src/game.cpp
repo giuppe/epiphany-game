@@ -417,11 +417,10 @@ void Game::go()
   			
        if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
        {
-
-           std::ofstream update_config(m_ini_path);
-           update_config<<menu.get_unsolved_level();
-           menu.set_current_level(menu.get_unsolved_level());
-           play=0;
+			
+			save_last_level(menu.get_unsolved_level());
+           	menu.set_current_level(menu.get_unsolved_level());
+           	play=0;
        }
        else
        {
@@ -454,7 +453,7 @@ void Game::init()
 	
 	
 	#ifdef _WIN32
-	m_ini_path="./epiphany.ini";
+	sprintf(m_ini_path, "%s", "./epiphany.ini");
 	#else
 	std::string user_home(getenv("HOME"));
 	if(user_home=="")
@@ -464,7 +463,7 @@ void Game::init()
 	else
 	{
 		user_home+="/.epiphany";
-		m_ini_path=user_home.c_str();
+		sprintf(m_ini_path, "%s", user_home.c_str());
 	}
 	#endif
 
@@ -498,12 +497,14 @@ void Game::play_level(const char *level_path)
 
 void Game::load_config()
 {
-	std::ifstream config_file(m_ini_path);
+	std::string ini_path_string(m_ini_path);
+	
+	std::ifstream config_file(ini_path_string.c_str());
 	
 	if(!config_file)
 	{
-		DEBWARN("No "<<m_ini_path<<"; Creating...\n");
-		std::ofstream new_config(m_ini_path);
+		DEBWARN("No "<<ini_path_string<<"; Creating...\n");
+		std::ofstream new_config(ini_path_string.c_str());
 		if(!new_config)
 			DEBWARN("Unable to write config file!...\n");
 		m_unsolved_level=0;
@@ -550,11 +551,37 @@ void Game::load_fonts()
 
 }
 
+
 Game::~Game()
 {
-
+	
 	
 
+}
+
+void Game::save_last_level(Uint32 last_level)
+{
+	FILE* pFile = fopen(m_ini_path, "w");
+		
+	 
+	if(pFile == NULL)
+	{
+		DEBWARN("Error: Unable to open "<<m_ini_path<<", player level cannot be saved.\n");
+	}
+	else
+	{
+		char last_level_string[10];
+	
+		sprintf(last_level_string, "%d", last_level);
+		
+		fputs(last_level_string, pFile);
+		
+		fclose(pFile);
+		
+		DEBWARN("Saved "<<last_level<<" as last level\n");
+			
+	}
+	
 }
 
 
