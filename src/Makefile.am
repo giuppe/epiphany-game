@@ -29,4 +29,4 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	entities/entity_grass.h entities/entity_monster.h entities/entity_peperon.h \
 	entities/entity_player.h entities/entity_brick.h entities/entity_door.h \
 	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
-	resource_factory.h sprite.h epimap.h entity.h
+	resource_factory.h sprite.h epimap.h entity.h cmdline.h
