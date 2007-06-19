@@ -94,7 +94,7 @@
 			
 			C.Done(); // check for unused options
 			
-			delete map_name;
+			
 			/*
         if (argc == 2) 
         {
@@ -114,7 +114,15 @@
 		{
 			game->set_frame_limiter_enabled(false);
 		}
-		game->go();
+		
+		if(using_another_map == true)
+		{
+			game->play_level(map_name);
+		}
+		else
+		{
+			game->go();
+		}
 		
 		DEBOUT("Exiting game::go().\n");
 			
@@ -122,6 +130,7 @@
 		deinit_modules();
 		
 		delete game;
+		delete map_name;
 		
 		DEBOUT("\tExiting.\n");
 		return 0;
