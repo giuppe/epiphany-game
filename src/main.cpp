@@ -19,6 +19,7 @@
 #include "surface_manager.h"
 #include "resource_factory.h"
 #include "sfx.h"
+#include "input.h"
 #include "fonts/font_manager.h"
 #include "game.h"
 #include "screen.h"
@@ -75,6 +76,26 @@
 			
 		init_modules();	
 		
+		bool disable_frame_limiter = false;
+		
+		bool using_another_map = false;
+		
+		// command line arguments manipulation
+		cmdl::CmdLine C;
+		
+		C.Init( --argc, ++argv); 
+
+		        // retrieve and print an integer set with option "--set-int"
+		char* map_name= new char[255]; 
+		using_another_map = C.GetSingleValue("--map", map_name);
+			printf("Map name: %s\n", map_name);
+		
+			C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
+			
+			C.Done(); // check for unused options
+			
+			delete map_name;
+			/*
         if (argc == 2) 
         {
 			Game* game = Game::instance();
@@ -86,10 +107,13 @@
 			printf("Cannot supply more than one command line argument.\n");
 			return 1;
 		}
-	
+	*/
 
 		Game* game = Game::instance();
-	
+		if(disable_frame_limiter == true)
+		{
+			game->set_frame_limiter_enabled(false);
+		}
 		game->go();
 		
 		DEBOUT("Exiting game::go().\n");
