@@ -14,17 +14,18 @@
  *                                                                         *
  ***************************************************************************/
 #include "dephine.h"
-#include "sprite.h"
+
 #include <vector>
-#include <cmath>
+
 #include <fstream>
 #include "entity_type.h"
-#include "entity_factory.h"
+
 #include "fonts/font_factory.h"
-#include "entity.h"
+
 #include "entities/entity_player.h"
 #include "surface_manager.h"
 #include "game.h"
+#include "screen.h"
 #include "menu.h"
 #include "input.h"
 #include "level.h"
@@ -115,15 +116,18 @@ bool Game::main_loop()
 				get_keys();
 			}
 */
-			while(SDL_GetTicks()-current_frame_time<msec_per_frame)
+			if(m_frame_limiter_enabled==true)
 			{
-				if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-10))
+				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
 				{
-					SDL_Delay(10);
+					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-10))
+					{
+						SDL_Delay(10);
+					}
 				}
 			}
 		
-			input->update();
+			//input->update();
 		}
 		input->update();
 	}
@@ -402,8 +406,7 @@ void Game::go()
   		SDL_Delay(500);
     	
  	
-  		//APOI:
-  		//Might add some Hiscores here...
+  		//APOI: Might add some Hiscores here...
   		delete m_level;
   		
   		switch(result)
@@ -424,7 +427,7 @@ void Game::go()
        }
        else
        {
-         //FIXME: maybe a congratulation screen
+         //APOI: maybe a congratulation screen
          play=menu.go();
        }
   			
@@ -450,6 +453,7 @@ void Game::init()
 	m_config = Epiconfig::instance();
 	m_config->set_default_values();
 
+	m_frame_limiter_enabled = true;
 	
 	
 	#ifdef _WIN32

@@ -51,7 +51,7 @@ Level::Level()
 		m_entities_matrix[x][y] = 0;
 
 	}
-	
+
 	Entity_Manager::instance()->reset();
 	
 	m_acquired_keys=0;

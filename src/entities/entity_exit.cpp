@@ -31,7 +31,7 @@ Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score)
 	m_type=EXIT;
 	
 	m_exists=true;
-	//TODO: check boundaries
+
 	m_position_x=x;
 	
 	m_position_y=y;

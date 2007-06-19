@@ -18,14 +18,15 @@
 #include "direction.h"
 #include "entity_type.h"
 #include "level.h"
-
+#include "surface_manager.h"
 #include "sprite.h"
 
 #ifndef ENTITY_H
 #define ENTITY_H
 
-//Abstract class Entity is the base for creating whatever game object
-
+/*
+ * Abstract class Entity is the base for creating game objects
+*/
 class Entity
 {
 private:
@@ -50,8 +51,6 @@ protected:
 	
 	Sprite m_sprite;
 	
-	//true if player can pass it
-//	bool m_is_passable;
 		
 	//True if an entity exists - not used
 	bool m_exists;
@@ -82,7 +81,6 @@ public:
 	
 	void set_checked(bool check){m_just_checked=check;};
 	
-//	bool is_passable();
 		
 	void set_type(Entity_Type type);
 

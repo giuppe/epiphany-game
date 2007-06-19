@@ -21,8 +21,8 @@
 #include "sfx.h"
 #include "fonts/font_manager.h"
 #include "game.h"
-#include "input.h"
 #include "screen.h"
+#include "cmdline.h"
 
 
 
@@ -87,11 +87,12 @@
 			return 1;
 		}
 	
-	//	DEBOUT("Calling CL_Display::set_videomode\n");
+
 		Game* game = Game::instance();
 	
-			game->go();
-			DEBOUT("Exiting game::go().\n");
+		game->go();
+		
+		DEBOUT("Exiting game::go().\n");
 			
 	
 		deinit_modules();

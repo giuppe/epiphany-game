@@ -4,9 +4,9 @@ bin_PROGRAMS = epiphany
 
 epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	levelmap.cpp epiconfig.cpp entity_factory.cpp entity_manager.cpp \
-	game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp \
+	game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp cmdline.cpp \
 	entities/entity_gem.cpp entities/entity_door.cpp  entities/entity_wood.cpp 			\
-         entities/entity_brick.cpp  entities/entity_player.cpp  entities/entity_falling.cpp 		\
+         entities/entity_brick.cpp entities/entity_player.cpp  entities/entity_falling.cpp 		\
 	 entities/entity_emerald.cpp  entities/entity_peperon.cpp  entities/entity_sapphire.cpp 	\
 	 entities/entity_flintstone.cpp  entities/entity_explosion.cpp  entities/entity_monster.cpp 	\
 	 entities/entity_boulder.cpp  entities/entity_tomato.cpp	fonts/SFont.c			\
@@ -16,7 +16,6 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 
 epiphany_LDADD = -lSDL -lSDL_mixer
 
-#EXTRA_DISTS = dephine.h sfx.h game.h
 
 noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	game.h screen.h menu.h sfx.h except.h level.h entity_factory.h \

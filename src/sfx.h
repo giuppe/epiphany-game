@@ -15,14 +15,14 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include "sample.h"
+
 #include <vector>
 
 
 #ifndef SFX_H
 #define SFX_H
 
-class Game;
+class Sample;
 
 enum Sample_Type{	SFX_BOULDER_FALL,
 									SFX_EMERALD_EAT,

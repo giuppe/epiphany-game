@@ -16,7 +16,7 @@
 
 
 #include "dephine.h"
-#include "surface_manager.h"
+#include "surface.h"
 
 #ifndef SPRITE_H
 #define SPRITE_H

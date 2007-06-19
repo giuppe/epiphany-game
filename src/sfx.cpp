@@ -18,9 +18,10 @@
 #include "sfx.h"
 #include "sample.h"
 #include <vector>
-#include <string>
+
 #include "SDL/SDL_mixer.h"
-#include "game.h"
+
+#include "resource_factory.h"
 
 
 void Sample_Manager::init()

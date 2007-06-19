@@ -16,25 +16,19 @@
 
 #include "dephine.h"
 
-#include "sprite.h"
-#include "direction.h"
-#include "fonts/font.h"
+/
 #include "fonts/font_manager.h"
-#include "resource_factory.h"
-#include "entity_type.h"
-#include "entity.h"
-#include "entity_all.h"
+
 #include "game_timer.h"
 
-#include "sfx.h"
-#include "level.h"
-#include <vector>
-#include "screen.h"
+
 
 
 #ifndef GAME_H
 #define GAME_H
 class Menu;
+class Level;
+
 
 
 class Game
@@ -42,14 +36,8 @@ class Game
 
 private:
 
-	//const char* m_resource_path;
-	
-	
-	//Screen m_screen;
-	
+
 	Game_Timer m_time;
-	
-	//CL_InputBuffer m_input_buffer;
 	
 	Level* m_level;
 	
@@ -58,6 +46,8 @@ private:
 	Font_Handle m_time_font;
 	
 	Font_Handle m_credits_font;
+	
+	bool m_frame_limiter_enabled;
 
 	Epiconfig* m_config;
 	
@@ -67,13 +57,11 @@ private:
 	
 	char m_ini_path[255];
 
-	//Resource_Factory* m_res_manag;
 	
 	Uint32 find_levels_in_dir();
 
 public:
 
-	Game(){};
 	
 	void init();
 	
@@ -106,6 +94,10 @@ public:
 	
 	void save_last_level(Uint32 last_level);
 	
+	bool is_frame_limiter_enabled(){return m_frame_limiter_enabled;}
+	
+	void set_frame_limiter_enabled(bool enable){m_frame_limiter_enabled = enable;}
+	
 
 	// begin Singleton stuff
 
@@ -113,10 +105,10 @@ private:
 
 	static Game* _instance;
 
-/*protected:
+protected:
 
-	Entity_Factory(){};
-*/
+	Game(){};
+
 public:
 
 	static Game* instance();
