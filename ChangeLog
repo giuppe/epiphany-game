@@ -1,3 +1,8 @@
+Version 0.7.0:
+Added frame skipping (command line: --frame-skip <int>)
+Added loading of external levels (command line: --map <path>)
+Frame limiter could be disabled (command line: --disable-frame-limiter)
+
 Version 0.6.1:
 Fixed bug that prevented saving game progresses;
 Small fixes in autotools configuration, now "make distcheck" works. 
