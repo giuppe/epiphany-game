@@ -56,6 +56,8 @@ private:
 	Uint32 m_max_num_of_levels;
 	
 	char m_ini_path[255];
+	
+	Uint32 m_frame_skip;
 
 	
 	Uint32 find_levels_in_dir();
@@ -86,7 +88,7 @@ public:
 	
 	void move_all();
 	
-	void draw(int frame_number);
+	void draw(Uint32 frame_number, bool update_only=false);
 	
 	void draw_score();
 	
@@ -97,6 +99,10 @@ public:
 	bool is_frame_limiter_enabled(){return m_frame_limiter_enabled;}
 	
 	void set_frame_limiter_enabled(bool enable){m_frame_limiter_enabled = enable;}
+	
+	Uint32 get_frame_skip(){return m_frame_skip;}
+	
+	void set_frame_skip(Uint32 frame_skip){m_frame_skip = frame_skip;}
 	
 
 	// begin Singleton stuff

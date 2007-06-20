@@ -80,6 +80,8 @@
 		
 		bool using_another_map = false;
 		
+		Uint32 frame_skip = 0;
+		
 		// command line arguments manipulation
 		cmdl::CmdLine C;
 		
@@ -91,6 +93,11 @@
 			printf("Map name: %s\n", map_name);
 		
 			C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
+			
+			if(C.GetSingleValue("--frame-skip", frame_skip) == false)
+			{
+				frame_skip = 0;
+			}
 			
 			C.Done(); // check for unused options
 			
@@ -110,6 +117,9 @@
 	*/
 
 		Game* game = Game::instance();
+		
+		game->set_frame_skip(frame_skip);
+		
 		if(disable_frame_limiter == true)
 		{
 			game->set_frame_limiter_enabled(false);

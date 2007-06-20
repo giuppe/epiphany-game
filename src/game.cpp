@@ -104,12 +104,20 @@ bool Game::main_loop()
 //		Uint32 current_frame_time=0;
 
 		Uint32 msec_per_frame=m_config->get_msec_per_frame();
-
+		
+		Uint32 valid_frames = m_frame_skip+1;
+		
 		for(Uint32 j=0;j<m_config->get_max_anim_drawn();j++)
 		{
 			current_frame_time=SDL_GetTicks();
-		
-			draw(j);
+			if((j%valid_frames)==0)
+			{
+				draw(j, false);
+			}
+			else
+			{
+				draw(j, true);
+			}
 /*
 			if(j==m_config->get_max_anim_drawn()/2)
 			{
@@ -246,7 +254,7 @@ void Game::move_all()
 	
 }
 
-void Game::draw(int frame_number)
+void Game::draw(Uint32 frame_number, bool update_only)
 {
 
 	Entity* curr_ntt;
@@ -261,7 +269,10 @@ void Game::draw(int frame_number)
 	{
 		m_level->get_player().get_sprite().update_frame();
 		m_level->get_player().get_sprite().move();
-		screen->put(m_level->get_player().get_sprite());
+		if(update_only == false)
+		{
+			screen->put(m_level->get_player().get_sprite());
+		}
 	}
 
 	//draw other entities
@@ -272,14 +283,19 @@ void Game::draw(int frame_number)
 		{
 			curr_ntt->get_sprite().update_frame();
 			curr_ntt->get_sprite().move();
-			screen->put(curr_ntt->get_sprite());
+			if(update_only == false)
+			{
+				screen->put(curr_ntt->get_sprite());
+			}
 		}
 	}
-	
+	if(update_only == false)
+	{
 	draw_score();
 	
 	screen->flip_display();
-
+	}
+	
 }
 
 
@@ -454,6 +470,8 @@ void Game::init()
 	m_config->set_default_values();
 
 	m_frame_limiter_enabled = true;
+	
+	m_frame_skip = 0;
 	
 	
 	#ifdef _WIN32
