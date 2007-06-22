@@ -26,7 +26,6 @@ class Game;
 class Menu
 {
 private:
-	//Game* m_game;
 
 	Font_Handle m_menu_font;
 
@@ -39,6 +38,8 @@ private:
 	Surface* m_selector;
 
 	Surface* m_background;
+	
+	std::vector<std::string> m_menu_strings;
 
 public:
 
