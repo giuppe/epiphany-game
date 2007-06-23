@@ -17,11 +17,12 @@
 #include "dephine.h"
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
-
+#include "sprite.h"
 
 #ifndef MENU_H
 #define MENU_H
 class Game;
+
 
 class Menu_Entry;
 
@@ -37,7 +38,7 @@ private:
 
 	Uint32 m_total_levels;
 
-	Surface* m_selector;
+	Sprite m_selector;
 
 	Surface* m_background;
 	

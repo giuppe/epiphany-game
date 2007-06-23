@@ -47,7 +47,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 	Surface_Manager* surf_man= Surface_Manager::instance();
 
-	m_selector = surf_man->get_surface(Surface_Manager::SRF_MENU_SELECTOR);
+	m_selector.init(surf_man->get_surface(Surface_Manager::SRF_MENU_SELECTOR));
 	
 	m_background = surf_man->get_surface(Surface_Manager::SRF_MENU_BACKGROUND);
 
@@ -181,7 +181,7 @@ Sint32 Menu::go()
 
 	char level_number_string[255];
 
-	Sint32 curr_sprite=0;
+	//Sint32 curr_sprite=0;
 
 	Input* input = Input::instance();
 
@@ -272,9 +272,11 @@ Sint32 Menu::go()
 
 		}
 		
+		m_selector.update_frame();
+		
 		//animated menu selector drawing
-		m_selector->put_screen((config->get_game_size_x()/2)-90,menu_top_point+selected*menu_vertical_distance,32,32,curr_sprite);
-
+		m_selector.put_screen((config->get_game_size_x()/2)-90,menu_top_point+selected*menu_vertical_distance,32,32);
+/*
 		if(curr_sprite<7)
 		{
 
@@ -287,7 +289,7 @@ Sint32 Menu::go()
 			curr_sprite=0;
 
 		}
-
+*/
 	
 		screen->flip_display();
 
