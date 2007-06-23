@@ -18,3 +18,7 @@ doc-pak
 *.bz2
 *.gz
 *.cproject
+debug
+*.kdevelop
+*.pcs
+*.kdevses

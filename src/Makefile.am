@@ -12,7 +12,8 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	 entities/entity_boulder.cpp  entities/entity_tomato.cpp	fonts/SFont.c			\
          entities/entity_steel.cpp  entities/entity_grass.cpp  entities/entity_exit.cpp  entities/entity_key.cpp \
 	screen.cpp sprite.cpp menu.cpp game.cpp surface_manager.cpp input.cpp fonts/font.cpp \
-	fonts/font_factory.cpp fonts/font_manager.cpp surface.cpp resource_factory.cpp
+	fonts/font_factory.cpp fonts/font_manager.cpp surface.cpp resource_factory.cpp \
+	menu_entry_ranged.cpp
 
 epiphany_LDADD = -lSDL -lSDL_mixer
 
@@ -29,4 +30,5 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	entities/entity_grass.h entities/entity_monster.h entities/entity_peperon.h \
 	entities/entity_player.h entities/entity_brick.h entities/entity_door.h \
 	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
-	resource_factory.h sprite.h epimap.h entity.h cmdline.h
+	resource_factory.h sprite.h epimap.h entity.h cmdline.h \
+	menu_entry.h menu_entry_simple.h menu_entry_ranged.h

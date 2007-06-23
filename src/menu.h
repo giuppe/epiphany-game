@@ -23,6 +23,8 @@
 #define MENU_H
 class Game;
 
+class Menu_Entry;
+
 class Menu
 {
 private:
@@ -39,7 +41,7 @@ private:
 
 	Surface* m_background;
 	
-	std::vector<std::string> m_menu_strings;
+	std::vector<Menu_Entry*> m_menu_strings;
 
 public:
 

@@ -26,6 +26,9 @@
 #include "input.h"
 #include "screen.h"
 #include "game.h"
+#include "menu_entry.h"
+#include "menu_entry_simple.h"
+#include "menu_entry_ranged.h"
 
 
 
@@ -48,13 +51,22 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	
 	m_background = surf_man->get_surface(Surface_Manager::SRF_MENU_BACKGROUND);
 
-	m_menu_strings.push_back("Start");
+	Menu_Entry* menu_start = new Menu_Entry_Simple("Start");
 	
-	m_menu_strings.push_back("Level: ");
+	Menu_Entry* menu_level = new Menu_Entry_Ranged(0, m_unsolved_level, "Level: ");
 	
-	m_menu_strings.push_back("Credits");
+	Menu_Entry* menu_credits = new Menu_Entry_Simple("Credits");
 	
-	m_menu_strings.push_back("Exit");
+	Menu_Entry* menu_quit = new Menu_Entry_Simple("Quit");
+	
+	
+	m_menu_strings.push_back(menu_start);
+	
+	m_menu_strings.push_back(menu_level);
+	
+	m_menu_strings.push_back(menu_credits);
+	
+	m_menu_strings.push_back(menu_quit);
 	
 
 }
@@ -64,6 +76,10 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 Menu::~Menu()
 {
+	for(Uint32 i=0; i<m_menu_strings.size(); i++)
+	{
+		delete m_menu_strings[i];
+	}
 
 }
 
@@ -196,19 +212,16 @@ Sint32 Menu::go()
 		
 		//inserting level number
 		
-		std::string old_level_string(m_menu_strings[1]);
-		
-		m_menu_strings[1].append(level_number_string);
+
 		
 		//printing menu
 		
 		for(Uint32 i=0; i<m_menu_strings.size(); i++)
 		{
-			menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*i, m_menu_strings[i].c_str());
+			menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*i, m_menu_strings[i]->get_string());
 		}	
 		
-		m_menu_strings[1] = old_level_string;
-		
+	
 /*
 		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point, "Start");
 
@@ -244,22 +257,18 @@ Sint32 Menu::go()
 
 		}
 		
-		if((input->get_left())&&
-				(selected==1)&&
-				(level_number>0))
+		if((input->get_left()))
 		{
 
-			level_number--;
+			//level_number--;
+			m_menu_strings[selected]->action_left();
 
 		}
 		
-		if((input->get_right())&&
-				(selected==1)&&
-				(level_number<m_total_levels-1)&&
-				(level_number<m_unsolved_level))
+		if((input->get_right()))
 		{
 
-			level_number++;
+					m_menu_strings[selected]->action_right();
 
 		}
 		
