@@ -13,7 +13,7 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 	
 	Uint32 x=1;
 	Uint32 y = 1;
-	DEBOUT("Creating entity of type:"<<type<<"\n");
+	//DEBOUT("Creating entity of type:"<<type<<"\n");
 	switch(type)
 	{
 	case UNKNOWN:
