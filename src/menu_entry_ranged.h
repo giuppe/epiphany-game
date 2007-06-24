@@ -32,6 +32,8 @@ class Menu_Entry_Ranged : public Menu_Entry
 																{};
 	
 		void set_current_value(Uint32 current_value);
+		
+		Uint32 get_current_value(){return m_current_value;}
 	
 		const char* get_string();
 	

@@ -35,6 +35,7 @@
 #include <SDL/SDL.h>
 #include <string>
 #include <cassert>
+
 #include "sfx.h"
 
 
@@ -394,9 +395,9 @@ void Game::go()
 
 	Sint32 play=menu.go();
 	
-  while(play!=3)
+  while(play!=Menu::MENU_EPIPHANY_QUIT)
   {
-  	if(play==0)
+  	if(play==Menu::MENU_EPIPHANY_START)
   	{
   		
   		m_level=new Level();
@@ -450,7 +451,7 @@ void Game::go()
   			break;
   		}		
   	}
-  	else if(play==2)
+  	else if(play==Menu::MENU_EPIPHANY_CREDITS)
   	{
   		show_credits();
   		play=menu.go();

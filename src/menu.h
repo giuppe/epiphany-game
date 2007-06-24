@@ -18,16 +18,23 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
+#include "menu_list_epiphany.h"
 
 #ifndef MENU_H
 #define MENU_H
 class Game;
 
 
-class Menu_Entry;
-
 class Menu
 {
+	
+public:
+	enum{
+		MENU_EPIPHANY_START,
+		MENU_EPIPHANY_CREDITS,
+		MENU_EPIPHANY_QUIT
+	};
+	
 private:
 
 	Font_Handle m_menu_font;
@@ -42,7 +49,7 @@ private:
 
 	Surface* m_background;
 	
-	std::vector<Menu_Entry*> m_menu_strings;
+	Menu_List_Epiphany* m_menu_list;
 
 public:
 

@@ -26,9 +26,7 @@
 #include "input.h"
 #include "screen.h"
 #include "game.h"
-#include "menu_entry.h"
-#include "menu_entry_simple.h"
-#include "menu_entry_ranged.h"
+#include "menu_list.h"
 
 
 
@@ -51,22 +49,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	
 	m_background = surf_man->get_surface(Surface_Manager::SRF_MENU_BACKGROUND);
 
-	Menu_Entry* menu_start = new Menu_Entry_Simple("Start");
 	
-	Menu_Entry* menu_level = new Menu_Entry_Ranged(0, m_unsolved_level, "Level: ");
-	
-	Menu_Entry* menu_credits = new Menu_Entry_Simple("Credits");
-	
-	Menu_Entry* menu_quit = new Menu_Entry_Simple("Quit");
-	
-	
-	m_menu_strings.push_back(menu_start);
-	
-	m_menu_strings.push_back(menu_level);
-	
-	m_menu_strings.push_back(menu_credits);
-	
-	m_menu_strings.push_back(menu_quit);
 	
 
 }
@@ -76,10 +59,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 
 Menu::~Menu()
 {
-	for(Uint32 i=0; i<m_menu_strings.size(); i++)
-	{
-		delete m_menu_strings[i];
-	}
+
 
 }
 
@@ -158,7 +138,9 @@ bool Menu::increase_unsolved_level()
   m_unsolved_level++;
 
   if(m_unsolved_level==m_total_levels)
+  {
     return false;
+  }
 
   return true;
 }
@@ -173,15 +155,11 @@ Sint32 Menu::go()
 
 	Epiconfig* config=Epiconfig::instance();
 
-	Sint32 selected=0;
+	//Sint32 selected=0;
 
-	Uint32 level_number=m_current_level;
+	//Uint32 level_number=m_current_level;
 
 	Uint32 current_time;
-
-	char level_number_string[255];
-
-	//Sint32 curr_sprite=0;
 
 	Input* input = Input::instance();
 
@@ -190,10 +168,10 @@ Sint32 Menu::go()
 	Font* menu_font =Font_Manager::instance()->get_font(m_menu_font); 
 
 	input->update();
+	
+	m_menu_list = new Menu_List_Epiphany(m_unsolved_level);
 
-	while(!(((input->get_enter())||
-				(input->get_fire()))&&
-				(selected!=1)) )
+	while(m_menu_list->get_return_action() == Menu_List_Epiphany::MENU_NONE)
 	{
 
 		current_time=SDL_GetTicks();
@@ -202,95 +180,62 @@ Sint32 Menu::go()
 
 		m_background->put_screen(0,0, config->get_game_size_x(), config->get_game_size_y());
 
-		sprintf(level_number_string, "%d",level_number);
-
-		//m_menu_font->print_center(k_game_size_x/2,30,"Epiphany");
-
 		int menu_top_point=config->get_game_size_y()/2;
 
 		int menu_vertical_distance=config->get_game_size_y()/10;
 		
-		//inserting level number
-		
-
 		
 		//printing menu
 		
-		for(Uint32 i=0; i<m_menu_strings.size(); i++)
+				
+		for(Uint32 i=0; i<m_menu_list->get_list_size(); i++)
 		{
-			menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*i, m_menu_strings[i]->get_string());
+			menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*i, m_menu_list->get_menu_entry_string(i));
 		}	
 		
 	
-/*
-		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point, "Start");
 
-		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance, "Level:");
-
-		menu_font->write((config->get_game_size_x()/2)+60, menu_top_point+menu_vertical_distance, level_string);
-
-		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*2, "Credits");
-
-		menu_font->write((config->get_game_size_x()/2)-50, menu_top_point+menu_vertical_distance*3, "Quit");
-*/
 		if(input->get_up())
 		{
 
-			if(selected>0)
-			{
-
-				selected--;
-
-			}
+			m_menu_list->action_up();
 
 		}
 		
 		if(input->get_down())
 		{
 
-			if(selected<3)
-			{
-
-				selected++;
-
-			}
+			m_menu_list->action_down();
 
 		}
 		
 		if((input->get_left()))
 		{
 
-			//level_number--;
-			m_menu_strings[selected]->action_left();
+			m_menu_list->action_left();
 
 		}
 		
 		if((input->get_right()))
 		{
 
-					m_menu_strings[selected]->action_right();
+			m_menu_list->action_right();
 
 		}
+		
+		if(input->get_enter())
+		{
+			m_menu_list->action_press();
+		}
+		
+		
 		
 		m_selector.update_frame();
 		
 		//animated menu selector drawing
-		m_selector.put_screen((config->get_game_size_x()/2)-90,menu_top_point+selected*menu_vertical_distance,32,32);
-/*
-		if(curr_sprite<7)
-		{
+		
+		m_selector.put_screen((config->get_game_size_x()/2)-90,menu_top_point+m_menu_list->get_selected()*menu_vertical_distance,32,32);
 
-			curr_sprite++;
-
-		}
-		else
-		{
-
-			curr_sprite=0;
-
-		}
-*/
-	
 		screen->flip_display();
 
 		do
@@ -311,10 +256,32 @@ Sint32 Menu::go()
 
 	}	
 
-	m_current_level=level_number;
+//	m_current_level=level_number;
 
-	DEBOUT("Exiting Menu::go()... "<<selected<<"\n");
+	DEBOUT("Exiting Menu::go()... "<<m_menu_list->get_selected()<<"\n");
 
-	return selected;
+	Uint32 return_action;
+	switch(m_menu_list->get_return_action())
+	{
+		case Menu_List_Epiphany::MENU_START:
+			return_action = MENU_EPIPHANY_START;
+			break;
+		case Menu_List_Epiphany::MENU_CREDITS:
+			return_action = MENU_EPIPHANY_CREDITS;
+			break;
+		case Menu_List_Epiphany::MENU_QUIT:
+			return_action = MENU_EPIPHANY_QUIT;
+			break;
+		default:
+			DEBWARN("Warning: Selecting unhandled menu action: "<<m_menu_list->get_return_action()<<"; \n\tdefaulting to MENU_QUIT");
+			return_action = MENU_EPIPHANY_QUIT;
+	}
+
+
+	m_current_level = m_menu_list->get_selected_level();
+	
+	delete m_menu_list;
+
+	return return_action;
 
 }
