@@ -39,6 +39,10 @@ void Epiconfig::set_default_values()
 	m_msec_per_frame=150/m_max_anim_drawn;
 	//m_msec_per_frame=240/m_max_anim_drawn;
 	//m_msec_per_frame=120/m_max_anim_drawn;
+	
+	m_volume_sound = 0;
+	
+	m_volume_music = 0;
 }
 
 Uint32 Epiconfig::get_game_size_x()
@@ -91,6 +95,15 @@ Uint32 Epiconfig::get_msec_per_frame()
 	return m_msec_per_frame;
 }
 
+Uint32 Epiconfig::get_volume_sound()
+{
+	return m_volume_sound;
+}
+
+Uint32 Epiconfig::get_volume_music()
+{
+	return m_volume_music;
+}
 
 
 // begin Singleton stuff

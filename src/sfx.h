@@ -51,17 +51,15 @@ private:
 		
 	enum{
 			m_channels_monsters,
-			 m_channels_boulders,
-			 m_channels_gems,
-			 m_channels_explosions,
-			 m_channels_timealarm
+			m_channels_boulders,
+			m_channels_gems,
+			m_channels_explosions,
+			m_channels_timealarm
 	};
 	
 	
 public:
 	
-	//Sampleset(Game* game);
-
 	
 	void init();
 	
@@ -69,9 +67,14 @@ public:
 	
 	void play(Sample_Type type);
 	
+	Uint32 get_max_volume();
+	
+	Uint32 get_volume();
+	
+	void set_volume(Uint32 value);
 
 	
-		    // begin Singleton stuff
+	// begin Singleton stuff
 
 private:
 

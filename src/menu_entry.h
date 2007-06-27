@@ -27,6 +27,8 @@ public:
 	
 	virtual void action_press() = 0;
 	
+	virtual Uint32 get_value() = 0;
+	
 	virtual ~Menu_Entry(){};		
 	
 };

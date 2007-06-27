@@ -3,6 +3,7 @@
 #include "menu_entry.h"
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
+#include "menu_list_options.h"
 #include <vector>
 #include <cassert>
 
@@ -13,11 +14,11 @@ Menu_List_Epiphany::Menu_List_Epiphany(Uint32 unsolved_level)
 	
 	m_selected = 0;
 	
-	m_entry_seek = 0;
-	
 	m_entries_list.push_back(new Menu_Entry_Simple("Start"));
 	
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, unsolved_level, "Level: "));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, unsolved_level, "Level: ", unsolved_level));
+	
+	m_entries_list.push_back(new Menu_Entry_Simple("Options"));
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Credits"));
 	
@@ -43,9 +44,12 @@ void Menu_List_Epiphany::action_press()
 			m_return_action = MENU_START;
 			break;
 		case 2:
-			m_return_action = MENU_CREDITS;
+			m_return_action = MENU_OPTIONS;
 			break;
 		case 3:
+			m_return_action = MENU_CREDITS;
+			break;
+		case 4:
 			m_return_action = MENU_QUIT;
 			break;
 		default:
@@ -120,30 +124,8 @@ Uint32 Menu_List_Epiphany::get_return_action()
 
 Uint32 Menu_List_Epiphany::get_selected_level()
 {
-	return dynamic_cast<Menu_Entry_Ranged*>(m_entries_list[1])->get_current_value();
+	return m_entries_list[1]->get_value();
 	
 }
 
 
-
-/*
-bool Menu_List_Epiphany::has_next_entry()
-{
-	return (m_entry_seek<m_entries_list.size());
-}
-
-
-
-
-const char* Menu_List_Epiphany::get_next_entry()
-{
-	return m_entries_list[m_entry_seek++]->get_string();	
-}
-
-
-
-void Menu_List_Epiphany::reset_entry_seek()
-{
-	m_entry_seek = 0;	
-}
-*/

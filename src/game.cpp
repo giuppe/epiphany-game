@@ -136,7 +136,6 @@ bool Game::main_loop()
 				}
 			}
 		
-			//input->update();
 		}
 		input->update();
 	}
@@ -146,6 +145,9 @@ bool Game::main_loop()
 	return exit_state;
 	
 }
+
+
+
 
 void Game::get_keys()
 {
@@ -205,9 +207,10 @@ void Game::get_keys()
 		m_level->get_player().set_snap(false);
 	}
 	
-
-	
 }
+
+
+
 
 void Game::move_all()
 {
@@ -252,8 +255,10 @@ void Game::move_all()
 		m_level->get_player().check_and_do();
 	}
 	
-	
 }
+
+
+
 
 void Game::draw(Uint32 frame_number, bool update_only)
 {
@@ -385,79 +390,84 @@ void Game::draw_score()
 
 }
 
+
+
+
 void Game::go()
 {
 
-//	DEBOUT("Entering Game::go()...\n");
-	
-//	DEBOUT("Entering main loop...\n");
+
 	Menu menu(m_max_num_of_levels,m_unsolved_level);
 
 	Sint32 play=menu.go();
 	
-  while(play!=Menu::MENU_EPIPHANY_QUIT)
-  {
-  	if(play==Menu::MENU_EPIPHANY_START)
-  	{
-  		
-  		m_level=new Level();
-  		
-  		char current_level_path[255];
-  		sprintf(current_level_path, "%s", (Resource_Factory::instance()->get_resource_path().c_str()));
-  		
-  		sprintf(current_level_path, "%s%s", current_level_path, "/maps/level");
-  	
-
-
-  		sprintf(current_level_path, "%s%d", current_level_path, (menu.get_current_level()));
-  		
-  		sprintf(current_level_path, "%s%s", current_level_path, ".map");
-  	
-  		DEBOUT("Loading map: "<<current_level_path<<"\n");
-  	
-     	m_level->load_map(current_level_path);
-  			
-  	
-  		bool result=main_loop();
-  	
-  		SDL_Delay(500);
-    	
- 	
-  		//APOI: Might add some Hiscores here...
-  		delete m_level;
-  		
-  		switch(result)
+	while(play!=Menu::MENU_EPIPHANY_QUIT)
+	{
+		
+		if(play==Menu::MENU_EPIPHANY_START)
   		{
-   		case false:
-  			DEBWARN("Game_over!...");
-  			play=menu.go();
-  			break;
-  		case true:
-  			DEBWARN("Winner! ;)");
-  			
-       if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
-       {
-			
-			save_last_level(menu.get_unsolved_level());
-           	menu.set_current_level(menu.get_unsolved_level());
-           	play=0;
-       }
-       else
-       {
-         //APOI: maybe a congratulation screen
-         play=menu.go();
-       }
-  			
-  			break;
-  		}		
-  	}
-  	else if(play==Menu::MENU_EPIPHANY_CREDITS)
-  	{
-  		show_credits();
-  		play=menu.go();
-	  }	
+  		
+			m_level=new Level();
+  		
+			char current_level_path[255];
+  		
+			sprintf(current_level_path, "%s", (Resource_Factory::instance()->get_resource_path().c_str()));
+  		
+			sprintf(current_level_path, "%s%s", current_level_path, "/maps/level");
   	
-  }
+			sprintf(current_level_path, "%s%d", current_level_path, (menu.get_current_level()));
+  		
+			sprintf(current_level_path, "%s%s", current_level_path, ".map");
+  	
+			DEBOUT("Loading map: "<<current_level_path<<"\n");
+  	
+			m_level->load_map(current_level_path);
+  			  	
+			bool result=main_loop();
+  	
+			SDL_Delay(500);
+    	 	
+			//APOI: Might add some Hiscores here...
+
+			delete m_level;
+  		
+			switch(result)
+			{
+			case false:
+				DEBWARN("Game_over!...");
+				play=menu.go();
+				break;
+			case true:
+				DEBWARN("Winner! ;)");
+  				
+  				if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
+				{
+					save_last_level(menu.get_unsolved_level());
+				
+					menu.set_current_level(menu.get_unsolved_level());
+				
+					play=0;
+				}
+				else
+				{
+         			//TODO: maybe a congratulation screen
+         			play=menu.go();
+				}
+  			
+  				break;
+			}		
+		}
+  		else if(play==Menu::MENU_EPIPHANY_CREDITS)
+  		{
+  			show_credits();
+  			play=menu.go();
+		}
+		else if(play==Menu::MENU_EPIPHANY_NONE)
+		{
+			play=menu.go();
+		}
+  	
+	}
 }
 
 
@@ -473,7 +483,6 @@ void Game::init()
 	m_frame_limiter_enabled = true;
 	
 	m_frame_skip = 0;
-	
 	
 	#ifdef _WIN32
 	sprintf(m_ini_path, "%s", "./epiphany.ini");
@@ -508,13 +517,13 @@ void Game::init()
 
 void Game::play_level(const char *level_path)
 {
-        m_level=new Level();
+	m_level=new Level();
         
-        m_level->load_map(level_path);
+	m_level->load_map(level_path);
                                                         
         
-        main_loop();
-        return;
+	main_loop();
+	return;
 }
 
 
@@ -563,12 +572,13 @@ Uint32 Game::find_levels_in_dir()
 void Game::load_fonts()
 {
 	
-	
 	DEBOUT("Loading fonts... ");
-		m_game_font=Font_Factory::GAME_FONT;
 
-		m_time_font=Font_Factory::TIME_FONT;
-		m_credits_font=Font_Factory::CREDITS_FONT;
+	m_game_font=Font_Factory::GAME_FONT;
+
+	m_time_font=Font_Factory::TIME_FONT;
+	
+	m_credits_font=Font_Factory::CREDITS_FONT;
 	
 	DEBOUT("done.\n");
 
@@ -578,8 +588,6 @@ void Game::load_fonts()
 Game::~Game()
 {
 	
-	
-
 }
 
 void Game::save_last_level(Uint32 last_level)

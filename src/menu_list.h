@@ -7,6 +7,11 @@
 
 class Menu_List
 {
+public:
+	enum{
+		MENU_NONE = 0
+	};
+	
 protected:
 	
 	Uint32 m_selected;

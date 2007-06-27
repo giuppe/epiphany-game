@@ -24,16 +24,16 @@ class Menu_Entry_Ranged : public Menu_Entry
 																m_current_value(range_begin)
 																{};
 																
-		Menu_Entry_Ranged(Uint32 range_begin, Uint32 range_end, const char* string):
+		Menu_Entry_Ranged(Uint32 range_begin, Uint32 range_end, const char* string, Uint32 current_value):
 																m_range_begin(range_begin), 
 																m_range_end(range_end), 
-																m_current_value(range_begin),
+																m_current_value(current_value),
 																m_string(string)
 																{};
 	
 		void set_current_value(Uint32 current_value);
 		
-		Uint32 get_current_value(){return m_current_value;}
+		Uint32 get_value(){return m_current_value;}
 	
 		const char* get_string();
 	

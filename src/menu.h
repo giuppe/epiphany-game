@@ -18,18 +18,20 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
-#include "menu_list_epiphany.h"
+
 
 #ifndef MENU_H
 #define MENU_H
 class Game;
 
+class Menu_List;
 
 class Menu
 {
 	
 public:
 	enum{
+		MENU_EPIPHANY_NONE,
 		MENU_EPIPHANY_START,
 		MENU_EPIPHANY_CREDITS,
 		MENU_EPIPHANY_QUIT
@@ -49,7 +51,7 @@ private:
 
 	Surface* m_background;
 	
-	Menu_List_Epiphany* m_menu_list;
+	//Menu_List_Epiphany* m_menu_list;
 
 public:
 
@@ -68,6 +70,10 @@ public:
 	int go();
 
 	bool increase_unsolved_level();
+	
+	void render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 menu_left_point, Sint32 menu_vertical_distance);
+	
+	void print_menu_background();
 
 };
 

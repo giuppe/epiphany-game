@@ -41,6 +41,10 @@ private:
 	Uint32 m_moving_step;
 
 	Uint32 m_msec_per_frame;
+	
+	Uint32 m_volume_sound;
+	
+	Uint32 m_volume_music;
 
 public:
 
@@ -65,6 +69,14 @@ public:
 	Uint32 get_moving_step();
 
 	Uint32 get_msec_per_frame();
+	
+	Uint32 get_volume_sound();
+	
+	Uint32 get_volume_music();
+	
+	Uint32 set_volume_sound();
+	
+	Uint32 set_volume_music();
 	
 // begin Singleton stuff
 

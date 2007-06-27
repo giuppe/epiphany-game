@@ -1,33 +1,29 @@
 #include "dephine.h"
 #include "menu_list.h"
-#include "menu_entry.h"
 #include <vector>
 
-#ifndef MENU_LIST_EPIPHANY_H_
-#define MENU_LIST_EPIPHANY_H_
+#ifndef MENU_LIST_OPTIONS_H_
+#define MENU_LIST_OPTIONS_H_
 
-class Menu_List_Epiphany : public Menu_List
+class Menu_Entry;
+
+class Menu_List_Options : public Menu_List
 {
 private:
 
 	std::vector<Menu_Entry*> m_entries_list;
 	
 	Uint32 m_return_action;
-	
+
 public:
 	enum{
 		MENU_NONE,
-		MENU_START,
-		MENU_CREDITS,
-		MENU_OPTIONS,
-		MENU_QUIT
+		MENU_OK
 	};
 	
-	Menu_List_Epiphany(Uint32 unsolved_level);
+	Menu_List_Options();
 	
-	~Menu_List_Epiphany();
-	
-	Uint32 get_selected_level();
+	~Menu_List_Options();
 	
 	Uint32 get_return_action();
 	
@@ -47,4 +43,4 @@ public:
 	
 };
 
-#endif /*MENU_LIST_EPIPHANY_H_*/
+#endif /*MENU_LIST_OPTIONS_H_*/

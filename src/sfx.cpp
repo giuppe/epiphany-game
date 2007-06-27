@@ -94,12 +94,18 @@ void Sample_Manager::deinit()
 	delete 	m_samples[SFX_EXPLOSION];
 }
 
+
+
+
 Sample* Sample_Manager::get_sample(Sample_Type sfx)
 {
 	//FIXME: it should assert the existence of sample
 	return m_samples[sfx];
 	
 }
+
+
+
 
 void Sample_Manager::play(Sample_Type type)
 {
@@ -132,6 +138,31 @@ void Sample_Manager::play(Sample_Type type)
 		m_samples[type]->play(available_channel);
 	}
 }
+
+
+
+
+Uint32 Sample_Manager::get_max_volume()
+{
+	return MIX_MAX_VOLUME;
+}
+
+
+
+
+void Sample_Manager::set_volume(Uint32 value)
+{
+	Mix_Volume(-1, value);
+}
+
+
+
+
+Uint32 Sample_Manager::get_volume()
+{
+	return Mix_Volume(-1, -1);
+}
+
 
 
 
