@@ -57,7 +57,7 @@ void Menu_List_Epiphany::action_press()
 void Menu_List_Epiphany::action_down()
 {
 	
-	if(m_selected<m_entries_list.size())
+	if(m_selected<m_entries_list.size()-1)
 	{
 
 		m_selected++;
