@@ -521,23 +521,6 @@ void Game::play_level(const char *level_path)
 
 void Game::load_config()
 {
-	/*
-	std::string ini_path_string(m_ini_path);
-	
-	std::ifstream config_file(ini_path_string.c_str());
-	
-	if(!config_file)
-	{
-		DEBWARN("No "<<ini_path_string<<"; Creating...\n");
-		std::ofstream new_config(ini_path_string.c_str());
-		if(!new_config)
-			DEBWARN("Unable to write config file!...\n");
-		m_unsolved_level=0;
-		new_config<<m_unsolved_level;
-		return;
-	}
-	config_file>>m_unsolved_level;
-	*/
 	
 	m_unsolved_level = Epiconfig::instance()->get_last_level();
 	
@@ -588,30 +571,8 @@ Game::~Game()
 
 void Game::save_last_level(Uint32 last_level)
 {
+	
 	Epiconfig::instance()->set_last_level(last_level);
-	
-	/*
-	FILE* pFile = fopen(m_ini_path, "w");
-		
-	 
-	if(pFile == NULL)
-	{
-		DEBWARN("Error: Unable to open "<<m_ini_path<<", player level cannot be saved.\n");
-	}
-	else
-	{
-		char last_level_string[10];
-	
-		sprintf(last_level_string, "%d", last_level);
-		
-		fputs(last_level_string, pFile);
-		
-		fclose(pFile);
-		
-		DEBWARN("Saved "<<last_level<<" as last level\n");
-			
-	}
-	*/
 	
 }
 

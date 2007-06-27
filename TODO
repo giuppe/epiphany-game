@@ -3,13 +3,15 @@ Simple Todo list
 
 Short term:
   - automagic help screen pressing "h" or "F1"
+  - resizable menu screen
 
 
 
 Medium term:
  - adjustable sound volume;
  - Add music;
- - add and change samples;
+ - normalize samples;
+ - change explosion sample;
  - add new levels;
  - add level editor
 
