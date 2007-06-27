@@ -45,6 +45,8 @@ private:
 	Uint32 m_volume_sound;
 	
 	Uint32 m_volume_music;
+	
+	Uint32 m_last_level;
 
 public:
 
@@ -74,11 +76,17 @@ public:
 	
 	Uint32 get_volume_music();
 	
+	Uint32 get_last_level();
+	
+	void set_last_level(Uint32 level);
+	
 	void set_volume_sound(Uint32 volume);
 	
 	void set_volume_music(Uint32 volume);
 	
 	void read_values_from_file(char* filename);
+	
+	void save_values_to_file(char* filename);
 	
 	void refresh_game_window_parameters();
 	

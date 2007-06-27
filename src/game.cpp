@@ -93,16 +93,11 @@ bool Game::main_loop()
 
 		}
 		
-
 		current_frame_time=SDL_GetTicks();
-		
-		//m_level->get_player().set_direction(STOP);
 		
 		get_keys();
 		
 		move_all();
-
-//		Uint32 current_frame_time=0;
 
 		Uint32 msec_per_frame=m_config->get_msec_per_frame();
 		
@@ -119,12 +114,7 @@ bool Game::main_loop()
 			{
 				draw(j, true);
 			}
-/*
-			if(j==m_config->get_max_anim_drawn()/2)
-			{
-				get_keys();
-			}
-*/
+
 			if(m_frame_limiter_enabled==true)
 			{
 				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
@@ -477,9 +467,9 @@ void Game::init()
 
 	DEBOUT("Entering Game::init()...\n");
 	DEBOUT("Loading default configuration values...\n");
+	
 	m_config = Epiconfig::instance();
-	m_config->set_default_values();
-
+	
 	m_frame_limiter_enabled = true;
 	
 	m_frame_skip = 0;
@@ -499,6 +489,8 @@ void Game::init()
 	}
 	#endif
 
+
+	m_config->read_values_from_file(m_ini_path);
 
 	
 	DEBOUT("Loading config...\n");
@@ -529,6 +521,7 @@ void Game::play_level(const char *level_path)
 
 void Game::load_config()
 {
+	/*
 	std::string ini_path_string(m_ini_path);
 	
 	std::ifstream config_file(ini_path_string.c_str());
@@ -544,7 +537,10 @@ void Game::load_config()
 		return;
 	}
 	config_file>>m_unsolved_level;
-
+	*/
+	
+	m_unsolved_level = Epiconfig::instance()->get_last_level();
+	
 	m_max_num_of_levels=find_levels_in_dir();
 }
 
@@ -587,11 +583,14 @@ void Game::load_fonts()
 
 Game::~Game()
 {
-	
+	Epiconfig::instance()->save_values_to_file(m_ini_path);
 }
 
 void Game::save_last_level(Uint32 last_level)
 {
+	Epiconfig::instance()->set_last_level(last_level);
+	
+	/*
 	FILE* pFile = fopen(m_ini_path, "w");
 		
 	 
@@ -612,6 +611,7 @@ void Game::save_last_level(Uint32 last_level)
 		DEBWARN("Saved "<<last_level<<" as last level\n");
 			
 	}
+	*/
 	
 }
 

@@ -73,48 +73,46 @@
 
 	int main(int argc, char* argv[])
 	{
-			
-		init_modules();	
-		
+				
 		bool disable_frame_limiter = false;
 		
 		bool using_another_map = false;
 		
+		bool print_help = false;
+		
 		Uint32 frame_skip = 0;
 		
-		// command line arguments manipulation
 		cmdl::CmdLine C;
 		
 		C.Init( --argc, ++argv); 
 
-		        // retrieve and print an integer set with option "--set-int"
-		char* map_name= new char[255]; 
-		using_another_map = C.GetSingleValue("--map", map_name);
-			printf("Map name: %s\n", map_name);
-		
-			C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
-			
-			if(C.GetSingleValue("--frame-skip", frame_skip) == false)
-			{
-				frame_skip = 0;
-			}
-			
-			C.Done(); // check for unused options
-			
-			
-			/*
-        if (argc == 2) 
-        {
-			Game* game = Game::instance();
-			game->play_level(argv[1]);
-			return 0;
-		}
-		else if (argc > 2)
+		if(C.GetSingleValue("--help", print_help))
 		{
-			printf("Cannot supply more than one command line argument.\n");
-			return 1;
+			printf("Epiphany 0.7.0\n");
+			printf("Options:\n");
+			printf("\t--help\t\t\t\tprint this help\n");
+			printf("\t--frame-skip <n>\t\tskip <n> frames\n");
+			printf("\t--disable-frame-limiter\t\tdisable frame limiter\n");
+			return 0;
+			
 		}
-	*/
+		
+		init_modules();	
+
+		char* map_name= new char[255]; 
+		
+		using_another_map = C.GetSingleValue("--map", map_name);
+			
+		printf("Map name: %s\n", map_name);
+		
+		C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
+			
+		if(C.GetSingleValue("--frame-skip", frame_skip) == false)
+		{
+			frame_skip = 0;
+		}
+			
+		C.Done();			
 
 		Game* game = Game::instance();
 		
