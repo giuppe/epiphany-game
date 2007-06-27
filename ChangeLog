@@ -2,6 +2,9 @@ Version 0.7.0:
 Added frame skipping (command line: --frame-skip <int>)
 Added loading of external levels (command line: --map <path>)
 Frame limiter could be disabled (command line: --disable-frame-limiter)
+Added XML configuration file
+Added options menu;
+Added sound volume change;
 
 Version 0.6.1:
 Fixed bug that prevented saving game progresses;
