@@ -32,21 +32,30 @@ void Sample_Manager::init()
     	exit(2);
 	}
 	
-
-	
-	
 	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
-	// allocate 16 mixing channels
+
+	// allocate 32 mixing channels
 	Mix_AllocateChannels(32);
+
 	Mix_GroupChannels(0, 1, m_channels_monsters);
+
 	Mix_GroupChannels(2, 3, m_channels_boulders);
+
 	Mix_GroupChannels(4, 5, m_channels_gems);
+
 	Mix_GroupChannels(6, 7, m_channels_explosions);
+
 	Mix_GroupChannel(8, m_channels_timealarm);
 	
 	load_samples();
+	
+	this->set_volume(Epiconfig::instance()->get_volume_sound());
+
 }
+
+
+
 
 void Sample_Manager::load_samples()
 {
@@ -56,25 +65,39 @@ void Sample_Manager::load_samples()
 	std::string res_path(res_factory->get_resource_path());
 
 	res_path+= "/sfx/";
-	
 
 	m_samples[SFX_BOULDER_FALL]=new Sample(Mix_LoadWAV((res_path+"boulder_fall.wav").c_str()));
+
 	m_samples[SFX_EMERALD_EAT]=new Sample(Mix_LoadWAV((res_path+"emerald_eat.wav").c_str()));
+
 	m_samples[SFX_SAPPHIRE_EAT]=new Sample(Mix_LoadWAV((res_path+"sapphire_eat.wav").c_str()));
+
 	m_samples[SFX_GAME_GAMEOVER]=new Sample(Mix_LoadWAV((res_path+"gameover.wav").c_str()));
+
 	m_samples[SFX_DOOR_PASS]=new Sample(Mix_LoadWAV((res_path+"door_pass.wav").c_str()));
+
 	m_samples[SFX_EMERALD_FALL]=new Sample(Mix_LoadWAV((res_path+"gem_fall.wav").c_str()));
+
 	m_samples[SFX_SAPPHIRE_FALL]=new Sample(Mix_LoadWAV((res_path+"gem_fall.wav").c_str()));
+
 	m_samples[SFX_GRASS_EAT]=new Sample(Mix_LoadWAV((res_path+"grass_eat.wav").c_str()));
+
 	m_samples[SFX_KEY_EAT]=new Sample(Mix_LoadWAV((res_path+"key_eat.wav").c_str()));
+
 	m_samples[SFX_PLAYER_MOVE]=new Sample(Mix_LoadWAV((res_path+"player_move.wav").c_str()));
+
 	m_samples[SFX_MONSTER_MOVE]=new Sample(Mix_LoadWAV((res_path+"monster_move.wav").c_str()));
+
 	m_samples[SFX_WOOD_SMASH]=new Sample(Mix_LoadWAV((res_path+"wood_smash.wav").c_str()));
+
 	m_samples[SFX_GAME_TIMEALARM]=new Sample(Mix_LoadWAV((res_path+"timealarm.wav").c_str()));
+
 	m_samples[SFX_EXPLOSION]=new Sample(Mix_LoadWAV((res_path+"explosion.wav").c_str()));
 
-
 }
+
+
+
 
 void Sample_Manager::deinit()
 {
@@ -92,6 +115,8 @@ void Sample_Manager::deinit()
 	delete 	m_samples[SFX_WOOD_SMASH];
 	delete 	m_samples[SFX_GAME_TIMEALARM];
 	delete 	m_samples[SFX_EXPLOSION];
+	
+	Epiconfig::instance()->set_volume_sound(this->get_volume());
 }
 
 

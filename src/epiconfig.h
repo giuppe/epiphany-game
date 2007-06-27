@@ -74,9 +74,9 @@ public:
 	
 	Uint32 get_volume_music();
 	
-	Uint32 set_volume_sound();
+	void set_volume_sound(Uint32 volume);
 	
-	Uint32 set_volume_music();
+	void set_volume_music(Uint32 volume);
 	
 // begin Singleton stuff
 

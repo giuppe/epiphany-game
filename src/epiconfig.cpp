@@ -105,7 +105,16 @@ Uint32 Epiconfig::get_volume_music()
 	return m_volume_music;
 }
 
+void Epiconfig::set_volume_sound(Uint32 volume)
+{
+	m_volume_sound = volume;
+}
+	
 
+void Epiconfig::set_volume_music(Uint32 volume)
+{
+	m_volume_music = volume;
+}
 // begin Singleton stuff
 
 Epiconfig* Epiconfig::_instance = 0;
