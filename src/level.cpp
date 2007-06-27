@@ -35,17 +35,17 @@ extern int glb_curr_id;
 Level::Level()
 {
 
-	m_entities_matrix.resize(Epiconfig::instance()->get_level_size_x());
+	m_entities_matrix.resize(Epiconfig::instance()->get_map_size_x());
 
-	for(Uint32 i=0; i<Epiconfig::instance()->get_level_size_x(); i++)
+	for(Uint32 i=0; i<Epiconfig::instance()->get_map_size_x(); i++)
 	{
 
-		m_entities_matrix[i].resize(Epiconfig::instance()->get_level_size_y());
+		m_entities_matrix[i].resize(Epiconfig::instance()->get_map_size_y());
 		
 	}
 	
-	for(Uint32 x=0; x<Epiconfig::instance()->get_level_size_x(); x++)
-	for(Uint32 y=0; y<Epiconfig::instance()->get_level_size_y(); y++)
+	for(Uint32 x=0; x<Epiconfig::instance()->get_map_size_x(); x++)
+	for(Uint32 y=0; y<Epiconfig::instance()->get_map_size_y(); y++)
 	{
 
 		m_entities_matrix[x][y] = 0;
@@ -172,12 +172,12 @@ void Level::set_entity(Entity* ntt)
 
 Uint32 Level::get_size_x()
 {
-	return Epiconfig::instance()->get_level_size_x();
+	return Epiconfig::instance()->get_map_size_x();
 }
 
 Uint32 Level::get_size_y()
 {
-	return Epiconfig::instance()->get_level_size_y();
+	return Epiconfig::instance()->get_map_size_y();
 }
 
 std::vector<std::vector<Entity_Handle> >& Level::get_entities_matrix()

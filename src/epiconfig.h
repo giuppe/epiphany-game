@@ -22,17 +22,17 @@
 class Epiconfig
 {
 private:
-	Uint32 m_game_size_x;
+	Uint32 m_screen_size_x;
 
-	Uint32 m_game_size_y;
+	Uint32 m_screen_size_y;
 
 	Uint32 m_score_size_y;
 
 //	int m_sprite_size;
 
-	int m_level_size_x;
+	Uint32 m_map_size_x;
 
-	int m_level_size_y;
+	Uint32 m_map_size_y;
 
 	Uint32 m_max_anim_drawn;
 
@@ -50,17 +50,17 @@ public:
 
 	void set_default_values();
 
-	Uint32 get_game_size_x();
+	Uint32 get_screen_size_x();
 
-	Uint32 get_game_size_y();
+	Uint32 get_screen_size_y();
 
 	Uint32 get_score_size_y();
 
 //	int get_sprite_size();
 
-	Uint32 get_level_size_x();
+	Uint32 get_map_size_x();
 
-	Uint32 get_level_size_y();
+	Uint32 get_map_size_y();
 
 	Uint32 get_max_anim_drawn();
 
@@ -77,6 +77,10 @@ public:
 	void set_volume_sound(Uint32 volume);
 	
 	void set_volume_music(Uint32 volume);
+	
+	void read_values_from_file(char* filename);
+	
+	void refresh_game_window_parameters();
 	
 // begin Singleton stuff
 

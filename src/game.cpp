@@ -220,9 +220,9 @@ void Game::move_all()
 	m_level->get_player().set_speed(1);
 
 	Uint32 i,x,y;
-	for(x=0;x<m_config->get_level_size_x();x++)
+	for(x=0;x<m_config->get_map_size_x();x++)
 	{
-		for(y=0;y<m_config->get_level_size_y();y++)
+		for(y=0;y<m_config->get_map_size_y();y++)
 		{
 			matrix[x][y]=0;
 		}
@@ -310,9 +310,9 @@ void Game::draw(Uint32 frame_number, bool update_only)
 void Game::draw_score()
 {
 	
-	Sint32 real_game_size_y = m_config->get_game_size_y()-m_config->get_score_size_y();
-	Sint32 game_size_x=m_config->get_game_size_x();
-	Sint32 game_size_y=m_config->get_game_size_y();
+	Sint32 real_game_size_y = m_config->get_screen_size_y()-m_config->get_score_size_y();
+	Sint32 game_size_x=m_config->get_screen_size_x();
+	Sint32 game_size_y=m_config->get_screen_size_y();
 	Screen* screen = Screen::instance(); 
 	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0);
 	
@@ -510,7 +510,7 @@ void Game::init()
 	
 
 	DEBOUT("Initing Screen...\n");
-	Screen::instance()->init(m_config->get_game_size_x(),m_config->get_game_size_y(),m_config->get_level_size_x(), m_config->get_level_size_y(), k_sprite_size);
+	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x(), m_config->get_map_size_y(), k_sprite_size);
 	
 }
 
@@ -642,7 +642,7 @@ void Game::show_credits()
 	credits.push_back("Eric Mangold");
 	
 
-	Sint32 draw_pos=m_config->get_game_size_y();
+	Sint32 draw_pos=m_config->get_screen_size_y();
 
 //standard method: text scrolling
 	
@@ -672,15 +672,15 @@ void Game::show_credits()
 		}
 		else
 		{
-			draw_pos=m_config->get_game_size_y()-50;
+			draw_pos=m_config->get_screen_size_y()-50;
 		}
 
 
 		// draws two black movie-like bands
 
-		screen->fill_rect(0,0, m_config->get_game_size_x(), 50,0,0,0);
+		screen->fill_rect(0,0, m_config->get_screen_size_x(), 50,0,0,0);
 
-		screen->fill_rect(0,m_config->get_game_size_y()-50, m_config->get_game_size_x(), 50,0,0,0);
+		screen->fill_rect(0,m_config->get_screen_size_y()-50, m_config->get_screen_size_x(), 50,0,0,0);
 
 		while(SDL_GetTicks()-current_frame_time<20)
 		{

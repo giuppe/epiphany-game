@@ -157,7 +157,7 @@ Sint32 Menu::go()
 	
 	Menu_List_Epiphany* m_menu_list = new Menu_List_Epiphany(m_unsolved_level);
 
-	render_menu_list(m_menu_list, config->get_game_size_y()/2, config->get_game_size_x()/2, config->get_game_size_y()/12);
+	render_menu_list(m_menu_list, config->get_screen_size_y()/2, config->get_screen_size_x()/2, config->get_screen_size_y()/12);
 
 	DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
 
@@ -174,7 +174,7 @@ Sint32 Menu::go()
 		{
 			return_action = MENU_EPIPHANY_NONE;
 			Menu_List_Options menu_options;
-			render_menu_list(&menu_options, config->get_game_size_y()/2, config->get_game_size_x()/2, config->get_game_size_y()/12);
+			render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/2, config->get_screen_size_y()/12);
 			break;
 		}
 		case Menu_List_Epiphany::MENU_CREDITS:
@@ -205,7 +205,7 @@ void Menu::print_menu_background()
 	Epiconfig* config=Epiconfig::instance();
 	
 	
-	m_background->put_screen(0,0, config->get_game_size_x(), config->get_game_size_y());
+	m_background->put_screen(0,0, config->get_screen_size_x(), config->get_screen_size_y());
 	
 }
 
