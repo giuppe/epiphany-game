@@ -8,6 +8,7 @@ EXTRA_DIST =boulder.bmp       door_green.bmp  \
 	      key_blue.bmp        key_red.bmp          menu_background.bmp   player.bmp    \
 	      tomato.bmp door_blue.bmp     emerald.bmp      flintstone.bmp \
 	       key_blue_thumb.bmp  key_red_thumb.bmp    menu_font.bmp  \
-	       sapphire.bmp       unknown.bmp
+	       sapphire.bmp       unknown.bmp menu_back_tile.bmp \
+	      menu_title.bmp
 	
 pkgdata_DATA = $(EXTRA_DIST)

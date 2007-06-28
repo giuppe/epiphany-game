@@ -172,7 +172,7 @@ Sint32 Menu::go()
 		{
 			return_action = MENU_EPIPHANY_NONE;
 			Menu_List_Options menu_options;
-			render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/2, config->get_screen_size_y()/12);
+			render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/3, config->get_screen_size_y()/12);
 			break;
 		}
 		case Menu_List_Epiphany::MENU_QUIT:
@@ -199,8 +199,12 @@ void Menu::print_menu_background()
 	
 	Epiconfig* config=Epiconfig::instance();
 	
+	for(Uint32 i=0; i< config->get_screen_size_x(); i+=96)
+	for(Uint32 j=0; j< config->get_screen_size_y(); j+=96)
+	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_BACK_TILE)->put_screen(i,j,96,96,-1);
 	
-	m_background->put_screen(0,0, config->get_screen_size_x(), config->get_screen_size_y());
+	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_TITLE)->put_screen(config->get_screen_size_x()/2-148, 32, 296, 79,-1);
+	//m_background->put_screen(0,0, config->get_screen_size_x(), config->get_screen_size_y());
 	
 }
 
@@ -216,6 +220,8 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 	Screen* screen = Screen::instance();
 
 	Font* menu_font = Font_Manager::instance()->get_font(m_menu_font); 
+
+	input->reset_states();
 
 	input->update();
 	

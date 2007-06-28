@@ -22,7 +22,7 @@ Font* Font_Factory::create_font(Font_Type type)
 			m_res_factory += "/gfx/credits_font.bmp";
 			break;
 		case MENU_FONT:
-			m_res_factory += "/gfx/credits_font.bmp";
+			m_res_factory += "/gfx/menu_font.bmp";
 			break;
 		default:
 			assert(!"Error: Selected non-existing font type.");

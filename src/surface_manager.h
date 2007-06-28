@@ -46,7 +46,9 @@ enum Surface_Type{	SRF_UNKNOWN=0,
 									SRF_KEY_RED_THUMB=24,
 									SRF_KEY_BLUE_THUMB=25,
 									SRF_KEY_GREEN_THUMB=26,
-									SRF_KEY_YELLOW_THUMB=27
+									SRF_KEY_YELLOW_THUMB=27,
+									SRF_MENU_BACK_TILE,
+									SRF_MENU_TITLE
 									};
 private:
 	bool m_is_initialized;

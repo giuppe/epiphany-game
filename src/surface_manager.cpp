@@ -129,22 +129,28 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 			surface_path+=  "tomato.bmp";
 		break;
 	case Surface_Manager::SRF_MENU_SELECTOR:
-	surface_path+=  "menu_selector.bmp";
+		surface_path+=  "menu_selector.bmp";
 		break;
 	case Surface_Manager::SRF_MENU_BACKGROUND:
-	surface_path+=  "menu_background.bmp";
+		surface_path+=  "menu_background.bmp";
 		break;
 	case Surface_Manager::SRF_KEY_RED_THUMB:
-			surface_path+=  "key_red_thumb.bmp";
+		surface_path+=  "key_red_thumb.bmp";
 		break;
 	case Surface_Manager::SRF_KEY_BLUE_THUMB:
-			surface_path+=  "key_blue_thumb.bmp";
+		surface_path+=  "key_blue_thumb.bmp";
 		break;
 	case Surface_Manager::SRF_KEY_GREEN_THUMB:
-			surface_path+=  "key_green_thumb.bmp";
+		surface_path+=  "key_green_thumb.bmp";
 		break;
 	case Surface_Manager::SRF_KEY_YELLOW_THUMB:
-			surface_path+=  "key_yellow_thumb.bmp";
+		surface_path+=  "key_yellow_thumb.bmp";
+		break;
+	case Surface_Manager::SRF_MENU_BACK_TILE:
+		surface_path+=  "menu_back_tile.bmp";
+		break;
+	case Surface_Manager::SRF_MENU_TITLE:
+		surface_path+=  "menu_title.bmp";
 		break;
 	default:
 		assert(!"Trying to access a missing surface.");
@@ -234,8 +240,11 @@ void Surface_Manager::init()
 
 	add_surface(SRF_KEY_GREEN_THUMB, this->create_surface(SRF_KEY_GREEN_THUMB));	
 
-	add_surface(SRF_KEY_YELLOW_THUMB, this->create_surface(SRF_KEY_YELLOW_THUMB));	
+	add_surface(SRF_KEY_YELLOW_THUMB, this->create_surface(SRF_KEY_YELLOW_THUMB));
 	
+	add_surface(SRF_MENU_BACK_TILE, this->create_surface(SRF_MENU_BACK_TILE));	
+	
+	add_surface(SRF_MENU_TITLE, this->create_surface(SRF_MENU_TITLE));	
 }
 
 void Surface_Manager::deinit()
