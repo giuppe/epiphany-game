@@ -103,7 +103,7 @@
 		
 		using_another_map = C.GetSingleValue("--map", map_name);
 			
-		printf("Map name: %s\n", map_name);
+		
 		
 		C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
 			
@@ -125,6 +125,8 @@
 		
 		if(using_another_map == true)
 		{
+			printf("Map name: %s\n", map_name);
+			
 			game->play_level(map_name);
 		}
 		else
