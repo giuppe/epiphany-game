@@ -624,11 +624,11 @@ void Game::show_credits()
   		// draws two black movie-like bands
 
 
-		while(SDL_GetTicks()-current_frame_time<200)
+		while(SDL_GetTicks()-current_frame_time<20)
 		{
-			if(SDL_GetTicks()-current_frame_time<150)
+			if(SDL_GetTicks()-current_frame_time<15)
 			{
-				SDL_Delay(50);
+				SDL_Delay(5);
 			}
 		}
 		screen->flip_display();
