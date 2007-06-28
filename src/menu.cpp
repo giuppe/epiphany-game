@@ -163,8 +163,6 @@ Sint32 Menu::go()
 
 	Uint32 return_action;
 	
-	//Menu_List_Options* menu_options;
-	
 	switch(m_menu_list->get_return_action())
 	{
 		case Menu_List_Epiphany::MENU_START:
@@ -177,9 +175,6 @@ Sint32 Menu::go()
 			render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/2, config->get_screen_size_y()/12);
 			break;
 		}
-		case Menu_List_Epiphany::MENU_CREDITS:
-			return_action = MENU_EPIPHANY_CREDITS;
-			break;
 		case Menu_List_Epiphany::MENU_QUIT:
 			return_action = MENU_EPIPHANY_QUIT;
 			break;

@@ -18,7 +18,6 @@ public:
 	enum{
 		MENU_NONE,
 		MENU_START,
-		MENU_CREDITS,
 		MENU_OPTIONS,
 		MENU_QUIT
 	};

@@ -447,17 +447,19 @@ void Game::go()
   				break;
 			}		
 		}
-  		else if(play==Menu::MENU_EPIPHANY_CREDITS)
+ /* 		else if(play==Menu::MENU_EPIPHANY_CREDITS)
   		{
   			show_credits();
   			play=menu.go();
 		}
-		else if(play==Menu::MENU_EPIPHANY_NONE)
+*/		else if(play==Menu::MENU_EPIPHANY_NONE)
 		{
 			play=menu.go();
 		}
   	
 	}
+	
+	this->show_credits();
 }
 
 
@@ -580,32 +582,24 @@ void Game::save_last_level(Uint32 last_level)
 void Game::show_credits()
 {
 	
+	
+	
 	Sint32 current_frame_time=0;
 
 	std::vector<std::string> credits;
 
 	credits.push_back("Epiphany");
 	credits.push_back(" ");
-	credits.push_back("Coding:");
-	credits.push_back("Giuseppe D'Aqui'");
-	credits.push_back("Giuseppe Martino");
-	credits.push_back(" ");
-	credits.push_back("Level Designing:");
-	credits.push_back("Giuseppe D'Aqui'");
-	credits.push_back("Giuseppe Martino");
-	credits.push_back(" ");
-	credits.push_back("Graphics:");
-	credits.push_back("Giuseppe D'Aqui'");
-	credits.push_back("Antonio Malara");
+	credits.push_back("Giuseppe D'Aqui': Coding, Level Design, Graphics");
+	credits.push_back("Giuseppe Martino: Coding, Level Design");
+	credits.push_back("Antonio Malara: Graphics");
 	credits.push_back(" ");
 	credits.push_back("Thanks to:");
 	credits.push_back("Joerg Jaspert");
 	credits.push_back("Eric Mangold");
 	
 
-	Sint32 draw_pos=m_config->get_screen_size_y();
-
-//standard method: text scrolling
+	//standard method: text scrolling
 	
 	Uint32 i;
 	
@@ -616,38 +610,25 @@ void Game::show_credits()
 	
 	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
 	
-	while(!input->get_quit())
+	while(!(input->get_quit()||input->get_enter()||input->get_fire()))
 	{
 		current_frame_time=SDL_GetTicks();
 		screen->clear();
 		
 		for(i=0; i<credits.size(); i++)
 		{
-			credits_font->write_center(draw_pos+50*i,credits[i].c_str());
+			credits_font->write(32, 32+50*i,credits[i].c_str());
 			
 		}
 		
-    if(draw_pos+50*credits.size()>0)
+  		// draws two black movie-like bands
+
+
+		while(SDL_GetTicks()-current_frame_time<200)
 		{
-			draw_pos-=1;//(Sint32)(((SDL_GetTicks()-current_frame_time)/20)+1);
-		}
-		else
-		{
-			draw_pos=m_config->get_screen_size_y()-50;
-		}
-
-
-		// draws two black movie-like bands
-
-		screen->fill_rect(0,0, m_config->get_screen_size_x(), 50,0,0,0);
-
-		screen->fill_rect(0,m_config->get_screen_size_y()-50, m_config->get_screen_size_x(), 50,0,0,0);
-
-		while(SDL_GetTicks()-current_frame_time<20)
-		{
-			if(SDL_GetTicks()-current_frame_time<15)
+			if(SDL_GetTicks()-current_frame_time<150)
 			{
-				SDL_Delay(10);
+				SDL_Delay(50);
 			}
 		}
 		screen->flip_display();

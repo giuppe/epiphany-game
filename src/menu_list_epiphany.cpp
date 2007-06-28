@@ -20,7 +20,7 @@ Menu_List_Epiphany::Menu_List_Epiphany(Uint32 unsolved_level)
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Options"));
 	
-	m_entries_list.push_back(new Menu_Entry_Simple("Credits"));
+	//m_entries_list.push_back(new Menu_Entry_Simple("Credits"));
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Quit"));
 	
@@ -47,9 +47,6 @@ void Menu_List_Epiphany::action_press()
 			m_return_action = MENU_OPTIONS;
 			break;
 		case 3:
-			m_return_action = MENU_CREDITS;
-			break;
-		case 4:
 			m_return_action = MENU_QUIT;
 			break;
 		default:
