@@ -4,6 +4,7 @@
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
 #include "sfx.h"
+#include "music_manager.h"
 #include <vector>
 #include <cassert>
 
