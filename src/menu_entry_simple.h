@@ -9,7 +9,7 @@ class Menu_Entry_Simple : public Menu_Entry
 		std::string m_string;
 		
 	public:
-		Menu_Entry_Simple(){};
+	//	Menu_Entry_Simple(){};
 	
 		Menu_Entry_Simple(const char* string):m_string(string){};
 	
