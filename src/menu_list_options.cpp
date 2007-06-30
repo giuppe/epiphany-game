@@ -17,10 +17,10 @@ Menu_List_Options::Menu_List_Options()
 	
 	m_selected = 0;
 	
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, 8, "Sound Volume: ", Sample_Manager::instance()->get_volume()*8/128));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", Sample_Manager::instance()->get_volume()));
 	
 	//TODO insert music volume control
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, 8, "Music Volume: ", Music_Manager::instance()->get_volume()*8/128));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", Music_Manager::instance()->get_volume()));
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Back"));
 	
@@ -48,8 +48,8 @@ void Menu_List_Options::action_press()
 	{
 		case 2:
 			m_return_action = MENU_OK;
-			Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value()*128/8);
-			Music_Manager::instance()->set_volume(m_entries_list[1]->get_value()*128/8);
+			Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
+			Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
 			break;
 		default:
 			m_return_action = MENU_NONE;

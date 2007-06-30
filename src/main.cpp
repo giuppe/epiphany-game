@@ -18,6 +18,7 @@
 #include <SDL/SDL.h>
 #include "surface_manager.h"
 #include "resource_factory.h"
+#include "music_manager.h"
 #include "sfx.h"
 #include "input.h"
 #include "fonts/font_manager.h"
@@ -49,6 +50,8 @@
 		
 		Sample_Manager::instance();
 		
+		Music_Manager::instance();
+		
 		Font_Manager::instance();
 		
 		SDL_WM_SetCaption(get_title(), NULL);
@@ -59,6 +62,8 @@
 	{
 		
 		Surface_Manager::instance()->deinit();
+		
+		Music_Manager::instance()->deinit();
 		
 		Sample_Manager::instance()->deinit();
 		

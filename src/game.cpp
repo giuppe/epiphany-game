@@ -24,6 +24,7 @@
 
 #include "entities/entity_player.h"
 #include "surface_manager.h"
+#include "music_manager.h"
 #include "game.h"
 #include "screen.h"
 #include "menu.h"
@@ -389,6 +390,8 @@ void Game::go()
 
 	Menu menu(m_max_num_of_levels,m_unsolved_level);
 
+	Music_Manager::instance()->play(MUS_MENU);
+	
 	Sint32 play=menu.go();
 	
 	while(play!=Menu::MENU_EPIPHANY_QUIT)
@@ -494,6 +497,10 @@ void Game::init()
 
 	m_config->read_values_from_file(m_ini_path);
 
+	Sample_Manager::instance()->set_volume(m_config->get_volume_sound());
+	
+	Music_Manager::instance()->set_volume(m_config->get_volume_music());
+	
 	
 	DEBOUT("Loading config...\n");
 	load_config();	

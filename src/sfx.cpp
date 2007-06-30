@@ -169,7 +169,7 @@ void Sample_Manager::play(Sample_Type type)
 
 Uint32 Sample_Manager::get_max_volume()
 {
-	return MIX_MAX_VOLUME;
+	return MIX_MAX_VOLUME/16;
 }
 
 
@@ -177,7 +177,7 @@ Uint32 Sample_Manager::get_max_volume()
 
 void Sample_Manager::set_volume(Uint32 value)
 {
-	Mix_Volume(-1, value);
+	Mix_Volume(-1, value*16);
 }
 
 
@@ -185,7 +185,7 @@ void Sample_Manager::set_volume(Uint32 value)
 
 Uint32 Sample_Manager::get_volume()
 {
-	return Mix_Volume(-1, -1);
+	return Mix_Volume(-1, -1)/16;
 }
 
 

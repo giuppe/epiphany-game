@@ -43,9 +43,9 @@ void Epiconfig::set_default_values()
 	//m_msec_per_frame=240/m_max_anim_drawn;
 	//m_msec_per_frame=120/m_max_anim_drawn;
 	
-	m_volume_sound = 128;
+	m_volume_sound = 8;
 	
-	m_volume_music = 128;
+	m_volume_music = 8;
 	
 	m_last_level = 0;
 	
@@ -214,6 +214,21 @@ void Epiconfig::read_values_from_file(char* filename)
 			DEBWARN("Setting last level to: "<<m_last_level<<"\n");
 		}
 		
+		TiXmlText* sound_volume = docHandle.FirstChild("config").FirstChild("sound_volume").FirstChild().Text();
+		if(sound_volume)
+		{
+			m_volume_sound = atoi(sound_volume->Value());
+			DEBWARN("Setting sound volume to: "<<m_volume_sound<<"\n");
+		}
+
+		TiXmlText* music_volume = docHandle.FirstChild("config").FirstChild("music_volume").FirstChild().Text();
+		if(music_volume)
+		{
+			m_volume_music = atoi(music_volume->Value());
+			DEBWARN("Setting music volume to: "<<m_volume_music<<"\n");
+		}
+
+		
 	}
 	else
 	{
@@ -255,6 +270,12 @@ void Epiconfig::save_values_to_file(char* filename)
 	TiXmlElement * e_last_level = new TiXmlElement( "last_level" );
 	e_user->LinkEndChild( e_last_level );
 	
+	TiXmlElement * e_sound_volume = new TiXmlElement( "sound_volume" );
+	e_config->LinkEndChild( e_sound_volume );
+	
+	TiXmlElement * e_music_volume = new TiXmlElement( "music_volume" );
+	e_config->LinkEndChild( e_music_volume );
+	
 	char* text_screen_size_x = new char[10];
 	
 	char* text_screen_size_y = new char[10];
@@ -268,6 +289,14 @@ void Epiconfig::save_values_to_file(char* filename)
 	sprintf(text_screen_size_y, "%d", m_screen_size_y);
 	
 	
+	char* text_sound_volume = new char[10];
+	
+	sprintf(text_sound_volume, "%d", m_volume_sound);
+	
+	char* text_music_volume = new char[10];
+	
+	sprintf(text_music_volume, "%d", m_volume_music);
+	
 	TiXmlText * screen_x = new TiXmlText( text_screen_size_x );
 	e_screen_x->LinkEndChild( screen_x );
 	
@@ -277,6 +306,9 @@ void Epiconfig::save_values_to_file(char* filename)
 	TiXmlText * last_level = new TiXmlText( text_last_level );
 	e_last_level->LinkEndChild( last_level );
 	
+	e_sound_volume->LinkEndChild( new TiXmlText( text_sound_volume ) );
+	
+	e_music_volume->LinkEndChild( new TiXmlText( text_music_volume ) );
 	
 	doc.SaveFile( filename );
 	
