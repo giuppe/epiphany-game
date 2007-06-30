@@ -8,10 +8,9 @@ Short term:
   - fullscreen menu option
 
 Medium term:
- - adjustable sound volume;
- - Add music;
  - normalize samples;
  - change explosion sample;
+ - add a *real* resource manager;
  - add new levels;
  - add level editor
 

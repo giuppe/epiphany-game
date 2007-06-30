@@ -12,10 +12,10 @@ The player must collect all valuable minerals scattered in levels,
 avoiding being hit by a falling boulder, or (worst :) by a bomb.
 
 
-Current version: 0.6.1
+Current version: 0.7.0
 Tested under Linux and Win32, on i386 systems;
 
-It is a alpha version, but it is playable.
+It is a alpah version, but it is playable.
 It uses SDL 1.2 and SDL_mixer 1.2 (http://www.libsdl.org), so make sure it is properly installed
 before compiling Epiphany.
 
