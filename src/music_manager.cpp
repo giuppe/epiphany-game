@@ -26,7 +26,7 @@ void Music_Manager::load_musics()
 	//FIXME should check the existence of music files
 	m_musics[MUS_MENU]=Mix_LoadMUS((res_path+"epiphany_menu.ogg").c_str());
 
-	m_musics[MUS_CREDITS]=Mix_LoadMUS((res_path+"emerald_eat.wav").c_str());
+	m_musics[MUS_CREDITS]=Mix_LoadMUS((res_path+"epiphany_credits.ogg").c_str());
 
 	m_musics[MUS_GAME]=Mix_LoadMUS((res_path+"epiphany_game.ogg").c_str());
 

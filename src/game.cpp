@@ -603,13 +603,15 @@ void Game::show_credits()
 
 	credits.push_back("Epiphany");
 	credits.push_back(" ");
-	credits.push_back("Giuseppe D'Aqui': Coding, Level Design, Graphics");
-	credits.push_back("Giuseppe Martino: Coding, Level Design");
-	credits.push_back("Antonio Malara: Graphics");
+	credits.push_back("Giuseppe D'Aqui':");
+	credits.push_back("    Coding, Level Design, Graphics, Music");
+	credits.push_back("Giuseppe Martino:");
+	credits.push_back("    Coding, Level Design");
+	//credits.push_back("Antonio Malara: Graphics");
 	credits.push_back(" ");
 	credits.push_back("Thanks to:");
-	credits.push_back("Joerg Jaspert");
-	credits.push_back("Eric Mangold");
+	credits.push_back("  Joerg Jaspert");
+	credits.push_back("  Eric Mangold");
 	
 
 	//standard method: text scrolling
@@ -622,6 +624,9 @@ void Game::show_credits()
 	Screen* screen = Screen::instance();
 	
 	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
+	
+	Music_Manager::instance()->play(MUS_CREDITS);
+	
 	
 	while(!(input->get_quit()||input->get_enter()||input->get_fire()))
 	{
