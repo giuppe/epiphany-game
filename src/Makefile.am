@@ -15,7 +15,7 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	fonts/font_factory.cpp fonts/font_manager.cpp surface.cpp resource_factory.cpp \
 	menu_entry_ranged.cpp menu_list_epiphany.cpp menu_list_options.cpp \
 	tinyxml/tinystr.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp \
-	tinyxml/tinyxml.cpp menu_entry_bool.cpp
+	tinyxml/tinyxml.cpp menu_entry_bool.cpp music_manager.cpp
 
 epiphany_LDADD = -lSDL -lSDL_mixer
 
@@ -35,4 +35,4 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	resource_factory.h sprite.h epimap.h entity.h cmdline.h \
 	menu_entry.h menu_entry_simple.h menu_entry_ranged.h menu_list.h \
 	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
-	tinyxml/tinyxml.h menu_entry_bool.h
+	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h
