@@ -94,6 +94,8 @@ public:
 	
 	void show_credits();
 	
+	void show_loading();
+	
 	void save_last_level(Uint32 last_level);
 	
 	bool is_frame_limiter_enabled(){return m_frame_limiter_enabled;}

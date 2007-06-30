@@ -44,6 +44,8 @@
 bool Game::main_loop()
 {
 	
+	Music_Manager::instance()->play(MUS_GAME);
+	
 	Uint32 current_frame_time=0;
 	
 	bool exit_state=false;
@@ -415,6 +417,8 @@ void Game::go()
 			DEBOUT("Loading map: "<<current_level_path<<"\n");
   	
 			m_level->load_map(current_level_path);
+  			
+  			show_loading();
   			  	
 			bool result=main_loop();
   	
@@ -428,6 +432,7 @@ void Game::go()
 			{
 			case false:
 				DEBWARN("Game_over!...");
+				Music_Manager::instance()->play(MUS_MENU);
 				play=menu.go();
 				break;
 			case true:
@@ -444,6 +449,7 @@ void Game::go()
 				else
 				{
          			//TODO: maybe a congratulation screen
+         			Music_Manager::instance()->play(MUS_MENU);
          			play=menu.go();
 				}
   			
@@ -644,6 +650,24 @@ void Game::show_credits()
 		input->update();
 	}
 
+}
+
+void Game::show_loading()
+{
+	Screen* screen = Screen::instance();
+	
+	Font* ready_font = Font_Manager::instance()->get_font(Font_Factory::MENU_FONT);
+	
+	screen->clear();
+	
+	ready_font->write_center(100, "Ready!");
+	
+	screen->flip_display();
+	
+	Music_Manager::instance()->play(MUS_READY);
+	
+	SDL_Delay(1940);
+	
 }
 
 

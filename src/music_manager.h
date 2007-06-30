@@ -11,7 +11,8 @@
 enum Music_Type{
 				MUS_MENU,
 				MUS_CREDITS,
-				MUS_GAME
+				MUS_GAME,
+				MUS_READY
 };
 
 

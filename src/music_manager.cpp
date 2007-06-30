@@ -24,11 +24,13 @@ void Music_Manager::load_musics()
 	res_path+= "/sfx/";
 
 	//FIXME should check the existence of music files
-	m_musics[MUS_MENU]=Mix_LoadMUS((res_path+"epiphany_theme.ogg").c_str());
+	m_musics[MUS_MENU]=Mix_LoadMUS((res_path+"epiphany_menu.ogg").c_str());
 
 	m_musics[MUS_CREDITS]=Mix_LoadMUS((res_path+"emerald_eat.wav").c_str());
 
-	m_musics[MUS_GAME]=Mix_LoadMUS((res_path+"sapphire_eat.wav").c_str());
+	m_musics[MUS_GAME]=Mix_LoadMUS((res_path+"epiphany_game.ogg").c_str());
+
+	m_musics[MUS_READY]=Mix_LoadMUS((res_path+"epiphany_ready.ogg").c_str());
 
 }
 
@@ -37,7 +39,7 @@ void Music_Manager::deinit()
 	Mix_FreeMusic(m_musics[MUS_MENU]);
 	Mix_FreeMusic(m_musics[MUS_CREDITS]);
 	Mix_FreeMusic(m_musics[MUS_GAME]);
-	
+	Mix_FreeMusic(m_musics[MUS_READY]);
 	Epiconfig::instance()->set_volume_music(this->get_volume());
 }
 
