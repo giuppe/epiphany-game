@@ -110,8 +110,12 @@ public:
 	//It is called by Game::move_all() for every existing object
 	//and generally it contains some checks and calling to moving_functions
 		virtual void check_and_do()=0;
-		virtual bool pass_on_me(Direction d=STOP)=0;
-		virtual bool smash(Entity_Handle ntt)=0;
+	//	virtual bool pass_on_me(Direction d=STOP)=0;
+		virtual bool player_pressing_up(Entity_Handle down_entity);
+		virtual bool player_pressing_left(Entity_Handle right_entity);
+		virtual bool player_pressing_right(Entity_Handle left_entity);
+		virtual bool player_pressing_down(Entity_Handle up_entity);
+		virtual bool hit_from_up(Entity_Handle ntt)=0;
 		virtual bool explode()=0;
 		virtual bool roll_on_me()=0;
 		

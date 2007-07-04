@@ -57,7 +57,7 @@ void Entity_Falling::check_and_do()
 	{
 		return;
 	}
-	//HACKSOMETHINGHERE
+	//FIXME
 	//WIN32 complains if these are set as references,
 	//while in linux it runs smoothly
 	Entity_Handle down_entity=current_level->get_entity(m_position_x,m_position_y, DOWN);
@@ -67,7 +67,7 @@ void Entity_Falling::check_and_do()
 		if(m_is_falling)
 		{
 
-			m_is_falling=Entity_Manager::instance()->get_entity(down_entity)->smash(current_level->get_entity(m_position_x,m_position_y));
+			m_is_falling=Entity_Manager::instance()->get_entity(down_entity)->hit_from_up(current_level->get_entity(m_position_x,m_position_y));
 		}
 	}
 	else

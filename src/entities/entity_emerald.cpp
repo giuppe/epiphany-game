@@ -37,8 +37,6 @@ Entity_Emerald::Entity_Emerald(Level* level,Uint32 x, Uint32 y)
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_EMERALD));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_is_falling=false;
 	
@@ -83,6 +81,51 @@ bool Entity_Emerald::pass_on_me(Direction d)
 	kill();
 	return true;
 }
+
+bool Entity_Emerald::player_pressing_right(Entity_Handle left_entity)
+{
+	if(m_is_falling==true)
+		return false;
+	
+		current_level->get_player().inc_score(m_value);
+	Sample_Manager::instance()->play(SFX_EMERALD_EAT);
+	kill();
+	return true;
+}
+
+bool Entity_Emerald::player_pressing_left(Entity_Handle right_entity)
+{
+	if(m_is_falling==true)
+		return false;
+	
+		current_level->get_player().inc_score(m_value);
+	Sample_Manager::instance()->play(SFX_EMERALD_EAT);
+	kill();
+	return true;
+}
+
+bool Entity_Emerald::player_pressing_up(Entity_Handle down_entity)
+{
+	if(m_is_falling==true)
+		return false;
+	
+		current_level->get_player().inc_score(m_value);
+	Sample_Manager::instance()->play(SFX_EMERALD_EAT);
+	kill();
+	return true;
+}
+
+bool Entity_Emerald::player_pressing_down(Entity_Handle up_entity)
+{
+	if(m_is_falling==true)
+		return false;
+	
+		current_level->get_player().inc_score(m_value);
+	Sample_Manager::instance()->play(SFX_EMERALD_EAT);
+	kill();
+	return true;
+}
+	
 
 bool Entity_Emerald::explode()
 {

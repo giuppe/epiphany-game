@@ -69,6 +69,10 @@ void Level::set_key(Uint32 key)
 
 Entity_Handle Level::get_entity(Sint32 x, Sint32 y)
 {
+	if((x<0)||(y<0)||(x>(Sint32)m_entities_matrix.size())||(y>(Sint32)m_entities_matrix[0].size()))
+	{
+		return 0;
+	}
 	return m_entities_matrix[x][y];
 }
 
@@ -121,6 +125,54 @@ Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d)
 
 }
 
+Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d, Direction d1)
+{
+	Sint32 dx, dy;
+	
+	switch(d)
+	{
+	case STOP:
+		dx=0;
+		dy=0;
+		break;
+	case UP:
+		dx=0;
+		dy=-1;
+		break;
+	case UPRIGHT:
+		dx=1;
+		dy=-1;
+		break;	
+	case RIGHT:
+		dx=1;
+		dy=0;
+		break;
+	case DOWNRIGHT:
+		dx=1;
+		dy=1;
+		break;	
+	case DOWN:
+		dx=0;
+		dy=1;
+		break;
+	case DOWNLEFT:
+		dx=-1;
+		dy=1;
+		break;	
+	case LEFT:
+		dx=-1;
+		dy=0;
+		break;
+	case UPLEFT:
+		dx=-1;
+		dy=-1;
+		break;	
+	
+	}
+	
+	return get_entity(x+dx, y+dy, d1);
+
+}
 
 void Level::load_map(const char* map_path)
 {
@@ -217,7 +269,8 @@ void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 			{
 				Entity_Explosion* explosion = new Entity_Explosion(this,x,y);
 				
-				explosion->set_transform_to(transform_to); 
+				explosion->set_transform_to(transform_to);
+				explosion->set_initial_position(x, y); 
 				set_entity(explosion);
 			}
 		}
@@ -225,6 +278,7 @@ void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 		{
 			Entity_Explosion* explosion = new Entity_Explosion(this,x,y);
 				explosion->set_transform_to(transform_to); 
+				explosion->set_initial_position(x, y); 
 			set_entity(explosion);
 		}
 	}
@@ -232,6 +286,7 @@ void Level::explode(Uint32 x, Uint32 y, Entity_Type transform_to)
 	{
 		Entity_Explosion* explosion = new Entity_Explosion(this,x,y);
 				explosion->set_transform_to(transform_to); 
+				explosion->set_initial_position(x, y); 
 			set_entity(explosion);
 	}
 		
@@ -246,3 +301,34 @@ Uint32 Level::get_max_time()
 {
 	return m_max_time;
 }
+
+
+
+bool Level::player_push(Uint32 x, Uint32 y, Direction d)
+{
+	Entity_Handle neigh_entity = this->get_entity(x, y, d);
+	if(neigh_entity!=0)
+	{
+		bool return_value = false;
+		switch(d)
+		{
+			case LEFT:
+				return_value = Entity_Manager::instance()->get_entity(neigh_entity)->player_pressing_right(this->get_entity(x,y,d,LEFT));
+				break;
+			case RIGHT:
+				return_value = Entity_Manager::instance()->get_entity(neigh_entity)->player_pressing_left(this->get_entity(x,y,d,RIGHT));
+				break;
+			case UP:
+				return_value = Entity_Manager::instance()->get_entity(neigh_entity)->player_pressing_down(this->get_entity(x,y,d,UP));
+				break;
+			case DOWN:
+				return_value = Entity_Manager::instance()->get_entity(neigh_entity)->player_pressing_up(this->get_entity(x,y,d,DOWN));
+				break;
+			default:
+				return_value = false;
+		}
+		return return_value;
+	}
+	return true;
+}
+

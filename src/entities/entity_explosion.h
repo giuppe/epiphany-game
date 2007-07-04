@@ -38,7 +38,7 @@ public:
 	
 	bool pass_on_me(Direction d){return false;};
 	
-	bool smash(Entity_Handle){return false;};
+	bool hit_from_up(Entity_Handle){return false;};
 	
 	~Entity_Explosion();
 	

@@ -65,8 +65,13 @@ private:
 	
 	void move(Uint32 n_pixel);
 	
+	Uint32 m_sprite_width;
+	
+	Uint32 m_sprite_height;
 	
 public:
+
+	
 	
 	Sprite():m_initialized(false), m_total_frames(8){};
 

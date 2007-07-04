@@ -43,8 +43,6 @@ Entity_Player::Entity_Player(Level* level, Uint32 x, Uint32 y)
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_PLAYER));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);	
 	m_sprite.set_state(SP_STOP);
 	m_score=0;
 		
@@ -96,7 +94,18 @@ void Entity_Player::check_and_do()
 	{
 		m_sprite.set_state(SP_STOP);
 	}
-	Entity* neigh_entity;	
+	
+	if(current_level->player_push(m_position_x, m_position_y, m_direction))
+	{
+		if(!m_is_snapping)
+			move(m_direction);
+	}
+	else
+	{
+		m_sprite.set_state(SP_STOP);
+	}
+
+/*	Entity* neigh_entity;	
 	
 	Entity_Handle neigh_entity_id=current_level->get_entity(m_position_x,m_position_y, m_direction);
 	if(neigh_entity_id!=0)
@@ -121,7 +130,7 @@ void Entity_Player::check_and_do()
 			move(m_direction);
 		}
 	}
-		
+*/		
 	m_direction=STOP;
 
 	m_just_checked=true;
@@ -164,7 +173,7 @@ bool Entity_Player::is_exited()
 	
 }
 
-bool Entity_Player::smash(Entity_Handle ntt)
+bool Entity_Player::hit_from_up(Entity_Handle ntt)
 {
 	current_level->explode(m_position_x,m_position_y);
 

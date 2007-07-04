@@ -13,6 +13,10 @@ Medium term:
  - add a *real* resource manager;
  - add new levels;
  - add level editor
+ - add "boss" levels
+ -- every ten normal levels
+ -- different music, slow
+ -- "thinking" levels
 
 Long term:
  - No bugs ;)

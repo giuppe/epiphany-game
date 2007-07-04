@@ -53,7 +53,7 @@ public:
 	
 	Uint32 get_score();		
 	
-	bool smash(Entity_Handle);
+	bool hit_from_up(Entity_Handle);
 	
 	void inc_score(int score);
 	

@@ -38,8 +38,6 @@ Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score)
 		
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_EXIT));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 
 	
@@ -83,6 +81,63 @@ bool Entity_Exit::pass_on_me(Direction d)
 	return false;
 	
 }
+
+
+bool Entity_Exit::player_pressing_up(Entity_Handle down_entity)
+{
+
+	if(m_is_open)
+	{
+		kill();
+		// player wins...
+		current_level->get_player().win();
+		return true;
+	}
+	return false;
+}
+
+
+bool Entity_Exit::player_pressing_down(Entity_Handle up_entity)
+{
+
+	if(m_is_open)
+	{
+		kill();
+		// player wins...
+		current_level->get_player().win();
+		return true;
+	}
+	return false;
+}
+
+
+bool Entity_Exit::player_pressing_left(Entity_Handle right_entity)
+{
+
+	if(m_is_open)
+	{
+		kill();
+		// player wins...
+		current_level->get_player().win();
+		return true;
+	}
+	return false;
+}
+
+
+bool Entity_Exit::player_pressing_right(Entity_Handle left_entity)
+{
+
+	if(m_is_open)
+	{
+		kill();
+		// player wins...
+		current_level->get_player().win();
+		return true;
+	}
+	return false;
+}
+
 
 void Entity_Exit::set_min_score(Uint32 min_score)
 {

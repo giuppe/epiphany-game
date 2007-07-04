@@ -44,6 +44,10 @@ Sprite::Sprite(Surface* surface)
 	//FIXME: we should obtain this number from Surface
 	m_total_frames = 8;
 	
+	m_sprite_width = 32;
+	
+	m_sprite_height = 32;
+	
 }
 
 Sprite::Sprite(const Sprite& sprite)

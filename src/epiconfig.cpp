@@ -17,6 +17,7 @@
 #include "epiconfig.h"
 #include "tinyxml/tinyxml.h"
 #include <cstdlib>
+#include "sprite.h"
 
 
 void Epiconfig::set_default_values()

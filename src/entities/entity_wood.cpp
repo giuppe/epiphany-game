@@ -28,8 +28,6 @@ Entity_Wood::Entity_Wood(Level* level, Uint32 x, Uint32 y)
 	m_type=WOOD;
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_WOOD));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	
 	m_exists=true;
@@ -41,7 +39,7 @@ bool Entity_Wood::explode()
 	return true;
 }
 
-bool Entity_Wood::smash(Entity_Handle)
+bool Entity_Wood::hit_from_up(Entity_Handle)
 {
 	Sample_Manager::instance()->play(SFX_WOOD_SMASH);
 	return false;

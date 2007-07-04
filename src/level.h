@@ -58,6 +58,8 @@ public:
 	
 	Entity_Handle get_entity(Sint32 x, Sint32 y, Direction d);
 	
+	Entity_Handle get_entity(Sint32 x, Sint32 y, Direction d, Direction d1);
+	
 	void load_map(const char* path);
 	
 	Uint32 get_size_x();
@@ -79,6 +81,8 @@ public:
 	Uint32 get_min_score();
 
 	Uint32 get_max_time();
+	
+	bool player_push(Uint32 x, Uint32 y, Direction d);
 
 };
 

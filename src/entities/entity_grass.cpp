@@ -27,8 +27,6 @@ Entity_Grass::Entity_Grass(Level* level, Uint32 x, Uint32 y)
 	m_type=GRASS;
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_GRASS));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	
@@ -36,6 +34,45 @@ Entity_Grass::Entity_Grass(Level* level, Uint32 x, Uint32 y)
 }
 
 bool Entity_Grass::pass_on_me(Direction d)
+{
+
+	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");
+	Sample_Manager::instance()->play(SFX_GRASS_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Grass::player_pressing_up(Entity_Handle down_entity)
+{
+
+	Sample_Manager::instance()->play(SFX_GRASS_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Grass::player_pressing_down(Entity_Handle up_entity)
+{
+
+	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");
+	Sample_Manager::instance()->play(SFX_GRASS_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Grass::player_pressing_right(Entity_Handle left_entity)
+{
+
+	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");
+	Sample_Manager::instance()->play(SFX_GRASS_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Grass::player_pressing_left(Entity_Handle right_entity)
 {
 
 	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");

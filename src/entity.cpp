@@ -223,6 +223,27 @@ void Entity::move_left()
 }
 
 
+bool Entity::player_pressing_down(Entity_Handle up_entity)
+{
+	return false;
+}
+
+bool Entity::player_pressing_up(Entity_Handle down_entity)
+{
+	return false;
+}
+
+bool Entity::player_pressing_right(Entity_Handle left_entity)
+{
+	return false;
+}
+
+bool Entity::player_pressing_left(Entity_Handle right_entity)
+{
+	return false;
+}
+
+
 /*
 Sprite& Entity::get_sprite()
 {

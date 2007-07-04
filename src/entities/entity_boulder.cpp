@@ -30,8 +30,6 @@ Entity_Boulder::Entity_Boulder(Level* level, Uint32 x, Uint32 y)
 	m_type=BOULDER;
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_BOULDER));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_is_falling=false;
 	m_exists=true;
@@ -65,6 +63,31 @@ bool Entity_Boulder::pass_on_me(Direction d)
 	}
 	return false;
 	
+}
+
+bool Entity_Boulder::player_pressing_left(Entity_Handle right_entity)
+{
+	if((right_entity==0)&&(m_is_falling==false))
+	{
+		move(RIGHT);
+		m_just_checked=true;
+		m_is_falling=true;
+		return true;
+	}
+	return false;
+}
+
+bool Entity_Boulder::player_pressing_right(Entity_Handle left_entity)
+{
+	if((left_entity==0)&&(m_is_falling==false))
+	{
+		move(LEFT);
+		m_just_checked=true;
+		m_is_falling=true;
+	
+		return true;
+	}
+	return false;
 }
 
 bool Entity_Boulder::explode()

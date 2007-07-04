@@ -47,8 +47,6 @@ Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Uint32 id)
 	}
 	
 
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	
 	m_exists=true;
 
@@ -66,6 +64,42 @@ bool Entity_Key::pass_on_me(Direction d)
 	kill();
 	return true;
 }
+
+
+bool Entity_Key::player_pressing_up(Entity_Handle down_entity)
+{
+	current_level->set_key(m_key_id);
+	Sample_Manager::instance()->play(SFX_KEY_EAT);
+	kill();
+	return true;
+}
+
+bool Entity_Key::player_pressing_down(Entity_Handle up_entity)
+{
+	current_level->set_key(m_key_id);
+	Sample_Manager::instance()->play(SFX_KEY_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Key::player_pressing_left(Entity_Handle right_entity)
+{
+	current_level->set_key(m_key_id);
+	Sample_Manager::instance()->play(SFX_KEY_EAT);
+	kill();
+	return true;
+}
+
+
+bool Entity_Key::player_pressing_right(Entity_Handle left_entity)
+{
+	current_level->set_key(m_key_id);
+	Sample_Manager::instance()->play(SFX_KEY_EAT);
+	kill();
+	return true;
+}
+
 
 bool Entity_Key::explode()
 {

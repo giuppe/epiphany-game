@@ -444,7 +444,7 @@ void Game::go()
 				
 					menu.set_current_level(menu.get_unsolved_level());
 				
-					play=0;
+					play=Menu::MENU_EPIPHANY_START;
 				}
 				else
 				{
@@ -467,6 +467,8 @@ void Game::go()
 		}
   	
 	}
+	
+
 	
 	this->show_credits();
 }
@@ -619,7 +621,8 @@ void Game::show_credits()
 	Uint32 i;
 	
 	Input* input =Input::instance();
-	input->update(); 
+	input->reset_states();
+	//input->update(); 
 	
 	Screen* screen = Screen::instance();
 	

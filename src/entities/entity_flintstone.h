@@ -41,13 +41,16 @@ public:
 	
 	bool pass_on_me(Direction d);
 	
-	bool smash(Entity_Handle);
+	bool hit_from_up(Entity_Handle);
 	
 	bool explode();
 	
 	void explode_all_around();
 	
 //	bool roll_on_me(){return true;};
+	bool player_pressing_left(Entity_Handle right_entity);
+	
+	bool player_pressing_right(Entity_Handle left_entity);
 	
 };
 

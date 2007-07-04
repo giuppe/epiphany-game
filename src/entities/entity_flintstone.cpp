@@ -30,8 +30,6 @@ Entity_Flintstone::Entity_Flintstone(Level* level, Uint32 x, Uint32 y)
 	m_type=FLINTSTONE;
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_FLINTSTONE));
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_is_falling=false;
 	m_exists=true;
@@ -90,6 +88,35 @@ void Entity_Flintstone::check_and_do()
 	m_just_checked=true;
 }
 
+
+bool Entity_Flintstone::player_pressing_left(Entity_Handle right_entity)
+{
+	if((right_entity==0)&&(m_is_falling==false))
+	{
+		move(RIGHT);
+		m_just_checked=true;
+		if((current_level->get_entity(get_position_x(), get_position_y(), DOWN))==0)
+			m_is_falling=true;	
+		return true;
+	}
+	return false;
+}
+
+bool Entity_Flintstone::player_pressing_right(Entity_Handle left_entity)
+{
+	if((left_entity==0)&&(m_is_falling==false))
+	{
+		move(LEFT);
+		m_just_checked=true;
+		if((current_level->get_entity(get_position_x(), get_position_y(), DOWN))==0)
+			m_is_falling=true;	
+		return true;
+	}
+	return false;
+}
+
+
+
 bool Entity_Flintstone::pass_on_me(Direction d)
 {
 
@@ -107,7 +134,7 @@ bool Entity_Flintstone::pass_on_me(Direction d)
 	return false;
 }
 
-bool Entity_Flintstone::smash(Entity_Handle smasher)
+bool Entity_Flintstone::hit_from_up(Entity_Handle smasher)
 {
 	//kill();
 	if(Entity_Manager::instance()->get_entity(smasher)->get_type()==BOULDER)

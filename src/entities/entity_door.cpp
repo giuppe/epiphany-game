@@ -52,8 +52,6 @@ Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)
 	default:
 		assert(!"Error: Selected non existent door type.");
 	}
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	m_is_open=false;
@@ -75,6 +73,77 @@ bool Entity_Door::pass_on_me(Direction d)
 		{
 			current_level->get_player().set_speed(2);
 			current_level->get_player().move(d);
+			//current_level->get_player().set_direction(d);
+			Sample_Manager::instance()->play(SFX_DOOR_PASS);
+			return true;
+		}
+	}
+	return false;
+}
+
+
+bool Entity_Door::player_pressing_up(Entity_Handle down_entity)
+{
+	if(m_is_open)
+	{
+//		kill();
+		if(down_entity==0)
+		{
+			current_level->get_player().set_speed(2);
+			current_level->get_player().move(DOWN);
+			//current_level->get_player().set_direction(d);
+			Sample_Manager::instance()->play(SFX_DOOR_PASS);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Entity_Door::player_pressing_down(Entity_Handle up_entity)
+{
+	if(m_is_open)
+	{
+//		kill();
+		if(up_entity==0)
+		{
+			current_level->get_player().set_speed(2);
+			current_level->get_player().move(UP);
+			//current_level->get_player().set_direction(d);
+			Sample_Manager::instance()->play(SFX_DOOR_PASS);
+			return true;
+		}
+	}
+	return false;
+}
+
+
+bool Entity_Door::player_pressing_left(Entity_Handle right_entity)
+{
+	if(m_is_open)
+	{
+//		kill();
+		if(right_entity==0)
+		{
+			current_level->get_player().set_speed(2);
+			current_level->get_player().move(RIGHT);
+			//current_level->get_player().set_direction(d);
+			Sample_Manager::instance()->play(SFX_DOOR_PASS);
+			return true;
+		}
+	}
+	return false;
+}
+
+
+bool Entity_Door::player_pressing_right(Entity_Handle left_entity)
+{
+	if(m_is_open)
+	{
+//		kill();
+		if(left_entity==0)
+		{
+			current_level->get_player().set_speed(2);
+			current_level->get_player().move(LEFT);
 			//current_level->get_player().set_direction(d);
 			Sample_Manager::instance()->play(SFX_DOOR_PASS);
 			return true;

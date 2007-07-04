@@ -45,11 +45,19 @@ public:
 	
 	Uint32 get_min_score();
 	
-	bool smash(Entity_Handle){return false;};
+	bool hit_from_up(Entity_Handle){return false;};
 	
 	bool explode();
 
 	bool roll_on_me(){return false;};	
+	
+	bool player_pressing_left(Entity_Handle right_entity);
+	
+	bool player_pressing_right(Entity_Handle left_entity);
+	
+	bool player_pressing_up(Entity_Handle down_entity);
+	
+	bool player_pressing_down(Entity_Handle up_entity);
 	
 };
 
