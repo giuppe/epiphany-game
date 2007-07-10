@@ -1,10 +1,25 @@
+/***************************************************************************
+                          entity_factory.cpp  -  description
+                             -------------------
+    begin                : Jun 13 2007
+    copyright            : (C) 2007 by Giuseppe D'Aqui'
+    email                : kumber@tiscalinet.it
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License, Version 2,      *
+ *   as published by the Free Software Foundation.                         *
+ *                                                                         *
+ ***************************************************************************/
+
 #include "entity_factory.h"
-//#include "entity_blank.h"
 #include "entity_all.h"
 
 #include "level.h"
 
-//FIXME: remove *any* reference to Level
+//APOI: remove *any* reference to Level, maybe through message passing
 
 Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 {

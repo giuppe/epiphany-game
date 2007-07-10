@@ -51,5 +51,13 @@ enum Entity_Type{	UNKNOWN=0,
 									TOMATO_DOWN=26,
 									TOMATO_LEFT=27
 									};
+									
+enum Entity_State{	STOPPED,
+					MOVING_UP,
+					MOVING_RIGHT,
+					MOVING_LEFT,
+					MOVING_DOWN,
+					DYING
+};
 
 #endif //ENTITY_TYPE_H

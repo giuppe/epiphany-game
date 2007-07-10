@@ -1,3 +1,19 @@
+/***************************************************************************
+                          resource_factory.cpp  -  description
+                             -------------------
+    begin                : Jun 13 2007
+    copyright            : (C) 2007 by Giuseppe D'Aqui'
+    email                : kumber@tiscalinet.it
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License, Version 2,      *
+ *   as published by the Free Software Foundation.                         *
+ *                                                                         *
+ ***************************************************************************/
+
 #include "resource_factory.h"
 #include "dephine.h"
 #include <cstdio>

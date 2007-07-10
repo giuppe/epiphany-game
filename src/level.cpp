@@ -69,7 +69,7 @@ void Level::set_key(Uint32 key)
 
 Entity_Handle Level::get_entity(Sint32 x, Sint32 y)
 {
-	if((x<0)||(y<0)||(x>(Sint32)m_entities_matrix.size())||(y>(Sint32)m_entities_matrix[0].size()))
+	if((x<0)||(y<0)||(x>=(Sint32)m_entities_matrix.size())||(y>=(Sint32)m_entities_matrix[0].size()))
 	{
 		return 0;
 	}

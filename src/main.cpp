@@ -9,8 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License, Version 2, as published by  *
- *   the Free Software Foundation.                                   *
+ *   it under the terms of the GNU General Public License, Version 2,      *
+ *   as published by the Free Software Foundation.                         *
  *                                                                         *
  ***************************************************************************/
 
@@ -98,6 +98,7 @@
 			printf("\t--help\t\t\t\tprint this help\n");
 			printf("\t--frame-skip <n>\t\tskip <n> frames\n");
 			printf("\t--disable-frame-limiter\t\tdisable frame limiter\n");
+			printf("\t--map <map_path>\t\tplay <map_path> as level\n");
 			return 0;
 			
 		}
@@ -114,7 +115,7 @@
 			
 		if(C.GetSingleValue("--frame-skip", frame_skip) == false)
 		{
-			frame_skip = 0;
+			frame_skip = 1;
 		}
 			
 		C.Done();			

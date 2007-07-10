@@ -607,14 +607,17 @@ void Game::show_credits()
 	credits.push_back(" ");
 	credits.push_back("Giuseppe D'Aqui':");
 	credits.push_back("    Coding, Level Design, Graphics, Music");
+	credits.push_back(" ");
 	credits.push_back("Giuseppe Martino:");
 	credits.push_back("    Coding, Level Design");
 	//credits.push_back("Antonio Malara: Graphics");
 	credits.push_back(" ");
 	credits.push_back("Thanks to:");
-	credits.push_back("  Joerg Jaspert");
-	credits.push_back("  Eric Mangold");
-	
+	credits.push_back("  Joerg Jaspert, for Debian Packages");
+	credits.push_back("  Eric Mangold, for Level Editor");
+	credits.push_back(" ");
+	credits.push_back("Released under General Public License v2");
+	credits.push_back("See COPYING for details.");
 
 	//standard method: text scrolling
 	
@@ -638,7 +641,7 @@ void Game::show_credits()
 		
 		for(i=0; i<credits.size(); i++)
 		{
-			credits_font->write(32, 32+50*i,credits[i].c_str());
+			credits_font->write(32, 32+30*i,credits[i].c_str());
 			
 		}
 		

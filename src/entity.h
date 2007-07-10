@@ -51,6 +51,7 @@ protected:
 	
 	Sprite m_sprite;
 	
+	
 		
 	//True if an entity exists - not used
 	bool m_exists;

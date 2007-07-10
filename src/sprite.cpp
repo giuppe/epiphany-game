@@ -50,14 +50,13 @@ Sprite::Sprite(Surface* surface)
 	
 }
 
+
+
+
 Sprite::Sprite(const Sprite& sprite)
 {
 
 	//DEBOUT("Entering Sprite cpyctor...\n");
-
-//	CL_Surface temp=*(sprite.m_surface);
-
-//	m_surface=new CL_Surface(temp);
 
 	m_surface=sprite.m_surface;
 	
@@ -82,6 +81,8 @@ Sprite::Sprite(const Sprite& sprite)
 }
 
 
+
+
 void Sprite::init(Surface* surf)
 {
 
@@ -100,21 +101,34 @@ void Sprite::init(Surface* surf)
 	m_state = SP_STOP;
 	
 }
+
+
+
 	
 Sprite::~Sprite()
 {
 	
 	
 }
+
+
+
+
 void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
 {
 	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, (Sint32)frame_num);
 }
 
+
+
+
 void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y)
 {
 	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, m_curr_frame+m_state);
 }
+
+
+
 
 
 void Sprite::set_pos_x(Uint32 pos_x)
@@ -123,11 +137,17 @@ void Sprite::set_pos_x(Uint32 pos_x)
 	m_move_to_pos_x=pos_x;
 }
 
+
+
+
 void Sprite::set_pos_y(Uint32 pos_y)
 {
 	m_pos_y=pos_y;
 	m_move_to_pos_y=pos_y;
 }
+
+
+
 
 void Sprite::set_curr_frame(Uint32 frame)
 {
@@ -142,15 +162,22 @@ void Sprite::set_curr_frame(Uint32 frame)
 	}
 }
 
+
+
+
 void Sprite::set_speed(Uint32 speed)
 {
 	m_speed=speed;
 }
 
+
+
+
 void Sprite::move(Uint32 n_pixel)
 {
 	
 	n_pixel*=m_speed;
+	
 	if(m_pos_x<m_move_to_pos_x)
 	{
 		if(m_pos_x+n_pixel>m_move_to_pos_x)
@@ -205,63 +232,8 @@ void Sprite::move()
 {
 	
 	Sint32 n_pixel = k_sprite_size/m_total_frames;
-	
-	n_pixel*=m_speed;
-	if(m_pos_x!=m_move_to_pos_x)
-	{
-	if(m_pos_x<m_move_to_pos_x)
-	{
-		if(m_pos_x+n_pixel>m_move_to_pos_x)
-		{
-			m_pos_x=m_move_to_pos_x;
-		}
-		else
-		{
-			m_pos_x+=n_pixel;
-		}
-	}
-	else
-	{
-		if(m_pos_x-n_pixel<m_move_to_pos_x)
-		{
-			m_pos_x=m_move_to_pos_x;
-		}
-		else
-		{
-			m_pos_x-=n_pixel;
-		}
-	}
-	
-	}
-
-	if(m_pos_y!=m_move_to_pos_y)
-	{
-
-	if(m_pos_y<m_move_to_pos_y)
-	{
-		if(m_pos_y+n_pixel>m_move_to_pos_y)
-		{
-			m_pos_y=m_move_to_pos_y;
-		}
-		else
-		{
-			m_pos_y+=n_pixel;
-		}
-	}
-	else
-	{
-		if(m_pos_y-n_pixel<m_move_to_pos_y)
-		{
-			m_pos_y=m_move_to_pos_y;
-		}
-		else
-		{
-			m_pos_y-=n_pixel;
-		}
-	}
-	}
-
-
+		
+	move(n_pixel);
 
 }
 

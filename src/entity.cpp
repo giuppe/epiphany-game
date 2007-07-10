@@ -27,6 +27,7 @@ Entity::Entity()
 	//glb_curr_id++;
 	set_speed(1);
 	m_just_checked=false;
+
 	
 }
 
@@ -185,6 +186,8 @@ void Entity::move_up()
 	Uint32 new_position_y=m_position_y-1;	
 
 	set_position(new_position_x, new_position_y);
+
+	
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
 	m_sprite.set_state(SP_UP);
 		
@@ -197,6 +200,8 @@ void Entity::move_down()
 	Uint32 new_position_y=m_position_y+1;	
 
 	set_position(new_position_x, new_position_y);
+
+	
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
 	m_sprite.set_state(SP_DOWN);
 }
@@ -208,6 +213,8 @@ void Entity::move_right()
 	Uint32 new_position_y=m_position_y;	
 
 	set_position(new_position_x, new_position_y);
+
+	
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
 	m_sprite.set_state(SP_RIGHT);
 }
@@ -218,6 +225,8 @@ void Entity::move_left()
 	Uint32 new_position_y=m_position_y;	
 
 	set_position(new_position_x, new_position_y);
+	
+	
 	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
 	m_sprite.set_state(SP_LEFT);
 }
