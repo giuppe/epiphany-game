@@ -38,7 +38,7 @@ public:
 	
 	Entity_Handle add_entity(Entity* entity);
 	
-	Uint32 size() const {return m_entities.size();};
+	Uint32 size() {return m_entities.size();};
 	
 	void reset();
 	
