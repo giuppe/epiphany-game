@@ -209,6 +209,8 @@ void Game::move_all()
 {
 	
 	Entity_Manager* entity_manager = Entity_Manager::instance();
+	
+	Uint32 entity_manager_size = entity_manager->size();
 
 	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
@@ -223,7 +225,7 @@ void Game::move_all()
 		}
 	}
 	Entity* curr_entity;
-	for(i=1; i<entity_manager->size(); i++)
+	for(i=1; i<entity_manager_size; i++)
 	{	
 		curr_entity = entity_manager->get_entity(i);
 		if(curr_entity->exists())
@@ -234,7 +236,7 @@ void Game::move_all()
 	}
 	
 	
-	for(i=1; i<entity_manager->size(); i++)
+	for(i=1; i<entity_manager_size; i++)
 	{
 		curr_entity = entity_manager->get_entity(i);
 		
@@ -264,6 +266,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	
 	Entity_Manager* entity_manager = Entity_Manager::instance();
 	
+	Uint32 entity_manager_size = entity_manager->size();
+	
 	//centering screen on player
 	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
@@ -279,7 +283,7 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	}
 
 	//draw other entities
-	for(Uint32 i=1; i<entity_manager->size(); i++)
+	for(Uint32 i=1; i<entity_manager_size; i++)
 	{
 		curr_ntt=entity_manager->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
@@ -294,9 +298,9 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	}
 	if(update_only == false)
 	{
-	draw_score();
+		draw_score();
 	
-	screen->flip_display();
+		screen->flip_display();
 	}
 	
 }
