@@ -45,16 +45,18 @@ Font* Font_Factory::create_font(Font_Type type)
 	}
 	DEBOUT("Loading font: "<<m_res_factory<<"...\n");
 	SDL_Surface* temp = SDL_LoadBMP(m_res_factory.c_str());
-	if(temp!=NULL)
+	SDL_Surface* temp2 = SDL_DisplayFormat(temp);
+	
+	if(temp2!=NULL)
 	{
-		font->init(SFont_InitFont (temp));
+		font->init(SFont_InitFont (temp2));
 	}
 	else
 	{
-		DEBOUT("Error: "<<m_res_factory<<" is not a valid font.\n");
+		DEBOUT("Error: "<<m_res_factory<<" is not a valid font: "<<SDL_GetError()<<"\n");
 	}
 	
-	//SDL_FreeSurface(temp);
+	SDL_FreeSurface(temp);
 	
 	return font;
 }

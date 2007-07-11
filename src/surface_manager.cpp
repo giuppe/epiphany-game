@@ -172,11 +172,13 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		assert(!"Trying to access a missing surface.");
 	}
 	
-	SDL_Surface* temp = SDL_LoadBMP(surface_path.c_str());
+	SDL_Surface* temp2 = SDL_LoadBMP(surface_path.c_str());
+	
+	SDL_Surface* temp = SDL_DisplayFormat(temp2);
 	
 	if(temp==NULL)
 	{
-		DEBOUT("Error: "<<surface_path<<" is not a surface bitmap.\n");
+		DEBOUT("Error: "<<surface_path<<" is not a valid surface bitmap: "<<SDL_GetError()<<"\n");
 		assert(0);
 	}
 	//Set pink as transparent color
@@ -184,7 +186,7 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 	
 	surface->init(temp, frame_size_x, frame_size_y);
 	
-	//SDL_FreeSurface(temp);
+	SDL_FreeSurface(temp2);
 	
 	return surface;
 }

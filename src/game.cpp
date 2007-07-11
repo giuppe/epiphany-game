@@ -207,6 +207,8 @@ void Game::get_keys()
 
 void Game::move_all()
 {
+	
+	Entity_Manager* entity_manager = Entity_Manager::instance();
 
 	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
@@ -221,9 +223,9 @@ void Game::move_all()
 		}
 	}
 	Entity* curr_entity;
-	for(i=1; i<Entity_Manager::instance()->size(); i++)
+	for(i=1; i<entity_manager->size(); i++)
 	{	
-		curr_entity = Entity_Manager::instance()->get_entity(i);
+		curr_entity = entity_manager->get_entity(i);
 		if(curr_entity->exists())
 		{
 			curr_entity->set_checked(false);
@@ -232,9 +234,9 @@ void Game::move_all()
 	}
 	
 	
-	for(i=1; i<Entity_Manager::instance()->size(); i++)
+	for(i=1; i<entity_manager->size(); i++)
 	{
-		curr_entity = Entity_Manager::instance()->get_entity(i);
+		curr_entity = entity_manager->get_entity(i);
 		
 		if(curr_entity->exists())
 		{
@@ -260,6 +262,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	Screen* screen = Screen::instance();
 	screen->clear();
 	
+	Entity_Manager* entity_manager = Entity_Manager::instance();
+	
 	//centering screen on player
 	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
@@ -275,9 +279,9 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	}
 
 	//draw other entities
-	for(Uint32 i=1; i<Entity_Manager::instance()->size(); i++)
+	for(Uint32 i=1; i<entity_manager->size(); i++)
 	{
-		curr_ntt=Entity_Manager::instance()->get_entity(i);
+		curr_ntt=entity_manager->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
 			curr_ntt->get_sprite().update_frame();
@@ -513,13 +517,16 @@ void Game::init()
 	DEBOUT("Loading config...\n");
 	load_config();	
 	
+	DEBOUT("Initing Screen...\n");
+	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x(), m_config->get_map_size_y(), k_sprite_size);
+	
+	Surface_Manager::instance();
+	
 	
 	DEBOUT("Loading fonts...\n");
 	load_fonts();
 	
 
-	DEBOUT("Initing Screen...\n");
-	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x(), m_config->get_map_size_y(), k_sprite_size);
 	
 }
 
@@ -569,6 +576,8 @@ void Game::load_fonts()
 {
 	
 	DEBOUT("Loading fonts... ");
+	
+	Font_Manager::instance();
 
 	m_game_font=Font_Factory::GAME_FONT;
 
