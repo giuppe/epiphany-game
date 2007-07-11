@@ -39,6 +39,8 @@ private:
 	
 	void load_musics();
 	
+	bool music_enabled;
+	
 public:
 	
 	void init();
@@ -52,6 +54,10 @@ public:
 	Uint32 get_volume();
 	
 	void set_volume(Uint32 value);
+	
+	void disable_music();
+	
+	void enable_music();
 	
 	// begin Singleton stuff
 

@@ -45,15 +45,11 @@
 		Screen::instance();
 		
 		Resource_Factory::instance();
-		
-		Surface_Manager::instance();
-		
+			
 		Sample_Manager::instance();
 		
 		Music_Manager::instance();
-		
-		Font_Manager::instance();
-		
+
 		SDL_WM_SetCaption(get_title(), NULL);
 	
 	}
@@ -83,6 +79,8 @@
 		
 		bool using_another_map = false;
 		
+		bool disable_music = false;
+		
 		bool print_help = false;
 		
 		Uint32 frame_skip = 0;
@@ -99,6 +97,7 @@
 			printf("\t--frame-skip <n>\t\tskip <n> frames\n");
 			printf("\t--disable-frame-limiter\t\tdisable frame limiter\n");
 			printf("\t--map <map_path>\t\tplay <map_path> as level\n");
+			printf("\t--disable-music\t\tDon't play music\n");
 			return 0;
 			
 		}
@@ -117,6 +116,14 @@
 		{
 			frame_skip = 1;
 		}
+		
+		C.GetSingleValue("--disable-music", disable_music);
+		
+		if(disable_music == true)
+		{
+			Music_Manager::instance()->disable_music();
+		}
+		
 			
 		C.Done();			
 

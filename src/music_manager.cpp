@@ -24,6 +24,8 @@ void Music_Manager::init()
 	//FIXME: we should auto-resize the vector
 	m_musics.resize(25);
 	
+	music_enabled = true;
+	
 	load_musics();
 	
 	this->set_volume(Epiconfig::instance()->get_volume_music());
@@ -71,6 +73,9 @@ Mix_Music* Music_Manager::get_music(Music_Type music)
 
 void Music_Manager::play(Music_Type type)
 {
+	if(music_enabled == false)
+		return;
+		
 	Mix_Music* music = get_music(type);
 	
 	if(Mix_PlayMusic(music, -1)==-1) {
@@ -100,6 +105,16 @@ Uint32 Music_Manager::get_volume()
 	return Mix_VolumeMusic(-1)/16;
 }
 
+
+void Music_Manager::disable_music()
+{
+	music_enabled=false;
+}
+
+void Music_Manager::enable_music()
+{
+	music_enabled = true;
+}
 
 
 
