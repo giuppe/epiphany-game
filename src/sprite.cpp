@@ -237,7 +237,7 @@ void Sprite::move()
 
 }
 
-Uint32 Sprite::get_frame_number()
+Uint32 Sprite::get_frame_number() const
 {
 
 	return m_curr_frame;

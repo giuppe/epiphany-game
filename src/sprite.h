@@ -86,12 +86,12 @@ public:
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
 	
 	
-	Uint32 get_pos_x()
+	Uint32 get_pos_x() const
 	{
 		return m_pos_x;
   	}
 	
-	Uint32 get_pos_y()
+	Uint32 get_pos_y() const
 	{
 		return m_pos_y;
  	}
@@ -110,7 +110,7 @@ public:
 	
 	void update_frame();
 	
-	Uint32 get_frame_number();
+	Uint32 get_frame_number() const;
 	
 	void init(Surface* surf);
 	
