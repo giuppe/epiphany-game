@@ -122,9 +122,9 @@ bool Game::main_loop()
 			{
 				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
 				{
-					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-10))
+					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-5))
 					{
-						SDL_Delay(10);
+						SDL_Delay(5);
 					}
 				}
 			}
