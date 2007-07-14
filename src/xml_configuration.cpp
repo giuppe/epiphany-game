@@ -128,7 +128,7 @@ void XMLConfiguration::set_string(const std::string& section_name, const std::st
 
 
 
-void XMLConfiguration::set_int(const std::string& section_name, const std::string& object_name, const int& value)
+void XMLConfiguration::set_int(const std::string& section_name, const std::string& object_name, const Uint32& value)
 {
 	char string_value[255];
 	sprintf(string_value, "%d", value);

@@ -47,7 +47,7 @@ class XMLConfiguration : public AbstractConfiguration
 	
 		void set_string(const std::string& section_name, const std::string& object_name, const std::string& value);
 	
-		void set_int(const std::string& section_name, const std::string& object_name, const int& value);
+		void set_int(const std::string& section_name, const std::string& object_name, const Uint32& value);
 	
 		void set_bool(const std::string& section_name, const std::string& object_name, const bool& value);
 	
