@@ -26,6 +26,13 @@
 #include "screen.h"
 #include "cmdline.h"
 
+//TEST
+#include "abstract_configuration.h"
+#include "xml_configuration.h"
+#include "commandline_configuration.h"
+
+// END TEST
+
 
 
 	const char* get_title()
@@ -125,7 +132,22 @@
 		}
 		
 			
-		C.Done();			
+		C.Done();
+		
+		// TEST ZONE
+		
+		AbstractConfiguration* config = new XMLConfiguration("./mytest.xml", true);
+		
+		config->set_int("screen","size_x", 640);
+		
+		config->remove_section("author");
+		
+		config->save();
+		
+		config = new CommandlineConfiguration(argc, argv);
+		
+		
+		// END TEST ZONE			
 
 		Game* game = Game::instance();
 		

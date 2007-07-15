@@ -12,7 +12,7 @@ class XMLConfiguration : public AbstractConfiguration
 	
 		TiXmlDocument* m_document;
 		
-		std::string get_value(const std::string& section, const std::string& object) const;
+		bool get_value(const std::string& section, const std::string& object, std::string& value) const;
 		
 	//	std::string get_section(const std::string& object_path) const;
 		
@@ -31,13 +31,13 @@ class XMLConfiguration : public AbstractConfiguration
 		
 		~XMLConfiguration();
 		
-		std::string get_string(const std::string& section_name, const std::string& object_name) const;
+		bool get_string(const std::string& section_name, const std::string& object_name, std::string& value) const;
 		
-		Uint32 get_int(const std::string& section_name, const std::string& object_name) const;
+		bool get_int(const std::string& section_name, const std::string& object_name, Uint32& value) const;
 	
-		bool get_bool(const std::string& section_name, const std::string& object_name) const;
+		bool get_bool(const std::string& section_name, const std::string& object_name, bool& value) const;
 	
-	//	double get_double(const std::string& object_name) const;
+	//	bool get_double(const std::string& object_name, double& value) const;
 	
 		void save();
 		

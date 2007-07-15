@@ -25,7 +25,7 @@ std::string XMLConfiguration::get_object_name(const std::string& object_path) co
 */
 
 
-std::string XMLConfiguration::get_value(const std::string& section, const std::string& object) const
+bool XMLConfiguration::get_value(const std::string& section, const std::string& object, std::string& value) const
 {
 	if(m_initialized == true)
 	{
@@ -36,16 +36,17 @@ std::string XMLConfiguration::get_value(const std::string& section, const std::s
 		{
 		
 			DEBWARN("XMLConfiguration: "<<section<<"/"<<object<<" is "<<object_value<<"\n");
-			return object_value->Value();
+			value = object_value->Value(); 
+			return true;
 		}	
 	
 		DEBWARN("XMLConfiguration: cannot load "<<section<<"/"<<object<<"\n");
-		return "";
+		return false;
 	
 	}
 	
 	assert(!"XMLConfiguration: not initialized\n");
-	return "";
+	return false;
 	
 	
 }
@@ -86,27 +87,45 @@ XMLConfiguration::~XMLConfiguration()
 
 
 
-std::string XMLConfiguration::get_string(const std::string& section_name, const std::string& object_name) const
+bool XMLConfiguration::get_string(const std::string& section_name, const std::string& object_name, std::string& value) const
 {
 	
-	return get_value(section_name, object_name);
+	return get_value(section_name, object_name, value);
 }
 
 
 
-Uint32 XMLConfiguration::get_int(const std::string& section_name, const std::string& object_name) const
+bool XMLConfiguration::get_int(const std::string& section_name, const std::string& object_name, Uint32& value) const
 {
-	return atoi(get_value(section_name, object_name).c_str());
+	std::string value_string;
+	bool result = get_value(section_name, object_name, value_string);
+	if(result==true)
+	{
+		value = atoi(value_string.c_str());
+	}
+	return result;
 }
 
 
 	
-bool XMLConfiguration::get_bool(const std::string& section_name, const std::string& object_name) const
+bool XMLConfiguration::get_bool(const std::string& section_name, const std::string& object_name, bool& value) const
 {
-	if(get_value(section_name, object_name) == "true")
-		return true;
-		
-	return false;
+	std::string value_string;
+	bool result = get_value(section_name, object_name, value_string);
+	
+	if(result == true)
+	{
+		if(value_string == "true")
+		{
+			value = true;
+		}
+		else
+		{
+			value = false;
+		}
+	}
+	
+	return result;
 }
 
 	
