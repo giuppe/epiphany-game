@@ -4,7 +4,7 @@ bin_PROGRAMS = epiphany
 
 epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	levelmap.cpp epiconfig.cpp entity_factory.cpp entity_manager.cpp \
-	game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp cmdline.cpp \
+	game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp \
 	entities/entity_gem.cpp entities/entity_door.cpp  entities/entity_wood.cpp 			\
          entities/entity_brick.cpp entities/entity_player.cpp  entities/entity_falling.cpp 		\
 	 entities/entity_emerald.cpp  entities/entity_peperon.cpp  entities/entity_sapphire.cpp 	\
@@ -33,7 +33,7 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	entities/entity_grass.h entities/entity_monster.h entities/entity_peperon.h \
 	entities/entity_player.h entities/entity_brick.h entities/entity_door.h \
 	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
-	resource_factory.h sprite.h epimap.h entity.h cmdline.h \
+	resource_factory.h sprite.h epimap.h entity.h \
 	menu_entry.h menu_entry_simple.h menu_entry_ranged.h menu_list.h \
 	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
 	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h abstract_configuration.h \
