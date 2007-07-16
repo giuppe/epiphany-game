@@ -24,14 +24,11 @@
 #include "fonts/font_manager.h"
 #include "game.h"
 #include "screen.h"
-#include "cmdline.h"
 
-//TEST
-#include "abstract_configuration.h"
-#include "xml_configuration.h"
+
+
+
 #include "commandline_configuration.h"
-
-// END TEST
 
 
 
@@ -92,11 +89,9 @@
 		
 		Uint32 frame_skip = 0;
 		
-		cmdl::CmdLine C;
+		CommandlineConfiguration* cmdconf = new CommandlineConfiguration(argc, argv);
 		
-		C.Init( --argc, ++argv); 
-
-		if(C.GetSingleValue("--help", print_help))
+		if(cmdconf->get_bool(std::string("cmd"), std::string("help"), print_help))
 		{
 			printf("Epiphany 0.7.0\n");
 			printf("Options:\n");
@@ -111,20 +106,20 @@
 		
 		init_modules();	
 
-		char* map_name= new char[255]; 
+		std::string map_name; 
 		
-		using_another_map = C.GetSingleValue("--map", map_name);
+		using_another_map = cmdconf->get_string(std::string("cmd"), std::string("map"), map_name);
 			
 		
 		
-		C.GetSingleValue("--disable-frame-limiter", disable_frame_limiter);
+		cmdconf->get_bool(std::string("cmd"), std::string("disable-frame-limiter"), disable_frame_limiter);
 			
-		if(C.GetSingleValue("--frame-skip", frame_skip) == false)
+		if(cmdconf->get_int(std::string("cmd"), std::string("frame-skip"), frame_skip) == false)
 		{
 			frame_skip = 1;
 		}
 		
-		C.GetSingleValue("--disable-music", disable_music);
+		cmdconf->get_bool(std::string("cmd"), std::string("disable-music"), disable_music);
 		
 		if(disable_music == true)
 		{
@@ -132,22 +127,6 @@
 		}
 		
 			
-		C.Done();
-		
-		// TEST ZONE
-		
-		AbstractConfiguration* config = new XMLConfiguration("./mytest.xml", true);
-		
-		config->set_int("screen","size_x", 640);
-		
-		config->remove_section("author");
-		
-		config->save();
-		
-		config = new CommandlineConfiguration(argc, argv);
-		
-		
-		// END TEST ZONE			
 
 		Game* game = Game::instance();
 		
@@ -160,9 +139,9 @@
 		
 		if(using_another_map == true)
 		{
-			printf("Map name: %s\n", map_name);
+			printf("Map name: %s\n", map_name.c_str());
 			
-			game->play_level(map_name);
+			game->play_level(map_name.c_str());
 		}
 		else
 		{
@@ -175,7 +154,7 @@
 		deinit_modules();
 		
 		delete game;
-		delete map_name;
+
 		
 		DEBOUT("\tExiting.\n");
 		return 0;

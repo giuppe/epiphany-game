@@ -37,14 +37,16 @@ void CommandlineConfiguration::parse_arguments(const std::vector<std::string>& a
 			//DEBWARN("Argument: "<<curr_arg.substr(2)<<"\n");
 			if(prev_arg.substr(0, 2) == "--")
 			{
-				m_arguments[prev_arg.substr(0, 2)] = "true";
-				DEBOUT("Setting "<<prev_arg.substr(2)<<" = true\n");
+				std::string object_name(prev_arg.substr(2)); 
+				m_arguments[object_name] = std::string("true");
+				DEBOUT("Setting "<<object_name<<" = true\n");
 			}
 			
 			if(it == arguments.size()-1)
 			{
-				m_arguments[curr_arg.substr(0, 2)] = "true";
-				DEBOUT("Setting "<<curr_arg.substr(2)<<" = true\n");
+				std::string object_name(curr_arg.substr(2)); 
+				m_arguments[object_name] = std::string("true");
+				DEBOUT("Setting "<<object_name<<" = true\n");
 			}
 			prev_arg = curr_arg;
 		}
@@ -52,8 +54,9 @@ void CommandlineConfiguration::parse_arguments(const std::vector<std::string>& a
 		{
 			if(prev_arg.substr(0, 2) == "--")
 			{
-				m_arguments[prev_arg.substr(0, 2)] = curr_arg;
-				DEBOUT("Setting "<<prev_arg.substr(2)<<" = "<<curr_arg<<"\n");
+				std::string object_name(prev_arg.substr(2)); 
+				m_arguments[object_name] = curr_arg;
+				DEBOUT("Setting "<<object_name<<" = "<<curr_arg<<"\n");
 				
 			}
 			else if(curr_arg.substr(0, 2) == "--")
@@ -72,17 +75,54 @@ void CommandlineConfiguration::parse_arguments(const std::vector<std::string>& a
 
 bool CommandlineConfiguration::get_string(const std::string& section_name, const std::string& object_name, std::string& value) const
 {
-	assert(!"Function not implemented.");
+	if(m_arguments.count(object_name)==0)
+		return false;
+
+	std::map<std::string, std::string>::const_iterator it;
+	
+	it = m_arguments.find(object_name);
+	
+	value = it->second;
+	return true;
+	
 }
 		
 bool CommandlineConfiguration::get_int(const std::string& section_name, const std::string& object_name, Uint32& value) const
 {
-	assert(!"Function not implemented.");
+	if(m_arguments.count(object_name)==0)
+		return false;
+
+	std::map<std::string, std::string>::const_iterator it;
+	
+	it = m_arguments.find(object_name);
+	
+	value = atoi(it->second.c_str());
+	return true;
+	
 }
 	
 bool CommandlineConfiguration::get_bool(const std::string& section_name, const std::string& object_name, bool& value) const
 {
-	assert(!"Function not implemented.");
+	DEBOUT("Accessing: "<<object_name<<"\n");
+	if(m_arguments.find(object_name)==m_arguments.end())
+		return false;
+
+	std::map<std::string, std::string>::const_iterator it;
+	
+	it = m_arguments.find(object_name);
+	
+	
+	if(it->second=="true")
+	{
+		value = true;
+	}
+	else
+	{
+		value = false;
+	}
+	
+	return true;
+	
 }
 
 

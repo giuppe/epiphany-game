@@ -7,23 +7,6 @@
 
 
 
-/*
-std::string XMLConfiguration::get_section(const std::string& object_path) const
-{
-	return object_path.substr(0, object_path.find("/"));
-}
-
-
-
-		
-std::string XMLConfiguration::get_object_name(const std::string& object_path) const
-{
-	
-	return object_path.substr(object_path.find("/")+1, object_path.size());
-}
-
-*/
-
 
 bool XMLConfiguration::get_value(const std::string& section, const std::string& object, std::string& value) const
 {
