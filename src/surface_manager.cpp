@@ -172,9 +172,9 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		assert(!"Trying to access a missing surface.");
 	}
 	
-	SDL_Surface* temp2 = SDL_LoadBMP(surface_path.c_str());
+	SDL_Surface* temp = SDL_LoadBMP(surface_path.c_str());
 	
-	SDL_Surface* temp = SDL_DisplayFormat(temp2);
+	//SDL_Surface* temp2 = SDL_DisplayFormat(temp);
 	
 	if(temp==NULL)
 	{
@@ -186,7 +186,7 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 	
 	surface->init(temp, frame_size_x, frame_size_y);
 	
-	SDL_FreeSurface(temp2);
+	SDL_FreeSurface(temp);
 	
 	return surface;
 }
