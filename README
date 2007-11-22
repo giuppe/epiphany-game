@@ -22,9 +22,13 @@ before compiling Epiphany.
 Read "Tech" file for informations about how to write new maps.
 
 If you want to play contributed maps, just launch epiphany with the new map in the command line, e.g.:
-epiphany ./mylevel.map
+epiphany --map ./mylevel.map
 
-Keys:
+Use:
+epiphany --help
+for other usage information.
+
+In-Game Keys:
 Arrow keys -> move player;
 Space bar -> snap (eat without move);
 P or Pause -> pause game;

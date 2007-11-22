@@ -7,8 +7,8 @@ Added options menu;
 Added sound and music volume change;
 Added Music;
 Changed menu screen;
-Edited samples to match with music tune.
-
+Edited samples to match with music tune;
+Fixed several memory leaks.
 
 Version 0.6.1:
 Fixed bug that prevented saving game progresses;
