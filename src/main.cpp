@@ -2,7 +2,7 @@
                           main.cpp  -  description
                              -------------------
     begin                : Wed Aug 15 2001
-    copyright            : (C) 2001 by Giuseppe "Quobod" D'Aquì
+    copyright            : (C) 2001 by Giuseppe "Quobod" D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -43,6 +43,8 @@
 	{
 	
 		SDL_Init ( SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER );
+		
+		SDL_Delay(1000);
 
 		Input::instance()->init();
 		

@@ -103,7 +103,7 @@ bool CommandlineConfiguration::get_int(const std::string& section_name, const st
 	
 bool CommandlineConfiguration::get_bool(const std::string& section_name, const std::string& object_name, bool& value) const
 {
-	DEBOUT("Accessing: "<<object_name<<"\n");
+
 	if(m_arguments.find(object_name)==m_arguments.end())
 		return false;
 
@@ -124,5 +124,6 @@ bool CommandlineConfiguration::get_bool(const std::string& section_name, const s
 	return true;
 	
 }
+
 
 
