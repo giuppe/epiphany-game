@@ -2,7 +2,7 @@
                           level.cpp  -  description
                              -------------------
     begin                : Fri Aug 31 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -83,6 +83,7 @@ Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d)
 	switch(d)
 	{
 	case STOP:
+	default:
 		dx=0;
 		dy=0;
 		break;
@@ -132,6 +133,7 @@ Entity_Handle Level::get_entity(Sint32 x, Sint32 y, Direction d, Direction d1)
 	switch(d)
 	{
 	case STOP:
+	default:
 		dx=0;
 		dy=0;
 		break;
@@ -209,7 +211,6 @@ void Level::set_entity(Entity_Type type, Uint32 x, Uint32 y)
 	{
 		m_exit = (Entity_Exit*) entity;
 	}
-	
 }
 
 
