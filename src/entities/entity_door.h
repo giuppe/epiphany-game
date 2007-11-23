@@ -53,6 +53,10 @@ public:
 	
 	bool player_pressing_down(Entity_Handle up_entity);
 	
+	void refresh_sprite(){};
+	
+	void move_sprite(){};
+	
 };
 
 #endif //ENTITY_DOOR_H

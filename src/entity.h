@@ -2,7 +2,7 @@
                           entity.h  -  description
                              -------------------
     begin                : Wed Aug 15 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -77,6 +77,16 @@ public:
 	  return m_sprite;
 	
   }
+	
+	void refresh_sprite()
+	{
+		m_sprite.update_frame();
+	}
+	
+	void move_sprite()
+	{
+		m_sprite.move();
+	}
 	
 	void set_speed(Uint32 speed);
 	

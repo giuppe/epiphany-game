@@ -43,6 +43,10 @@ public:
 	
 	bool roll_on_me(){return false;};
 	
+	void refresh_sprite(){};
+	
+	void move_sprite(){};
+	
 };
 
 #endif //ENTITY_STEEL_H

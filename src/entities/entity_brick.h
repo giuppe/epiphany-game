@@ -2,7 +2,7 @@
                           entity_brick.h  -  description
                              -------------------
     begin                : Thu Sep 20 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -41,6 +41,10 @@ public:
 	bool explode();
 	
 	bool roll_on_me(){return false;};
+	
+	void refresh_sprite(){};
+	
+	void move_sprite(){};
 	
 };
 

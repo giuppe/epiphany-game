@@ -44,6 +44,10 @@ public:
 	
 	bool roll_on_me(){return true;};
 	
+	void refresh_sprite(){};
+	
+	void move_sprite(){};
+	
 };
 
 #endif //ENTITY_WOOD_H

@@ -2,7 +2,7 @@
                           game.cpp  -  description
                              -------------------
     begin                : Tue Aug 28 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -288,8 +288,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 		curr_ntt=entity_manager->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
-			curr_ntt->get_sprite().update_frame();
-			curr_ntt->get_sprite().move();
+			curr_ntt->refresh_sprite();
+			curr_ntt->move_sprite();
 			if(update_only == false)
 			{
 				screen->put(curr_ntt->get_sprite());

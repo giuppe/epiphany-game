@@ -2,7 +2,7 @@
                           entity_grass.h  -  description
                              -------------------
     begin                : Thu Sep 20 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -43,6 +43,10 @@ public:
 	bool player_pressing_up(Entity_Handle down_entity);
 	
 	bool player_pressing_down(Entity_Handle up_entity);
+	
+	void refresh_sprite(){};
+	
+	void move_sprite(){};
 	
 };
 
