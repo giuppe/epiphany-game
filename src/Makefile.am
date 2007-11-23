@@ -1,8 +1,8 @@
 #SUBDIRS = entities
 
-bin_PROGRAMS = epiphany
+bin_PROGRAMS = epiphany-game
 
-epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
+epiphany_game_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	levelmap.cpp epiconfig.cpp entity_factory.cpp entity_manager.cpp \
 	game_timer.cpp myparser.cpp epimap.cpp emdlparser.cpp \
 	entities/entity_gem.cpp entities/entity_door.cpp  entities/entity_wood.cpp 			\
@@ -18,7 +18,7 @@ epiphany_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	tinyxml/tinyxml.cpp menu_entry_bool.cpp music_manager.cpp xml_configuration.cpp \
 	commandline_configuration.cpp
 
-epiphany_LDADD = -lSDL -lSDL_mixer
+epiphany_game_LDADD = -lSDL -lSDL_mixer
 
 
 noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
