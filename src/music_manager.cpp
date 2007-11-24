@@ -18,9 +18,19 @@
 #include <SDL/SDL_mixer.h>
 #include "music_manager.h"
 #include "resource_factory.h"
+#include "sfx.h"
 
 void Music_Manager::init()
 {
+
+	m_disabled = Sample_Manager::instance()->is_disabled();
+	
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, not initing music\n");
+			return;
+		}
+	
 	//FIXME: we should auto-resize the vector
 	m_musics.resize(25);
 	
@@ -35,6 +45,12 @@ void Music_Manager::init()
 void Music_Manager::load_musics()
 {
 
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, not loading music\n");
+			return;
+		}
+	
 	Resource_Factory* res_factory=Resource_Factory::instance();
 
 	std::string res_path(res_factory->get_resource_path());
@@ -54,6 +70,11 @@ void Music_Manager::load_musics()
 
 void Music_Manager::deinit()
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, not unloading music\n");
+			return;
+		}
 	Mix_FreeMusic(m_musics[MUS_MENU]);
 	Mix_FreeMusic(m_musics[MUS_CREDITS]);
 	Mix_FreeMusic(m_musics[MUS_GAME]);
@@ -63,6 +84,12 @@ void Music_Manager::deinit()
 
 Mix_Music* Music_Manager::get_music(Music_Type music)
 {
+	if(m_disabled==true)
+	{
+			DEBOUT("Sound system disabled, cannot get music\n");
+			exit(1);
+			return NULL;
+	}
 	//FIXME: it should assert the existence of sample
 	return m_musics[music];
 	
@@ -73,6 +100,11 @@ Mix_Music* Music_Manager::get_music(Music_Type music)
 
 void Music_Manager::play(Music_Type type)
 {
+	if(m_disabled==true)
+		{
+			return;
+		}
+	
 	if(music_enabled == false)
 		return;
 		
@@ -94,6 +126,11 @@ Uint32 Music_Manager::get_max_volume()
 
 void Music_Manager::set_volume(Uint32 value)
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, cannot set volume\n");
+			return;
+		}
 	Mix_VolumeMusic(value*16);
 }
 
@@ -102,6 +139,11 @@ void Music_Manager::set_volume(Uint32 value)
 
 Uint32 Music_Manager::get_volume()
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, volume is always zero\n");
+			return 0;
+		}
 	return Mix_VolumeMusic(-1)/16;
 }
 

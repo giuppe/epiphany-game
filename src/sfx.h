@@ -75,6 +75,7 @@ public:
 	
 	void set_volume(Uint32 value);
 
+	bool is_disabled();
 	
 	// begin Singleton stuff
 

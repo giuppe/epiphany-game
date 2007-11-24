@@ -56,6 +56,11 @@ void Sample_Manager::init()
 
 }
 
+bool Sample_Manager::is_disabled()
+{
+	return m_disabled;
+}
+
 
 
 void Sample_Manager::load_samples()

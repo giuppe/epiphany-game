@@ -39,6 +39,8 @@ private:
 	
 	void load_musics();
 	
+	bool m_disabled;
+	
 	bool music_enabled;
 	
 public:
