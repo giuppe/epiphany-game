@@ -45,6 +45,8 @@ class Sample_Manager
 private:
 	std::vector<Sample*> m_samples;
 	
+	bool m_disabled;
+	
 	Sample* get_sample(Sample_Type sfx);
 	
 		void load_samples();

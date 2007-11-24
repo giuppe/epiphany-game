@@ -29,8 +29,10 @@ void Sample_Manager::init()
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1) 
 	{
     	printf("Mix_OpenAudio: %s\n", Mix_GetError());
-    	exit(2);
+    	m_disabled = true;
+    	return;
 	}
+	m_disabled = false;
 	
 	//FIXME: we should auto-resize the vector
 	m_samples.resize(25);
@@ -56,10 +58,15 @@ void Sample_Manager::init()
 
 
 
-
 void Sample_Manager::load_samples()
 {
 
+	if(m_disabled==true)
+	{
+		DEBOUT("Sound system disabled, not loading samples\n");
+		return;
+	}
+	
 	Resource_Factory* res_factory=Resource_Factory::instance();
 
 	std::string res_path(res_factory->get_resource_path());
@@ -101,6 +108,11 @@ void Sample_Manager::load_samples()
 
 void Sample_Manager::deinit()
 {
+	if(m_disabled==true)
+	{
+			DEBOUT("Sound system disabled, not un-loading samples\n");
+			return;
+	}
 	delete m_samples[SFX_BOULDER_FALL];
 	delete 	m_samples[SFX_EMERALD_EAT];
 	delete 	m_samples[SFX_SAPPHIRE_EAT];
@@ -124,6 +136,12 @@ void Sample_Manager::deinit()
 
 Sample* Sample_Manager::get_sample(Sample_Type sfx)
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, cannot get sample.\n");
+			exit(1);
+			return NULL;
+		}
 	//FIXME: it should assert the existence of sample
 	return m_samples[sfx];
 	
@@ -134,6 +152,10 @@ Sample* Sample_Manager::get_sample(Sample_Type sfx)
 
 void Sample_Manager::play(Sample_Type type)
 {
+	if(m_disabled==true)
+		{
+			return;
+		}
 	Sint32 channel_group=-1;
 	switch(type)
 	{
@@ -177,6 +199,11 @@ Uint32 Sample_Manager::get_max_volume()
 
 void Sample_Manager::set_volume(Uint32 value)
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, cannot set volume\n");
+			return;
+		}
 	Mix_Volume(-1, value*16);
 }
 
@@ -185,6 +212,11 @@ void Sample_Manager::set_volume(Uint32 value)
 
 Uint32 Sample_Manager::get_volume()
 {
+	if(m_disabled==true)
+		{
+			DEBOUT("Sound system disabled, returning null volume\n");
+			return 0;
+		}
 	return Mix_Volume(-1, -1)/16;
 }
 
