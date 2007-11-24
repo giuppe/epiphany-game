@@ -1,3 +1,9 @@
+Version 0.8.0:
+code refactoring (sprite-related)
+
+Version 0.7.1:
+Renamed binary to "epiphany-game"
+
 Version 0.7.0:
 Added frame skipping (command line: --frame-skip <int>)
 Added loading of external levels (command line: --map <path>)
