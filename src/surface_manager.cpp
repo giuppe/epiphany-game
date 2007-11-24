@@ -149,6 +149,8 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		break;
 	case Surface_Manager::SRF_MENU_BACKGROUND:
 		surface_path+=  "menu_background.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_KEY_RED_THUMB:
 		surface_path+=  "key_red_thumb.bmp";
@@ -164,9 +166,13 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		break;
 	case Surface_Manager::SRF_MENU_BACK_TILE:
 		surface_path+=  "menu_back_tile.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_MENU_TITLE:
 		surface_path+=  "menu_title.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	default:
 		assert(!"Trying to access a missing surface.");
@@ -181,8 +187,7 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		DEBOUT("Error: "<<surface_path<<" is not a valid surface bitmap: "<<SDL_GetError()<<"\n");
 		assert(0);
 	}
-	//Set pink as transparent color
-	SDL_SetColorKey(temp, SDL_SRCCOLORKEY, SDL_MapRGB(temp->format, 255, 0, 255));
+	
 	
 	surface->init(temp, frame_size_x, frame_size_y);
 	

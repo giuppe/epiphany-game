@@ -57,6 +57,12 @@ protected:
 	bool m_exists;
 	
 	Level* current_level;
+	
+	Sprite& get_sprite()
+	{
+		return m_sprite;
+	}
+	
 public:
 
 	Entity();	
@@ -70,13 +76,10 @@ public:
 	Uint32 get_position_y();
 	
 	Entity_Type get_type()
-  {return m_type;};
+	{
+		return m_type;
+	}
 
-	Sprite& get_sprite()
-  {
-	  return m_sprite;
-	
-  }
 	
 	void refresh_sprite()
 	{
@@ -86,6 +89,16 @@ public:
 	void move_sprite()
 	{
 		m_sprite.move();
+	}
+	
+	Uint32 get_pos_screen_x()
+	{
+		return m_sprite.get_pos_x();
+	}
+		
+	Uint32 get_pos_screen_y()
+	{
+		return m_sprite.get_pos_y();
 	}
 	
 	void set_speed(Uint32 speed);
@@ -114,6 +127,8 @@ public:
 	bool exists(){return m_exists;};
 	
 	void kill();
+	
+	void draw_on_screen();
 		
 	// Virtual functions
 	

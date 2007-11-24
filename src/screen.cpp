@@ -2,7 +2,7 @@
                           screen.cpp  -  description
                              -------------------
     begin                : Mon Oct 22 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -28,12 +28,19 @@ Uint32 Screen::get_screen_size_x()
 	
 }
 
+
+
+
 Uint32 Screen::get_screen_size_y()
 {
 
 	return m_screen_size_y;
 	
 }
+
+
+
+
 
 void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size)
 {
@@ -50,11 +57,23 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	if(m_screen == NULL)
 	{
 		printf("Unable to set %d x %d video mode: %s\n", resolution_x, resolution_y, SDL_GetError());
+		exit(1);
 	}
+	
+	
+	
+	m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_screen_size_x, m_screen_size_y, 0,0,0,0,0);
+	
 }
 
 
+Uint8 Screen::get_bpp()
+{
+	return SDL_GetVideoInfo()->vfmt->BitsPerPixel;
+}
 
+
+/*
 void Screen::put(Sprite& sprite)
 {
 	Sint32 curr_pos_x=sprite.get_pos_x();
@@ -67,10 +86,43 @@ void Screen::put(Sprite& sprite)
 //	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
 	//int frame=sprite.get_frame_number();
 	//sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
-		sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size);
+		sprite.put_screen((Sint32)(curr_pos_x-m_win_pos_x), (Sint32)(curr_pos_y-m_win_pos_y), (Sint32)m_cell_size, (Sint32)m_cell_size);
 	}
 	
 }
+*/
+
+Uint32 Screen::get_win_pos_x()
+{
+	return m_win_pos_x;
+}
+
+
+Uint32 Screen::get_win_pos_y()
+{
+	return m_win_pos_y;
+}
+
+Uint32 Screen::get_win_size_x()
+{
+	return m_win_size_x;
+}
+
+
+Uint32 Screen::get_win_size_y()
+{
+	return m_win_size_y;
+}
+
+
+/*
+void Screen::put(Surface& surface, Uint32 x, Uint32 y)
+{
+	
+	
+	
+}
+*/
 
 
 
@@ -80,6 +132,9 @@ void Screen::set_cell_size(Uint32 cell_size)
 	m_cell_size=cell_size;
 	
 }
+
+
+
 
 void Screen::set_window_center(Uint32 x, Uint32 y)
 {
@@ -123,15 +178,31 @@ void Screen::set_window_center(Uint32 x, Uint32 y)
 //		m_win_pos_y=(y-(m_win_size_y/2));
 }
 
+
+
+
 void Screen::clear()
 {
 	SDL_FillRect(m_screen, NULL, SDL_MapRGB(m_screen->format, 0, 0, 0));
 }	
 
+
+
+
 void Screen::flip_display()
 {
+	SDL_Rect rect_src;
+	rect_src.w=m_win_size_x;
+	rect_src.h=m_win_size_y;
+	rect_src.x=m_win_pos_x;
+	rect_src.y=m_win_pos_y;
+	
+	SDL_BlitSurface(m_game_screen, &rect_src, m_screen, NULL);
 	SDL_Flip(m_screen);
 }
+
+
+
 
 void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
@@ -142,6 +213,10 @@ void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 	dest.h = size_y;
 	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
 }
+
+
+
+
 
 void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
@@ -155,6 +230,10 @@ void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
 	*/
 }
+
+
+
+
 
 // begin Singleton stuff
 

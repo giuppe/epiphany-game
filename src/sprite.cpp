@@ -2,7 +2,7 @@
                           sprite.cpp  -  description
                              -------------------
     begin                : Sat Sep 22 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -18,6 +18,7 @@
 #include "dephine.h"
 
 #include "sprite.h"
+#include "screen.h"
 
 
 Sprite::Sprite(Surface* surface)
@@ -270,4 +271,18 @@ void Sprite::move_to_pos_y(Uint32 y)
 void Sprite::update_frame()
 {
 	set_curr_frame(m_curr_frame+1);
+}
+
+
+
+void Sprite::draw()
+{
+	Screen* screen = Screen::instance();
+	if(	((m_pos_x+48>(Sint32)screen->get_win_pos_x())&&
+				(m_pos_x<(Sint32)(screen->get_win_pos_x()+screen->get_win_size_x())))&&
+				((m_pos_y+48>(Sint32)screen->get_win_pos_y())&&
+				(m_pos_y<(Sint32)(screen->get_win_pos_y()+screen->get_win_size_y()))))
+	{
+		m_surface->put_screen(m_pos_x-screen->get_win_pos_x(), m_pos_y-screen->get_win_pos_y(), screen->get_cell_size(), screen->get_cell_size(),m_curr_frame+m_state);
+	}
 }

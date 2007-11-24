@@ -2,7 +2,7 @@
                           sprite.h  -  description
                              -------------------
     begin                : Sat Sep 22 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -61,6 +61,7 @@ private:
 	
 	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
 	
+	
 	void set_curr_frame(Uint32 frame);
 	
 	void move(Uint32 n_pixel);
@@ -83,8 +84,11 @@ public:
 	
 	void set_speed(Uint32 speed);
 		
-	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
+
 	
+	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
+
+		
 	
 	Uint32 get_pos_x() const
 	{
@@ -115,6 +119,8 @@ public:
 	void init(Surface* surf);
 	
 	void set_state(Anim_State state);
+	
+	void draw();
 		
 };
 	

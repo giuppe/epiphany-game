@@ -2,7 +2,7 @@
                           screen.h  -  Basic Screen Interface
                              -------------------
     begin                : Mon Oct 22 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -37,12 +37,15 @@ private:
 	
 	SDL_Surface* m_screen;
 	
+	SDL_Surface* m_game_screen;
+	
 public:
 
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size);
 	
+	Uint8 get_bpp();
 	
-	void put(Sprite& sprite);
+	//void put(Sprite& sprite);
 		
 	//void put(Entity* entity);
 	
@@ -51,6 +54,19 @@ public:
 	Uint32 get_screen_size_x();
 	
 	Uint32 get_screen_size_y();
+	
+	Uint32 get_win_pos_x();
+	
+	Uint32 get_win_pos_y();
+	
+	Uint32 get_win_size_x();
+	
+	Uint32 get_win_size_y();
+	
+	Uint32 get_cell_size()
+	{
+		return m_cell_size;
+	}
 		
 	void set_cell_size(Uint32 cell_size);
 	

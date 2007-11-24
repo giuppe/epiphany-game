@@ -2,7 +2,7 @@
                           entity.cpp  -  description
                              -------------------
     begin                : Tue Aug 28 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -19,15 +19,14 @@
 #include "entity.h"
 
 
-//int glb_curr_id=1;
+
+
 
 Entity::Entity()
 {
-	//m_id=glb_curr_id;
-	//glb_curr_id++;
+
 	set_speed(1);
 	m_just_checked=false;
-
 	
 }
 
@@ -179,7 +178,7 @@ void Entity::move(Direction direction)
 	
 }
 
-//C'è una funzione per ogni movimento poichè poi bisogna aggiungere le animazioni
+//C'ï¿½ una funzione per ogni movimento poichï¿½ poi bisogna aggiungere le animazioni
 void Entity::move_up()
 {
 	Uint32 new_position_x=m_position_x;
@@ -266,3 +265,9 @@ bool Entity::exists()
 	return m_exists;
 }
  */
+
+void Entity::draw_on_screen()
+{
+	this->m_sprite.draw();
+
+}

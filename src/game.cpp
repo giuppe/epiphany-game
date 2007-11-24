@@ -269,16 +269,20 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	Uint32 entity_manager_size = entity_manager->size();
 	
 	//centering screen on player
-	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
+//	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
+	screen->set_window_center(m_level->get_player().get_pos_screen_x(), m_level->get_player().get_pos_screen_y());
+
+	
 	//drawing player
 	if(m_level->get_player().exists())
 	{
-		m_level->get_player().get_sprite().update_frame();
-		m_level->get_player().get_sprite().move();
+		m_level->get_player().refresh_sprite();
+		m_level->get_player().move_sprite();
 		if(update_only == false)
 		{
-			screen->put(m_level->get_player().get_sprite());
+			//screen->put(m_level->get_player().get_sprite());
+			m_level->get_player().draw_on_screen();
 		}
 	}
 
@@ -292,7 +296,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 			curr_ntt->move_sprite();
 			if(update_only == false)
 			{
-				screen->put(curr_ntt->get_sprite());
+				curr_ntt->draw_on_screen();
+				//screen->put(curr_ntt->get_sprite());
 			}
 		}
 	}
