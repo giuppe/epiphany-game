@@ -44,7 +44,9 @@ private:
 	
 	friend class Font;
 	
-	SDL_Surface* get_screen(){return m_screen;}
+	bool m_use_virtual_screen;
+	
+	SDL_Surface* get_screen();
 
 public:
 
@@ -70,7 +72,7 @@ public:
 	Uint32 get_game_size_y();
 	
 
-		
+	void use_virtual_screen(){m_use_virtual_screen = true;}
 
 	
 	void set_camera_position(WorldCoord position);
@@ -91,6 +93,8 @@ public:
 	
 	ScreenCoord coord_to_screen(WorldCoord wld_coord);
 	
+	void resize_virtual_screen(Uint32 size_x, Uint32 size_y);
+	
 // begin Singleton stuff
 
 private:
@@ -99,7 +103,7 @@ private:
 
 protected:
 
-    Screen(): m_game_size_x(0), m_game_size_y(0){};
+    Screen(): m_game_size_x(0), m_game_size_y(0), m_use_virtual_screen(false){};
 
 public:
 

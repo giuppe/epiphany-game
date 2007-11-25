@@ -39,7 +39,10 @@ Uint32 Screen::get_game_size_y()
 }
 
 
-
+SDL_Surface* Screen::get_screen()
+{
+	return m_screen;
+}
 
 
 void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y)
@@ -64,6 +67,17 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	
 	m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_game_size_x, m_game_size_y, this->get_bpp(),0,0,0,0);
 	
+}
+
+
+void Screen::resize_virtual_screen(Uint32 size_x, Uint32 size_y)
+{
+	if(m_use_virtual_screen)
+	{
+		m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, size_x, size_y, this->get_bpp(),0,0,0,0);
+		m_game_size_x=size_x;
+		m_game_size_y=size_y;
+	}
 }
 
 
@@ -174,6 +188,7 @@ void Screen::set_camera_position(WorldCoord position)
 
 void Screen::clear()
 {
+	
 	SDL_FillRect(m_screen, NULL, SDL_MapRGB(m_screen->format, 0, 0, 0));
 }	
 
@@ -183,8 +198,10 @@ void Screen::clear()
 void Screen::flip_display()
 {
 
-	
-	//SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
+	if(m_use_virtual_screen)
+	{
+		SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
+	}
 	SDL_Flip(m_screen);
 }
 
@@ -221,7 +238,12 @@ void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 
 void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 {
-	SDL_BlitSurface(surface, src,  m_screen, dest);
+	SDL_Surface* dest_surf = m_screen;
+	if(m_use_virtual_screen)
+	{
+		dest_surf = m_game_screen;
+	}
+	SDL_BlitSurface(surface, src,  dest_surf, dest);
 }
 
 

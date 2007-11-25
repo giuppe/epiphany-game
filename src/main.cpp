@@ -105,6 +105,7 @@
 			printf("\t--map <map_path>\t\tplay <map_path> as level\n");
 			printf("\t--disable-music\t\tDon't play music\n");
 			//printf("\t--disable-sound\t\tDon't play sounds\n");
+			printf("\t--virtual-screen\t\tUse a double buffer when drawing (experimental)");
 			return 0;
 			
 		}
@@ -131,6 +132,14 @@
 			Music_Manager::instance()->disable_music();
 		}
 		
+		bool virtual_screen = false;
+		
+		cmdconf->get_bool(std::string("cmd"), std::string("virtual-screen"), virtual_screen);
+				
+		if(virtual_screen == true)
+		{
+			Screen::instance()->use_virtual_screen();
+		}
 			
 
 		Game* game = Game::instance();
