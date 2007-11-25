@@ -54,6 +54,7 @@ bool Game::main_loop()
 
 	m_time.start();
 
+		Screen::instance()->resize_world_screen(m_level->get_size_x()*k_sprite_size, m_level->get_size_y()*k_sprite_size);
 	
 	Screen::instance()->set_camera_position(m_level->get_player().get_sprite_position());
 
@@ -659,6 +660,8 @@ void Game::show_credits()
 	
 	Screen* screen = Screen::instance();
 	
+		screen->resize_world_screen(0,0);
+	
 	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
 	
 	Music_Manager::instance()->play(MUS_CREDITS);
@@ -697,6 +700,8 @@ void Game::show_loading()
 {
 	Screen* screen = Screen::instance();
 	
+	screen->resize_world_screen(0,0);
+	
 	Font* ready_font = Font_Manager::instance()->get_font(Font_Factory::MENU_FONT);
 	
 	screen->clear();
@@ -707,6 +712,7 @@ void Game::show_loading()
 	
 	Music_Manager::instance()->play(MUS_READY);
 	
+	//music duration
 	SDL_Delay(1940);
 	
 }

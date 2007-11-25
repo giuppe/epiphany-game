@@ -152,8 +152,9 @@ bool Menu::increase_unsolved_level()
 Sint32 Menu::go()
 {
 
-
 	Epiconfig* config=Epiconfig::instance();
+	
+	Screen::instance()->resize_world_screen(0, 0);
 	
 	Menu_List_Epiphany* m_menu_list = new Menu_List_Epiphany(m_unsolved_level);
 
