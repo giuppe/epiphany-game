@@ -73,6 +73,8 @@
 		
 		Resource_Factory::instance()->deinit();
 		
+		Screen::instance()->deinit();
+		
 		SDL_Quit();
 	
 	}	
