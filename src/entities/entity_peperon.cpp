@@ -28,7 +28,7 @@ Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y, Direction direc
 	m_position_y=y;
 	m_type=PEPERON;
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_PEPERON));
+	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_PEPERON));
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	m_is_exploding=false;

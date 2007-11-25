@@ -2,7 +2,7 @@
                           entity_grass.cpp  -  description
                              -------------------
     begin                : Mon Oct 1 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -26,7 +26,7 @@ Entity_Grass::Entity_Grass(Level* level, Uint32 x, Uint32 y)
 	m_position_y=y;
 	m_type=GRASS;
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_GRASS));
+	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_GRASS));
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	

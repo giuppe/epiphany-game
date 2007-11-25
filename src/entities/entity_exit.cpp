@@ -2,7 +2,7 @@
                           entity_exit.cpp  -  description
                              -------------------
     begin                : Mon Oct 1 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -37,7 +37,7 @@ Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score)
 	m_position_y=y;
 		
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_EXIT));
+	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_EXIT));
 	m_sprite.set_state(SP_STOP);
 
 	

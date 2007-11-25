@@ -31,16 +31,16 @@ Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Uint32 id)
 	switch(m_key_id)
 	{
 	case 1:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_KEY_RED));
+		m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_KEY_RED));
 		break;
 	case 2:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_KEY_BLUE));
+		m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_KEY_BLUE));
 		break;
 	case 4:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_KEY_GREEN));
+		m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_KEY_GREEN));
 		break;
 	case 8:
-		m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_KEY_YELLOW));
+		m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_KEY_YELLOW));
 		break;
 	default:
 		assert(!"Error: Selected non existent key type.");

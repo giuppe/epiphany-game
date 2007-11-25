@@ -29,7 +29,7 @@ Entity_Flintstone::Entity_Flintstone(Level* level, Uint32 x, Uint32 y)
 	m_position_y=y;
 	m_type=FLINTSTONE;
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_FLINTSTONE));
+	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_FLINTSTONE));
 	m_sprite.set_state(SP_STOP);
 	m_is_falling=false;
 	m_exists=true;

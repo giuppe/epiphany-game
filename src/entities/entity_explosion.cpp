@@ -28,7 +28,7 @@ Entity_Explosion::Entity_Explosion(Level* level, Uint32 x, Uint32 y)
 	m_position_y=y;
 	m_type=EXPLOSION;
 	Surface_Manager* surf_man = Surface_Manager::instance();
-	m_sprite=Sprite(surf_man->get_surface(Surface_Manager::SRF_EXPLOSION));
+	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_EXPLOSION));
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	m_transform_to=UNKNOWN;
