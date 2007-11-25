@@ -23,36 +23,12 @@
 
 Sprite::Sprite(Surface* surface)
 {
-
-	m_surface=surface;
-	
-	m_pos.x=0;
-	
-	m_pos.y=0;
-	
-	m_move_to_pos_x=0;
-	
-	m_move_to_pos_y=0;
-	
-	m_initialized=true;
-	
-	m_curr_frame=0;
-	
-	m_speed=1;
-	
-	m_state = SP_STOP;
-	
-	//FIXME: we should obtain this number from Surface
-	m_total_frames = 8;
-	
-	m_sprite_width = 32;
-	
-	m_sprite_height = 32;
+	init(surface);
 	
 }
 
 
-
+/*
 
 Sprite::Sprite(const Sprite& sprite)
 {
@@ -81,7 +57,7 @@ Sprite::Sprite(const Sprite& sprite)
 	
 }
 
-
+*/
 
 
 void Sprite::init(Surface* surf)
@@ -96,10 +72,20 @@ void Sprite::init(Surface* surf)
 	m_move_to_pos_x=0;
 	
 	m_move_to_pos_y=0;
-
-	m_initialized=true;
 	
 	m_state = SP_STOP;
+	
+	m_curr_frame=0;
+	
+	m_speed=1;
+	
+	m_initialized=true;
+	
+	m_total_frames = 8;
+	
+	m_sprite_width = 32;
+	
+	m_sprite_height = 32;
 	
 }
 

@@ -36,7 +36,7 @@ Entity_Monster::Entity_Monster()
 	m_position_x=0;
 	m_position_y=0;
 	m_type=UNKNOWN;
-	m_sprite=0;
+
 	m_exists=true;
 		
 }

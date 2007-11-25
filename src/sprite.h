@@ -76,15 +76,19 @@ private:
 	
 	Uint32 m_sprite_height;
 	
+	Sprite(const Sprite& sprite);
+	
+	Sprite(Surface* surface);
+	
 public:
 
 	
 	
-	Sprite():m_initialized(false), m_total_frames(8){};
+	Sprite():m_initialized(false){};
 
-	Sprite(Surface* surface);
+
 	
-	Sprite(const Sprite& sprite);
+	//Sprite(const Sprite& sprite);
 	
 	~Sprite();
 	

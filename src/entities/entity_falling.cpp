@@ -2,7 +2,7 @@
                           entity_falling.cpp  -  description
                              -------------------
     begin                : Mon Oct 1 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -44,7 +44,7 @@ Entity_Falling::Entity_Falling()
 	m_position_x=0;
 	m_position_y=0;
 	m_type=UNKNOWN;
-	m_sprite=0;
+
 
 	m_is_falling=false;
 	m_exists=true;
