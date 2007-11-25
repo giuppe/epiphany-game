@@ -44,10 +44,10 @@ Uint32 Screen::get_screen_size_y()
 
 void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size)
 {
-	m_win_pos_x=0;
-	m_win_pos_y=0;
-	m_win_size_x=resolution_x;
-	m_win_size_y=resolution_y-Epiconfig::instance()->get_score_size_y();
+	m_camera.x=0;
+	m_camera.y=0;
+	m_camera.w=resolution_x;
+	m_camera.h=resolution_y-Epiconfig::instance()->get_score_size_y();
 	m_cell_size=cell_size;
 	
 	m_screen_size_x=level_size_x*m_cell_size;
@@ -76,42 +76,46 @@ Uint8 Screen::get_bpp()
 
 void Screen::put(Sprite& sprite)
 {
-	Sint32 curr_pos_x=sprite.get_pos_x();
-	Sint32 curr_pos_y=sprite.get_pos_y();
-	if(	((curr_pos_x+48>(Sint32)m_win_pos_x)&&
+	//Sint32 curr_pos_x=sprite.get_pos_x();
+	//Sint32 curr_pos_y=sprite.get_pos_y();
+	WorldCoord world_pos = sprite.get_position();
+	ScreenCoord screen_pos = this->coord_to_screen(world_pos);
+	
+/*	if(	((curr_pos_x+48>(Sint32)m_win_pos_x)&&
 			(curr_pos_x<(Sint32)(m_win_pos_x+m_win_size_x)))&&
 			((curr_pos_y+48>(Sint32)m_win_pos_y)&&
 			(curr_pos_y<(Sint32)(m_win_pos_y+m_win_size_y))))
 	{
+	*/
 //	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
 	//int frame=sprite.get_frame_number();
 	//sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
-		sprite.put_screen((Sint32)(curr_pos_x-m_win_pos_x), (Sint32)(curr_pos_y-m_win_pos_y));
-	}
+		sprite.put_screen(screen_pos);
+	//}
 	
 }
 
 
 Uint32 Screen::get_win_pos_x()
 {
-	return m_win_pos_x;
+	return m_camera.x;
 }
 
 
 Uint32 Screen::get_win_pos_y()
 {
-	return m_win_pos_y;
+	return m_camera.y;
 }
 
 Uint32 Screen::get_win_size_x()
 {
-	return m_win_size_x;
+	return m_camera.w;
 }
 
 
 Uint32 Screen::get_win_size_y()
 {
-	return m_win_size_y;
+	return m_camera.h;
 }
 
 ScreenCoord Screen::coord_to_screen(WorldCoord wld_coord)
@@ -140,7 +144,7 @@ void Screen::put(Surface& surface, WorldCoord wld_coord)
 
 void Screen::put(Surface& surface, ScreenCoord scr_coord)
 {
-	surface.put_screen(scr_coord.x, scr_coord.y);
+	surface.put_screen(scr_coord);
 }
 
 
@@ -157,36 +161,36 @@ void Screen::set_cell_size(Uint32 cell_size)
 void Screen::set_window_center(Uint32 x, Uint32 y)
 {
 
-	if(x>(m_win_size_x/2))
+	if(x>(m_camera.w/2))
 	{
-		if((x+(m_win_size_x/2))<m_screen_size_x)
+		if((x+(m_camera.w/2))<m_screen_size_x)
 		{
-			m_win_pos_x=(x-(m_win_size_x/2));
+			m_camera.x=(x-(m_camera.w/2));
 		}	
 		else
 		{
-			m_win_pos_x=(m_screen_size_x-(m_win_size_x));
+			m_camera.x=(m_screen_size_x-(m_camera.w));
 		}
 	}
 	else
 	{
-		m_win_pos_x=0;
+		m_camera.x=0;
 	}
 		
-	if(y>(m_win_size_y/2))
+	if(y>(m_camera.h/2))
 	{
-		if((y+(m_win_size_y/2))<m_screen_size_y)
+		if((y+(m_camera.h/2))<m_screen_size_y)
 		{
-			m_win_pos_y=(y-(m_win_size_y/2));
+			m_camera.y=(y-(m_camera.h/2));
 		}	
 		else
 		{
-			m_win_pos_y=(m_screen_size_y-(m_win_size_y));
+			m_camera.y=(m_screen_size_y-(m_camera.h));
 		}
 	}
 	else
 	{
-		m_win_pos_y=0;
+		m_camera.y=0;
 	}
 
 //	if((x>(m_win_size_x/2))&&((x+(m_win_size_x/2))<m_screen_size_x))
@@ -209,13 +213,9 @@ void Screen::clear()
 
 void Screen::flip_display()
 {
-	SDL_Rect rect_src;
-	rect_src.w=m_win_size_x;
-	rect_src.h=m_win_size_y;
-	rect_src.x=m_win_pos_x;
-	rect_src.y=m_win_pos_y;
+
 	
-	SDL_BlitSurface(m_game_screen, &rect_src, m_screen, NULL);
+	SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
 	SDL_Flip(m_screen);
 }
 

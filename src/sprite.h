@@ -15,11 +15,14 @@
  ***************************************************************************/
 
 
-#include "dephine.h"
-#include "surface.h"
 
 #ifndef SPRITE_H
 #define SPRITE_H
+#include "dephine.h"
+#include "surface.h"
+
+struct WorldCoord;
+
 
 
 enum Anim_State{ SP_STOP=0,
@@ -36,6 +39,7 @@ class Sprite
 private:
 
 	Surface* m_surface;
+	
 	
 	Uint32 m_pos_x;
 	
@@ -59,7 +63,7 @@ private:
 	
 	Uint32 m_total_frames; 
 	
-	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 frame_num);
+	void put_screen(ScreenCoord scr_coord, Uint32 frame_num);
 	
 	
 	void set_curr_frame(Uint32 frame);
@@ -86,9 +90,13 @@ public:
 		
 
 	
-	void put_screen(Sint32 pos_x, Sint32 pos_y);
+	void put_screen(ScreenCoord scr_coord);
 
-		
+	WorldCoord get_position() const;
+	
+	void set_position(WorldCoord pos);
+	
+	void move_to_position(WorldCoord pos);
 	
 	Uint32 get_pos_x() const
 	{

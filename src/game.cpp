@@ -372,24 +372,34 @@ void Game::draw_score()
 	
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	
+	ScreenCoord scr_coord;
+	
 	if(m_level->get_acquired_keys()&1)
 	{
-		surf_man->get_surface(Surface_Manager::SRF_KEY_RED_THUMB)->put_screen(game_size_x-k_sprite_size/2,game_size_y-k_sprite_size/2);
+		scr_coord.x = game_size_x-k_sprite_size/2;
+		scr_coord.y = game_size_y-k_sprite_size/2;
+		surf_man->get_surface(Surface_Manager::SRF_KEY_RED_THUMB)->put_screen(scr_coord);
 	}
 	
 	if(m_level->get_acquired_keys()&2)
 	{
-		surf_man->get_surface(Surface_Manager::SRF_KEY_BLUE_THUMB)->put_screen(game_size_x-k_sprite_size,game_size_y-k_sprite_size/2);
+		scr_coord.x = game_size_x-k_sprite_size;
+		scr_coord.y = game_size_y-k_sprite_size/2;
+		surf_man->get_surface(Surface_Manager::SRF_KEY_BLUE_THUMB)->put_screen(scr_coord);
 	}
 	
 	if(m_level->get_acquired_keys()&4)
 	{
-		surf_man->get_surface(Surface_Manager::SRF_KEY_GREEN_THUMB)->put_screen(game_size_x-(k_sprite_size+k_sprite_size/2),game_size_y-k_sprite_size/2);
+		scr_coord.x = game_size_x-(k_sprite_size+k_sprite_size/2);
+		scr_coord.y = game_size_y-k_sprite_size/2;
+		surf_man->get_surface(Surface_Manager::SRF_KEY_GREEN_THUMB)->put_screen(scr_coord);
 	}
 	
 	if(m_level->get_acquired_keys()&8)
 	{
-		surf_man->get_surface(Surface_Manager::SRF_KEY_YELLOW_THUMB)->put_screen(game_size_x-2*k_sprite_size,game_size_y-k_sprite_size/2);
+		scr_coord.x = game_size_x-2*k_sprite_size;
+		scr_coord.y =game_size_y-k_sprite_size/2;
+		surf_man->get_surface(Surface_Manager::SRF_KEY_YELLOW_THUMB)->put_screen(scr_coord);
 	}
 	
 	//screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,100,50,10);

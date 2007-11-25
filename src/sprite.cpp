@@ -115,17 +115,17 @@ Sprite::~Sprite()
 
 
 
-void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 frame_num)
+void Sprite::put_screen(ScreenCoord scr_coord, Uint32 frame_num)
 {
-	m_surface->put_screen(x, y, (Sint32)frame_num);
+	m_surface->put_screen(scr_coord, (Sint32)frame_num);
 }
 
 
 
 
-void Sprite::put_screen(Sint32 x, Sint32 y)
+void Sprite::put_screen(ScreenCoord scr_coord)
 {
-	m_surface->put_screen(x, y, m_curr_frame+m_state);
+	m_surface->put_screen(scr_coord, m_curr_frame+m_state);
 }
 
 
@@ -290,4 +290,24 @@ void Sprite::draw()
 	
 	Screen::instance()->put(*this);
 	
+}
+
+
+WorldCoord Sprite::get_position() const
+{
+	WorldCoord result;
+	result.x = m_pos_x;
+	result.y = m_pos_y;
+	return result;
+}
+	
+void Sprite::set_position(WorldCoord pos)
+{
+	set_pos_x(pos.x);
+	set_pos_y(pos.y);
+}
+	
+void Sprite::move_to_position(WorldCoord pos)
+{
+	move_to_pos(pos.x, pos.y);
 }
