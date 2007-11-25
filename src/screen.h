@@ -50,6 +50,8 @@ public:
 
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y);
 	
+	void deinit();
+	
 	Uint8 get_bpp();
 	
 	void put(Sprite& sprite);
