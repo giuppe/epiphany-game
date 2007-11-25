@@ -20,20 +20,14 @@
 #define SCREEN_H
 #include "dephine.h"
 #include "sprite.h"
+#include "world_coord.h"
+#include "screen_coord.h"
 
 class Entity;
 
-struct ScreenCoord
-{
-	Sint32 x;
-	Sint32 y;
-};
 
-struct WorldCoord
-{
-	Sint32 x;
-	Sint32 y;
-};
+
+
 
 
 class Screen

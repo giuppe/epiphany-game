@@ -20,8 +20,7 @@
 #define SPRITE_H
 #include "dephine.h"
 #include "surface.h"
-
-struct WorldCoord;
+#include "world_coord.h"
 
 
 
@@ -40,10 +39,13 @@ private:
 
 	Surface* m_surface;
 	
+	WorldCoord m_pos;
 	
-	Uint32 m_pos_x;
+	WorldCoord m_move_to_pos;
 	
-	Uint32 m_pos_y;
+	//Uint32 m_pos_x;
+	
+	//Uint32 m_pos_y;
 	
 	Uint32 m_move_to_pos_x;
 	
@@ -98,15 +100,9 @@ public:
 	
 	void move_to_position(WorldCoord pos);
 	
-	Uint32 get_pos_x() const
-	{
-		return m_pos_x;
-  	}
+	Uint32 get_pos_x() const;
 	
-	Uint32 get_pos_y() const
-	{
-		return m_pos_y;
- 	}
+	Uint32 get_pos_y() const;
  	
 	void set_pos_x(Uint32 x);
 	

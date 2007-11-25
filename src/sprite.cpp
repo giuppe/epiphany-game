@@ -26,9 +26,9 @@ Sprite::Sprite(Surface* surface)
 
 	m_surface=surface;
 	
-	m_pos_x=0;
+	m_pos.x=0;
 	
-	m_pos_y=0;
+	m_pos.y=0;
 	
 	m_move_to_pos_x=0;
 	
@@ -61,9 +61,9 @@ Sprite::Sprite(const Sprite& sprite)
 
 	m_surface=sprite.m_surface;
 	
-	m_pos_x=sprite.m_pos_x;
+	m_pos=sprite.m_pos;
 	
-	m_pos_y=sprite.m_pos_y;
+	
 	
 	m_move_to_pos_x=sprite.m_move_to_pos_x;
 	
@@ -89,9 +89,9 @@ void Sprite::init(Surface* surf)
 
 	m_surface=surf;
 	
-	m_pos_x=0;
+	m_pos.x=0;
 	
-	m_pos_y=0;
+	m_pos.y=0;
 	
 	m_move_to_pos_x=0;
 	
@@ -129,12 +129,20 @@ void Sprite::put_screen(ScreenCoord scr_coord)
 }
 
 
+Uint32 Sprite::get_pos_x() const
+	{
+		return m_pos.x;
+  	}
 
+Uint32 Sprite::get_pos_y() const
+	{
+		return m_pos.x;
+  	}
 
 
 void Sprite::set_pos_x(Uint32 pos_x)
 {
-	m_pos_x=pos_x;
+	m_pos.x=pos_x;
 	m_move_to_pos_x=pos_x;
 }
 
@@ -143,7 +151,7 @@ void Sprite::set_pos_x(Uint32 pos_x)
 
 void Sprite::set_pos_y(Uint32 pos_y)
 {
-	m_pos_y=pos_y;
+	m_pos.y=pos_y;
 	m_move_to_pos_y=pos_y;
 }
 
@@ -179,49 +187,49 @@ void Sprite::move(Uint32 n_pixel)
 	
 	n_pixel*=m_speed;
 	
-	if(m_pos_x<m_move_to_pos_x)
+	if(m_pos.x<m_move_to_pos_x)
 	{
-		if(m_pos_x+n_pixel>m_move_to_pos_x)
+		if(m_pos.x+n_pixel>m_move_to_pos_x)
 		{
-			m_pos_x=m_move_to_pos_x;
+			m_pos.x=m_move_to_pos_x;
 		}
 		else
 		{
-			m_pos_x+=n_pixel;
+			m_pos.x+=n_pixel;
 		}
 	}
-	else if(m_pos_x>m_move_to_pos_x)
+	else if(m_pos.x>m_move_to_pos_x)
 	{
-		if(m_pos_x-n_pixel<m_move_to_pos_x)
+		if(m_pos.x-n_pixel<m_move_to_pos_x)
 		{
-			m_pos_x=m_move_to_pos_x;
+			m_pos.x=m_move_to_pos_x;
 		}
 		else
 		{
-			m_pos_x-=n_pixel;
+			m_pos.x-=n_pixel;
 		}
 	}
 
-	if(m_pos_y<m_move_to_pos_y)
+	if(m_pos.y<m_move_to_pos_y)
 	{
-		if(m_pos_y+n_pixel>m_move_to_pos_y)
+		if(m_pos.y+n_pixel>m_move_to_pos_y)
 		{
-			m_pos_y=m_move_to_pos_y;
+			m_pos.y=m_move_to_pos_y;
 		}
 		else
 		{
-			m_pos_y+=n_pixel;
+			m_pos.y+=n_pixel;
 		}
 	}
-	else if(m_pos_y>m_move_to_pos_y)
+	else if(m_pos.y>m_move_to_pos_y)
 	{
-		if(m_pos_y-n_pixel<m_move_to_pos_y)
+		if(m_pos.y-n_pixel<m_move_to_pos_y)
 		{
-			m_pos_y=m_move_to_pos_y;
+			m_pos.y=m_move_to_pos_y;
 		}
 		else
 		{
-			m_pos_y-=n_pixel;
+			m_pos.y-=n_pixel;
 		}
 	}
 
@@ -295,10 +303,7 @@ void Sprite::draw()
 
 WorldCoord Sprite::get_position() const
 {
-	WorldCoord result;
-	result.x = m_pos_x;
-	result.y = m_pos_y;
-	return result;
+	return m_pos;
 }
 	
 void Sprite::set_position(WorldCoord pos)

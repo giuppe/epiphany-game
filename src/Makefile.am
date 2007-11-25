@@ -37,4 +37,4 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	menu_entry.h menu_entry_simple.h menu_entry_ranged.h menu_list.h \
 	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
 	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h abstract_configuration.h \
-	xml_configuration.h commandline_configuration.h
+	xml_configuration.h commandline_configuration.h world_coord.h screen_coord.h
