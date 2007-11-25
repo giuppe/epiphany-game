@@ -29,7 +29,7 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 	}
 
 	Uint32 num_frames_x, num_frames_y;
-	
+
 	if((frame_size_x==0)||(frame_size_y==0))
 	{
 		m_frame_size_x = surface->w;
@@ -46,68 +46,54 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 		num_frames_x = (m_surface->w)/frame_size_x;
 		num_frames_y = (m_surface->h)/frame_size_y;
 	}
-	
-		m_num_frames = num_frames_x*num_frames_y;
 
-		m_surfaces = new Frame[m_num_frames];
+	m_num_frames = num_frames_x*num_frames_y;
 
-		SDL_Rect src;
+	m_surfaces = new Frame[m_num_frames];
 
-		for(Uint32 i = 0; i<num_frames_x; i++)
+	SDL_Rect src;
+
+	for(Uint32 i = 0; i<num_frames_x; i++)
+	{
+		for(Uint32 k=0; k<num_frames_y; k++)
 		{
-			for(Uint32 k=0; k<num_frames_y; k++)
-			{
-				src.x = i*m_frame_size_x;
-				src.y = k*m_frame_size_y;
+			src.x = i*m_frame_size_x;
+			src.y = k*m_frame_size_y;
 
-				src.w = m_frame_size_x;
-				src.h = m_frame_size_y;
+			src.w = m_frame_size_x;
+			src.h = m_frame_size_y;
 
-				/*				dest.x = x;
-					dest.y = y;
+			SDL_Surface* surface_temp=SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, m_frame_size_x, m_frame_size_y, Screen::instance()->get_bpp(),0,0,0,0);
 
-					dest.w = m_frame_size_x;
-					dest.h = m_frame_size_y;
-				 */
-				SDL_Surface* surface_temp=SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, m_frame_size_x, m_frame_size_y, Screen::instance()->get_bpp(),0,0,0,0);
-				
-				if(surface_temp == NULL) {
-				        DEBOUT("CreateRGBSurface failed: "<< SDL_GetError());
-				        //exit(1);
-				    }
-				
-				SDL_BlitSurface(m_surface, &src, surface_temp, NULL);
-				
-				m_surfaces[k*num_frames_x+i].image=SDL_DisplayFormat(surface_temp);
-				
-			
-				//Set pink as transparent color
-				SDL_SetColorKey(m_surfaces[k*num_frames_x+i].image, SDL_SRCCOLORKEY, SDL_MapRGB(m_surfaces[k*num_frames_x+i].image->format, 255, 0, 255));
-				
-				m_surfaces[k*num_frames_x+i].pause=1;
-				
-				
-				SDL_FreeSurface(surface_temp);
+			if(surface_temp == NULL) {
+				DEBOUT("CreateRGBSurface failed: "<< SDL_GetError());
+				exit(1);
+			}
+
+			SDL_BlitSurface(m_surface, &src, surface_temp, NULL);
+
+			m_surfaces[k*num_frames_x+i].image=SDL_DisplayFormat(surface_temp);
+
+
+			//Set pink as transparent color
+			SDL_SetColorKey(m_surfaces[k*num_frames_x+i].image, SDL_SRCCOLORKEY, SDL_MapRGB(m_surfaces[k*num_frames_x+i].image->format, 255, 0, 255));
+
+			m_surfaces[k*num_frames_x+i].pause=1;
+
+
+			SDL_FreeSurface(surface_temp);
 		}
 
 	}
-	
+
 	m_is_inited=true;
 }
 
 void Surface::put_screen(ScreenCoord scr_coord, int frame_no)
 {
-	
-	
-	//SDL_Rect dest;
-	Screen* screen = Screen::instance();
-	
-	//dest.x = scr_coord.x;
-	//dest.y = scr_coord.y;
 
-	//dest.w = m_frame_size_x;
-	//dest.h = m_frame_size_y;
-	
+	Screen* screen = Screen::instance();
+
 	if(frame_no == -1)
 	{
 		screen->blit_surface(m_surfaces[0].image, NULL,  scr_coord);
@@ -115,24 +101,19 @@ void Surface::put_screen(ScreenCoord scr_coord, int frame_no)
 	}
 	else
 	{
-		//src.x = (frame_no%k_max_anim)*m_frame_size_x;
-		//src.y = (frame_no/k_max_anim)*m_frame_size_y;
+
 		SDL_Rect src;
 		src.x = 0;
 		src.y = 0;
-		
+
 		src.w = m_frame_size_x;
 		src.h = m_frame_size_y;
-	
-		
+
+
 		screen->blit_surface(m_surfaces[frame_no].image, &src,  scr_coord);
 	}
-	
-	
-	
-	
-	
-	
+
+
 }
 
 Surface::~Surface()
