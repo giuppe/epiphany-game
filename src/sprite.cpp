@@ -21,45 +21,6 @@
 #include "screen.h"
 
 
-Sprite::Sprite(Surface* surface)
-{
-	init(surface);
-	
-}
-
-
-/*
-
-Sprite::Sprite(const Sprite& sprite)
-{
-
-	//DEBOUT("Entering Sprite cpyctor...\n");
-
-	m_surface=sprite.m_surface;
-	
-	m_pos=sprite.m_pos;
-	
-	
-	
-	m_move_to_pos_x=sprite.m_move_to_pos_x;
-	
-	m_move_to_pos_y=sprite.m_move_to_pos_y;
-	
-	m_initialized=true;
-	
-	m_curr_frame=sprite.m_curr_frame;
-
-	m_speed=sprite.m_speed;
-	
-	m_state = sprite.m_state;
-	
-	m_total_frames = sprite.m_total_frames;
-	
-}
-
-*/
-
-
 void Sprite::init(Surface* surf)
 {
 
@@ -69,9 +30,9 @@ void Sprite::init(Surface* surf)
 	
 	m_pos.y=0;
 	
-	m_move_to_pos_x=0;
+	m_move_to_pos.x=0;
 	
-	m_move_to_pos_y=0;
+	m_move_to_pos.y=0;
 	
 	m_state = SP_STOP;
 	
@@ -129,7 +90,7 @@ Uint32 Sprite::get_pos_y() const
 void Sprite::set_pos_x(Uint32 pos_x)
 {
 	m_pos.x=pos_x;
-	m_move_to_pos_x=pos_x;
+	m_move_to_pos.x=pos_x;
 }
 
 
@@ -138,7 +99,7 @@ void Sprite::set_pos_x(Uint32 pos_x)
 void Sprite::set_pos_y(Uint32 pos_y)
 {
 	m_pos.y=pos_y;
-	m_move_to_pos_y=pos_y;
+	m_move_to_pos.y=pos_y;
 }
 
 
@@ -173,22 +134,22 @@ void Sprite::move(Uint32 n_pixel)
 	
 	n_pixel*=m_speed;
 	
-	if(m_pos.x<m_move_to_pos_x)
+	if(m_pos.x<m_move_to_pos.x)
 	{
-		if(m_pos.x+n_pixel>m_move_to_pos_x)
+		if(m_pos.x+n_pixel>m_move_to_pos.x)
 		{
-			m_pos.x=m_move_to_pos_x;
+			m_pos.x=m_move_to_pos.x;
 		}
 		else
 		{
 			m_pos.x+=n_pixel;
 		}
 	}
-	else if(m_pos.x>m_move_to_pos_x)
+	else if(m_pos.x>m_move_to_pos.x)
 	{
-		if(m_pos.x-n_pixel<m_move_to_pos_x)
+		if(m_pos.x-n_pixel<m_move_to_pos.x)
 		{
-			m_pos.x=m_move_to_pos_x;
+			m_pos.x=m_move_to_pos.x;
 		}
 		else
 		{
@@ -196,22 +157,22 @@ void Sprite::move(Uint32 n_pixel)
 		}
 	}
 
-	if(m_pos.y<m_move_to_pos_y)
+	if(m_pos.y<m_move_to_pos.y)
 	{
-		if(m_pos.y+n_pixel>m_move_to_pos_y)
+		if(m_pos.y+n_pixel>m_move_to_pos.y)
 		{
-			m_pos.y=m_move_to_pos_y;
+			m_pos.y=m_move_to_pos.y;
 		}
 		else
 		{
 			m_pos.y+=n_pixel;
 		}
 	}
-	else if(m_pos.y>m_move_to_pos_y)
+	else if(m_pos.y>m_move_to_pos.y)
 	{
-		if(m_pos.y-n_pixel<m_move_to_pos_y)
+		if(m_pos.y-n_pixel<m_move_to_pos.y)
 		{
-			m_pos.y=m_move_to_pos_y;
+			m_pos.y=m_move_to_pos.y;
 		}
 		else
 		{
@@ -246,19 +207,19 @@ void Sprite::set_state(Anim_State state)
 
 void Sprite::move_to_pos(Uint32 x, Uint32 y)
 {
-	m_move_to_pos_x=x;
-	m_move_to_pos_y=y;
+	m_move_to_pos.x=x;
+	m_move_to_pos.y=y;
 }
 
 
 void Sprite::move_to_pos_x(Uint32 x)
 {
-	m_move_to_pos_x=x;
+	m_move_to_pos.x=x;
 }
 
 void Sprite::move_to_pos_y(Uint32 y)
 {
-	m_move_to_pos_y=y;
+	m_move_to_pos.y=y;
 }
 
 

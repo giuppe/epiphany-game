@@ -131,8 +131,12 @@ bool Entity::set_initial_position(Uint32 x, Uint32 y)
 	m_position_x=x;
 	m_position_y=y;
 	
-	(m_sprite).set_pos_x(m_position_x*k_sprite_size);
-	(m_sprite).set_pos_y(m_position_y*k_sprite_size);
+	WorldCoord pos;
+	pos.x = m_position_x*k_sprite_size;
+	pos.y = m_position_y*k_sprite_size;
+	
+	(m_sprite).set_position(pos);
+
 
 	
 	//current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
@@ -186,8 +190,11 @@ void Entity::move_up()
 
 	set_position(new_position_x, new_position_y);
 
+	WorldCoord final_pos;
+	final_pos.x = new_position_x*k_sprite_size;
+	final_pos.y = new_position_y*k_sprite_size;
 	
-	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
+	m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_UP);
 		
 }
@@ -200,9 +207,12 @@ void Entity::move_down()
 
 	set_position(new_position_x, new_position_y);
 
-	
-	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
-	m_sprite.set_state(SP_DOWN);
+	WorldCoord final_pos;
+		final_pos.x = new_position_x*k_sprite_size;
+		final_pos.y = new_position_y*k_sprite_size;
+		
+		m_sprite.move_to_position(final_pos);
+		m_sprite.set_state(SP_DOWN);
 }
 
 void Entity::move_right()
@@ -214,7 +224,11 @@ void Entity::move_right()
 	set_position(new_position_x, new_position_y);
 
 	
-	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
+	WorldCoord final_pos;
+		final_pos.x = new_position_x*k_sprite_size;
+		final_pos.y = new_position_y*k_sprite_size;
+		
+		m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_RIGHT);
 }
 
@@ -226,7 +240,11 @@ void Entity::move_left()
 	set_position(new_position_x, new_position_y);
 	
 	
-	m_sprite.move_to_pos(new_position_x*k_sprite_size, new_position_y*k_sprite_size);
+	WorldCoord final_pos;
+		final_pos.x = new_position_x*k_sprite_size;
+		final_pos.y = new_position_y*k_sprite_size;
+		
+		m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_LEFT);
 }
 
@@ -251,20 +269,6 @@ bool Entity::player_pressing_left(Entity_Handle right_entity)
 	return false;
 }
 
-
-/*
-Sprite& Entity::get_sprite()
-{
-	return m_sprite;
-	
-}
-*/
-/*
-bool Entity::exists()
-{
-	return m_exists;
-}
- */
 
 void Entity::draw_on_screen()
 {

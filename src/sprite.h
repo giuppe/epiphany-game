@@ -42,15 +42,7 @@ private:
 	WorldCoord m_pos;
 	
 	WorldCoord m_move_to_pos;
-	
-	//Uint32 m_pos_x;
-	
-	//Uint32 m_pos_y;
-	
-	Uint32 m_move_to_pos_x;
-	
-	Uint32 m_move_to_pos_y;
-	
+		
 	Uint32 m_step_x;
 
 	Uint32 m_step_y;
@@ -79,31 +71,7 @@ private:
 	Sprite(const Sprite& sprite);
 	
 	Sprite(Surface* surface);
-	
-public:
 
-	
-	
-	Sprite():m_initialized(false){};
-
-
-	
-	//Sprite(const Sprite& sprite);
-	
-	~Sprite();
-	
-	void set_speed(Uint32 speed);
-		
-
-	
-	void put_screen(ScreenCoord scr_coord);
-
-	WorldCoord get_position() const;
-	
-	void set_position(WorldCoord pos);
-	
-	void move_to_position(WorldCoord pos);
-	
 	Uint32 get_pos_x() const;
 	
 	Uint32 get_pos_y() const;
@@ -112,11 +80,31 @@ public:
 	
 	void set_pos_y(Uint32 y);
 	
-	void move_to_pos(Uint32 x, Uint32 y);
 	
 	void move_to_pos_x(Uint32 x);
 	
 	void move_to_pos_y(Uint32 y);
+	
+	void move_to_pos(Uint32 x, Uint32 y);
+	
+public:
+
+	
+	
+	Sprite():m_initialized(false){};
+
+	
+	~Sprite();
+	
+	void set_speed(Uint32 speed);
+	
+	void put_screen(ScreenCoord scr_coord);
+
+	WorldCoord get_position() const;
+	
+	void set_position(WorldCoord pos);
+	
+	void move_to_position(WorldCoord pos);
 	
 	void move();
 	
