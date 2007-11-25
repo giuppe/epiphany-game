@@ -29,7 +29,7 @@ public:
 
 	Menu_Entry(){};
 	
-	virtual const char* get_string() = 0;
+	virtual std::string get_string() const = 0;
 	
 //	virtual void set_string(const char* string) = 0;
 	
@@ -43,7 +43,7 @@ public:
 	
 	virtual void action_press() = 0;
 	
-	virtual Uint32 get_value() = 0;
+	virtual Uint32 get_value() const = 0;
 	
 	virtual ~Menu_Entry(){};		
 	

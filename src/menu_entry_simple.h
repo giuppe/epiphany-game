@@ -29,11 +29,11 @@ class Menu_Entry_Simple : public Menu_Entry
 	
 		Menu_Entry_Simple(const char* string):m_string(string){};
 	
-		const char* get_string(){return m_string.c_str();};
+		std::string get_string() const {return m_string;};
 	
-		void set_string(const char* string){m_string = string;};
+		void set_string(const std::string& string){m_string = string;};
 		
-		Uint32 get_value(){ return 0;}
+		Uint32 get_value() const{ return 0;}
 	
 		void action_left(){};
 	

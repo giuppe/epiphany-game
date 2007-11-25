@@ -247,7 +247,7 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 				
 		for(Uint32 i=0; i<menu_list->get_list_size(); i++)
 		{
-			menu_font->write(menu_left_point-50, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i));
+			menu_font->write(menu_left_point-50, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i).c_str());
 		}	
 		
 	

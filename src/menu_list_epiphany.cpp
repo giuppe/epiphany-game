@@ -115,7 +115,7 @@ void Menu_List_Epiphany::action_left()
 
 
 
-const char* Menu_List_Epiphany::get_menu_entry_string(Uint32 entry)
+std::string Menu_List_Epiphany::get_menu_entry_string(Uint32 entry) const
 {
 	assert(entry<m_entries_list.size() && "Fatal: Accessing menu_entry outside limits");
 
@@ -123,19 +123,19 @@ const char* Menu_List_Epiphany::get_menu_entry_string(Uint32 entry)
 }
 
 
-Uint32 Menu_List_Epiphany::get_list_size()
+Uint32 Menu_List_Epiphany::get_list_size() const
 {
 	return m_entries_list.size();
 		
 }
 
 
-Uint32 Menu_List_Epiphany::get_return_action()
+Uint32 Menu_List_Epiphany::get_return_action() const
 {
 	return m_return_action;
 }
 
-Uint32 Menu_List_Epiphany::get_selected_level()
+Uint32 Menu_List_Epiphany::get_selected_level() const
 {
 	return m_entries_list[1]->get_value();
 	

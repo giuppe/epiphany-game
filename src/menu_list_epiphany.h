@@ -42,9 +42,9 @@ public:
 	
 	~Menu_List_Epiphany();
 	
-	Uint32 get_selected_level();
+	Uint32 get_selected_level() const;
 	
-	Uint32 get_return_action();
+	Uint32 get_return_action() const;
 	
 	void action_left();
 	
@@ -56,9 +56,9 @@ public:
 	
 	void action_press();
 	
-	Uint32 get_list_size();
+	Uint32 get_list_size() const;
 	
-	const char* get_menu_entry_string(Uint32 entry);
+	std::string get_menu_entry_string(Uint32 entry) const;
 	
 };
 

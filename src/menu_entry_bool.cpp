@@ -25,7 +25,7 @@ void Menu_Entry_Bool::action_press()
 		
 }
 
-const char* Menu_Entry_Bool::get_string()
+std::string Menu_Entry_Bool::get_string() const
 {
 	if(m_current_value == 0)
 	{

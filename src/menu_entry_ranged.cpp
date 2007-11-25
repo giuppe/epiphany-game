@@ -29,19 +29,19 @@ void Menu_Entry_Ranged::set_current_value(Uint32 current_value)
 
 
 	
-const char* Menu_Entry_Ranged::get_string()
+std::string Menu_Entry_Ranged::get_string() const
 {
 	std::string result(m_string);
 	char value_string[255];
 	sprintf(value_string, "%d", m_current_value);
 	result+= value_string;
-	return result.c_str();
+	return result;
 }
 
 
 
 	
-void Menu_Entry_Ranged::set_string(const char* string)
+void Menu_Entry_Ranged::set_string(const std::string& string)
 {
 	m_string = string;
 }

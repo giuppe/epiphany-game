@@ -35,11 +35,11 @@ protected:
 public:
 	virtual ~Menu_List(){};
 	
-	Uint32 get_selected(){return m_selected;}
+	Uint32 get_selected() const {return m_selected;}
 	
-	bool is_selected(Uint32 entry){if(m_selected == entry) return true; return false;}
+	bool is_selected(Uint32 entry)const{if(m_selected == entry) return true; return false;}
 		
-	virtual Uint32 get_return_action() = 0;
+	virtual Uint32 get_return_action() const = 0;
 	
 	virtual void action_left() = 0;
 	
@@ -51,9 +51,9 @@ public:
 	
 	virtual void action_press() = 0;
 	
-	virtual const char* get_menu_entry_string(Uint32 entry) = 0;
+	virtual std::string get_menu_entry_string(Uint32 entry) const = 0;
 	
-	virtual Uint32 get_list_size() = 0;
+	virtual Uint32 get_list_size() const = 0;
 	
 /*	
 	virtual bool has_next_entry() = 0;

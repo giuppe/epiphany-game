@@ -49,11 +49,11 @@ class Menu_Entry_Ranged : public Menu_Entry
 	
 		void set_current_value(Uint32 current_value);
 		
-		Uint32 get_value(){return m_current_value;}
+		Uint32 get_value() const {return m_current_value;}
 	
-		const char* get_string();
+		std::string get_string() const;
 	
-		void set_string(const char* string);
+		void set_string(const std::string& string);
 	
 		void action_left();
 	
