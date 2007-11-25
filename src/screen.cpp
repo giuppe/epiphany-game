@@ -88,25 +88,6 @@ Uint8 Screen::get_bpp()
 
 
 
-void Screen::put(Sprite& sprite)
-{
-
-	WorldCoord world_pos = sprite.get_position();
-	ScreenCoord screen_pos = this->coord_to_screen(world_pos);
-	
-/*	if(	((curr_pos_x+48>(Sint32)m_win_pos_x)&&
-			(curr_pos_x<(Sint32)(m_win_pos_x+m_win_size_x)))&&
-			((curr_pos_y+48>(Sint32)m_win_pos_y)&&
-			(curr_pos_y<(Sint32)(m_win_pos_y+m_win_size_y))))
-	{
-	*/
-		sprite.put_screen(screen_pos);
-	//}
-	
-}
-
-
-
 
 ScreenCoord Screen::coord_to_screen(WorldCoord wld_coord)
 {
@@ -188,8 +169,12 @@ void Screen::set_camera_position(WorldCoord position)
 
 void Screen::clear()
 {
-	
-	SDL_FillRect(m_screen, NULL, SDL_MapRGB(m_screen->format, 0, 0, 0));
+	SDL_Surface* dest_surf = m_screen;
+	if(m_use_virtual_screen)
+	{
+		dest_surf = m_game_screen;
+	}
+	SDL_FillRect(dest_surf, NULL, SDL_MapRGB(dest_surf->format, 0, 0, 0));
 }	
 
 
@@ -246,6 +231,22 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 	SDL_BlitSurface(surface, src,  dest_surf, dest);
 }
 
+void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
+{
+	SDL_Rect rect_dest;
+	rect_dest.x=dest.x;
+	rect_dest.y=dest.y;
+	blit_surface(surface, src,&rect_dest);
+}
+
+void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest)
+{
+	SDL_Rect rect_dest;
+	ScreenCoord dest_screen = this->coord_to_screen(dest);
+	rect_dest.x=dest_screen.x;
+	rect_dest.y=dest_screen.y;
+	blit_surface(surface, src,&rect_dest);
+}
 
 void Screen::deinit()
 {

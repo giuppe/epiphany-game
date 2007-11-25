@@ -99,18 +99,18 @@ void Surface::put_screen(ScreenCoord scr_coord, int frame_no)
 {
 	
 	
-	SDL_Rect dest;
+	//SDL_Rect dest;
 	Screen* screen = Screen::instance();
 	
-	dest.x = scr_coord.x;
-	dest.y = scr_coord.y;
+	//dest.x = scr_coord.x;
+	//dest.y = scr_coord.y;
 
-	dest.w = m_frame_size_x;
-	dest.h = m_frame_size_y;
+	//dest.w = m_frame_size_x;
+	//dest.h = m_frame_size_y;
 	
 	if(frame_no == -1)
 	{
-		screen->blit_surface(m_surfaces[0].image, NULL,  &dest);
+		screen->blit_surface(m_surfaces[0].image, NULL,  scr_coord);
 
 	}
 	else
@@ -125,7 +125,7 @@ void Surface::put_screen(ScreenCoord scr_coord, int frame_no)
 		src.h = m_frame_size_y;
 	
 		
-		screen->blit_surface(m_surfaces[frame_no].image, &src,  &dest);
+		screen->blit_surface(m_surfaces[frame_no].image, &src,  scr_coord);
 	}
 	
 	

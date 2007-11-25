@@ -64,17 +64,9 @@ private:
 	
 	void move(Uint32 n_pixel);
 	
-	Uint32 m_sprite_width;
-	
-	Uint32 m_sprite_height;
-	
 	Sprite(const Sprite& sprite);
 	
 	Sprite(Surface* surface);
-
-	Uint32 get_pos_x() const;
-	
-	Uint32 get_pos_y() const;
  	
 	void set_pos_x(Uint32 x);
 	

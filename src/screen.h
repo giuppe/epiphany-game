@@ -48,6 +48,7 @@ private:
 	
 	SDL_Surface* get_screen();
 
+
 public:
 
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y);
@@ -56,7 +57,7 @@ public:
 	
 	Uint8 get_bpp();
 	
-	void put(Sprite& sprite);
+
 		
 	//void put(Entity* entity);
 	
@@ -88,6 +89,10 @@ public:
 
 	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
+	
+	void blit_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest);
+	
+	void blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest);
 	
 	WorldCoord coord_to_world(ScreenCoord scr_coord);
 	

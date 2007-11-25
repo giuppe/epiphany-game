@@ -44,9 +44,6 @@ void Sprite::init(Surface* surf)
 	
 	m_total_frames = 8;
 	
-	m_sprite_width = 32;
-	
-	m_sprite_height = 32;
 	
 }
 
@@ -75,16 +72,6 @@ void Sprite::put_screen(ScreenCoord scr_coord)
 	m_surface->put_screen(scr_coord, m_curr_frame+m_state);
 }
 
-
-Uint32 Sprite::get_pos_x() const
-	{
-		return m_pos.x;
-  	}
-
-Uint32 Sprite::get_pos_y() const
-	{
-		return m_pos.x;
-  	}
 
 
 void Sprite::set_pos_x(Uint32 pos_x)
@@ -232,18 +219,9 @@ void Sprite::update_frame()
 
 void Sprite::draw()
 {
-	/*
-	Screen* screen = Screen::instance();
-	if(	((m_pos_x+48>(Sint32)screen->get_win_pos_x())&&
-				(m_pos_x<(Sint32)(screen->get_win_pos_x()+screen->get_win_size_x())))&&
-				((m_pos_y+48>(Sint32)screen->get_win_pos_y())&&
-				(m_pos_y<(Sint32)(screen->get_win_pos_y()+screen->get_win_size_y()))))
-	{
-		m_surface->put_screen(m_pos_x-screen->get_win_pos_x(), m_pos_y-screen->get_win_pos_y(), screen->get_cell_size(), screen->get_cell_size(),m_curr_frame+m_state);
-	}
-	*/
-	
-	Screen::instance()->put(*this);
+
+	this->put_screen(Screen::instance()->coord_to_screen(m_pos));
+
 	
 }
 
