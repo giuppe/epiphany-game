@@ -102,6 +102,7 @@
 			printf("\t--disable-frame-limiter\t\tdisable frame limiter\n");
 			printf("\t--map <map_path>\t\tplay <map_path> as level\n");
 			printf("\t--disable-music\t\tDon't play music\n");
+			//printf("\t--disable-sound\t\tDon't play sounds\n");
 			return 0;
 			
 		}

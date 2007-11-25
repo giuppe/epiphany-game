@@ -59,7 +59,7 @@ private:
 	
 	Uint32 m_total_frames; 
 	
-	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y, Uint32 frame_num);
+	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 frame_num);
 	
 	
 	void set_curr_frame(Uint32 frame);
@@ -86,7 +86,7 @@ public:
 		
 
 	
-	void put_screen(Sint32 pos_x, Sint32 pos_y, Uint32 size_x, Uint32 size_y);
+	void put_screen(Sint32 pos_x, Sint32 pos_y);
 
 		
 	

@@ -73,7 +73,7 @@ Uint8 Screen::get_bpp()
 }
 
 
-/*
+
 void Screen::put(Sprite& sprite)
 {
 	Sint32 curr_pos_x=sprite.get_pos_x();
@@ -86,11 +86,11 @@ void Screen::put(Sprite& sprite)
 //	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
 	//int frame=sprite.get_frame_number();
 	//sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
-		sprite.put_screen((Sint32)(curr_pos_x-m_win_pos_x), (Sint32)(curr_pos_y-m_win_pos_y), (Sint32)m_cell_size, (Sint32)m_cell_size);
+		sprite.put_screen((Sint32)(curr_pos_x-m_win_pos_x), (Sint32)(curr_pos_y-m_win_pos_y));
 	}
 	
 }
-*/
+
 
 Uint32 Screen::get_win_pos_x()
 {
@@ -114,16 +114,34 @@ Uint32 Screen::get_win_size_y()
 	return m_win_size_y;
 }
 
-
-/*
-void Screen::put(Surface& surface, Uint32 x, Uint32 y)
+ScreenCoord Screen::coord_to_screen(WorldCoord wld_coord)
 {
-	
+	ScreenCoord scr;
+	scr.x = wld_coord.x - m_camera.x;
+	scr.y = wld_coord.y - m_camera.y;
+	return scr;
+}
+
+WorldCoord Screen::coord_to_world(ScreenCoord scr_coord)
+{
+	WorldCoord wld;
+	wld.x = scr_coord.x + m_camera.x;
+	wld.y = scr_coord.y + m_camera.y;
+	return wld;
+}
+
+
+void Screen::put(Surface& surface, WorldCoord wld_coord)
+{
+	put(surface, coord_to_screen(wld_coord));
 	
 	
 }
-*/
 
+void Screen::put(Surface& surface, ScreenCoord scr_coord)
+{
+	surface.put_screen(scr_coord.x, scr_coord.y);
+}
 
 
 void Screen::set_cell_size(Uint32 cell_size)

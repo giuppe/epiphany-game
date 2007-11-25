@@ -201,9 +201,9 @@ void Menu::print_menu_background()
 	
 	for(Uint32 i=0; i< config->get_screen_size_x(); i+=96)
 	for(Uint32 j=0; j< config->get_screen_size_y(); j+=96)
-	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_BACK_TILE)->put_screen(i,j,96,96,-1);
+	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_BACK_TILE)->put_screen(i,j);
 	
-	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_TITLE)->put_screen(config->get_screen_size_x()/2-148, 32, 296, 79,-1);
+	Surface_Manager::instance()->get_surface(Surface_Manager::SRF_MENU_TITLE)->put_screen(config->get_screen_size_x()/2-148, 32);
 	//m_background->put_screen(0,0, config->get_screen_size_x(), config->get_screen_size_y());
 	
 }
@@ -283,7 +283,7 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 		
 		//animated menu selector drawing
 		
-		m_selector.put_screen(menu_left_point-90,menu_top_point+menu_list->get_selected()*menu_vertical_distance,32,32);
+		m_selector.put_screen(menu_left_point-90,menu_top_point+menu_list->get_selected()*menu_vertical_distance);
 
 		screen->flip_display();
 

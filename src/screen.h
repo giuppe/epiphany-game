@@ -23,6 +23,19 @@
 
 class Entity;
 
+struct ScreenCoord
+{
+	Sint32 x;
+	Sint32 y;
+};
+
+struct WorldCoord
+{
+	Sint32 x;
+	Sint32 y;
+};
+
+
 class Screen
 {
 private:
@@ -39,17 +52,24 @@ private:
 	
 	SDL_Surface* m_game_screen;
 	
+	SDL_Rect m_camera;
+	
 public:
 
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size);
 	
 	Uint8 get_bpp();
 	
-	//void put(Sprite& sprite);
+	void put(Sprite& sprite);
 		
 	//void put(Entity* entity);
 	
 	//void put(Surface* surface, Sint32 x, Sint32 y);
+	
+
+	void put(Surface& surface, ScreenCoord scr_coord);
+	
+	void put(Surface& surface, WorldCoord wld_coord);
 	
 	Uint32 get_screen_size_x();
 	
@@ -81,6 +101,10 @@ public:
 	void fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
 	SDL_Surface* get_screen(){return m_screen;}
+	
+	WorldCoord coord_to_world(ScreenCoord scr_coord);
+	
+	ScreenCoord coord_to_screen(WorldCoord wld_coord);
 	
 // begin Singleton stuff
 

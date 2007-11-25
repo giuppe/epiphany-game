@@ -95,7 +95,7 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 	m_is_inited=true;
 }
 
-void Surface::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int frame_no)
+void Surface::put_screen(Sint32 x, Sint32 y, int frame_no)
 {
 	
 	SDL_Rect src;
@@ -110,8 +110,8 @@ void Surface::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int f
 		dest.x = x;
 		dest.y = y;
 
-		dest.w = size_x;
-		dest.h = size_y;
+		dest.w = m_frame_size_x;
+		dest.h = m_frame_size_y;
 		SDL_BlitSurface(m_surfaces[0].image, NULL,  screen, &dest);
 	}
 	else

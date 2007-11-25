@@ -52,7 +52,7 @@ public:
 	
 	//Surface(SDL_Surface* surface):m_surface(surface), m_frame_size_x(0), m_frame_size_y(0){};
 
-	void put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, int frame_no=-1);
+	void put_screen(Sint32 x, Sint32 y, int frame_no=-1);
 	
 	void init(SDL_Surface* surface, Uint32 frame_size_x=32, Uint32 frame_size_y=32);
 	

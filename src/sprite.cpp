@@ -115,17 +115,17 @@ Sprite::~Sprite()
 
 
 
-void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint32 frame_num)
+void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 frame_num)
 {
-	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, (Sint32)frame_num);
+	m_surface->put_screen(x, y, (Sint32)frame_num);
 }
 
 
 
 
-void Sprite::put_screen(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y)
+void Sprite::put_screen(Sint32 x, Sint32 y)
 {
-	m_surface->put_screen(x, y, (Sint32)size_x, (Sint32)size_y, m_curr_frame+m_state);
+	m_surface->put_screen(x, y, m_curr_frame+m_state);
 }
 
 
@@ -277,6 +277,7 @@ void Sprite::update_frame()
 
 void Sprite::draw()
 {
+	/*
 	Screen* screen = Screen::instance();
 	if(	((m_pos_x+48>(Sint32)screen->get_win_pos_x())&&
 				(m_pos_x<(Sint32)(screen->get_win_pos_x()+screen->get_win_size_x())))&&
@@ -285,4 +286,8 @@ void Sprite::draw()
 	{
 		m_surface->put_screen(m_pos_x-screen->get_win_pos_x(), m_pos_y-screen->get_win_pos_y(), screen->get_cell_size(), screen->get_cell_size(),m_curr_frame+m_state);
 	}
+	*/
+	
+	Screen::instance()->put(*this);
+	
 }
