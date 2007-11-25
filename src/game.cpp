@@ -54,8 +54,10 @@ bool Game::main_loop()
 
 	m_time.start();
 
-	Screen::instance()->set_window_center(m_level->get_player().get_position_x()*k_sprite_size,m_level->get_player().get_position_y()*k_sprite_size);
+	
+	Screen::instance()->set_camera_position(m_level->get_player().get_sprite_position());
 
+	
 	Input* input = Input::instance();
 	
 	input->update();
@@ -271,7 +273,7 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	//centering screen on player
 //	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
-	screen->set_window_center(m_level->get_player().get_pos_screen_x(), m_level->get_player().get_pos_screen_y());
+	screen->set_camera_position(m_level->get_player().get_sprite_position());
 
 	
 	//drawing player
@@ -537,7 +539,7 @@ void Game::init()
 	load_config();	
 	
 	DEBOUT("Initing Screen...\n");
-	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x(), m_config->get_map_size_y(), k_sprite_size);
+	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x()*k_sprite_size, m_config->get_map_size_y()*k_sprite_size);
 	
 	Surface_Manager::instance();
 	

@@ -25,7 +25,7 @@
 
 class Entity;
 
-
+class Font;
 
 
 
@@ -33,9 +33,8 @@ class Entity;
 class Screen
 {
 private:
-	Uint32 m_screen_size_x;
-	Uint32 m_screen_size_y;
-	Uint32 m_cell_size;
+	Uint32 m_game_size_x;
+	Uint32 m_game_size_y;
 	
 	SDL_Surface* m_screen;
 	
@@ -43,9 +42,13 @@ private:
 	
 	SDL_Rect m_camera;
 	
+	friend class Font;
+	
+	SDL_Surface* get_screen(){return m_screen;}
+
 public:
 
-	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y, Uint32 cell_size);
+	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y);
 	
 	Uint8 get_bpp();
 	
@@ -60,26 +63,15 @@ public:
 	
 	void put(Surface& surface, WorldCoord wld_coord);
 	
-	Uint32 get_screen_size_x();
+	Uint32 get_game_size_x();
 	
-	Uint32 get_screen_size_y();
+	Uint32 get_game_size_y();
 	
-	Uint32 get_win_pos_x();
-	
-	Uint32 get_win_pos_y();
-	
-	Uint32 get_win_size_x();
-	
-	Uint32 get_win_size_y();
-	
-	Uint32 get_cell_size()
-	{
-		return m_cell_size;
-	}
+
 		
-	void set_cell_size(Uint32 cell_size);
+
 	
-	void set_window_center(Uint32 cell_x, Uint32 cell_y);
+	void set_camera_position(WorldCoord position);
 	
 	void clear();
 	
@@ -89,7 +81,9 @@ public:
 	
 	void fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
-	SDL_Surface* get_screen(){return m_screen;}
+
+	
+	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
 	
 	WorldCoord coord_to_world(ScreenCoord scr_coord);
 	
@@ -103,7 +97,7 @@ private:
 
 protected:
 
-    Screen(): m_screen_size_x(0), m_screen_size_y(0), m_cell_size(0) {};
+    Screen(): m_game_size_x(0), m_game_size_y(0){};
 
 public:
 

@@ -91,6 +91,11 @@ public:
 		m_sprite.move();
 	}
 	
+	WorldCoord get_sprite_position()
+	{
+		return m_sprite.get_position();
+	}
+	/*
 	Uint32 get_pos_screen_x()
 	{
 		return m_sprite.get_pos_x();
@@ -100,7 +105,7 @@ public:
 	{
 		return m_sprite.get_pos_y();
 	}
-	
+	*/
 	void set_speed(Uint32 speed);
 	
 	void set_checked(bool check){m_just_checked=check;};
