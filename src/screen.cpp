@@ -62,7 +62,7 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	
 	
 	
-	m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_game_size_x, m_game_size_y, 0,0,0,0,0);
+	m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_game_size_x, m_game_size_y, this->get_bpp(),0,0,0,0);
 	
 }
 
@@ -184,7 +184,7 @@ void Screen::flip_display()
 {
 
 	
-	SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
+	//SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
 	SDL_Flip(m_screen);
 }
 
@@ -225,6 +225,10 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 }
 
 
+void Screen::deinit()
+{
+	SDL_FreeSurface(m_game_screen);
+}
 
 // begin Singleton stuff
 
