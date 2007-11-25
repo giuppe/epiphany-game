@@ -43,11 +43,6 @@ private:
 	Uint32 m_screen_size_y;
 	Uint32 m_cell_size;
 	
-/*	Uint32 m_win_pos_x;
-	Uint32 m_win_pos_y;
-	Uint32 m_win_size_x;
-	Uint32 m_win_size_y;
-	*/
 	SDL_Surface* m_screen;
 	
 	SDL_Surface* m_game_screen;

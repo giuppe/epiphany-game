@@ -76,8 +76,7 @@ Uint8 Screen::get_bpp()
 
 void Screen::put(Sprite& sprite)
 {
-	//Sint32 curr_pos_x=sprite.get_pos_x();
-	//Sint32 curr_pos_y=sprite.get_pos_y();
+
 	WorldCoord world_pos = sprite.get_position();
 	ScreenCoord screen_pos = this->coord_to_screen(world_pos);
 	
@@ -87,9 +86,6 @@ void Screen::put(Sprite& sprite)
 			(curr_pos_y<(Sint32)(m_win_pos_y+m_win_size_y))))
 	{
 	*/
-//	DEBOUT("drawing sprite at: "<<curr_pos_x<<", "<<curr_pos_y<<"\n");
-	//int frame=sprite.get_frame_number();
-	//sprite.put_screen((int)(curr_pos_x-m_win_pos_x), (int)(curr_pos_y-m_win_pos_y), (int)m_cell_size, (int)m_cell_size, frame);
 		sprite.put_screen(screen_pos);
 	//}
 	
