@@ -33,12 +33,12 @@ class Font;
 class Screen
 {
 private:
-	Uint32 m_game_size_x;
-	Uint32 m_game_size_y;
+	Uint32 m_world_size_x;
+	Uint32 m_world_size_y;
 	
 	SDL_Surface* m_screen;
 	
-	SDL_Surface* m_game_screen;
+	SDL_Surface* m_virtual_screen;
 	
 	SDL_Rect m_camera;
 	
@@ -47,11 +47,13 @@ private:
 	bool m_use_virtual_screen;
 	
 	SDL_Surface* get_screen();
+	
+	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
 
 
 public:
 
-	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y);
+	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x, Uint32 world_size_y);
 	
 	void deinit();
 	
@@ -64,13 +66,13 @@ public:
 	//void put(Surface* surface, Sint32 x, Sint32 y);
 	
 
-	void put(Surface& surface, ScreenCoord scr_coord);
+//	void put(Surface& surface, ScreenCoord scr_coord);
 	
-	void put(Surface& surface, WorldCoord wld_coord);
+//	void put(Surface& surface, WorldCoord wld_coord);
 	
-	Uint32 get_game_size_x();
+	Uint32 get_world_size_x();
 	
-	Uint32 get_game_size_y();
+	Uint32 get_world_size_y();
 	
 
 	void use_virtual_screen(){m_use_virtual_screen = true;}
@@ -87,9 +89,6 @@ public:
 	void fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b);
 	
 
-	
-	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
-	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest);
 	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest);
@@ -98,7 +97,7 @@ public:
 	
 	ScreenCoord coord_to_screen(WorldCoord wld_coord);
 	
-	void resize_virtual_screen(Uint32 size_x, Uint32 size_y);
+	void resize_world_screen(Uint32 size_x=0, Uint32 size_y=0);
 	
 // begin Singleton stuff
 
@@ -108,7 +107,7 @@ private:
 
 protected:
 
-    Screen(): m_game_size_x(0), m_game_size_y(0), m_use_virtual_screen(false){};
+    Screen(): m_world_size_x(0), m_world_size_y(0), m_use_virtual_screen(false){};
 
 public:
 

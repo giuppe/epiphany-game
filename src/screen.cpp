@@ -22,19 +22,19 @@
 
 
 
-Uint32 Screen::get_game_size_x()
+Uint32 Screen::get_world_size_x()
 {
-	return m_game_size_x;
+	return m_world_size_x;
 	
 }
 
 
 
 
-Uint32 Screen::get_game_size_y()
+Uint32 Screen::get_world_size_y()
 {
 
-	return m_game_size_y;
+	return m_world_size_y;
 	
 }
 
@@ -45,7 +45,7 @@ SDL_Surface* Screen::get_screen()
 }
 
 
-void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x, Uint32 level_size_y)
+void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x, Uint32 world_size_y)
 {
 	m_camera.x=0;
 	m_camera.y=0;
@@ -53,8 +53,8 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	m_camera.h=resolution_y-Epiconfig::instance()->get_score_size_y();
 
 	
-	m_game_size_x=level_size_x;
-	m_game_size_y=level_size_y;
+	m_world_size_x=world_size_x;
+	m_world_size_y=world_size_y;
 	
 	m_screen = SDL_SetVideoMode(resolution_x, resolution_y, 0, SDL_HWSURFACE|SDL_DOUBLEBUF);
 	if(m_screen == NULL)
@@ -65,19 +65,27 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 level_size_x,
 	
 	
 	
-	m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_game_size_x, m_game_size_y, this->get_bpp(),0,0,0,0);
+	m_virtual_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_world_size_x, m_world_size_y, this->get_bpp(),0,0,0,0);
 	
 }
 
 
-void Screen::resize_virtual_screen(Uint32 size_x, Uint32 size_y)
+void Screen::resize_world_screen(Uint32 size_x, Uint32 size_y)
 {
+	if((size_x==0)||(size_y==0))
+	{
+		size_x = m_screen->w;
+		size_y = m_screen->h;
+	}
+	
 	if(m_use_virtual_screen)
 	{
-		m_game_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, size_x, size_y, this->get_bpp(),0,0,0,0);
-		m_game_size_x=size_x;
-		m_game_size_y=size_y;
+		m_virtual_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, size_x, size_y, this->get_bpp(),0,0,0,0);
+		
 	}
+	
+	m_world_size_x=size_x;
+	m_world_size_y=size_y;
 }
 
 
@@ -105,7 +113,7 @@ WorldCoord Screen::coord_to_world(ScreenCoord scr_coord)
 	return wld;
 }
 
-
+/*
 void Screen::put(Surface& surface, WorldCoord wld_coord)
 {
 	put(surface, coord_to_screen(wld_coord));
@@ -118,7 +126,7 @@ void Screen::put(Surface& surface, ScreenCoord scr_coord)
 	surface.put_screen(scr_coord);
 }
 
-
+*/
 
 
 
@@ -127,13 +135,13 @@ void Screen::set_camera_position(WorldCoord position)
 
 	if(position.x>(m_camera.w/2))
 	{
-		if((position.x+(m_camera.w/2))<m_game_size_x)
+		if((position.x+(m_camera.w/2))<m_world_size_x)
 		{
 			m_camera.x=(position.x-(m_camera.w/2));
 		}	
 		else
 		{
-			m_camera.x=(m_game_size_x-(m_camera.w));
+			m_camera.x=(m_world_size_x-(m_camera.w));
 		}
 	}
 	else
@@ -143,13 +151,13 @@ void Screen::set_camera_position(WorldCoord position)
 		
 	if(position.y>(m_camera.h/2))
 	{
-		if((position.y+(m_camera.h/2))<m_game_size_y)
+		if((position.y+(m_camera.h/2))<m_world_size_y)
 		{
 			m_camera.y=(position.y-(m_camera.h/2));
 		}	
 		else
 		{
-			m_camera.y=(m_game_size_y-(m_camera.h));
+			m_camera.y=(m_world_size_y-(m_camera.h));
 		}
 	}
 	else
@@ -172,7 +180,7 @@ void Screen::clear()
 	SDL_Surface* dest_surf = m_screen;
 	if(m_use_virtual_screen)
 	{
-		dest_surf = m_game_screen;
+		dest_surf = m_virtual_screen;
 	}
 	SDL_FillRect(dest_surf, NULL, SDL_MapRGB(dest_surf->format, 0, 0, 0));
 }	
@@ -185,7 +193,7 @@ void Screen::flip_display()
 
 	if(m_use_virtual_screen)
 	{
-		SDL_BlitSurface(m_game_screen, &m_camera, m_screen, NULL);
+		SDL_BlitSurface(m_virtual_screen, &m_camera, m_screen, NULL);
 	}
 	SDL_Flip(m_screen);
 }
@@ -226,7 +234,7 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 	SDL_Surface* dest_surf = m_screen;
 	if(m_use_virtual_screen)
 	{
-		dest_surf = m_game_screen;
+		dest_surf = m_virtual_screen;
 	}
 	SDL_BlitSurface(surface, src,  dest_surf, dest);
 }
@@ -250,7 +258,7 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest)
 
 void Screen::deinit()
 {
-	SDL_FreeSurface(m_game_screen);
+	SDL_FreeSurface(m_virtual_screen);
 }
 
 // begin Singleton stuff
