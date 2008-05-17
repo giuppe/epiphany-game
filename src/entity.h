@@ -53,7 +53,7 @@ protected:
 	Sprite m_sprite;
 	
 	vector<Sprite> m_sprites;
-	
+	friend class Entity_Factory;
 	enum Entity_State{ST_STOP, 
 		ST_MOVING_UP, 
 		ST_MOVING_LEFT, 
@@ -125,6 +125,10 @@ public:
 	bool set_initial_position(Uint32 x, Uint32 y);
 	// Moving functions - one for every direction
 	
+	void move();
+
+	bool can_move();
+	
 	void move_up();
 	
 	void move_down();
@@ -140,6 +144,8 @@ public:
 	void draw_on_screen();
 	
 	Entity_State get_state();
+	
+	void set_state(Entity_State state);
 	// Virtual functions
 	
 	// this function need to be overloaded in the derivative classes.

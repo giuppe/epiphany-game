@@ -87,16 +87,20 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 		entity=new Entity_Flintstone(level,x,y);
 		break;
 	case PEPERON_UP:
-		entity=new Entity_Peperon(level,x,y,UP);
+		entity=new Entity_Peperon(level,x,y);
+		entity->set_state(Entity::ST_MOVING_UP);
 		break;
 	case PEPERON_RIGHT:
-		entity=new Entity_Peperon(level,x,y,RIGHT);
+		entity=new Entity_Peperon(level,x,y);
+		entity->set_state(Entity::ST_MOVING_RIGHT);
 		break;
 	case PEPERON_DOWN:
-		entity=new Entity_Peperon(level,x,y,DOWN);
+		entity=new Entity_Peperon(level,x,y);
+		entity->set_state(Entity::ST_MOVING_DOWN);
 		break;
 	case PEPERON_LEFT:
-		entity=new Entity_Peperon(level,x,y,LEFT);
+		entity=new Entity_Peperon(level,x,y);
+		entity->set_state(Entity::ST_MOVING_LEFT);
 		break;
 	case BRICK:
 		entity=new Entity_Brick(level,x,y);
@@ -105,16 +109,20 @@ Entity* Entity_Factory::create_entity(Entity_Type type, Level* level)
 		entity=new Entity_Wood(level,x,y);
 		break;
 	case TOMATO_UP:
-		entity=new Entity_Tomato(level,x,y,UP);
+		entity=new Entity_Tomato(level,x,y);
+		entity->set_state(Entity::ST_MOVING_UP);
 		break;
 	case TOMATO_RIGHT:
-		entity=new Entity_Tomato(level,x,y,RIGHT);
+		entity=new Entity_Tomato(level,x,y);
+		entity->set_state(Entity::ST_MOVING_RIGHT);
 		break;
 	case TOMATO_DOWN:
-		entity=new Entity_Tomato(level,x,y,DOWN);
+		entity=new Entity_Tomato(level,x,y);
+		entity->set_state(Entity::ST_MOVING_DOWN);
 		break;
 	case TOMATO_LEFT:
-		entity=new Entity_Tomato(level,x,y,LEFT);
+		entity=new Entity_Tomato(level,x,y);
+		entity->set_state(Entity::ST_MOVING_LEFT);
 		break;
 	case EXPLOSION:
 		entity = new Entity_Explosion(level,x,y);

@@ -21,7 +21,7 @@
 #include "entity_manager.h"
 #include "entity_player.h"
 
-Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y, Direction direction)
+Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y)
 {
 	current_level=level;
 	m_position_x=x;
@@ -32,7 +32,7 @@ Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y, Direction direc
 	m_sprite.set_state(SP_STOP);
 	m_exists=true;
 	m_is_exploding=false;
-	m_direction=direction;
+	m_state=ST_STOP;
 
 }
 	
@@ -66,81 +66,82 @@ void Entity_Peperon::check_and_do()
 		return;
 	}
 	
-	switch(m_direction)
+	switch(m_state)
 	{
-	case UP:
+	case ST_MOVING_UP:
 		if(right_entity_id!=0)
 		{
 			if(up_entity_id!=0)
 			{
-				m_direction=LEFT;
+				m_state=ST_MOVING_LEFT;
 			}
 		}
 		else
 		{
-			m_direction=RIGHT;
+			m_state=ST_MOVING_RIGHT;
 		}
 		break;
 		
-	case RIGHT:
+	case ST_MOVING_RIGHT:
 		if(down_entity_id!=0)
 		{
 			if(right_entity_id!=0)
 			{
 
-				m_direction=UP;
+				m_state=ST_MOVING_UP;
 			}
 
 		}
 		else
 		{
-			m_direction=DOWN;
+			m_state=ST_MOVING_DOWN;
 		}
 		break;
 		
-	case DOWN:
+	case ST_MOVING_DOWN:
 		if(left_entity_id!=0)
 		{
 			if(down_entity_id!=0)
 			{
 
-				m_direction=RIGHT;
+				m_state=ST_MOVING_RIGHT;
 			}
 
 		}
 		else
 		{
-			m_direction=LEFT;
+			m_state=ST_MOVING_LEFT;
 		}
 		break;
 		
-	case LEFT:
+	case ST_MOVING_LEFT:
 		if(up_entity_id!=0)
 		{
 			if(left_entity_id!=0)
 			{
-			//		move(LEFT);
-				m_direction=DOWN;
+		
+				m_state=ST_MOVING_DOWN;
 			}
 
 		}
 		else
 		{
-			m_direction=UP;
+			m_state=ST_MOVING_UP;
 		}
 		break;
 		
 	default:
 		m_sprite.set_state(SP_STOP);
+		m_state=ST_STOP;
 	}
-	if(current_level->get_entity(m_position_x, m_position_y, m_direction)==0)
+	if(m_state!=ST_STOP)
 	{
 		
 
 		Sample_Manager::instance()->play(SFX_MONSTER_MOVE);
-
-		move(m_direction);
-
+		if(can_move()){
+			move();
+		}
 	}
 		
 	m_just_checked=true;

@@ -25,9 +25,10 @@ class Entity_Monster:public Entity
 {
 protected:
 	
-	Direction m_direction;
+//	Direction m_direction;
 	
 	bool m_is_exploding;
+	Direction get_direction();
 
 public:
 
@@ -35,7 +36,7 @@ public:
 
 	Entity_Monster();
 	
-	Direction get_direction();
+
 	
 };
 

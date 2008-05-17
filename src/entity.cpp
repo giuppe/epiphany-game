@@ -151,6 +151,77 @@ void Entity::move(Direction direction)
 	
 }
 
+/**
+ * This function auto-selects direction depending on entity internal state.
+ */
+void Entity::move()
+{
+//	#ifdef DEBUG_MODE
+//		if(current_level->get_entity(m_position_x, m_position_y, direction)!=0)
+//			DEBOUT("Alert: moving over a referenced entity: from ("<<m_position_x<<", "<<m_position_y<<"), dir: "<<direction<<"\n");
+//	#endif
+		switch(m_state)
+		{
+	
+		case ST_MOVING_UP:
+			move_up();
+			break;
+
+		case ST_MOVING_RIGHT:
+			move_right();
+			break;
+	
+		case ST_MOVING_DOWN:
+			move_down();
+			break;
+		
+		case ST_MOVING_LEFT:
+			move_left();
+			break;	
+		
+		default:
+			break;
+		
+	
+		
+	}
+	
+}
+
+/**
+ * This function returns true if entity can move in the selected direction (depending on entity internal state).
+ */
+bool Entity::can_move()
+{
+
+	Direction d = STOP;
+		switch(m_state)
+		{
+	
+		case ST_MOVING_UP:
+			d=UP;
+			break;
+
+		case ST_MOVING_RIGHT:
+			d=RIGHT;
+			break;
+	
+		case ST_MOVING_DOWN:
+			d=DOWN;
+			break;
+		
+		case ST_MOVING_LEFT:
+			d=LEFT;
+			break;	
+		
+		default:
+			break;
+	}
+		
+	return (current_level->get_entity(m_position_x, m_position_y, d)==0);
+	
+}
+
 //C'� una funzione per ogni movimento poich� poi bisogna aggiungere le animazioni
 void Entity::move_up()
 {
@@ -249,3 +320,10 @@ Entity::Entity_State Entity::get_state()
 {
 	return m_state;
 }
+
+void Entity::set_state(Entity_State state)
+{
+	m_state = state;
+}
+
+

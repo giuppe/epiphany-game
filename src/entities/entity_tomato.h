@@ -24,7 +24,7 @@
 class Entity_Tomato:public Entity_Monster
 {
 public:
-	Entity_Tomato(Level* level, Uint32 x, Uint32 y, Direction direction);
+	Entity_Tomato(Level* level, Uint32 x, Uint32 y);
 	
 	void check_and_do();
 	
