@@ -2,7 +2,7 @@
                           entity_falling.h  -  description
                              -------------------
     begin                : Sat Sep 29 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -27,7 +27,7 @@ class Entity_Falling:public Entity
 {
 protected:
 	
-	bool m_is_falling;
+	//bool m_is_falling;
 
 public:
 

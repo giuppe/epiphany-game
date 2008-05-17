@@ -37,7 +37,8 @@ Entity_Sapphire::Entity_Sapphire(Level* level, Uint32 x, Uint32 y)
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_SAPPHIRE));
 	m_sprite.set_state(SP_STOP);
-	m_is_falling=false;
+	//m_is_falling=false;
+	m_state=ST_STOP;
 	
 	m_exists=true;
 	
@@ -48,9 +49,10 @@ Entity_Sapphire::Entity_Sapphire(Level* level, Uint32 x, Uint32 y)
 void Entity_Sapphire::check_and_do()
 {
 
-	bool was_falling=m_is_falling;
+	bool was_falling=(m_state==ST_MOVING_DOWN);
 	Entity_Falling::check_and_do();
-	if((was_falling==true)&&(m_is_falling==false))
+	
+	if((was_falling==true)&&(m_state==ST_STOP))
 	{
 		Sample_Manager::instance()->play(SFX_SAPPHIRE_FALL);
 	}
@@ -59,7 +61,7 @@ void Entity_Sapphire::check_and_do()
 
 bool Entity_Sapphire::player_pressing_right(Entity_Handle left_entity)
 {
-	if(m_is_falling==true)
+	if(m_state==ST_MOVING_DOWN)
 		return false;
 	
 	current_level->do_inc_player_score(m_value);
@@ -70,7 +72,7 @@ bool Entity_Sapphire::player_pressing_right(Entity_Handle left_entity)
 
 bool Entity_Sapphire::player_pressing_left(Entity_Handle right_entity)
 {
-	if(m_is_falling==true)
+	if(m_state==ST_MOVING_DOWN)
 		return false;
 	
 	current_level->do_inc_player_score(m_value);
@@ -81,7 +83,7 @@ bool Entity_Sapphire::player_pressing_left(Entity_Handle right_entity)
 
 bool Entity_Sapphire::player_pressing_up(Entity_Handle down_entity)
 {
-	if(m_is_falling==true)
+	if(m_state==ST_MOVING_DOWN)
 		return false;
 	
 	current_level->do_inc_player_score(m_value);
@@ -92,7 +94,7 @@ bool Entity_Sapphire::player_pressing_up(Entity_Handle down_entity)
 
 bool Entity_Sapphire::player_pressing_down(Entity_Handle up_entity)
 {
-	if(m_is_falling==true)
+	if(m_state==ST_MOVING_DOWN)
 		return false;
 	
 	current_level->do_inc_player_score(m_value);

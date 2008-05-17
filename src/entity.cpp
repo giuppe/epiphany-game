@@ -24,7 +24,7 @@
 
 Entity::Entity()
 {
-
+	m_state=ST_STOP;
 	set_speed(1);
 	m_just_checked=false;
 	
@@ -162,7 +162,7 @@ void Entity::move_up()
 	WorldCoord final_pos;
 	final_pos.x = new_position_x*k_sprite_size;
 	final_pos.y = new_position_y*k_sprite_size;
-	
+	m_state = ST_MOVING_UP;
 	m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_UP);
 		
@@ -179,7 +179,7 @@ void Entity::move_down()
 	WorldCoord final_pos;
 		final_pos.x = new_position_x*k_sprite_size;
 		final_pos.y = new_position_y*k_sprite_size;
-		
+	m_state = ST_MOVING_DOWN;
 		m_sprite.move_to_position(final_pos);
 		m_sprite.set_state(SP_DOWN);
 }
@@ -196,7 +196,7 @@ void Entity::move_right()
 	WorldCoord final_pos;
 		final_pos.x = new_position_x*k_sprite_size;
 		final_pos.y = new_position_y*k_sprite_size;
-		
+	m_state=ST_MOVING_RIGHT;
 		m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_RIGHT);
 }
@@ -212,7 +212,7 @@ void Entity::move_left()
 	WorldCoord final_pos;
 		final_pos.x = new_position_x*k_sprite_size;
 		final_pos.y = new_position_y*k_sprite_size;
-		
+	m_state=ST_MOVING_LEFT;
 		m_sprite.move_to_position(final_pos);
 	m_sprite.set_state(SP_LEFT);
 }
@@ -243,4 +243,9 @@ void Entity::draw_on_screen()
 {
 	this->m_sprite.draw();
 
+}
+
+Entity::Entity_State Entity::get_state()
+{
+	return m_state;
 }

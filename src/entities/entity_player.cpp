@@ -78,7 +78,7 @@ void Entity_Player::check_and_do()
 {
 	if(m_just_checked==true)
 	{
-	//	m_just_moved=false;
+
 		
 		return;
 	}
@@ -105,32 +105,7 @@ void Entity_Player::check_and_do()
 		m_sprite.set_state(SP_STOP);
 	}
 
-/*	Entity* neigh_entity;	
-	
-	Entity_Handle neigh_entity_id=current_level->get_entity(m_position_x,m_position_y, m_direction);
-	if(neigh_entity_id!=0)
-	{
-		neigh_entity=Entity_Manager::instance()->get_entity(neigh_entity_id);
-		if(neigh_entity->pass_on_me(m_direction))
-		{
-			if(!m_is_snapping)
-				move(m_direction);
-		}
-		else
-		{
-			m_sprite.set_state(SP_STOP);
-		}
 
-	}
-	else
-	{
-		if(!m_is_snapping)
-		{
-			Sample_Manager::instance()->play(SFX_PLAYER_MOVE);
-			move(m_direction);
-		}
-	}
-*/		
 	m_direction=STOP;
 
 	m_just_checked=true;
@@ -192,6 +167,6 @@ void Entity_Player::kill()
 	{
 		Sample_Manager::instance()->play(SFX_GAME_GAMEOVER);
 	}
-//	set_position(0,0);
+
 
 }

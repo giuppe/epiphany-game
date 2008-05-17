@@ -32,8 +32,8 @@ Entity_Falling::Entity_Falling(Level* level, Uint32 x, Uint32 y)
 	m_position_y=y;
 	m_type=UNKNOWN;
 //	m_sprite=current_level.get_sprite(UNKNOWN);
-
-	m_is_falling=false;
+m_state=ST_STOP;
+	//m_is_falling=false;
 	m_exists=true;
 		
 }
@@ -44,9 +44,9 @@ Entity_Falling::Entity_Falling()
 	m_position_x=0;
 	m_position_y=0;
 	m_type=UNKNOWN;
+	m_state=ST_STOP;
 
-
-	m_is_falling=false;
+	//m_is_falling=false;
 	m_exists=true;
 		
 }
@@ -64,18 +64,19 @@ void Entity_Falling::check_and_do()
 	
 	if(down_entity!=0)
 	{
-		if(m_is_falling)
+		if(m_state==ST_MOVING_DOWN)
 		{
 
-			m_is_falling=Entity_Manager::instance()->get_entity(down_entity)->hit_from_up(current_level->get_entity(m_position_x,m_position_y));
+			bool should_fall=Entity_Manager::instance()->get_entity(down_entity)->hit_from_up(current_level->get_entity(m_position_x,m_position_y));
+			m_state=(should_fall==true)?ST_MOVING_DOWN:ST_STOP;
 		}
 	}
 	else
 	{
-		m_is_falling=true;
+		m_state=ST_MOVING_DOWN;
 	}
 	
-	if(m_is_falling)
+	if(m_state==ST_MOVING_DOWN)
 	{
 		move(DOWN);
 		
@@ -108,9 +109,10 @@ void Entity_Falling::check_and_do()
 				
 	}
 	
-	if(m_is_falling==false)
+	if(m_state!=ST_MOVING_DOWN)
 	{
 		m_sprite.set_state(SP_STOP);
+		m_state=ST_STOP;
 
 	}
 	
@@ -125,7 +127,7 @@ void Entity_Falling::check_and_do()
 bool Entity_Falling::is_falling()
 {
 
-	return m_is_falling;
+	return m_state==ST_MOVING_DOWN;
 	
 }
 
@@ -133,14 +135,15 @@ bool Entity_Falling::is_falling()
 void Entity_Falling::roll(Direction direction)
 {
 
-	m_is_falling=true;
-	move(direction);	
 
+	move(direction);
+	m_just_checked=true;
+	m_state=ST_MOVING_DOWN;
 }
 
 bool Entity_Falling::roll_on_me()
 {
-	if(m_is_falling)
+	if(m_state==ST_MOVING_DOWN)
 		return false;
 
 	return true;

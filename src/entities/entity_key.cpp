@@ -56,14 +56,7 @@ Uint32 Entity_Key::get_key_id()
 {
 	return m_key_id;
 }
-	/*
-bool Entity_Key::pass_on_me(Direction d)
-{
-	current_level->set_key(m_key_id);
-	Sample_Manager::instance()->play(SFX_KEY_EAT);
-	kill();
-	return true;
-}*/
+
 
 
 bool Entity_Key::player_pressing_up(Entity_Handle down_entity)

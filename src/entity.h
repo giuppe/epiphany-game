@@ -20,10 +20,11 @@
 #include "level.h"
 #include "surface_manager.h"
 #include "sprite.h"
+#include <vector>
 
 #ifndef ENTITY_H
 #define ENTITY_H
-
+using namespace std;
 /*
  * Abstract class Entity is the base for creating game objects
 */
@@ -51,6 +52,17 @@ protected:
 	
 	Sprite m_sprite;
 	
+	vector<Sprite> m_sprites;
+	
+	enum Entity_State{ST_STOP, 
+		ST_MOVING_UP, 
+		ST_MOVING_LEFT, 
+		ST_MOVING_DOWN, 
+		ST_MOVING_RIGHT,
+		ST_DISAPPEARING,
+		ST_EXPLODING
+	};
+	Entity_State m_state;
 	
 		
 	//True if an entity exists - not used
@@ -62,6 +74,8 @@ protected:
 	{
 		return m_sprite;
 	}
+	
+	Sprite& get_sprite(Entity_State state);
 	
 public:
 
@@ -124,7 +138,8 @@ public:
 	void kill();
 	
 	void draw_on_screen();
-		
+	
+	Entity_State get_state();
 	// Virtual functions
 	
 	// this function need to be overloaded in the derivative classes.
