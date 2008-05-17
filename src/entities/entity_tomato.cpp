@@ -40,7 +40,7 @@ void Entity_Tomato::check_and_do()
 {
 	if(m_just_checked==true)
 	{
-	//	m_just_moved=false;
+
 		
 		return;
 	}
@@ -63,7 +63,7 @@ void Entity_Tomato::check_and_do()
 		((left_entity_id!=0)&&(Entity_Manager::instance()->get_entity(left_entity_id)->get_type()==PLAYER)))
 	{
 		kill();
-		current_level->get_player().set_direction(STOP);
+		current_level->do_player_stop();
 		return;
 	}
 	
@@ -72,14 +72,11 @@ void Entity_Tomato::check_and_do()
 	case UP:
 		if(right_entity_id!=0)
 		{
-			if(up_entity_id==0)
-			{
-			//		move(UP);
-			}
-			else
+			if(up_entity_id!=0)
 			{
 				m_direction=LEFT;
 			}
+
 		}
 		else
 		{
@@ -90,14 +87,11 @@ void Entity_Tomato::check_and_do()
 	case RIGHT:
 		if(down_entity_id!=0)
 		{
-			if(right_entity_id==0)
-			{
-			//		move(RIGHT);
-			}
-			else
+			if(right_entity_id!=0)
 			{
 				m_direction=UP;
 			}
+
 		}
 		else
 		{
@@ -108,14 +102,11 @@ void Entity_Tomato::check_and_do()
 	case DOWN:
 		if(left_entity_id!=0)
 		{
-			if(down_entity_id==0)
-			{
-			//		move(DOWN);
-			}
-			else
+			if(down_entity_id!=0)
 			{
 				m_direction=RIGHT;
 			}
+
 		}
 		else
 		{
@@ -126,14 +117,11 @@ void Entity_Tomato::check_and_do()
 	case LEFT:
 		if(up_entity_id!=0)
 		{
-			if(left_entity_id==0)
-			{
-			//		move(LEFT);
-			}
-			else
+			if(left_entity_id!=0)
 			{
 				m_direction=DOWN;
 			}
+
 		}
 		else
 		{
@@ -146,10 +134,9 @@ void Entity_Tomato::check_and_do()
 	}
 	if(current_level->get_entity(m_position_x, m_position_y, m_direction)==0)
 	{
-		//if(!(current_level->get_sample(SFX_MONSTER_MOVE)->is_playing()))
-		//{
-			Sample_Manager::instance()->play(SFX_MONSTER_MOVE);
-		//}
+
+		Sample_Manager::instance()->play(SFX_MONSTER_MOVE);
+
 		move(m_direction);
 
 	}
@@ -168,15 +155,11 @@ bool Entity_Tomato::hit_from_up(Entity_Handle smasher)
 
 }
 	
-bool Entity_Tomato::pass_on_me(Direction d)
-{
-	return false;
-}
+
 
 void Entity_Tomato::kill()
 {
-//	m_exists=false;
-//    Entity::kill();
+
 	current_level->explode(m_position_x, m_position_y, SAPPHIRE);
 
 	
@@ -189,7 +172,7 @@ void Entity_Tomato::explode_all_around()
 	current_level->explode(m_position_x,m_position_y-1, EMERALD);
 	current_level->explode(m_position_x+1,m_position_y-1, EMERALD);
 	current_level->explode(m_position_x-1,m_position_y, EMERALD);
-//	current_level->explode(m_position_x,m_position_y);
+
 	current_level->explode(m_position_x+1,m_position_y, EMERALD);
 	current_level->explode(m_position_x-1,m_position_y+1, EMERALD);
 	current_level->explode(m_position_x,m_position_y+1, EMERALD);
@@ -199,7 +182,7 @@ void Entity_Tomato::explode_all_around()
 
 bool Entity_Tomato::explode()
 {
-	//explodes all entities around ;)
+
 	if(m_just_checked==true)
 	{
 		m_is_exploding=true;
@@ -210,15 +193,6 @@ bool Entity_Tomato::explode()
 		m_just_checked=true;
 	}
 	
-//	m_exists=false;
-//	current_level->explode(m_position_x-1,m_position_y-1);
-//	current_level->explode(m_position_x,m_position_y-1);
-//	current_level->explode(m_position_x+1,m_position_y-1);
-//	current_level->explode(m_position_x-1,m_position_y);
-//	current_level->explode(m_position_x,m_position_y);
-//	current_level->explode(m_position_x+1,m_position_y);
-//	current_level->explode(m_position_x-1,m_position_y+1);
-//	current_level->explode(m_position_x,m_position_y+1);
-//	current_level->explode(m_position_x+1,m_position_y+1);
+
 	return true;
 }

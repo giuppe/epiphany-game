@@ -35,8 +35,6 @@ public:
 	
 	Uint32 get_door_id();
 	
-	bool pass_on_me(Direction);
-	
 	bool hit_from_up(Entity_Handle){return false;};
 	
 	void check_and_do();

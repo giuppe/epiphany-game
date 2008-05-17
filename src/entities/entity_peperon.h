@@ -30,8 +30,6 @@ public:
 	
 	bool hit_from_up(Entity_Handle);
 	
-	bool pass_on_me(Direction);
-	
 	void kill();
 	
 	bool explode();

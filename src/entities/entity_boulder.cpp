@@ -47,23 +47,6 @@ void Entity_Boulder::check_and_do()
 	}
 }
 
-bool Entity_Boulder::pass_on_me(Direction d)
-{
-
-	if(((d==RIGHT)||(d==LEFT))&&(m_is_falling==false))
-	{
-		if((current_level->get_entity(get_position_x(), get_position_y(), d))==0)
-		{
-			move(d);
-			m_just_checked=true;
-				if((current_level->get_entity(get_position_x(), get_position_y(), DOWN))==0)
-					m_is_falling=true;		
-			return true;
-		}
-	}
-	return false;
-	
-}
 
 bool Entity_Boulder::player_pressing_left(Entity_Handle right_entity)
 {

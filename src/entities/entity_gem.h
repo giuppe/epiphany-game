@@ -2,7 +2,7 @@
                           entity_gem.h  -  description
                              -------------------
     begin                : Thu Sep 27 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -27,11 +27,11 @@ class Entity_Gem
 
 protected:
 	
-	int m_value;
+	Sint32 m_value;
 		
 public:
 	
-	int get_value() const;
+	Sint32 get_value() const;
 	
 };
 

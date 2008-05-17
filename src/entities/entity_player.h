@@ -2,7 +2,7 @@
                           entity_player.h  -  description
                              -------------------
     begin                : Thu Sep 20 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -40,9 +40,7 @@ public:
 	void check_and_do();
 	
 	bool is_alive();
-	
-	bool pass_on_me(Direction d);
-	
+
 	void win();
 	
 	bool is_exited();

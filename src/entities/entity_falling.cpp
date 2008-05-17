@@ -82,10 +82,6 @@ void Entity_Falling::check_and_do()
 	}
 	else
 	{
-	//	if(((current_level->get_entity(m_position_x, m_position_y, RIGHT).is_referenced()==false)&&
-	//		(current_level->get_entity(m_position_x,m_position_y, Direction(DOWN+RIGHT)).is_referenced()==false))||
-	//		((current_level->get_entity(m_position_x, m_position_y, LEFT).is_referenced()==false)&&
-	//						(current_level->get_entity(m_position_x, m_position_y, Direction(DOWN+LEFT)).is_referenced()==false)))
 			
 		if((down_entity!=0)&&(Entity_Manager::instance()->get_entity(down_entity)->roll_on_me()))
 		{
@@ -136,27 +132,16 @@ bool Entity_Falling::is_falling()
 
 void Entity_Falling::roll(Direction direction)
 {
-//	if(current_level->get_entity_id(m_position_x, m_position_y, direction)==0)
-//	{
+
 	m_is_falling=true;
 	move(direction);	
-//		switch(direction)
-//		{
-//		case LEFT:
-//			move_left();
-//			break;
-//		case RIGHT:
-//			move_right();
-//		break;
-			
-//		}
-	//}
+
 }
 
 bool Entity_Falling::roll_on_me()
 {
 	if(m_is_falling)
 		return false;
-//	m_just_checked=true;
+
 	return true;
 }

@@ -54,16 +54,16 @@ bool Game::main_loop()
 
 	m_time.start();
 
-		Screen::instance()->resize_world_screen(m_level->get_size_x()*k_sprite_size, m_level->get_size_y()*k_sprite_size);
+	Screen::instance()->resize_world_screen(m_level->get_size_x()*k_sprite_size, m_level->get_size_y()*k_sprite_size);
 	
-	Screen::instance()->set_camera_position(m_level->get_player().get_sprite_position());
+	Screen::instance()->set_camera_position(m_level->get_player_sprite_position());
 
 	
 	Input* input = Input::instance();
 	
 	input->update();
 
-	while((m_level->get_player().is_alive())||
+	while((m_level->is_player_alive())||
 				(!input->get_fire())
 				)
 	{
@@ -78,7 +78,7 @@ bool Game::main_loop()
 			}
 		}
 		
-		if(m_level->get_player().is_alive())
+		if(m_level->is_player_alive())
 		{
 
 			m_time.update();
@@ -93,7 +93,7 @@ bool Game::main_loop()
 			if(m_time.is_zero())
 			{
 
-				m_level->explode(m_level->get_player().get_position_x(),m_level->get_player().get_position_y());
+				m_level->do_explode_player();
 
 			}
 
@@ -136,7 +136,7 @@ bool Game::main_loop()
 		input->update();
 	}
 	
-	exit_state=m_level->get_player().is_exited();	
+	exit_state=m_level->is_player_exited();	
 	
 	return exit_state;
 	
@@ -155,10 +155,10 @@ void Game::get_keys()
 	input->update();
 	Direction direction=STOP;
 	
-	if((input->get_quit())&&(m_level->get_player().is_alive()))
+	if((input->get_quit())&&(m_level->is_player_alive()))
 	{
 			
-		m_level->explode(m_level->get_player().get_position_x(),m_level->get_player().get_position_y());
+		m_level->do_explode_player();
 		return;
 				
 	}
@@ -196,11 +196,11 @@ void Game::get_keys()
 	
 	if(input->get_fire())
 	{
-		m_level->get_player().set_snap(true);
+		m_level->do_set_player_snap(true);
 	}
 	else
 	{
-		m_level->get_player().set_snap(false);
+		m_level->do_set_player_snap(false);
 	}
 	
 }
@@ -217,7 +217,7 @@ void Game::move_all()
 
 	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
-	m_level->get_player().set_speed(1);
+	m_level->do_set_player_speed(1);
 
 	Uint32 i,x,y;
 	for(x=0;x<m_config->get_map_size_x();x++)
@@ -249,10 +249,10 @@ void Game::move_all()
 				curr_entity->check_and_do();
 		}
 	}
-	
-	if(m_level->get_player().exists())
+	Entity* player = &m_level->get_player();
+	if(player->exists())
 	{
-		m_level->get_player().check_and_do();
+		player->check_and_do();
 	}
 	
 }
@@ -267,6 +267,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	Screen* screen = Screen::instance();
 	screen->clear();
 	
+	Entity* player = &m_level->get_player();
+	
 	Entity_Manager* entity_manager = Entity_Manager::instance();
 	
 	Uint32 entity_manager_size = entity_manager->size();
@@ -274,18 +276,18 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	//centering screen on player
 //	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
 
-	screen->set_camera_position(m_level->get_player().get_sprite_position());
+	screen->set_camera_position(m_level->get_player_sprite_position());
 
 	
 	//drawing player
-	if(m_level->get_player().exists())
+	if(player->exists())
 	{
-		m_level->get_player().refresh_sprite();
-		m_level->get_player().move_sprite();
+		player->refresh_sprite();
+		player->move_sprite();
 		if(update_only == false)
 		{
 			//screen->put(m_level->get_player().get_sprite());
-			m_level->get_player().draw_on_screen();
+			player->draw_on_screen();
 		}
 	}
 
@@ -335,12 +337,12 @@ void Game::draw_score()
 	
 	sprintf(text, "%s",("Score: "));
 	
-	sprintf(text, "%s%d", text,(Sint32)m_level->get_player().get_score());
+	sprintf(text, "%s%d", text,(Sint32)m_level->get_current_score());
 	
 	game_font->write(4,real_game_size_y+5, text);
 
 	// find how many score to complete level
-	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_player().get_score());
+	Sint32 remaining=(Sint32)(m_level->get_min_score()-m_level->get_current_score());
 
 	if(remaining>0)
 	{
@@ -351,7 +353,7 @@ void Game::draw_score()
 	}
 	else
 	{
-    if(m_level->get_player().is_exited())
+    if(m_level->is_player_exited())
 		{
 			game_font->write(200,real_game_size_y+5, "Well done!");
 		}
@@ -368,7 +370,7 @@ void Game::draw_score()
 	time_font->write(game_size_x-k_sprite_size*2,game_size_y-k_sprite_size, time_string);
 
 	
-	if(!m_level->get_player().is_alive())
+	if(!m_level->is_player_alive())
 	{
 		game_font->write(380,real_game_size_y+5, "Press Space");
 	}

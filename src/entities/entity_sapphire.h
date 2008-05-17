@@ -2,7 +2,7 @@
                           entity_sapphire.h  -  description
                              -------------------
     begin                : Mon Oct 1 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -31,9 +31,7 @@ public:
 	//static const Uint32 value=1;
 	
 	void check_and_do();
-	
-	bool pass_on_me(Direction d);
-	
+
 	bool hit_from_up(Entity_Handle);
 	
 	bool explode();

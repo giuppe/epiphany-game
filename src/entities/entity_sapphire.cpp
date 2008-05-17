@@ -55,37 +55,14 @@ void Entity_Sapphire::check_and_do()
 		Sample_Manager::instance()->play(SFX_SAPPHIRE_FALL);
 	}
 }
-	
-bool Entity_Sapphire::pass_on_me(Direction d)
-{
-	//BEGIN
-	//gameplay hack
-	//code to avoid player to eat from a column of falling sapphire
-	if(m_is_falling==true)
-		return false;
-		
-	Entity_Handle up_entity_id=current_level->get_entity(m_position_x, m_position_y, UP);
-	if(up_entity_id!=0)
-	{
-		//Ntt_pointer up_entity=current_level->get_entity(up_entity_id);
-		Entity_Falling* up_fall_entity=dynamic_cast<Entity_Falling*>(Entity_Manager::instance()->get_entity(up_entity_id));
-		if((up_fall_entity)&&(up_fall_entity->is_falling()))
-			return false;
-	}
-	//END
-	current_level->get_player().inc_score(m_value);
-	Sample_Manager::instance()->play(SFX_SAPPHIRE_EAT);
-	kill();
-	return true;
-	
-}
+
 
 bool Entity_Sapphire::player_pressing_right(Entity_Handle left_entity)
 {
 	if(m_is_falling==true)
 		return false;
 	
-		current_level->get_player().inc_score(m_value);
+	current_level->do_inc_player_score(m_value);
 	Sample_Manager::instance()->play(SFX_SAPPHIRE_EAT);
 	kill();
 	return true;
@@ -96,7 +73,7 @@ bool Entity_Sapphire::player_pressing_left(Entity_Handle right_entity)
 	if(m_is_falling==true)
 		return false;
 	
-		current_level->get_player().inc_score(m_value);
+	current_level->do_inc_player_score(m_value);
 	Sample_Manager::instance()->play(SFX_SAPPHIRE_EAT);
 	kill();
 	return true;
@@ -107,7 +84,7 @@ bool Entity_Sapphire::player_pressing_up(Entity_Handle down_entity)
 	if(m_is_falling==true)
 		return false;
 	
-		current_level->get_player().inc_score(m_value);
+	current_level->do_inc_player_score(m_value);
 	Sample_Manager::instance()->play(SFX_SAPPHIRE_EAT);
 	kill();
 	return true;
@@ -118,7 +95,7 @@ bool Entity_Sapphire::player_pressing_down(Entity_Handle up_entity)
 	if(m_is_falling==true)
 		return false;
 	
-		current_level->get_player().inc_score(m_value);
+	current_level->do_inc_player_score(m_value);
 	Sample_Manager::instance()->play(SFX_SAPPHIRE_EAT);
 	kill();
 	return true;

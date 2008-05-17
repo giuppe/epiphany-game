@@ -33,14 +33,6 @@ Entity_Grass::Entity_Grass(Level* level, Uint32 x, Uint32 y)
 		
 }
 
-bool Entity_Grass::pass_on_me(Direction d)
-{
-
-	//DEBOUT("Entering Entity_Grass::pass_on_me()\n");
-	Sample_Manager::instance()->play(SFX_GRASS_EAT);
-	kill();
-	return true;
-}
 
 
 bool Entity_Grass::player_pressing_up(Entity_Handle down_entity)

@@ -333,3 +333,57 @@ bool Level::player_push(Uint32 x, Uint32 y, Direction d)
 	return true;
 }
 
+void Level::do_inc_player_score(Sint32 value)
+{
+	m_player->inc_score(value);
+}
+
+void Level::do_win_level()
+{
+	m_player->win();
+}
+
+Uint32 Level::get_current_score()
+{
+	return m_player->get_score();
+}
+
+void Level::do_player_stop()
+{
+	m_player->set_direction(STOP);
+}
+
+void Level::do_player_move(Direction d)
+{
+	m_player->move(d);
+}
+
+void Level::do_set_player_speed(Uint32 speed)
+{
+	m_player->set_speed(speed);
+}
+
+bool Level::is_player_alive()
+{
+	return m_player->is_alive();
+}
+
+bool Level::is_player_exited()
+{
+	return m_player->is_exited();
+}
+
+void Level::do_set_player_snap(bool snap)
+{
+	m_player->set_snap(snap);
+}
+
+void Level::do_explode_player()
+{
+	this->explode(m_player->get_position_x(), m_player->get_position_y());
+}
+
+WorldCoord Level::get_player_sprite_position()
+{
+	return m_player->get_sprite_position();
+}

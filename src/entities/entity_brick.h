@@ -34,8 +34,6 @@ public:
 	//it does nothing: its check_and_do is empty.
 	void check_and_do(){}	
 
-	bool pass_on_me(Direction d){return false;}
-	
 	bool hit_from_up(Entity_Handle){return false;};
 	
 	bool explode();

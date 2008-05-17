@@ -40,29 +40,7 @@ Entity_Handle Entity::get_id()
 	return m_id;
 }
 
-/*
-void Entity::m_set_position_x(Uint32 x)
-{
 
-	if((x>=current_level->get_size_x())||(x<0))
-		Common_Ex::throw_common("Entity x position outside level.\n");
-	
-	m_position_x=x;
-//	m_sprite.set_pos_x(x*k_sprite_size);
-
-}
-
-void Entity::m_set_position_y(Uint32 y)
-{
-
-	if((y>=current_level->get_size_y())||(y<0))
-		Common_Ex::throw_common("Entity y position outside level.\n");
-	
-	m_position_y=y;
-	//	m_sprite.set_pos_y(y*k_sprite_size);
-
-}
-*/
 Uint32 Entity::get_position_x()
 {
 
@@ -76,13 +54,8 @@ Uint32 Entity::get_position_y()
 	return m_position_y;	
 
 }
-/*
-Entity_Type Entity::get_type()
-{
-	//DEBOUT("Entering get_type()...\n");
-	return m_type;	
-}
-*/
+
+
 void Entity::set_type(Entity_Type type)
 {
 	
@@ -99,7 +72,7 @@ void Entity::set_speed(Uint32 speed)
 void Entity::kill()
 {
 		m_exists=false;
-//		set_position(0,0);
+
 		current_level->get_entities_matrix()[m_position_x][m_position_y]=0;
 }
 
@@ -114,7 +87,7 @@ bool Entity::set_position(Uint32 x, Uint32 y)
 	
 	//This fix a bug
 	current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
-//	current_level->set_entity(this);
+
 
 	return true;
 	
@@ -124,10 +97,7 @@ bool Entity::set_initial_position(Uint32 x, Uint32 y)
 {
 	if(((x>=current_level->get_size_x())||(x<0))||((y>=current_level->get_size_y())||(y<0)))
 			return false;	
-//	current_level->get_entities_matrix()[m_position_x][m_position_y]=0;
-				
-//	m_set_position_x(x);
-//	m_set_position_y(y);
+
 	m_position_x=x;
 	m_position_y=y;
 	
@@ -139,8 +109,7 @@ bool Entity::set_initial_position(Uint32 x, Uint32 y)
 
 
 	
-	//current_level->get_entities_matrix()[m_position_x][m_position_y]=m_id;
-//	current_level->set_entity(this);
+
 
 	return true;
 	

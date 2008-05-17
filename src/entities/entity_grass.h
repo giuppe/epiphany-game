@@ -25,9 +25,6 @@ public:
 
 	Entity_Grass(Level* level, Uint32 x, Uint32 y);
 
-	
-	bool pass_on_me(Direction d);
-	
 	void check_and_do(){};
 	
 	bool hit_from_up(Entity_Handle){return false;};

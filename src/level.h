@@ -2,7 +2,7 @@
                           level.h  -  description
                              -------------------
     begin                : Fri Aug 31 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -18,6 +18,7 @@
 #include "direction.h"
 #include "entity_type.h"
 #include "entity_manager.h"
+#include "world_coord.h"
 #include <vector>
 #include "sfx.h"
 
@@ -48,11 +49,12 @@ private:
 	Uint32 m_min_score;
 	Uint32 m_max_time;
 	void set_entity(Entity*);
-
+	Entity_Player& get_player();
+	friend class Game;
 public:
 	Level();
 	
-	Entity_Player& get_player();
+
 	
 	Entity_Handle get_entity(Sint32 x, Sint32 y);
 	
@@ -83,7 +85,29 @@ public:
 	Uint32 get_max_time();
 	
 	bool player_push(Uint32 x, Uint32 y, Direction d);
+	
+	void do_inc_player_score(Sint32 value);
+	
+	Uint32 get_current_score();
+	
+	void do_win_level();
+	
+	void do_player_stop();
+	
+	void do_set_player_speed(Uint32 speed);
+	
+	void do_player_move(Direction d);
+	
+	bool is_player_alive();
 
+	bool is_player_exited();
+	
+	void do_set_player_snap(bool snap);
+	
+	WorldCoord get_player_sprite_position();
+	
+	void do_explode_player();
+	
 };
 
 #endif //LEVEL_H

@@ -57,7 +57,7 @@ void Entity_Exit::check_and_do()
 	if(m_just_checked==true)
 		return;
 	
-	if(current_level->get_player().get_score()>=m_min_score)
+	if(current_level->get_current_score()>=m_min_score)
 	{
 		m_is_open=true;
 		m_sprite.set_state(SP_UP);
@@ -69,18 +69,6 @@ void Entity_Exit::check_and_do()
 		
 }
 
-bool Entity_Exit::pass_on_me(Direction d)
-{
-	if(m_is_open)
-	{
-		kill();
-		// player wins...
-		current_level->get_player().win();
-		return true;
-	}
-	return false;
-	
-}
 
 
 bool Entity_Exit::player_pressing_up(Entity_Handle down_entity)
@@ -90,7 +78,7 @@ bool Entity_Exit::player_pressing_up(Entity_Handle down_entity)
 	{
 		kill();
 		// player wins...
-		current_level->get_player().win();
+		current_level->do_win_level();
 		return true;
 	}
 	return false;
@@ -104,7 +92,7 @@ bool Entity_Exit::player_pressing_down(Entity_Handle up_entity)
 	{
 		kill();
 		// player wins...
-		current_level->get_player().win();
+		current_level->do_win_level();
 		return true;
 	}
 	return false;
@@ -118,7 +106,7 @@ bool Entity_Exit::player_pressing_left(Entity_Handle right_entity)
 	{
 		kill();
 		// player wins...
-		current_level->get_player().win();
+		current_level->do_win_level();
 		return true;
 	}
 	return false;
@@ -132,7 +120,7 @@ bool Entity_Exit::player_pressing_right(Entity_Handle left_entity)
 	{
 		kill();
 		// player wins...
-		current_level->get_player().win();
+		current_level->do_win_level();
 		return true;
 	}
 	return false;

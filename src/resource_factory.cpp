@@ -67,6 +67,40 @@ void Resource_Factory::init()
   	m_resource_path = res_path_string.c_str();
 
 	DEBOUT("Using "<<m_resource_path<<"/epiphany.scr"<<" as resource script.\n");
+	
+	char* line = new char[1024];
+	
+	FILE* res_file = fopen((res_path_string+"/epiphany.scr").c_str(), "r");
+	
+	if(res_file != NULL)
+	{
+		fgets(line, 1024, res_file);
+		char* action = new char[255];
+		sscanf(line, "%s", action);
+		if(strcmp(action, "sprite")==0){
+			
+			char* sprite_name = new char[255];
+			char* sprite_path = new char[512];
+			sscanf(line,"%s %s %s", action, sprite_name, sprite_path);
+			DEBOUT("Found sprite definition: "<<sprite_name<<" in "<<sprite_path);
+			//TODO: do something useful... like loading the sprite
+			delete[] sprite_name;
+			delete[] sprite_path;
+		}
+		else if(strcmp(action, "sound")==0){
+			DEBOUT("Found sound definition");
+			char* sound_name = new char[255];
+			char* sound_path = new char[512];
+			sscanf(line,"%s %s %s", action, sound_name, sound_path);
+			//TODO: do something useful... like loading the sound
+			delete[] sound_name;
+			delete[] sound_path;
+		}
+		delete[] action;
+	}
+	delete[] line;
+	
+	fclose(res_file);
 }
 
 void Resource_Factory::deinit()

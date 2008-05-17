@@ -2,7 +2,7 @@
                           entity_emerald.h  -  description
                              -------------------
     begin                : Thu Sep 20 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -31,7 +31,6 @@ public:
 
 	void check_and_do();
 	
-	bool pass_on_me(Direction d);
 	
 	bool hit_from_up(Entity_Handle){return false;};
 	

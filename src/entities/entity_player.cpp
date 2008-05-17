@@ -141,10 +141,7 @@ void Entity_Player::check_and_do()
 }
 
 
-bool Entity_Player::pass_on_me(Direction d)
-{
-	return false;
-}
+
 
 bool Entity_Player::is_alive()
 {

@@ -95,17 +95,7 @@ public:
 	{
 		return m_sprite.get_position();
 	}
-	/*
-	Uint32 get_pos_screen_x()
-	{
-		return m_sprite.get_pos_x();
-	}
-		
-	Uint32 get_pos_screen_y()
-	{
-		return m_sprite.get_pos_y();
-	}
-	*/
+
 	void set_speed(Uint32 speed);
 	
 	void set_checked(bool check){m_just_checked=check;};
@@ -141,7 +131,7 @@ public:
 	//It is called by Game::move_all() for every existing object
 	//and generally it contains some checks and calling to moving_functions
 		virtual void check_and_do()=0;
-	//	virtual bool pass_on_me(Direction d=STOP)=0;
+
 		virtual bool player_pressing_up(Entity_Handle down_entity);
 		virtual bool player_pressing_left(Entity_Handle right_entity);
 		virtual bool player_pressing_right(Entity_Handle left_entity);

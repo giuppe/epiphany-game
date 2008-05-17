@@ -117,22 +117,6 @@ bool Entity_Flintstone::player_pressing_right(Entity_Handle left_entity)
 
 
 
-bool Entity_Flintstone::pass_on_me(Direction d)
-{
-
-	if(((d==RIGHT)||(d==LEFT))&&(m_is_falling==false))
-	{
-		if((current_level->get_entity(get_position_x(), get_position_y(), d))==0)
-		{
-			move(d);
-			m_just_checked=true;
-				if((current_level->get_entity(get_position_x(), get_position_y(), DOWN))==0)
-					m_is_falling=true;		
-			return true;
-		}
-	}
-	return false;
-}
 
 bool Entity_Flintstone::hit_from_up(Entity_Handle smasher)
 {
