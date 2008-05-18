@@ -39,6 +39,7 @@ Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score)
 	Surface_Manager* surf_man = Surface_Manager::instance();
 	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_EXIT));
 	m_sprite.set_state(SP_STOP);
+	m_sprite.start_animation();
 
 	
 	m_min_score=min_score;

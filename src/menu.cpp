@@ -50,6 +50,7 @@ Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
 	
 	m_background = surf_man->get_surface(Surface_Manager::SRF_MENU_BACKGROUND);
 
+	m_selector.start_animation();
 	
 	
 
@@ -288,7 +289,7 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 		
 		
 		
-		m_selector.update_frame();
+		//m_selector.update_frame();
 		
 		//animated menu selector drawing
 		
@@ -298,7 +299,11 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 		
 		scr_coord.y = menu_top_point+menu_list->get_selected()*menu_vertical_distance;
 		
-		m_selector.put_screen(scr_coord);
+		m_selector.set_position_on_screen(scr_coord);
+		
+		m_selector.draw();
+		
+	//	m_selector.put_screen(scr_coord);
 
 		screen->flip_display();
 

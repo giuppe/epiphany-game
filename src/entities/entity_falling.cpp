@@ -67,7 +67,7 @@ void Entity_Falling::check_and_do()
 		if(m_state==ST_MOVING_DOWN)
 		{
 
-			bool should_fall=Entity_Manager::instance()->get_entity(down_entity)->hit_from_up(current_level->get_entity(m_position_x,m_position_y));
+			bool should_fall=current_level->do_hit(this->m_id, down_entity);
 			m_state=(should_fall==true)?ST_MOVING_DOWN:ST_STOP;
 		}
 	}
@@ -92,7 +92,7 @@ void Entity_Falling::check_and_do()
 			if((current_level->get_entity(m_position_x, m_position_y, RIGHT)==0)&&
 				 (current_level->get_entity(m_position_x,m_position_y, Direction(DOWN+RIGHT))==0)&&
 				 ((upright_entity==0)||
-				 (!dynamic_cast<Entity_Falling*>(Entity_Manager::instance()->get_entity(upright_entity)))))
+				 (Entity_Manager::instance()->get_entity(upright_entity)->get_state()!=ST_MOVING_DOWN)))
 				
 			{
 				roll(RIGHT);
@@ -100,7 +100,7 @@ void Entity_Falling::check_and_do()
 			else if((current_level->get_entity(m_position_x, m_position_y, LEFT)==0)&&
 							(current_level->get_entity(m_position_x, m_position_y, Direction(DOWN+LEFT))==0)&&
 							((upleft_entity==0)||
-							(!dynamic_cast<Entity_Falling*>(Entity_Manager::instance()->get_entity(upleft_entity)))))
+							(Entity_Manager::instance()->get_entity(upleft_entity)->get_state()!=ST_MOVING_DOWN)))
 			{
 				roll(LEFT);
 			

@@ -113,22 +113,6 @@ WorldCoord Screen::coord_to_world(ScreenCoord scr_coord)
 	return wld;
 }
 
-/*
-void Screen::put(Surface& surface, WorldCoord wld_coord)
-{
-	put(surface, coord_to_screen(wld_coord));
-	
-	
-}
-
-void Screen::put(Surface& surface, ScreenCoord scr_coord)
-{
-	surface.put_screen(scr_coord);
-}
-
-*/
-
-
 
 void Screen::set_camera_position(WorldCoord position)
 {
@@ -165,11 +149,7 @@ void Screen::set_camera_position(WorldCoord position)
 		m_camera.y=0;
 	}
 
-//	if((x>(m_win_size_x/2))&&((x+(m_win_size_x/2))<m_screen_size_x))
-//		m_win_pos_x=(x-(m_win_size_x/2));
-		
-//	if((y>(m_win_size_y/2))&&((y+(m_win_size_y/2))<m_screen_size_y))
-//		m_win_pos_y=(y-(m_win_size_y/2));
+
 }
 
 
@@ -185,6 +165,22 @@ void Screen::clear()
 	SDL_FillRect(dest_surf, NULL, SDL_MapRGB(dest_surf->format, 0, 0, 0));
 }	
 
+
+void Screen::clear(Uint32 x, Uint32 y, Uint32 w, Uint32 h)
+{
+	SDL_Surface* dest_surf = m_screen;
+	SDL_Rect dest_rect;
+	dest_rect.x=x;
+	dest_rect.y=y;
+	dest_rect.w=w;
+	dest_rect.h=h;
+	
+	if(m_use_virtual_screen)
+	{
+		dest_surf = m_virtual_screen;
+	}
+	SDL_FillRect(dest_surf, &dest_rect, SDL_MapRGB(dest_surf->format, 0, 0, 0));
+}	
 
 
 
@@ -218,14 +214,7 @@ void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r, Uint8 g, Uint8 b)
 {
 	assert(!"Error: Screen::draw_rect() not implemented.");
-	/*
-	SDL_Rect dest;
-	dest.x = x;
-	dest.y = y;
-	dest.w = size_x;
-	dest.h = size_y;
-	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
-	*/
+
 }
 
 

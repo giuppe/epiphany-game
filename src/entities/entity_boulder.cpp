@@ -32,6 +32,7 @@ Entity_Boulder::Entity_Boulder(Level* level, Uint32 x, Uint32 y)
 	m_sprite.init(surf_man->get_surface(Surface_Manager::SRF_BOULDER));
 	m_sprite.set_state(SP_STOP);
 	m_state=ST_STOP;
+	m_sprite.start_animation();
 	//m_is_falling=false;
 	m_exists=true;
 

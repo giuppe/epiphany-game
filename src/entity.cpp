@@ -312,6 +312,7 @@ bool Entity::player_pressing_left(Entity_Handle right_entity)
 
 void Entity::draw_on_screen()
 {
+	
 	this->m_sprite.draw();
 
 }
@@ -326,4 +327,9 @@ void Entity::set_state(Entity_State state)
 	m_state = state;
 }
 
+
+void Entity::clear_bg()
+{
+	m_sprite.clear_bg();
+}
 

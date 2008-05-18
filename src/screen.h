@@ -61,15 +61,7 @@ public:
 	
 
 		
-	//void put(Entity* entity);
-	
-	//void put(Surface* surface, Sint32 x, Sint32 y);
-	
 
-//	void put(Surface& surface, ScreenCoord scr_coord);
-	
-//	void put(Surface& surface, WorldCoord wld_coord);
-	
 	Uint32 get_world_size_x();
 	
 	Uint32 get_world_size_y();
@@ -81,6 +73,8 @@ public:
 	void set_camera_position(WorldCoord position);
 	
 	void clear();
+	
+	void clear(Uint32 x, Uint32 y, Uint32 w, Uint32 h);
 	
 	void flip_display();
 	

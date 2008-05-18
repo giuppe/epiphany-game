@@ -265,7 +265,7 @@ void Game::draw(Uint32 frame_number, bool update_only)
 
 	Entity* curr_ntt;
 	Screen* screen = Screen::instance();
-	screen->clear();
+	//screen->clear();
 	
 	Entity* player = &m_level->get_player();
 	
@@ -278,15 +278,64 @@ void Game::draw(Uint32 frame_number, bool update_only)
 
 	screen->set_camera_position(m_level->get_player_sprite_position());
 
+	//move sprites
+	if(player->exists())
+	{
+		player->move_sprite();
+	}
+	for(Uint32 i=1; i<entity_manager_size; i++)
+	{
+		curr_ntt=entity_manager->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		{
+
+			curr_ntt->move_sprite();
+			
+		}
+	}
 	
+	//clearing background
+	screen->clear();
+	//TODO: we should clear only changed background
+//	if(player->exists())
+//	{
+//		player->clear_bg();
+//	}
+//	for(Uint32 i=1; i<entity_manager_size; i++)
+//	{
+//		curr_ntt=entity_manager->get_entity(i);
+//		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+//		{
+//
+//			curr_ntt->clear_bg();
+//			
+//		}
+//	}
+	//updating background
+	
+	//drawing sprites
+	
+	if(player->exists())
+	{
+		player->draw_on_screen();
+	}
+	for(Uint32 i=1; i<entity_manager_size; i++)
+	{
+		curr_ntt=entity_manager->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		{
+
+			curr_ntt->draw_on_screen();
+			
+		}
+	}
+#if 0
 	//drawing player
 	if(player->exists())
 	{
-		player->refresh_sprite();
-		player->move_sprite();
 		if(update_only == false)
 		{
-			//screen->put(m_level->get_player().get_sprite());
+
 			player->draw_on_screen();
 		}
 	}
@@ -297,15 +346,16 @@ void Game::draw(Uint32 frame_number, bool update_only)
 		curr_ntt=entity_manager->get_entity(i);
 		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 		{
-			curr_ntt->refresh_sprite();
+		//	curr_ntt->refresh_sprite();
 			curr_ntt->move_sprite();
 			if(update_only == false)
 			{
 				curr_ntt->draw_on_screen();
-				//screen->put(curr_ntt->get_sprite());
+
 			}
 		}
 	}
+#endif	
 	if(update_only == false)
 	{
 		draw_score();

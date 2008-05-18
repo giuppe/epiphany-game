@@ -108,6 +108,8 @@ public:
 	
 	void do_explode_player();
 	
+	bool do_hit(Entity_Handle sender, Entity_Handle receiver);
+	
 };
 
 #endif //LEVEL_H

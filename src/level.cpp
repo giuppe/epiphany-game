@@ -387,3 +387,8 @@ WorldCoord Level::get_player_sprite_position()
 {
 	return m_player->get_sprite_position();
 }
+
+bool Level::do_hit(Entity_Handle sender, Entity_Handle receiver)
+{
+	return Entity_Manager::instance()->get_entity(receiver)->hit_from_up(sender);
+}

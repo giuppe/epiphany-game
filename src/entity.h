@@ -77,6 +77,8 @@ protected:
 	
 	Sprite& get_sprite(Entity_State state);
 	
+	//void refresh_sprite();
+	
 public:
 
 	Entity();	
@@ -95,10 +97,8 @@ public:
 	}
 
 	
-	void refresh_sprite()
-	{
-		m_sprite.update_frame();
-	}
+
+
 	
 	void move_sprite()
 	{
@@ -140,6 +140,8 @@ public:
 	bool exists(){return m_exists;};
 	
 	void kill();
+	
+	void clear_bg();
 	
 	void draw_on_screen();
 	

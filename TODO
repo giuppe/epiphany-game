@@ -3,6 +3,9 @@ Simple Todo list
 
 Short term:
  - normalize samples;
+ - add FSM to entity_player
+ - fix virtual-screen mode
+ - polish sprite related code (animations, etc)
 
 Medium term:
   - automagic help screen pressing "h" or "F1"

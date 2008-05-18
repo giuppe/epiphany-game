@@ -39,17 +39,21 @@ private:
 
 	Surface* m_surface;
 	
+	Surface* m_back_replacement;
+	
 	WorldCoord m_pos;
+	
+	WorldCoord m_old_pos;
 	
 	WorldCoord m_move_to_pos;
 		
-	Uint32 m_step_x;
-
-	Uint32 m_step_y;
-
 	Uint32 m_speed;
 		
 	Uint32 m_curr_frame;
+	
+	bool m_is_animating;
+	
+	bool m_is_changed;
 	
 	bool m_initialized;
 
@@ -79,6 +83,10 @@ private:
 	
 	void move_to_pos(Uint32 x, Uint32 y);
 	
+	void put_screen(ScreenCoord scr_coord);
+	
+	void update_frame();
+	
 public:
 
 	
@@ -90,7 +98,7 @@ public:
 	
 	void set_speed(Uint32 speed);
 	
-	void put_screen(ScreenCoord scr_coord);
+
 
 	WorldCoord get_position() const;
 	
@@ -100,7 +108,9 @@ public:
 	
 	void move();
 	
-	void update_frame();
+	void set_position_on_screen(ScreenCoord scr_coord);
+	
+
 	
 	Uint32 get_frame_number() const;
 	
@@ -109,6 +119,16 @@ public:
 	void set_state(Anim_State state);
 	
 	void draw();
+	
+	void clear_bg();
+	
+	void update_bg();
+	
+	void start_animation();
+	
+	void stop_animation();
+	
+
 		
 };
 	

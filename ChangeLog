@@ -1,5 +1,6 @@
 Version 0.8.0:
 code refactoring (sprite-related)
+code refactoring (introduced FSM in entities)
 Fixed: will not crash if sound system is absent
 
 Version 0.7.1:
