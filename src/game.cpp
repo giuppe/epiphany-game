@@ -64,7 +64,7 @@ bool Game::main_loop()
 	input->update();
 
 	while((m_level->is_player_alive())||
-				(!input->get_fire())
+				((!input->get_fire())&&(!input->get_enter())&&(!input->get_die()))
 				)
 	{
 
@@ -133,7 +133,7 @@ bool Game::main_loop()
 			}
 		
 		}
-		input->update();
+		//input->update();
 	}
 	
 	exit_state=m_level->is_player_exited();	
@@ -698,6 +698,7 @@ void Game::show_credits()
 	credits.push_back("Thanks to:");
 	credits.push_back("  Joerg Jaspert, for Debian Packages");
 	credits.push_back("  Eric Mangold, for Level Editor");
+	credits.push_back("  Stefan for gameplay related patches");
 	credits.push_back(" ");
 	credits.push_back("Released under General Public License v2");
 	credits.push_back("See COPYING for details.");

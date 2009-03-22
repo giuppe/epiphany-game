@@ -77,6 +77,10 @@ void Entity_Player::inc_score(int score)
 
 void Entity_Player::check_and_do()
 {
+	if(m_is_alive==false){
+		m_just_checked=true;
+		return;
+	}
 	if(m_just_checked==true)
 	{
 
@@ -164,6 +168,7 @@ void Entity_Player::kill()
 {
 	m_exists=false;
 	m_is_alive=false;
+	m_just_checked=true;
 	if(!m_is_exited)
 	{
 		Sample_Manager::instance()->play(SFX_GAME_GAMEOVER);

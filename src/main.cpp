@@ -97,7 +97,7 @@
 		
 		if(cmdconf->get_bool(std::string("cmd"), std::string("help"), print_help))
 		{
-			printf("Epiphany 0.7.0\n");
+			printf("Epiphany 0.8.0\n");
 			printf("Options:\n");
 			printf("\t--help\t\t\t\tprint this help\n");
 			printf("\t--frame-skip <n>\t\tskip <n> frames\n");

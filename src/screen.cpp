@@ -116,7 +116,7 @@ WorldCoord Screen::coord_to_world(ScreenCoord scr_coord)
 
 void Screen::set_camera_position(WorldCoord position)
 {
-
+	
 	if(position.x>(m_camera.w/2))
 	{
 		if((position.x+(m_camera.w/2))<m_world_size_x)
@@ -126,6 +126,8 @@ void Screen::set_camera_position(WorldCoord position)
 		else
 		{
 			m_camera.x=(m_world_size_x-(m_camera.w));
+			//patch by stefan
+			//m_camera.x = ((m_world_size_x>m_camera.x?m_world_size_x:m_camera.x)-(m_camera.x));
 		}
 	}
 	else
@@ -142,6 +144,8 @@ void Screen::set_camera_position(WorldCoord position)
 		else
 		{
 			m_camera.y=(m_world_size_y-(m_camera.h));
+			// patch by stefan
+			//m_camera.y=((m_world_size_y>m_camera.y?m_world_size_y:m_camera.y)-(m_camera.y));
 		}
 	}
 	else

@@ -21,7 +21,7 @@ class Input
 {
 private:
 // states
-	bool m_left;
+    bool m_left;
     bool m_right;
     bool m_up;
     bool m_down;
@@ -32,6 +32,31 @@ private:
     bool m_pause;
     bool m_enter;
     bool m_fullscreen;
+
+    bool p_left;
+    bool p_right;
+    bool p_up;
+    bool p_down;
+    bool p_alt;
+    bool p_quit;
+    bool p_die;
+    bool p_fire;
+    bool p_pause;
+    bool p_enter;
+    bool p_fullscreen;
+
+    bool r_left;
+    bool r_right;
+    bool r_up;
+    bool r_down;
+    bool r_alt;
+    bool r_quit;
+    bool r_die;
+    bool r_fire;
+    bool r_pause;
+    bool r_enter;
+    bool r_fullscreen;
+
 
 public:
 
