@@ -482,7 +482,7 @@ void Game::draw_score()
 void Game::go()
 {
 
-
+	Input::instance()->reset_states();
 	Menu menu(m_max_num_of_levels,m_unsolved_level);
 
 	Music_Manager::instance()->play(MUS_MENU);

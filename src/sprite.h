@@ -87,11 +87,13 @@ private:
 	
 	void update_frame();
 	
+	void set_is_changed();
+	
 public:
 
 	
 	
-	Sprite():m_initialized(false){};
+	Sprite():m_is_changed(true),m_initialized(false){};
 
 	
 	~Sprite();

@@ -87,6 +87,8 @@ public:
 	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest);
 	
+	void get_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest);
+	
 	WorldCoord coord_to_world(ScreenCoord scr_coord);
 	
 	ScreenCoord coord_to_screen(WorldCoord wld_coord);

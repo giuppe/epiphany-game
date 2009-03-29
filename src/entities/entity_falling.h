@@ -25,13 +25,16 @@
 
 class Entity_Falling:public Entity
 {
+private:
+	Entity_Falling(Level* level, Uint32 x, Uint32 y);
 protected:
 	
 	//bool m_is_falling;
+	
 
 public:
 
-	Entity_Falling(Level* level, Uint32 x, Uint32 y);
+	
 
 	Entity_Falling();
 	

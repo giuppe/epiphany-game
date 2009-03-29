@@ -53,6 +53,7 @@ Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)
 		assert(!"Error: Selected non existent door type.");
 	}
 	m_sprite.set_state(SP_STOP);
+	m_sprite.start_animation();
 	m_exists=true;
 	m_is_open=false;
 

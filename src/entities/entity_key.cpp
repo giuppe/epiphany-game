@@ -46,7 +46,7 @@ Entity_Key::Entity_Key(Level* level, Uint32 x, Uint32 y, Uint32 id)
 		assert(!"Error: Selected non existent key type.");
 	}
 	
-
+	m_sprite.start_animation();
 	
 	m_exists=true;
 

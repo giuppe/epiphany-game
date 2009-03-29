@@ -143,6 +143,8 @@ public:
 	
 	void clear_bg();
 	
+	void update_bg();
+	
 	void draw_on_screen();
 	
 	Entity_State get_state();

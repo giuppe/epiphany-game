@@ -125,9 +125,9 @@ void Screen::set_camera_position(WorldCoord position)
 		}	
 		else
 		{
-			m_camera.x=(m_world_size_x-(m_camera.w));
+			//m_camera.x=(m_world_size_x-(m_camera.w));
 			//patch by stefan
-			//m_camera.x = ((m_world_size_x>m_camera.x?m_world_size_x:m_camera.x)-(m_camera.x));
+			m_camera.x = ((m_world_size_x>m_camera.w?m_world_size_x:m_camera.w)-(m_camera.w));
 		}
 	}
 	else
@@ -143,9 +143,9 @@ void Screen::set_camera_position(WorldCoord position)
 		}	
 		else
 		{
-			m_camera.y=(m_world_size_y-(m_camera.h));
+			//m_camera.y=(m_world_size_y-(m_camera.h));
 			// patch by stefan
-			//m_camera.y=((m_world_size_y>m_camera.y?m_world_size_y:m_camera.y)-(m_camera.y));
+			m_camera.y=((m_world_size_y>m_camera.h?m_world_size_y:m_camera.h)-(m_camera.h));
 		}
 	}
 	else
@@ -247,6 +247,21 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest)
 	rect_dest.x=dest_screen.x;
 	rect_dest.y=dest_screen.y;
 	blit_surface(surface, src,&rect_dest);
+}
+
+void Screen::get_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
+{
+	SDL_Rect rect_dest;
+	rect_dest.x=dest.x;
+	rect_dest.y=dest.y;
+	SDL_Surface* src_surf = m_screen;
+	SDL_Surface* dest_surf = surface;
+	if(m_use_virtual_screen)
+	{
+		src_surf = m_virtual_screen;
+	}
+	SDL_BlitSurface(src_surf, src,  dest_surf, &rect_dest);
+	
 }
 
 void Screen::deinit()

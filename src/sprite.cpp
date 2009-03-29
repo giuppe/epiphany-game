@@ -59,9 +59,9 @@ void Sprite::init(Surface* surf)
 	
 	m_total_frames = 8;
 	
-	m_is_changed=true;
+	this->set_is_changed();
 	
-	m_is_animating=true;
+	m_is_animating=false;
 	
 	
 }
@@ -97,7 +97,7 @@ void Sprite::set_pos_x(Uint32 pos_x)
 {
 	m_pos.x=pos_x;
 	m_move_to_pos.x=pos_x;
-	m_is_changed=true;
+	set_is_changed();
 }
 
 
@@ -107,7 +107,7 @@ void Sprite::set_pos_y(Uint32 pos_y)
 {
 	m_pos.y=pos_y;
 	m_move_to_pos.y=pos_y;
-	m_is_changed=true;
+	set_is_changed();
 }
 
 
@@ -124,7 +124,7 @@ void Sprite::set_curr_frame(Uint32 frame)
 	{
 		m_curr_frame=frame;
 	}
-	m_is_changed=true;
+	set_is_changed();
 }
 
 
@@ -147,6 +147,10 @@ void Sprite::move(Uint32 n_pixel)
 	
 	m_old_pos=m_pos;
 	n_pixel*=m_speed;
+	
+	if((m_pos.x != m_move_to_pos.x)&&(m_pos.y!=m_move_to_pos.y)){
+		set_is_changed();
+	}
 	
 	if(m_pos.x<m_move_to_pos.x)
 	{
@@ -218,30 +222,30 @@ Uint32 Sprite::get_frame_number() const
 
 void Sprite::set_state(Anim_State state)
 {
-	//if(m_state!=state){
+	if(m_state!=state){
 		m_state=state;
-		m_is_changed=true;
-	//}
+		set_is_changed();
+	}
 }
 
 void Sprite::move_to_pos(Uint32 x, Uint32 y)
 {
 	m_move_to_pos.x=x;
 	m_move_to_pos.y=y;
-	m_is_changed=true;
+	set_is_changed();
 }
 
 
 void Sprite::move_to_pos_x(Uint32 x)
 {
 	m_move_to_pos.x=x;
-	m_is_changed=true;
+	set_is_changed();
 }
 
 void Sprite::move_to_pos_y(Uint32 y)
 {
 	m_move_to_pos.y=y;
-	m_is_changed=true;
+	set_is_changed();
 }
 
 
@@ -249,7 +253,7 @@ void Sprite::update_frame()
 {
 	if(m_is_animating==true){
 		set_curr_frame(m_curr_frame+1);
-		m_is_changed=true;
+		set_is_changed();
 	}
 
 }
@@ -260,6 +264,7 @@ void Sprite::draw()
 {
 	update_frame();
 	if(m_is_changed==true){
+		
 		this->put_screen(Screen::instance()->coord_to_screen(m_pos));
 		m_is_changed=false;
 	}
@@ -274,9 +279,12 @@ WorldCoord Sprite::get_position() const
 	
 void Sprite::set_position(WorldCoord pos)
 {
+	if((pos.x == this->m_pos.x)&&(pos.y== this->m_pos.y)){
+		return;
+	}
 	set_pos_x(pos.x);
 	set_pos_y(pos.y);
-	m_is_changed=true;
+	set_is_changed();
 }
 
 void Sprite::set_position_on_screen(ScreenCoord pos)
@@ -284,20 +292,23 @@ void Sprite::set_position_on_screen(ScreenCoord pos)
 	WorldCoord wld = Screen::instance()->coord_to_world(pos);
 	set_pos_x(wld.x);
 	set_pos_y(wld.y);
-	m_is_changed=true;
+	set_is_changed();
 }
 	
 void Sprite::move_to_position(WorldCoord pos)
 {
+	if((pos.x == this->m_pos.x)&&(pos.y== this->m_pos.y)){
+		return;
+	}
 	move_to_pos(pos.x, pos.y);
-	m_is_changed=true;
+	set_is_changed();
 }
 
 void Sprite::clear_bg(){
 	if(m_is_changed==true){
 		Screen* screen = Screen::instance(); 
 		ScreenCoord screen_pos = screen->coord_to_screen(m_pos);
-		screen->clear(screen_pos.x-4,screen_pos.y-4,40,40);
+		screen->clear(screen_pos.x-2,screen_pos.y-2,36,36);
 	}
 }
 
@@ -305,15 +316,23 @@ void Sprite::update_bg(){
 	if(m_is_changed==true){
 		Screen* screen = Screen::instance(); 
 		ScreenCoord screen_pos = screen->coord_to_screen(m_pos);
-//		SDL_Rect src_rect;
-//		src_rect.x=0;
-//		src_rect.y=0;
-//		src_rect.w=k_sprite_size+8;
-//		src_rect.h=k_sprite_size+8;
+		SDL_Rect src_rect;
+		src_rect.x=0;
+		src_rect.y=0;
+		src_rect.w=k_sprite_size+8;
+		src_rect.h=k_sprite_size+8;
 		screen_pos.x -= 4;
 		screen_pos.y -= 4;
 		m_back_replacement->put_screen(screen_pos,0);
-		//screen->blit_surface(m_back_replacement, src_rect, screen_pos);
+		SDL_Surface* new_back = SDL_CreateRGBSurface(SDL_HWSURFACE, k_sprite_size+8, k_sprite_size+8, Screen::instance()->get_bpp(),0,0,0,0);
+		
+		screen->get_surface(new_back, &src_rect, screen_pos);
+		delete m_back_replacement;
+		m_back_replacement = new Surface();
+		m_back_replacement->init(new_back, k_sprite_size+8, k_sprite_size+8);
 	}
 }
 
+void Sprite::set_is_changed(){
+	m_is_changed=true;
+}
