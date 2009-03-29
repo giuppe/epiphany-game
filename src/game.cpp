@@ -297,22 +297,37 @@ void Game::draw(Uint32 frame_number, bool update_only)
 	//clearing background
 	screen->clear();
 	//TODO: we should clear only changed background
-//	if(player->exists())
-//	{
-//		player->clear_bg();
-//	}
-//	for(Uint32 i=1; i<entity_manager_size; i++)
-//	{
-//		curr_ntt=entity_manager->get_entity(i);
-//		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-//		{
-//
-//			curr_ntt->clear_bg();
-//			
-//		}
-//	}
+#if 0
+	if(player->exists())
+	{
+		player->clear_bg();
+	}
+	for(Uint32 i=1; i<entity_manager_size; i++)
+	{
+		curr_ntt=entity_manager->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		{
+
+			curr_ntt->clear_bg();
+			
+		}
+	}
 	//updating background
-	
+	if(player->exists())
+	{
+		player->update_bg();
+	}
+	for(Uint32 i=1; i<entity_manager_size; i++)
+	{
+		curr_ntt=entity_manager->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		{
+
+			curr_ntt->update_bg();
+			
+		}
+	}
+#endif
 	//drawing sprites
 	
 	if(player->exists())
