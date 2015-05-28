@@ -34,9 +34,12 @@ Space bar -> snap (eat without move);
 P or Pause -> pause game;
 ---
 
-You can find Epiphany on:
-Sourceforge:						https://github.com/giuppe/epiphany-game
-Debian binary package:				http://packages.debian.org/epiphany
+You can find Epiphany source on:
+Github:						https://github.com/giuppe/epiphany-game
+Debian package:				http://packages.debian.org/epiphany
+
+You can download a release (for Windows or Linux) from Github:
+https://github.com/giuppe/epiphany-game/releases
 
 ---
 
