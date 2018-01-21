@@ -400,9 +400,7 @@ void Game::draw_score()
 	
 	char text[255];
 	
-	sprintf(text, "%s",("Score: "));
-	
-	sprintf(text, "%s%d", text,(Sint32)m_level->get_current_score());
+	sprintf(text, "Score: %d", (Sint32)m_level->get_current_score());
 	
 	game_font->write(4,real_game_size_y+5, text);
 
@@ -411,8 +409,7 @@ void Game::draw_score()
 
 	if(remaining>0)
 	{
-		sprintf(text,"%s","Remaining:   ");
-		sprintf(text,"%s%d", text, remaining);
+		sprintf(text,"Remaining:   %d", remaining);
 		game_font->write(200,real_game_size_y+5, text);
 
 	}
@@ -498,14 +495,10 @@ void Game::go()
 			m_level=new Level();
   		
 			char current_level_path[255];
-  		
-			sprintf(current_level_path, "%s", (Resource_Factory::instance()->get_resource_path().c_str()));
-  		
-			sprintf(current_level_path, "%s%s", current_level_path, "/maps/level");
-  	
-			sprintf(current_level_path, "%s%d", current_level_path, (menu.get_current_level()));
-  		
-			sprintf(current_level_path, "%s%s", current_level_path, ".map");
+
+			sprintf(current_level_path, "%s/maps/level%d.map",
+			        Resource_Factory::instance()->get_resource_path().c_str(),
+			        menu.get_current_level());
   	
 			DEBOUT("Loading map: "<<current_level_path<<"\n");
   	
