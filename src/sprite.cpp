@@ -71,8 +71,9 @@ void Sprite::init(Surface* surf)
 	
 Sprite::~Sprite()
 {
-	delete m_back_replacement;
-	
+	if (m_initialized) {
+		delete m_back_replacement;
+	}
 }
 
 
