@@ -2,6 +2,7 @@ autom4te.cache
 Makefile
 *.in
 config.h
+config.h.in~
 missing
 depcomp
 install-sh
@@ -23,3 +24,9 @@ debug
 *.pcs
 *.kdevses
 callgrind.out.*
+src/epiphany
+src/Makefile.in
+src/Makefile
+src/.deps
+src/epiphany-game
+src/*.o
