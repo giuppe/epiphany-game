@@ -16,8 +16,9 @@
 
 #include "surface_manager.h"
 #include "surface.h"
+#include "screen.h"
 #include "resource_factory.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include "game.h"
 
@@ -180,7 +181,6 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 	
 	SDL_Surface* temp = SDL_LoadBMP(surface_path.c_str());
 	
-	//SDL_Surface* temp2 = SDL_DisplayFormat(temp);
 	
 	if(temp==NULL)
 	{
@@ -188,8 +188,8 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		assert(0);
 	}
 	
-	
-	surface->init(temp, frame_size_x, frame_size_y);
+	DEBOUT("Initing surface:"<<surface_path<<"\n");
+	surface->init(Screen::instance()->get_renderer(), temp, frame_size_x, frame_size_y);
 	
 	SDL_FreeSurface(temp);
 	

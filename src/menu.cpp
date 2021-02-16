@@ -21,7 +21,7 @@
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include "input.h"
 #include "screen.h"

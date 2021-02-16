@@ -37,7 +37,7 @@
 //Insert standard includes here (used by all files)
 
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 //#include "except.h"
 #include "epiconfig.h"

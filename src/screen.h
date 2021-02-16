@@ -36,16 +36,20 @@ private:
 	Uint32 m_world_size_x;
 	Uint32 m_world_size_y;
 	
-	SDL_Surface* m_screen;
+	SDL_Window* m_window;
+
+	SDL_Renderer* m_renderer;
 	
 	SDL_Surface* m_virtual_screen;
+
+	SDL_Texture* m_screen;
 	
 	SDL_Rect m_camera;
 	
 	friend class Font;
 	
-	bool m_use_virtual_screen;
-	
+	SDL_Window* get_window();
+
 	SDL_Surface* get_screen();
 	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
@@ -56,19 +60,18 @@ public:
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x, Uint32 world_size_y);
 	
 	void deinit();
-	
-	Uint8 get_bpp();
-	
-
 		
+	Uint8 get_bpp(){return 32;};
+
+	SDL_Surface* convert_surface_format(SDL_Surface* surface);
+
+	void set_window_title(const char* title);
+	
+	SDL_Renderer* get_renderer();
 
 	Uint32 get_world_size_x();
 	
 	Uint32 get_world_size_y();
-	
-
-	void use_virtual_screen(){m_use_virtual_screen = true;}
-
 	
 	void set_camera_position(WorldCoord position);
 	
@@ -103,7 +106,7 @@ private:
 
 protected:
 
-    Screen(): m_world_size_x(0), m_world_size_y(0), m_use_virtual_screen(false){};
+    Screen(): m_world_size_x(0), m_world_size_y(0){};
 
 public:
 

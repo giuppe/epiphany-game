@@ -33,7 +33,7 @@
 #include "game_timer.h"
 #include <cstdlib>
 #include <cstdio>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include <cassert>
 
@@ -602,6 +602,7 @@ void Game::init()
 	DEBOUT("Initing Screen...\n");
 	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x()*k_sprite_size, m_config->get_map_size_y()*k_sprite_size);
 	
+	DEBOUT("Initing Surface Manager...\n");
 	Surface_Manager::instance();
 	
 	

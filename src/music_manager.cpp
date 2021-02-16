@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 #include "music_manager.h"
 #include "resource_factory.h"
 #include "sfx.h"

@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "dephine.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <cassert>
 #include "screen.h"
 #include "sprite.h"
@@ -41,7 +41,22 @@ Uint32 Screen::get_world_size_y()
 
 SDL_Surface* Screen::get_screen()
 {
-	return m_screen;
+	return m_virtual_screen;
+}
+
+SDL_Renderer* Screen::get_renderer()
+{
+	return m_renderer;
+}
+
+SDL_Surface* Screen::convert_surface_format(SDL_Surface* surface){
+	SDL_Surface* temp = SDL_CreateRGBSurface(0, surface->w, surface->h, 32,
+											0x00FF0000,
+											0x0000FF00,
+											0x000000FF,
+											0xFF000000);
+	SDL_BlitSurface(surface, NULL, temp, NULL);
+	return temp;
 }
 
 
@@ -56,17 +71,30 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 	m_world_size_x=world_size_x;
 	m_world_size_y=world_size_y;
 	
-	m_screen = SDL_SetVideoMode(resolution_x, resolution_y, 0, SDL_HWSURFACE|SDL_DOUBLEBUF);
-	if(m_screen == NULL)
+	m_window = SDL_CreateWindow("My Game Window",
+                          SDL_WINDOWPOS_UNDEFINED,
+                          SDL_WINDOWPOS_UNDEFINED,
+                          resolution_x, resolution_y,
+                          SDL_WINDOW_SHOWN);
+
+	//m_screen = SDL_SetVideoMode(resolution_x, resolution_y, 0, SDL_HWSURFACE|SDL_DOUBLEBUF);
+	if(m_window == NULL)
 	{
 		printf("Unable to set %d x %d video mode: %s\n", resolution_x, resolution_y, SDL_GetError());
 		exit(1);
 	}
-	
-	
-	
-	m_virtual_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, m_world_size_x, m_world_size_y, this->get_bpp(),0,0,0,0);
-	
+
+	m_renderer = SDL_CreateRenderer(m_window, -1, 0);
+
+	m_virtual_screen = SDL_CreateRGBSurface(0, resolution_x, resolution_y, 32,
+											0x00FF0000,
+											0x0000FF00,
+											0x000000FF,
+											0xFF000000);
+	m_screen = SDL_CreateTexture(m_renderer,
+								 SDL_PIXELFORMAT_ARGB8888,
+								 SDL_TEXTUREACCESS_STREAMING,
+								 resolution_x, resolution_y);
 }
 
 
@@ -74,28 +102,28 @@ void Screen::resize_world_screen(Uint32 size_x, Uint32 size_y)
 {
 	if((size_x==0)||(size_y==0))
 	{
-		size_x = m_screen->w;
-		size_y = m_screen->h;
+		size_x = m_virtual_screen->w;
+		size_y = m_virtual_screen->h;
 	}
 	
-	if(m_use_virtual_screen)
-	{
-		m_virtual_screen = SDL_CreateRGBSurface(SDL_HWSURFACE, size_x, size_y, this->get_bpp(),0,0,0,0);
+	
+	m_virtual_screen = SDL_CreateRGBSurface(0, size_x, size_y, 32,
+                                        0x00FF0000,
+                                        0x0000FF00,
+                                        0x000000FF,
+                                        0xFF000000);
 		
-	}
+	
 	
 	m_world_size_x=size_x;
 	m_world_size_y=size_y;
 }
 
 
-Uint8 Screen::get_bpp()
+void Screen::set_window_title(const char* title)
 {
-	return SDL_GetVideoInfo()->vfmt->BitsPerPixel;
+	SDL_SetWindowTitle(m_window, title);
 }
-
-
-
 
 ScreenCoord Screen::coord_to_screen(WorldCoord wld_coord)
 {
@@ -161,28 +189,22 @@ void Screen::set_camera_position(WorldCoord position)
 
 void Screen::clear()
 {
-	SDL_Surface* dest_surf = m_screen;
-	if(m_use_virtual_screen)
-	{
-		dest_surf = m_virtual_screen;
-	}
+	SDL_Surface* dest_surf = m_virtual_screen;
+	
 	SDL_FillRect(dest_surf, NULL, SDL_MapRGB(dest_surf->format, 0, 0, 0));
 }	
 
 
 void Screen::clear(Uint32 x, Uint32 y, Uint32 w, Uint32 h)
 {
-	SDL_Surface* dest_surf = m_screen;
+	SDL_Surface* dest_surf = m_virtual_screen;
 	SDL_Rect dest_rect;
 	dest_rect.x=x;
 	dest_rect.y=y;
 	dest_rect.w=w;
 	dest_rect.h=h;
 	
-	if(m_use_virtual_screen)
-	{
-		dest_surf = m_virtual_screen;
-	}
+	
 	SDL_FillRect(dest_surf, &dest_rect, SDL_MapRGB(dest_surf->format, 0, 0, 0));
 }	
 
@@ -190,12 +212,12 @@ void Screen::clear(Uint32 x, Uint32 y, Uint32 w, Uint32 h)
 
 void Screen::flip_display()
 {
-
-	if(m_use_virtual_screen)
-	{
-		SDL_BlitSurface(m_virtual_screen, &m_camera, m_screen, NULL);
-	}
-	SDL_Flip(m_screen);
+	SDL_LockSurface(m_virtual_screen);
+	SDL_UpdateTexture(m_screen, NULL, m_virtual_screen->pixels, m_virtual_screen->pitch);
+	SDL_RenderClear(m_renderer);
+	SDL_RenderCopy(m_renderer, m_screen, NULL, NULL);
+	SDL_RenderPresent(m_renderer);
+	SDL_UnlockSurface(m_virtual_screen);
 }
 
 
@@ -208,7 +230,7 @@ void Screen::fill_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 	dest.y = y;
 	dest.w = size_x;
 	dest.h = size_y;
-	SDL_FillRect(m_screen, &dest, SDL_MapRGB(m_screen->format, r, g, b));
+	SDL_FillRect(m_virtual_screen, &dest, SDL_MapRGB(m_virtual_screen->format, r, g, b));
 }
 
 
@@ -224,11 +246,8 @@ void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 
 void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 {
-	SDL_Surface* dest_surf = m_screen;
-	if(m_use_virtual_screen)
-	{
-		dest_surf = m_virtual_screen;
-	}
+	SDL_Surface* dest_surf = m_virtual_screen;
+	
 	SDL_BlitSurface(surface, src,  dest_surf, dest);
 }
 
@@ -254,12 +273,9 @@ void Screen::get_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
 	SDL_Rect rect_dest;
 	rect_dest.x=dest.x;
 	rect_dest.y=dest.y;
-	SDL_Surface* src_surf = m_screen;
+	SDL_Surface* src_surf = m_virtual_screen;
 	SDL_Surface* dest_surf = surface;
-	if(m_use_virtual_screen)
-	{
-		src_surf = m_virtual_screen;
-	}
+	
 	SDL_BlitSurface(src_surf, src,  dest_surf, &rect_dest);
 	
 }
@@ -267,6 +283,9 @@ void Screen::get_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
 void Screen::deinit()
 {
 	SDL_FreeSurface(m_virtual_screen);
+	SDL_DestroyTexture(m_screen);
+	SDL_DestroyRenderer(m_renderer);
+	SDL_DestroyWindow(m_window);
 }
 
 // begin Singleton stuff

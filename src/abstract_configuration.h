@@ -2,7 +2,7 @@
 #define ABSTRACT_CONFIGURATION_H_
 
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 class AbstractConfiguration
 {

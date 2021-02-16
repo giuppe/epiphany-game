@@ -36,11 +36,7 @@ void Sprite::init(Surface* surf)
 
 	m_surface=surf;
 	
-	m_back_replacement= new Surface();
-	
-	m_back_replacement->init(SDL_CreateRGBSurface(SDL_HWSURFACE, k_sprite_size+8, k_sprite_size+8, Screen::instance()->get_bpp(),0,0,0,0),0,0);
-	
-	
+
 	m_pos.x=0;
 	
 	m_pos.y=0;
@@ -71,9 +67,7 @@ void Sprite::init(Surface* surf)
 	
 Sprite::~Sprite()
 {
-	if (m_initialized) {
-		delete m_back_replacement;
-	}
+	
 }
 
 
@@ -305,34 +299,6 @@ void Sprite::move_to_position(WorldCoord pos)
 	set_is_changed();
 }
 
-void Sprite::clear_bg(){
-	if(m_is_changed==true){
-		Screen* screen = Screen::instance(); 
-		ScreenCoord screen_pos = screen->coord_to_screen(m_pos);
-		screen->clear(screen_pos.x-2,screen_pos.y-2,36,36);
-	}
-}
-
-void Sprite::update_bg(){
-	if(m_is_changed==true){
-		Screen* screen = Screen::instance(); 
-		ScreenCoord screen_pos = screen->coord_to_screen(m_pos);
-		SDL_Rect src_rect;
-		src_rect.x=0;
-		src_rect.y=0;
-		src_rect.w=k_sprite_size+8;
-		src_rect.h=k_sprite_size+8;
-		screen_pos.x -= 4;
-		screen_pos.y -= 4;
-		m_back_replacement->put_screen(screen_pos,0);
-		SDL_Surface* new_back = SDL_CreateRGBSurface(SDL_HWSURFACE, k_sprite_size+8, k_sprite_size+8, Screen::instance()->get_bpp(),0,0,0,0);
-		
-		screen->get_surface(new_back, &src_rect, screen_pos);
-		delete m_back_replacement;
-		m_back_replacement = new Surface();
-		m_back_replacement->init(new_back, k_sprite_size+8, k_sprite_size+8);
-	}
-}
 
 void Sprite::set_is_changed(){
 	m_is_changed=true;

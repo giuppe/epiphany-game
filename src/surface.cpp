@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
 #include "screen.h"
 #include "surface.h"
 
-void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_y)
+void Surface::init(SDL_Renderer* renderer, SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_y)
 {
-	SDL_Surface* m_surface = SDL_DisplayFormat(surface);
+	SDL_Surface* m_surface = Screen::instance()->convert_surface_format(surface);
 
 	if( m_surface == NULL )
 	{
@@ -32,8 +32,8 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 
 	if((frame_size_x==0)||(frame_size_y==0))
 	{
-		m_frame_size_x = surface->w;
-		m_frame_size_y = surface->h;
+		m_frame_size_x = m_surface->w;
+		m_frame_size_y = m_surface->h;
 		num_frames_x=1;
 		num_frames_y=1;
 	}
@@ -63,7 +63,7 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 			src.w = m_frame_size_x;
 			src.h = m_frame_size_y;
 
-			SDL_Surface* surface_temp=SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, m_frame_size_x, m_frame_size_y, Screen::instance()->get_bpp(),0,0,0,0);
+			SDL_Surface* surface_temp = SDL_CreateRGBSurface(0, m_frame_size_x, m_frame_size_y, Screen::instance()->get_bpp(), 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 
 			if(surface_temp == NULL) {
 				DEBOUT("CreateRGBSurface failed: "<< SDL_GetError());
@@ -72,16 +72,14 @@ void Surface::init(SDL_Surface* surface, Uint32 frame_size_x, Uint32 frame_size_
 
 			SDL_BlitSurface(m_surface, &src, surface_temp, NULL);
 
-			m_surfaces[k*num_frames_x+i].image=SDL_DisplayFormat(surface_temp);
+			m_surfaces[k*num_frames_x+i].image = surface_temp;
 
 
 			//Set pink as transparent color
-			SDL_SetColorKey(m_surfaces[k*num_frames_x+i].image, SDL_SRCCOLORKEY, SDL_MapRGB(m_surfaces[k*num_frames_x+i].image->format, 255, 0, 255));
+			SDL_SetColorKey(m_surfaces[k*num_frames_x+i].image, SDL_TRUE, SDL_MapRGB(m_surfaces[k*num_frames_x+i].image->format, 255, 0, 255));
 
 			m_surfaces[k*num_frames_x+i].pause=1;
 
-
-			SDL_FreeSurface(surface_temp);
 		}
 
 	}

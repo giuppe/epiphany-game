@@ -18,6 +18,7 @@
 #include "font.h"
 #include "SFont.h"
 #include "resource_factory.h"
+#include "screen.h"
 #include <cassert>
 #include <string>
 
@@ -45,7 +46,7 @@ Font* Font_Factory::create_font(Font_Type type)
 	}
 	DEBOUT("Loading font: "<<m_res_factory<<"...\n");
 	SDL_Surface* temp = SDL_LoadBMP(m_res_factory.c_str());
-	SDL_Surface* temp2 = SDL_DisplayFormat(temp);
+	SDL_Surface* temp2 = Screen::instance()->convert_surface_format(temp);
 	
 	if(temp2!=NULL)
 	{

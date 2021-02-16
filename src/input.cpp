@@ -16,7 +16,7 @@
 
 
 #include "dephine.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "input.h"
 
 
@@ -47,7 +47,7 @@ Sint32 Input::event_filter(const SDL_Event *event)
 	return 1;
 }
 
-Sint32 sdl_event_filter(const SDL_Event *event)
+int sdl_event_filter(void* userdata, SDL_Event *event)
 {
 	return Input::instance()->event_filter(event);
 }
@@ -98,8 +98,7 @@ void Input::init()
 	m_fullscreen = false;
 	m_pause = false;
 	reset_states();
-	SDL_SetEventFilter(sdl_event_filter);
-	SDL_EnableKeyRepeat(0,0);
+	SDL_SetEventFilter(sdl_event_filter, NULL);
 }
 
 
