@@ -328,13 +328,3 @@ void Entity::set_state(Entity_State state)
 }
 
 
-void Entity::clear_bg()
-{
-	m_sprite.clear_bg();
-}
-
-void Entity::update_bg()
-{
-	m_sprite.update_bg();
-}
-

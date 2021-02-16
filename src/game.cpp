@@ -33,7 +33,7 @@
 #include "game_timer.h"
 #include <cstdlib>
 #include <cstdio>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include <cassert>
 

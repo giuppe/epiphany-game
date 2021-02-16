@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "surface_manager.h"
 #include "resource_factory.h"
 #include "music_manager.h"
@@ -56,7 +56,7 @@
 		
 		Music_Manager::instance();
 
-		SDL_WM_SetCaption(get_title(), NULL);
+		Screen::instance()->set_window_title(get_title());
 	
 	}
 	
@@ -132,16 +132,6 @@
 			Music_Manager::instance()->disable_music();
 		}
 		
-		bool virtual_screen = false;
-		
-		cmdconf->get_bool(std::string("cmd"), std::string("virtual-screen"), virtual_screen);
-				
-		if(virtual_screen == true)
-		{
-			Screen::instance()->use_virtual_screen();
-		}
-			
-
 		Game* game = Game::instance();
 		
 		game->set_frame_skip(frame_skip);

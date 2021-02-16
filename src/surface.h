@@ -19,7 +19,7 @@
 #ifndef SURFACE_H_
 #define SURFACE_H_
 #include "dephine.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 
 //typedef CL_Surface Surface;
@@ -57,7 +57,7 @@ public:
 
 	void put_screen(ScreenCoord scr_coord, int frame_no=-1);
 	
-	void init(SDL_Surface* surface, Uint32 frame_size_x=32, Uint32 frame_size_y=32);
+	void init(SDL_Renderer* renderer, SDL_Surface* surface, Uint32 frame_size_x=32, Uint32 frame_size_y=32);
 	
 	~Surface();
 	

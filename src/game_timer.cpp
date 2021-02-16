@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 #include <cstdlib>
 #include <cstdio>
 #include "game_timer.h"

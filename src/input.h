@@ -16,7 +16,7 @@
 
 #ifndef INPUT_H_
 #define INPUT_H_
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 class Input
 {
 private:

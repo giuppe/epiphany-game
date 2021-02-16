@@ -1,23 +1,23 @@
 AC_INIT()
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(epiphany,0.7.99)
+AM_INIT_AUTOMAKE(epiphany,0.9.0)
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_CHECK_HEADER(SDL/SDL.h,, [echo "Please install SDL from http://www.libsdl.org";exit])
-AC_CHECK_HEADER(SDL/SDL_mixer.h,, [echo "Please install SDL_mixer from http://www.libsdl.org/projects/SDL_mixer/";exit])
+AC_CHECK_HEADER(SDL2/SDL.h,, [echo "Please install SDL from http://www.libsdl.org";exit])
+AC_CHECK_HEADER(SDL2/SDL_mixer.h,, [echo "Please install SDL_mixer from http://www.libsdl.org/projects/SDL_mixer/";exit])
 
 
 
 
-AC_CHECK_LIB( SDL,   main,, [
-        echo "SDL installed, but -lSDL not found, run 'ldconfig' and try again,"
+AC_CHECK_LIB( SDL2,   main,, [
+        echo "SDL2 installed, but -lSDL2 not found, run 'ldconfig' and try again,"
         echo "if that doesn't help have a look at the file config.log and look into"
         echo "the FAQ."
         exit
         ])
  
- AC_CHECK_LIB( SDL_mixer,   main,, [
+ AC_CHECK_LIB( SDL2_mixer,   main,, [
         echo "SDL_mixer installed, but -lSDL_mixer not found, run 'ldconfig' and try again,"
         echo "if that doesn't help have a look at the file config.log and look into"
         echo "the FAQ."
@@ -51,7 +51,7 @@ AC_ARG_ENABLE(emscripten, AC_HELP_STRING([--enable-emscripten],[Enable Emscripte
 
 AC_ARG_ENABLE(static, AC_HELP_STRING([--enable-static],[Enable static compiling]), [
 	LDFLAGS="$LDFLAGS --static"
-	LIBS="$LIBS -L/usr/X11R6/lib -lXext -lXxf86vm -lX11 -lXm -lz -lSDL -lSDL_mixer -ldl -lpthread"
+	LIBS="$LIBS -L/usr/X11R6/lib -lXext -lXxf86vm -lX11 -lXm -lz -lSDL2 -lSDL2_mixer -ldl -lpthread"
 	],)
 	
 AC_OUTPUT(	Makefile		\

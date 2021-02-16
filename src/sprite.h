@@ -39,8 +39,6 @@ private:
 
 	Surface* m_surface;
 	
-	Surface* m_back_replacement;
-	
 	WorldCoord m_pos;
 	
 	WorldCoord m_old_pos;
@@ -121,10 +119,6 @@ public:
 	void set_state(Anim_State state);
 	
 	void draw();
-	
-	void clear_bg();
-	
-	void update_bg();
 	
 	void start_animation();
 	
