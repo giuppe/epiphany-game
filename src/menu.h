@@ -18,7 +18,7 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
-
+#include "runnable.h"
 
 #ifndef MENU_H
 #define MENU_H
@@ -26,7 +26,19 @@ class Game;
 
 class Menu_List;
 
-class Menu
+class Menu_List_Epiphany;
+
+class Menu_List_Options;
+
+class Screen;
+
+class Input;
+
+class Font;
+
+
+
+class Menu : public Runnable
 {
 	
 public:
@@ -49,8 +61,22 @@ private:
 	Sprite m_selector;
 
 	Surface* m_background;
-	
-	//Menu_List_Epiphany* m_menu_list;
+
+	Sint32 m_result = MENU_EPIPHANY_NONE;
+
+	Menu_List_Epiphany* m_main_menu_list;
+
+	Menu_List_Options* m_options_menu_list;
+
+	Sint32 m_main_menu_top_point; 
+	Sint32 m_main_menu_left_point; 
+	Sint32 m_main_menu_vertical_distance;
+
+	Sint32 m_options_menu_top_point; 
+	Sint32 m_options_menu_left_point; 
+	Sint32 m_options_menu_vertical_distance;
+
+	bool m_is_options_menu_open = false;
 
 public:
 
@@ -66,14 +92,22 @@ public:
 
 	void set_current_level(Uint32 current_level);
 
-	int go();
-
 	bool increase_unsolved_level();
-	
-	void render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 menu_left_point, Sint32 menu_vertical_distance);
 	
 	void print_menu_background();
 
+	Sprite* get_selector(){return &m_selector;};
+
+	void setup();
+
+	void update(double elapsed);
+
+	void destroy();
+
+	Sint32 get_result(){return m_result;};
+
 };
+
+
 
 #endif //MENU_H

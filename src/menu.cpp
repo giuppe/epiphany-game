@@ -29,7 +29,10 @@
 #include "menu_list.h"
 #include "menu_list_options.h"
 #include "menu_list_epiphany.h"
-
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
 
 
 
@@ -148,54 +151,6 @@ bool Menu::increase_unsolved_level()
 }
 
 
-
-
-Sint32 Menu::go()
-{
-
-	Epiconfig* config=Epiconfig::instance();
-	
-	Screen::instance()->resize_world_screen(0, 0);
-	
-	Menu_List_Epiphany* m_menu_list = new Menu_List_Epiphany(m_unsolved_level);
-
-	render_menu_list(m_menu_list, config->get_screen_size_y()/2, config->get_screen_size_x()/2, config->get_screen_size_y()/12);
-
-	DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
-
-	Uint32 return_action;
-	
-	switch(m_menu_list->get_return_action())
-	{
-		case Menu_List_Epiphany::MENU_START:
-			return_action = MENU_EPIPHANY_START;
-			break;
-		case Menu_List_Epiphany::MENU_OPTIONS:
-		{
-			return_action = MENU_EPIPHANY_NONE;
-			Menu_List_Options menu_options;
-			render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/3, config->get_screen_size_y()/12);
-			break;
-		}
-		case Menu_List_Epiphany::MENU_QUIT:
-			return_action = MENU_EPIPHANY_QUIT;
-			break;
-		default:
-			DEBWARN("Warning: Selecting unhandled menu action: "<<m_menu_list->get_return_action()<<"; \n\tdefaulting to MENU_QUIT");
-			return_action = MENU_EPIPHANY_QUIT;
-	}
-
-	m_current_level = m_menu_list->get_selected_level();
-	
-	delete m_menu_list;
-
-	return return_action;
-
-}
-
-
-
-
 void Menu::print_menu_background()
 {
 	
@@ -218,111 +173,170 @@ void Menu::print_menu_background()
 	
 }
 
-
-
-
-void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 menu_left_point, Sint32 menu_vertical_distance)
+void Menu::setup()
 {
-	Uint32 current_time;
+	Epiconfig* config=Epiconfig::instance();
+	
+	Screen::instance()->resize_world_screen(0, 0);
 
 	Input* input = Input::instance();
+	
+	m_main_menu_list = new Menu_List_Epiphany(m_unsolved_level);
 
-	Screen* screen = Screen::instance();
+	m_options_menu_list = new Menu_List_Options();
 
-	Font* menu_font = Font_Manager::instance()->get_font(m_menu_font); 
+	m_main_menu_top_point= config->get_screen_size_y()/2;
+	m_main_menu_left_point= config->get_screen_size_x()/2;
+	m_main_menu_vertical_distance= config->get_screen_size_y()/12;
+	
+	m_options_menu_top_point= config->get_screen_size_y()/2;
+	m_options_menu_left_point= config->get_screen_size_x()/3;
+	m_options_menu_vertical_distance= config->get_screen_size_y()/12;
 
 	input->reset_states();
 
 	input->update();
+
+}
+
+
+void Menu::update(double elapsed)
+{
+	Screen* screen = Screen::instance();
+	Input* input = Input::instance();
+	Menu* menu = this;
+	Font* menu_font = Font_Manager::instance()->get_font(m_menu_font);
+	Sprite* selector = this->get_selector();	
 	
-	while(menu_list->get_return_action() == Menu_List::MENU_NONE)
+	Menu_List* menu_list;
+	Sint32 menu_top_point;
+	Sint32 menu_left_point; 
+	Sint32 menu_vertical_distance;
+	if(m_is_options_menu_open==false)
+	{
+		menu_list = m_main_menu_list;
+		menu_top_point = m_main_menu_top_point;
+		menu_left_point = m_main_menu_left_point;
+		menu_vertical_distance = m_main_menu_vertical_distance;
+	}
+	else
+	{
+		menu_list = m_options_menu_list;
+		menu_top_point = m_options_menu_top_point;
+		menu_left_point = m_options_menu_left_point;
+		menu_vertical_distance = m_options_menu_vertical_distance;
+	}
+	
+
+	screen->clear();
+
+	menu->print_menu_background();
+		
+	//printing menu
+						
+	for(Uint32 i=0; i<menu_list->get_list_size(); i++)
+	{
+		menu_font->write(menu_left_point-50, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i).c_str());
+	}	
+		
+
+	if(input->get_up())
 	{
 
-		current_time=SDL_GetTicks();
+		menu_list->action_up();
 
-		screen->clear();
+	}
+		
+	if(input->get_down())
+	{
 
-		this->print_menu_background();
-		
-		//printing menu
-		
-				
-		for(Uint32 i=0; i<menu_list->get_list_size(); i++)
-		{
-			menu_font->write(menu_left_point-50, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i).c_str());
-		}	
-		
-	
+		menu_list->action_down();
 
-		if(input->get_up())
-		{
+	}
+		
+	if((input->get_left()))
+	{
 
-			menu_list->action_up();
+		menu_list->action_left();
 
-		}
+	}
 		
-		if(input->get_down())
-		{
+	if((input->get_right()))
+	{
 
-			menu_list->action_down();
+		menu_list->action_right();
 
-		}
+	}
 		
-		if((input->get_left()))
-		{
+	if(input->get_enter())
+	{
+		menu_list->action_press();
+	}
+		
 
-			menu_list->action_left();
-
-		}
 		
-		if((input->get_right()))
-		{
-
-			menu_list->action_right();
-
-		}
+	ScreenCoord scr_coord;
 		
-		if(input->get_enter())
-		{
-			menu_list->action_press();
-		}
+	scr_coord.x = menu_left_point-90;
 		
+	scr_coord.y = menu_top_point+menu_list->get_selected()*menu_vertical_distance;
 		
+	selector->set_position_on_screen(scr_coord);
 		
-		//m_selector.update_frame();
-		
-		//animated menu selector drawing
-		
-		ScreenCoord scr_coord;
-		
-		scr_coord.x = menu_left_point-90;
-		
-		scr_coord.y = menu_top_point+menu_list->get_selected()*menu_vertical_distance;
-		
-		m_selector.set_position_on_screen(scr_coord);
-		
-		m_selector.draw();
+	selector->draw();
 		
 	//	m_selector.put_screen(scr_coord);
 
-		screen->flip_display();
+	screen->flip_display();
 
-		do
+	input->update();
+	
+	if(m_is_options_menu_open == false)
+	{
+		switch(menu_list->get_return_action())
 		{
-			
-			if((SDL_GetTicks()-current_time)<90)
+			case Menu_List_Epiphany::MENU_START:
+				m_result = MENU_EPIPHANY_START;
+				break;
+			case Menu_List_Epiphany::MENU_OPTIONS:
 			{
-
-				SDL_Delay(10);
-
+				m_result = MENU_EPIPHANY_NONE;
+				m_is_options_menu_open = true;
+				//Menu_List_Options menu_options;
+				//render_menu_list(&menu_options, config->get_screen_size_y()/2, config->get_screen_size_x()/3, config->get_screen_size_y()/12);
+				break;
 			}
-
+			case Menu_List_Epiphany::MENU_QUIT:
+				m_result = MENU_EPIPHANY_QUIT;
+				break;
+			//default:
+				//DEBWARN("Warning: Selecting unhandled menu action: "<<menu_list->get_return_action()<<"; \n\tdefaulting to MENU_QUIT");
+				//m_result = MENU_EPIPHANY_QUIT;
 		}
+		m_current_level = menu_list->get_selected_level();
+	}
+	else
+	{
+		switch(menu_list->get_return_action())
+		{
+			case Menu_List_Options::MENU_NONE:
 
-		while((SDL_GetTicks()-current_time)<100);
+			break;
+			case Menu_List_Options::MENU_OK:
+				m_is_options_menu_open = false;
+			break;
+		}
+	}
 
-		input->update();
+	
 
-	}	
 }
+
+void Menu::destroy()
+{
+	delete m_main_menu_list;
+	delete m_options_menu_list;
+}
+
+
 

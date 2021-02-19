@@ -45,6 +45,10 @@ AC_ARG_ENABLE(profile, AC_HELP_STRING([--enable-profile],[Enable profile mode (v
 	CXXFLAGS="$CXXFLAGS -pg"
 	],)
 
+AC_ARG_ENABLE(emscripten, AC_HELP_STRING([--enable-emscripten],[Enable Emscripten]), [
+	CXXFLAGS="$CXXFLAGS -s USE_SDL=2 -s USE_SDL_MIXER=2"
+	],)
+
 AC_ARG_ENABLE(static, AC_HELP_STRING([--enable-static],[Enable static compiling]), [
 	LDFLAGS="$LDFLAGS --static"
 	LIBS="$LIBS -L/usr/X11R6/lib -lXext -lXxf86vm -lX11 -lXm -lz -lSDL -lSDL_mixer -ldl -lpthread"

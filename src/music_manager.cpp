@@ -95,7 +95,17 @@ Mix_Music* Music_Manager::get_music(Music_Type music)
 	
 }
 
-
+void Music_Manager::stop()
+{
+	if(m_disabled==true)
+	{
+		return;
+	}
+	if(music_enabled == false)
+		return;
+	
+	Mix_HaltMusic();
+}
 
 
 void Music_Manager::play(Music_Type type)

@@ -37,8 +37,10 @@ public:
 	
 	Uint32 get_selected() const {return m_selected;}
 	
-	bool is_selected(Uint32 entry)const{if(m_selected == entry) return true; return false;}
-		
+	bool is_selected(Uint32 entry) const {if(m_selected == entry) return true; return false;}
+
+	Uint32 get_selected_level() const {return 0;}
+
 	virtual Uint32 get_return_action() const = 0;
 	
 	virtual void action_left() = 0;

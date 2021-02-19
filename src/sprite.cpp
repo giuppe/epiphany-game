@@ -206,8 +206,28 @@ void Sprite::move(Uint32 n_pixel)
 void Sprite::move()
 {
 	
-	Sint32 n_pixel = k_sprite_size/m_total_frames;
-		
+	//Sint32 n_pixel = k_sprite_size/m_total_frames;
+	Sint32 n_pixel = 0;
+	if(m_pos.x!=m_move_to_pos.x)
+	{
+		if(m_pos.x>m_move_to_pos.x){
+			n_pixel=m_pos.x-m_move_to_pos.x; 
+		}
+		else
+		{
+			n_pixel=m_move_to_pos.x-m_pos.x;
+		}
+	}
+	else
+	{
+		if(m_pos.y>m_move_to_pos.y){
+			n_pixel=m_pos.y-m_move_to_pos.y; 
+		}
+		else
+		{
+			n_pixel=m_move_to_pos.y-m_pos.y;
+		}
+	}
 	move(n_pixel);
 
 	

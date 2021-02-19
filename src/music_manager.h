@@ -50,6 +50,8 @@ public:
 	void deinit();
 	
 	void play(Music_Type type);
+
+	void stop();
 	
 	Uint32 get_max_volume();
 	

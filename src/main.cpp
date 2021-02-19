@@ -159,7 +159,21 @@
 		}
 		else
 		{
-			game->go();
+			game->setup();
+			Uint32 current_frame_time=SDL_GetTicks();
+			Uint32 past_frame_time = SDL_GetTicks();
+			Sint32 buffer_frame_time = 0;
+			while(1){
+				current_frame_time=SDL_GetTicks();
+				game->update(current_frame_time-past_frame_time);
+				buffer_frame_time = 266-(SDL_GetTicks()-current_frame_time);
+				if(buffer_frame_time >0)
+				{
+					DEBOUT("Sleeping for: "<<buffer_frame_time<<"\n");
+					SDL_Delay(buffer_frame_time);
+				}
+				past_frame_time = current_frame_time;
+			}
 		}
 		
 		DEBOUT("Exiting game::go().\n");
