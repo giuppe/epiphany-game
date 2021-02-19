@@ -25,7 +25,7 @@ debug
 *.kdevses
 callgrind.out.*
 src/epiphany
-src/Makefile.in
+**/Makefile.in
 src/Makefile
 src/.deps
 src/epiphany-game
