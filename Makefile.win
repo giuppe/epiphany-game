@@ -1,0 +1,58 @@
+#OBJS specifies which files to compile as part of the project
+OBJS = src/sfx.cpp src/main.cpp src/level.cpp src/sample.cpp src/entity.cpp \
+	src/levelmap.cpp src/epiconfig.cpp src/entity_factory.cpp src/entity_manager.cpp \
+	src/game_timer.cpp src/myparser.cpp src/epimap.cpp src/emdlparser.cpp \
+	src/entities/entity_gem.cpp src/entities/entity_door.cpp  src/entities/entity_wood.cpp 			\
+         src/entities/entity_brick.cpp src/entities/entity_player.cpp  src/entities/entity_falling.cpp 		\
+	src/entities/entity_emerald.cpp  src/entities/entity_peperon.cpp  src/entities/entity_sapphire.cpp 	\
+	 src/entities/entity_flintstone.cpp  src/entities/entity_explosion.cpp  src/entities/entity_monster.cpp 	\
+	 src/entities/entity_boulder.cpp  src/entities/entity_tomato.cpp	src/fonts/SFont.c			\
+         src/entities/entity_steel.cpp  src/entities/entity_grass.cpp  src/entities/entity_exit.cpp  src/entities/entity_key.cpp \
+	src/screen.cpp src/sprite.cpp src/menu.cpp src/game.cpp src/surface_manager.cpp src/input.cpp src/fonts/font.cpp \
+	src/fonts/font_factory.cpp src/fonts/font_manager.cpp src/surface.cpp src/resource_factory.cpp \
+	src/menu_entry_ranged.cpp src/menu_list_epiphany.cpp src/menu_list_options.cpp \
+	src/tinyxml/tinystr.cpp src/tinyxml/tinyxmlerror.cpp src/tinyxml/tinyxmlparser.cpp \
+	src/tinyxml/tinyxml.cpp src/menu_entry_bool.cpp src/music_manager.cpp src/xml_configuration.cpp \
+	src/commandline_configuration.cpp
+
+HEADERS = entity_type.h emdlparser.h levelmap.h \
+	game.h screen.h menu.h sfx.h except.h level.h entity_factory.h \
+	fonts/font_manager.h fonts/font_factory.h fonts/font.h fonts/SFont.h \
+	input.h sample.h myparser.h epiconfig.h entity_all.h resource.h \
+	game_timer.h map_editor.h entity_manager.h direction.h \
+	surface_manager.h surface.h dephine.h entities/entity_explosion.h \
+	entities/entity_boulder.h entities/entity_wood.h entities/entity_exit.h \
+	entities/entity_steel.h entities/entity_key.h entities/entity_sapphire.h \
+	entities/entity_unknown.h entities/entity_flintstone.h entities/entity_falling.h \
+	entities/entity_grass.h entities/entity_monster.h entities/entity_peperon.h \
+	entities/entity_player.h entities/entity_brick.h entities/entity_door.h \
+	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
+	resource_factory.h sprite.h epimap.h entity.h \
+	menu_entry.h menu_entry_simple.h menu_entry_ranged.h menu_list.h \
+	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
+	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h abstract_configuration.h \
+	xml_configuration.h commandline_configuration.h world_coord.h screen_coord.h
+
+#CC specifies which compiler we're using
+CC = g++
+
+#INCLUDE_PATHS specifies the additional include paths we'll need
+INCLUDE_PATHS = -IC:\mingw_dev\include
+
+#LIBRARY_PATHS specifies the additional library paths we'll need
+LIBRARY_PATHS = -LC:\mingw_dev\lib
+
+#COMPILER_FLAGS specifies the additional compilation options we're using
+# -w suppresses all warnings
+# -Wl,-subsystem,windows gets rid of the console window
+COMPILER_FLAGS = -w -Wl,-subsystem,windows -I.. -I./src
+
+#LINKER_FLAGS specifies the libraries we're linking against
+LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer
+
+#OBJ_NAME specifies the name of our exectuable
+OBJ_NAME = epiphany-game.exe
+
+#This is the target that compiles our executable
+all : $(OBJS)
+	$(CC) $(OBJS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)

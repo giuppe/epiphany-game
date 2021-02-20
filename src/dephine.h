@@ -42,7 +42,9 @@
 //#include "except.h"
 #include "epiconfig.h"
 
-
+#ifndef PACKAGE
+#define PACKAGE "Epiphany"
+#endif
 
 /**************************************************/
 /*                  Game Constants                */
