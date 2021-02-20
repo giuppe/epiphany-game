@@ -106,14 +106,14 @@ void Screen::resize_world_screen(Uint32 size_x, Uint32 size_y)
 		size_y = m_virtual_screen->h;
 	}
 	
-	
-	m_virtual_screen = SDL_CreateRGBSurface(0, size_x, size_y, 32,
+	if(size_x!=m_world_size_x || size_y!=m_world_size_y){
+		m_virtual_screen = SDL_CreateRGBSurface(0, size_x, size_y, 32,
                                         0x00FF0000,
                                         0x0000FF00,
                                         0x000000FF,
                                         0xFF000000);
 		
-	
+	}
 	
 	m_world_size_x=size_x;
 	m_world_size_y=size_y;
