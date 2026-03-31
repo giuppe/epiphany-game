@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 
 #ifndef ENTITY_GEM_H
 #define ENTITY_GEM_H

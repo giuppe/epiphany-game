@@ -1,0 +1,34 @@
+		#if (windows && (!(neko)))
+		// Windows Display APIs behave differently if the DPI Awareness process flag is not set.
+		// If it is not set Windows would consider this a "legacy app" and its display scaling would mess with Flixel/OpenFL/Lime display parameters
+		// source: https://github.com/godotengine/godot/commit/eb0f9651b3bb12b79db4ee4f8862a3be16a11ea5, author: reduz
+		// see also: https://discourse.libsdl.org/t/sdl-getdesktopdisplaymode-resolution-reported-in-windows-10-when-using-app-scaling/22389
+		untyped __cpp__ ("
+			HMODULE Shcore = LoadLibraryW(L\"Shcore.dll\");
+			HMODULE User32 = LoadLibraryW(L\"User32.dll\");
+			int dpiSet = 0;
+			// For Windows 8.1+
+			if (Shcore != NULL)
+			{
+				typedef HRESULT (WINAPI * SetProcessDpiAwareness_t) (int);//(SHC_PROCESS_DPI_AWARENESS);
+				
+				SetProcessDpiAwareness_t SetProcessDpiAwareness = (SetProcessDpiAwareness_t)GetProcAddress(Shcore, \"SetProcessDpiAwareness\");
+				
+				if (SetProcessDpiAwareness)
+				{
+					SetProcessDpiAwareness(2);
+					dpiSet = 1;
+				}	
+			}
+			// For Windows Vista, 7, 8
+			if (User32 != NULL && dpiSet == 0)
+			{
+				typedef BOOL(WINAPI * SetProcessDpiAware_t)(void);
+				SetProcessDpiAware_t SetProcessDpiAware = (SetProcessDpiAware_t)GetProcAddress(User32, \"SetProcessDpiAware\");
+				if (SetProcessDpiAware)
+				{
+					SetProcessDpiAware();
+				}
+			}
+			");
+#end

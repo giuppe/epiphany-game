@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_monster.h"
 
 #ifndef ENTITY_TOMATO_H

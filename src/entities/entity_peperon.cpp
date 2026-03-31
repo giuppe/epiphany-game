@@ -14,11 +14,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_monster.h"
 #include "entity_peperon.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_player.h"
 
 Entity_Peperon::Entity_Peperon(Level* level, Uint32 x, Uint32 y)

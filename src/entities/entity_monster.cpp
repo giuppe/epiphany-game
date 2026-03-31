@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_monster.h"
 
 Entity_Monster::Entity_Monster(Level* level, Uint32 x, Uint32 y)

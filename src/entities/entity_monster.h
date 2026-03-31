@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 
 #ifndef ENTITY_MONSTER_H
 #define ENTITY_MONSTER_H

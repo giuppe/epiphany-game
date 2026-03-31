@@ -15,11 +15,11 @@
  ***************************************************************************/
  
 
-#include "dephine.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_emerald.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_player.h"
 #include "entity_falling.h"
 

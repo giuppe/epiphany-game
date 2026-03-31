@@ -722,7 +722,7 @@ void Game::show_credits()
 	
 	Screen* screen = Screen::instance();
 	
-		screen->resize_world_screen(0,0);
+	screen->resize_world_screen(0,0);
 	
 	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
 	
@@ -762,7 +762,7 @@ void Game::show_loading()
 {
 	Screen* screen = Screen::instance();
 	
-	screen->resize_world_screen(0,0);
+	screen->reset_virtual_screen_size();
 	
 	Font* ready_font = Font_Manager::instance()->get_font(Font_Factory::MENU_FONT);
 	

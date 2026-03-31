@@ -15,12 +15,12 @@
  ***************************************************************************/
  
 
-#include "dephine.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_exit.h"
 #include "entity_player.h"
-#include "level.h"
+#include "../level.h"
 
 Entity_Exit::Entity_Exit(Level* level, Uint32 x, Uint32 y, Uint32 min_score)
 {

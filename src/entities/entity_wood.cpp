@@ -15,9 +15,9 @@
  ***************************************************************************/
 
 
-#include "level.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../level.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_wood.h"
 
 Entity_Wood::Entity_Wood(Level* level, Uint32 x, Uint32 y)

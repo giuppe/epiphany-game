@@ -71,7 +71,7 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 	m_world_size_x=world_size_x;
 	m_world_size_y=world_size_y;
 	
-	m_window = SDL_CreateWindow("My Game Window",
+	m_window = SDL_CreateWindow("Epiphany",
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           resolution_x, resolution_y,
@@ -95,6 +95,24 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 								 SDL_PIXELFORMAT_ARGB8888,
 								 SDL_TEXTUREACCESS_STREAMING,
 								 resolution_x, resolution_y);
+}
+
+void Screen::reset_virtual_screen_size()
+{
+	Uint32 format;
+	int access;
+	int w;
+	int h;
+	if(SDL_QueryTexture(m_screen, &format, &access, &w, &h)==0)
+	{
+		this->resize_world_screen(w, h);
+	}
+	else
+	{
+		    printf("SDL_QueryTexture failed: %s\n", SDL_GetError());
+	}
+
+	
 }
 
 

@@ -14,9 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "level.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../level.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_steel.h"
 
 Entity_Steel::Entity_Steel(Level* level, Uint32 x, Uint32 y)

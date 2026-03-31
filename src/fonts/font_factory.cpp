@@ -17,8 +17,8 @@
 #include "font_factory.h"
 #include "font.h"
 #include "SFont.h"
-#include "resource_factory.h"
-#include "screen.h"
+#include "../resource_factory.h"
+#include "../screen.h"
 #include <cassert>
 #include <string>
 

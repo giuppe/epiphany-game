@@ -14,15 +14,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 
 #include "entity_falling.h"
 #include "entity_player.h"
 #include "entity_emerald.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_boulder.h"
-#include "level.h"
+#include "../level.h"
 
 
 Entity_Falling::Entity_Falling(Level* level, Uint32 x, Uint32 y)

@@ -14,9 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_grass.h"
 
 Entity_Grass::Entity_Grass(Level* level, Uint32 x, Uint32 y)

@@ -16,8 +16,8 @@
  
 #ifndef FONT_MANAGER_H_
 #define FONT_MANAGER_H_
-#include "dephine.h"
-#include "surface_manager.h"
+#include "../dephine.h"
+#include "../surface_manager.h"
 #include "font.h"
 #include <vector>
 

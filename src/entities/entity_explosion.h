@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
  
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 
-#include "entity_type.h"
+#include "../entity_type.h"
 
 #ifndef ENTITY_EXPLOSION
 #define ENTITY_EXPLOSION

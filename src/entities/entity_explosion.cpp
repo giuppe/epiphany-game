@@ -15,11 +15,11 @@
  ***************************************************************************/
  
 
-#include "dephine.h"
+#include "../dephine.h"
 #include "entity_explosion.h"
-#include "entity_all.h"
+#include "../entity_all.h"
 
-#include "entity_type.h"
+#include "../entity_type.h"
 
 Entity_Explosion::Entity_Explosion(Level* level, Uint32 x, Uint32 y)
 {

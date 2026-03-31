@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_EXIT_H
 #define ENTITY_EXIT_H

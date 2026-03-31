@@ -282,7 +282,7 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 
 		}
 		
-		if(input->get_enter())
+		if(input->get_enter()||input->get_fire())
 		{
 			menu_list->action_press();
 		}

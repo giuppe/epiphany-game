@@ -14,12 +14,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "sprite.h"
-#include "entity.h"
-#include "entity_manager.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../entity.h"
+#include "../entity_manager.h"
 
-#include "entity_all.h"
+#include "../entity_all.h"
 
 
 Entity_Player::Entity_Player(Level* level, Uint32 x, Uint32 y)

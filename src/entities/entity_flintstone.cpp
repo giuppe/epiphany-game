@@ -14,11 +14,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_flintstone.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_player.h"
 
 

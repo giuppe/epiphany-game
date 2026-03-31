@@ -14,8 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_key.h"
 #include <cassert>
 

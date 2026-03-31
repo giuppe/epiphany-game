@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_monster.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_tomato.h"
 #include "entity_player.h"
 

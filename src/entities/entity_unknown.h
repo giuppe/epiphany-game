@@ -1,5 +1,5 @@
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_UNKNOWN_H_
 #define ENTITY_UNKNOWN_H_

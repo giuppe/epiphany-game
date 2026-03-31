@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_BRICK_H
 #define ENTITY_BRICK_H

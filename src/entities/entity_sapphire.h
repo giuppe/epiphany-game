@@ -13,7 +13,7 @@
  *   the Free Software Foundation.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "entity.h"
+#include "../entity.h"
 #include "entity_gem.h"
 #include "entity_falling.h"
 

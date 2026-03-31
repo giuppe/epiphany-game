@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_GRASS_H
 #define ENTITY_GRASS_H

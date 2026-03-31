@@ -97,6 +97,8 @@ public:
 	ScreenCoord coord_to_screen(WorldCoord wld_coord);
 	
 	void resize_world_screen(Uint32 size_x=0, Uint32 size_y=0);
+
+	void reset_virtual_screen_size();
 	
 // begin Singleton stuff
 

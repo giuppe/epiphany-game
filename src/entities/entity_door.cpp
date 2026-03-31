@@ -15,12 +15,12 @@
  ***************************************************************************/
  
 
-#include "dephine.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../entity.h"
 #include "entity_door.h"
-#include "entity_all.h"
-#include "sfx.h"
-#include "surface_manager.h"
+#include "../entity_all.h"
+#include "../sfx.h"
+#include "../surface_manager.h"
 #include <cassert>
 
 Entity_Door::Entity_Door(Level* level, Uint32 x, Uint32 y, Uint32 id)

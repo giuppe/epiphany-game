@@ -17,7 +17,7 @@
 #ifndef FONT_FACTORY_H_
 #define FONT_FACTORY_H_
 
-#include "resource_factory.h"
+#include "../resource_factory.h"
 
 class Font;
 

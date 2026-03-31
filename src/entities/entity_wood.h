@@ -16,7 +16,7 @@
 
 
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_WOOD_H
 #define ENTITY_WOOD_H

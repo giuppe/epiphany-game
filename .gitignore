@@ -30,3 +30,4 @@ src/Makefile
 src/.deps
 src/epiphany-game
 src/*.o
+/Default/

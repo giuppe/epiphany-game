@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_STEEL_H
 #define ENTITY_STEEL_H

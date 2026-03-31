@@ -14,7 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "entity.h"
+#include "../entity.h"
 
 #ifndef ENTITY_PLAYER_H
 #define ENTITY_PLAYER_H

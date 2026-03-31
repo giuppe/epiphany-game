@@ -13,14 +13,14 @@
  *   the Free Software Foundation.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "dephine.h"
+#include "../dephine.h"
 
-#include "sprite.h"
-#include "entity.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_sapphire.h"
-#include "entity_manager.h"
+#include "../entity_manager.h"
 #include "entity_player.h"
-#include "entity_all.h"
+#include "../entity_all.h"
 
 
 Entity_Sapphire::Entity_Sapphire(Level* level, Uint32 x, Uint32 y)

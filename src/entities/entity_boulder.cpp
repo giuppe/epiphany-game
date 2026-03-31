@@ -14,10 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dephine.h"
-#include "sprite.h"
-#include "surface_manager.h"
-#include "entity.h"
+#include "../dephine.h"
+#include "../sprite.h"
+#include "../surface_manager.h"
+#include "../entity.h"
 #include "entity_boulder.h"
 #include "entity_player.h"
 

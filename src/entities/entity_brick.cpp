@@ -14,9 +14,9 @@
  *                                                                         *
  ***************************************************************************/
  
-#include "level.h"
-#include "sprite.h"
-#include "entity.h"
+#include "../level.h"
+#include "../sprite.h"
+#include "../entity.h"
 #include "entity_brick.h"
 
 Entity_Brick::Entity_Brick(Level* level, Uint32 x, Uint32 y)

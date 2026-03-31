@@ -16,8 +16,8 @@
 
 #include "font.h"
 #include "SFont.h"
-#include "screen.h"
-#include "epiconfig.h"
+#include "../screen.h"
+#include "../epiconfig.h"
 #include <cassert>
 
 void Font::write(Sint32 x, Sint32 y, const char* text)
