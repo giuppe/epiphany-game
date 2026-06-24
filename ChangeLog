@@ -1,3 +1,7 @@
+Version 0.9.0:
+upgrade SDL to 2.x
+Fixed: font rendering in menu and game HUD printing only the first letter of strings
+
 Version 0.8.0:
 code refactoring (sprite-related)
 code refactoring (introduced FSM in entities)
