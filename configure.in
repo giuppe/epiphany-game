@@ -4,8 +4,8 @@ AM_INIT_AUTOMAKE(epiphany,0.9.0)
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_CHECK_HEADER(SDL2/SDL.h,, [echo "Please install SDL from http://www.libsdl.org";exit])
-AC_CHECK_HEADER(SDL2/SDL_mixer.h,, [echo "Please install SDL_mixer from http://www.libsdl.org/projects/SDL_mixer/";exit])
+AC_CHECK_HEADER(SDL2/SDL.h,, [echo "Please install SDL 2.x from http://www.libsdl.org";exit])
+AC_CHECK_HEADER(SDL2/SDL_mixer.h,, [echo "Please install SDL_mixer 2.x from http://www.libsdl.org/projects/SDL_mixer/";exit])
 
 
 
@@ -26,7 +26,6 @@ AC_CHECK_LIB( SDL2,   main,, [
 
 
 AH_TEMPLATE(DEBUG_MODE)
-[CXXFLAGS=""]
 
 
 
