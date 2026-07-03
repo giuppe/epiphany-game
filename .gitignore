@@ -33,3 +33,5 @@ src/*.o
 /Default/
 compile
 config.log
+*~
+epiphany-game*
