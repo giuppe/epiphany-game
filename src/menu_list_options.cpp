@@ -73,6 +73,12 @@ void Menu_List_Options::action_press()
 	
 }
 
+void Menu_List_Options::action_quit()
+{
+	m_selected = 2;
+	this->action_press();
+}
+
 
 
 

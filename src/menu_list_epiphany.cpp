@@ -112,6 +112,14 @@ void Menu_List_Epiphany::action_left()
 	m_entries_list[m_selected]->action_left();
 }
 
+/**
+ * To be called when ESC is pressed or the window is closed
+ */
+void Menu_List_Epiphany::action_quit()
+{
+	m_return_action = MENU_QUIT;
+}
+
 
 
 

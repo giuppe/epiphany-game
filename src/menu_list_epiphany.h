@@ -55,6 +55,8 @@ public:
 	void action_down();
 	
 	void action_press();
+
+	void action_quit();
 	
 	Uint32 get_list_size() const;
 	

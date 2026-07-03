@@ -50,6 +50,8 @@ public:
 	virtual void action_down() = 0;
 	
 	virtual void action_press() = 0;
+
+	virtual void action_quit() = 0;
 	
 	virtual std::string get_menu_entry_string(Uint32 entry) const = 0;
 	
