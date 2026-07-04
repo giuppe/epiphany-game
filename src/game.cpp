@@ -736,7 +736,7 @@ void Game::show_credits()
 		
 		for(i=0; i<credits.size(); i++)
 		{
-			credits_font->write(32, 32+30*i,credits[i].c_str());
+			credits_font->write(32, 10+20*i,credits[i].c_str());
 			
 		}
 		
