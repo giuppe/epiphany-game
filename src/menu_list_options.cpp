@@ -115,6 +115,9 @@ void Menu_List_Options::action_up()
 void Menu_List_Options::action_right()
 {
 	m_entries_list[m_selected]->action_right();
+	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
+	Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
+			
 }
 
 
@@ -123,6 +126,9 @@ void Menu_List_Options::action_right()
 void Menu_List_Options::action_left()
 {
 	m_entries_list[m_selected]->action_left();
+	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
+	Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
+			
 }
 
 
