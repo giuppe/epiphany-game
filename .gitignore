@@ -29,9 +29,10 @@ src/epiphany
 src/Makefile
 src/.deps
 src/epiphany-game
-src/*.o
+**/*.o
 /Default/
 compile
 config.log
 *~
 epiphany-game*
+build/
