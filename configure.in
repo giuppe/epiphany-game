@@ -1,6 +1,6 @@
-AC_INIT()
+AC_INIT([epiphany], [0.9.0])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(epiphany,0.9.0)
+AM_INIT_AUTOMAKE([subdir-objects])
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
