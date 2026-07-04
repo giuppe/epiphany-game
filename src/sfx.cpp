@@ -209,7 +209,8 @@ void Sample_Manager::set_volume(Uint32 value)
 			DEBOUT("Sound system disabled, cannot set volume\n");
 			return;
 		}
-	Mix_Volume(-1, value*16);
+	
+	Mix_Volume(-1, value*value*2);
 }
 
 
@@ -222,7 +223,7 @@ Uint32 Sample_Manager::get_volume()
 			DEBOUT("Sound system disabled, returning null volume\n");
 			return 0;
 		}
-	return Mix_Volume(-1, -1)/16;
+	return (Uint32)(sqrt(Mix_Volume(-1, -1))/2);
 }
 
 

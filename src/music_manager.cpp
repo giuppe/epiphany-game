@@ -131,7 +131,7 @@ void Music_Manager::set_volume(Uint32 value)
 			DEBOUT("Sound system disabled, cannot set volume\n");
 			return;
 		}
-	Mix_VolumeMusic(value*16);
+	Mix_VolumeMusic(value*value*2);
 }
 
 
@@ -144,7 +144,7 @@ Uint32 Music_Manager::get_volume()
 			DEBOUT("Sound system disabled, volume is always zero\n");
 			return 0;
 		}
-	return Mix_VolumeMusic(-1)/16;
+	return (Uint32)(sqrt(Mix_VolumeMusic(-1))/2);
 }
 
 
