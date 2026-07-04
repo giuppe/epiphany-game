@@ -192,34 +192,42 @@ void Input::update()
 	// If key was pressed, set state apropriately.
 	// left, right, up, down: the winner is the last key pressed
 	// I don't expect anyone to press more than one key per turn ;)
+	// Update 2026: I *do* now expect more than one key per turn, live and learn :D
+	
+	bool selected = false;
 	if (p_left)
 	{
 		m_left=true;
 		m_right=false;
 		m_up=false;
 		m_down=false;
+		selected = true;
 	}
-	if (p_right)
+	if (p_right && !(p_last_right && selected))
 	{
 		m_left=false;
 		m_right=true;
 		m_up=false;
 		m_down=false;
+		selected = true;
 	}
-	if (p_up)
+	if (p_up && !(p_last_up && selected))
 	{
 		m_left=false;
 		m_right=false;
 		m_up=true;
 		m_down=false;
+		selected = true;
 	}
-	if (p_down)
+	if (p_down && !(p_last_down && selected))
 	{
 		m_left=false;
 		m_right=false;
 		m_up=false;
 		m_down=true;
+		selected = true;
 	}
+	DEBWARN("m_down: "<<m_down<<", m_left: "<<m_left<<"\n");
 	m_fire|=p_fire;
 	m_enter|=p_enter;
 	m_die|=p_die;
@@ -227,6 +235,10 @@ void Input::update()
 	m_alt|=p_alt;
 
 	// Forget all key press events
+	p_last_down = p_down;
+	p_last_up = p_up;
+	p_last_right = p_right;
+	p_last_left = p_left;
 	p_quit= false;
 	p_die = false;
 	p_left = false;

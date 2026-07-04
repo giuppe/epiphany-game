@@ -45,6 +45,11 @@ private:
     bool p_enter;
     bool p_fullscreen;
 
+    bool p_last_left;
+    bool p_last_right;
+    bool p_last_up;
+    bool p_last_down;
+
     bool r_left;
     bool r_right;
     bool r_up;
