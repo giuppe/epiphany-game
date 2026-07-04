@@ -43,6 +43,8 @@ private:
 	SDL_Surface* m_virtual_screen;
 
 	SDL_Texture* m_screen;
+
+	SDL_Texture* m_scaling_texture;
 	
 	SDL_Rect m_camera;
 	

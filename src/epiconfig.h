@@ -28,6 +28,8 @@ private:
 
 	Uint32 m_score_size_y;
 
+	SDL_Point m_base_screen_size;
+
 //	int m_sprite_size;
 
 	Uint32 m_map_size_x;
@@ -57,6 +59,10 @@ public:
 	Uint32 get_screen_size_y();
 
 	Uint32 get_score_size_y();
+
+	Uint32 get_base_screen_size_x(){return m_base_screen_size.x;}
+
+	Uint32 get_base_screen_size_y(){return m_base_screen_size.y;}
 
 //	int get_sprite_size();
 

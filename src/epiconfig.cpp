@@ -24,9 +24,10 @@ void Epiconfig::set_default_values()
 {
 	//size in pixels
 	m_screen_size_x=640;
-	m_screen_size_y=480;
+	m_screen_size_y=360;
 	m_score_size_y=32;
 
+	m_base_screen_size = {640,360};
 
 	//size in cells
 	m_map_size_x=32;

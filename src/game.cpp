@@ -386,9 +386,9 @@ void Game::draw(Uint32 frame_number, bool update_only)
 void Game::draw_score()
 {
 	
-	Sint32 real_game_size_y = m_config->get_screen_size_y()-m_config->get_score_size_y();
-	Sint32 game_size_x=m_config->get_screen_size_x();
-	Sint32 game_size_y=m_config->get_screen_size_y();
+	Sint32 real_game_size_y = m_config->get_base_screen_size_y()-m_config->get_score_size_y();
+	Sint32 game_size_x=m_config->get_base_screen_size_x();
+	Sint32 game_size_y=m_config->get_base_screen_size_y();
 	Screen* screen = Screen::instance(); 
 	screen->fill_rect(0, real_game_size_y, game_size_x, game_size_y,0,0,0);
 	

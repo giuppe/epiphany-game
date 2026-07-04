@@ -64,18 +64,20 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 {
 	m_camera.x=0;
 	m_camera.y=0;
-	m_camera.w=resolution_x;
-	m_camera.h=resolution_y-Epiconfig::instance()->get_score_size_y();
+	m_camera.w=Epiconfig::instance()->get_base_screen_size_x();
+	m_camera.h=Epiconfig::instance()->get_base_screen_size_y()-Epiconfig::instance()->get_score_size_y();
 
 	
 	m_world_size_x=world_size_x;
 	m_world_size_y=world_size_y;
+
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
 	
 	m_window = SDL_CreateWindow("Epiphany",
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           resolution_x, resolution_y,
-                          SDL_WINDOW_SHOWN);
+                          SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE|SDL_WINDOW_ALLOW_HIGHDPI);
 
 	//m_screen = SDL_SetVideoMode(resolution_x, resolution_y, 0, SDL_HWSURFACE|SDL_DOUBLEBUF);
 	if(m_window == NULL)
@@ -84,7 +86,8 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 		exit(1);
 	}
 
-	m_renderer = SDL_CreateRenderer(m_window, -1, 0);
+	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_TARGETTEXTURE);
+
 
 	m_virtual_screen = SDL_CreateRGBSurface(0, resolution_x, resolution_y, 32,
 											0x00FF0000,
@@ -94,7 +97,19 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 	m_screen = SDL_CreateTexture(m_renderer,
 								 SDL_PIXELFORMAT_ARGB8888,
 								 SDL_TEXTUREACCESS_STREAMING,
-								 resolution_x, resolution_y);
+								 Epiconfig::instance()->get_base_screen_size_x(), Epiconfig::instance()->get_base_screen_size_y());
+
+								 const int base_w = Epiconfig::instance()->get_base_screen_size_x();
+	const int base_h = Epiconfig::instance()->get_base_screen_size_y();
+
+	int scale = std::ceil(std::max((float)1, std::min((float)(resolution_x) / base_w,
+									(float)(resolution_y) / base_h)));
+	
+	Uint32 intermediate_w = base_w * scale;
+	Uint32 intermediate_h = base_h * scale;
+	m_scaling_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
+								 SDL_TEXTUREACCESS_TARGET, intermediate_w,intermediate_h);
+	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeNearest);
 }
 
 void Screen::reset_virtual_screen_size()
@@ -230,12 +245,50 @@ void Screen::clear(Uint32 x, Uint32 y, Uint32 w, Uint32 h)
 
 void Screen::flip_display()
 {
+	int window_w, window_h;
+
+	SDL_GetRendererOutputSize(m_renderer, &window_w, &window_h);
+
+	const int base_w = Epiconfig::instance()->get_base_screen_size_x();
+	const int base_h = Epiconfig::instance()->get_base_screen_size_y();
+
+	int scale = std::ceil(std::max((float)1, std::min((float)(window_w) / base_w,
+									(float)(window_h) / base_h)));
+	//DEBWARN("Window: ("<<window_w<<","<<window_h<<") "<<"Scale "<<scale<<"\n");
+
+	Uint32 intermediate_w = base_w * scale;
+	Uint32 intermediate_h = base_h * scale;
+	
+	SDL_Rect intermediate_dest_rect;
+	intermediate_dest_rect.w = intermediate_w;
+	intermediate_dest_rect.h = intermediate_h;
+	intermediate_dest_rect.x = 0;
+	intermediate_dest_rect.y = 0;
+	
 	SDL_LockSurface(m_virtual_screen);
 	SDL_UpdateTexture(m_screen, NULL, m_virtual_screen->pixels, m_virtual_screen->pitch);
-	SDL_RenderClear(m_renderer);
-	SDL_RenderCopy(m_renderer, m_screen, NULL, NULL);
-	SDL_RenderPresent(m_renderer);
 	SDL_UnlockSurface(m_virtual_screen);
+
+	SDL_SetRenderTarget(m_renderer, m_scaling_texture);
+	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeNearest);
+	SDL_RenderClear(m_renderer);
+	
+	SDL_RenderCopy(m_renderer, m_screen, NULL, &intermediate_dest_rect);
+
+	SDL_SetRenderTarget(m_renderer, nullptr);
+
+	float downscale_x = (float)window_w / intermediate_w;
+	float downscale_y = (float)window_h / intermediate_h;
+	SDL_Rect dst;
+	dst.w = (int)(intermediate_w * std::min(downscale_x, downscale_y));
+	dst.h = (int)(intermediate_h * std::min(downscale_x, downscale_y));
+	dst.x = (window_w - dst.w) / 2;
+	dst.y = (window_h - dst.h) / 2;
+	//DEBWARN("dst.w: "<<dst.w<<" .h: "<<dst.h<<"\n");
+	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeLinear);
+	SDL_RenderCopy(m_renderer, m_scaling_texture, nullptr, &dst);
+	SDL_RenderPresent(m_renderer);
+	
 }
 
 
