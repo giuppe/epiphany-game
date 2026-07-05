@@ -86,27 +86,47 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 		exit(1);
 	}
 
-	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_TARGETTEXTURE);
+	update_window_size(resolution_x, resolution_y);
 
-
-	m_virtual_screen = SDL_CreateRGBSurface(0, resolution_x, resolution_y, 32,
+	m_virtual_screen = SDL_CreateRGBSurface(0, 
+		Epiconfig::instance()->get_base_screen_size_x(), 
+		Epiconfig::instance()->get_base_screen_size_y(), 
+		32,
 											0x00FF0000,
 											0x0000FF00,
 											0x000000FF,
-											0xFF000000);
-	m_screen = SDL_CreateTexture(m_renderer,
-								 SDL_PIXELFORMAT_ARGB8888,
-								 SDL_TEXTUREACCESS_STREAMING,
-								 Epiconfig::instance()->get_base_screen_size_x(), Epiconfig::instance()->get_base_screen_size_y());
+		0xFF000000
+	);
+	
+}
+
+void Screen::update_window_size(Uint32 size_x, Uint32 size_y)
+{
+	if(m_renderer)
+		SDL_DestroyRenderer(m_renderer);
+	if(m_screen)
+		SDL_DestroyTexture(m_screen);
+	if(m_scaling_texture)
+		SDL_DestroyTexture(m_scaling_texture);
+                
+    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_TARGETTEXTURE);
 
 								 const int base_w = Epiconfig::instance()->get_base_screen_size_x();
 	const int base_h = Epiconfig::instance()->get_base_screen_size_y();
 
-	int scale = std::ceil(std::max((float)1, std::min((float)(resolution_x) / base_w,
-									(float)(resolution_y) / base_h)));
+	
+	m_screen = SDL_CreateTexture(m_renderer,
+		SDL_PIXELFORMAT_ARGB8888,
+		SDL_TEXTUREACCESS_STREAMING,
+		base_w, base_h);
+
+
+	int scale = std::ceil(std::max((float)1, std::min((float)(size_x) / base_w,
+									(float)(size_y) / base_h)));
 	
 	Uint32 intermediate_w = base_w * scale;
 	Uint32 intermediate_h = base_h * scale;
+	
 	m_scaling_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
 								 SDL_TEXTUREACCESS_TARGET, intermediate_w,intermediate_h);
 	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeNearest);

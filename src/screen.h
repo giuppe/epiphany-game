@@ -38,13 +38,13 @@ private:
 	
 	SDL_Window* m_window;
 
-	SDL_Renderer* m_renderer;
+	SDL_Renderer* m_renderer = NULL;
 	
-	SDL_Surface* m_virtual_screen;
+	SDL_Surface* m_virtual_screen = NULL;
 
-	SDL_Texture* m_screen;
+	SDL_Texture* m_screen = NULL;
 
-	SDL_Texture* m_scaling_texture;
+	SDL_Texture* m_scaling_texture = NULL;
 	
 	SDL_Rect m_camera;
 	

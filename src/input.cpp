@@ -18,6 +18,7 @@
 #include "dephine.h"
 #include <SDL2/SDL.h>
 #include "input.h"
+#include "screen.h"
 
 
 
@@ -35,7 +36,9 @@ Sint32 Input::event_filter(const SDL_Event *event)
 		//std::cout<<"Keyup event\n";
 		return 1;
 		break;
-
+	case SDL_WINDOWEVENT:
+		return 1;
+		break;
 
 	case SDL_QUIT:
 		m_quit=true;
@@ -174,6 +177,16 @@ void Input::update()
 
 		case SDL_QUIT:
 			m_quit=true;
+			break;
+		case SDL_WINDOWEVENT:
+			switch (event.window.event) {
+				case SDL_WINDOWEVENT_SIZE_CHANGED:
+					int new_width = event.window.data1;
+					int new_height = event.window.data2;
+					Screen::instance()->update_window_size(new_width, new_height);
+					break;
+			}
+			break;
 
 		}
 	}
