@@ -47,6 +47,8 @@ private:
 	SDL_Texture* m_scaling_texture = NULL;
 	
 	SDL_Rect m_camera;
+
+	bool m_fullscreen = false;
 	
 	friend class Font;
 	
@@ -93,12 +95,20 @@ public:
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, WorldCoord dest);
 	
 	void get_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest);
+
+	bool is_fullscreen(){return m_fullscreen;}
+
+	void set_fullscreen(bool f);
+
+	bool toggle_fullscreen();
 	
 	WorldCoord coord_to_world(ScreenCoord scr_coord);
 	
 	ScreenCoord coord_to_screen(WorldCoord wld_coord);
 	
 	void resize_world_screen(Uint32 size_x=0, Uint32 size_y=0);
+
+	void update_window_size(Uint32 size_x, Uint32 size_y);
 
 	void reset_virtual_screen_size();
 	

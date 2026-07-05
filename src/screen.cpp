@@ -59,9 +59,23 @@ SDL_Surface* Screen::convert_surface_format(SDL_Surface* surface){
 	return temp;
 }
 
+static int resizingEventWatcher(void *data, SDL_Event *event)
+{
+	if (event->type == SDL_WINDOWEVENT &&
+		event->window.event == SDL_WINDOWEVENT_RESIZED)
+	{
+		SDL_Window *win = SDL_GetWindowFromID(event->window.windowID);
+		if (win == (SDL_Window *)data)
+		{
+			Screen::instance()->update_window_size(event->window.data1, event->window.data2);
+		}
+	}
+	return 0;
+}
 
 void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x, Uint32 world_size_y)
 {
+	SDL_EventState(SDL_WINDOWEVENT, SDL_ENABLE);
 	m_camera.x=0;
 	m_camera.y=0;
 	m_camera.w=Epiconfig::instance()->get_base_screen_size_x();
@@ -85,16 +99,17 @@ void Screen::init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x,
 		printf("Unable to set %d x %d video mode: %s\n", resolution_x, resolution_y, SDL_GetError());
 		exit(1);
 	}
+	SDL_AddEventWatch(resizingEventWatcher, m_window);
 
 	update_window_size(resolution_x, resolution_y);
-
+	
 	m_virtual_screen = SDL_CreateRGBSurface(0, 
 		Epiconfig::instance()->get_base_screen_size_x(), 
 		Epiconfig::instance()->get_base_screen_size_y(), 
 		32,
-											0x00FF0000,
-											0x0000FF00,
-											0x000000FF,
+		0x00FF0000,
+		0x0000FF00,
+		0x000000FF,
 		0xFF000000
 	);
 	
@@ -111,7 +126,7 @@ void Screen::update_window_size(Uint32 size_x, Uint32 size_y)
                 
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_TARGETTEXTURE);
 
-								 const int base_w = Epiconfig::instance()->get_base_screen_size_x();
+	const int base_w = Epiconfig::instance()->get_base_screen_size_x();
 	const int base_h = Epiconfig::instance()->get_base_screen_size_y();
 
 	
@@ -130,6 +145,30 @@ void Screen::update_window_size(Uint32 size_x, Uint32 size_y)
 	m_scaling_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
 								 SDL_TEXTUREACCESS_TARGET, intermediate_w,intermediate_h);
 	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeNearest);
+	//DEBWARN("New window: ("<<size_x<<","<<size_y<<")\n");
+	//DEBWARN("Intermediate screen: ("<<intermediate_w<<","<<intermediate_h<<")\n");
+	//DEBWARN("New window: ("<<size_x<<","<<size_y<<")\n");
+}
+
+void Screen::set_fullscreen(bool f)
+{
+	if(f)
+	{
+		//SDL_SetWindowBordered(m_window, SDL_FALSE);
+		SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	}
+	else
+	{
+		//SDL_SetWindowBordered(m_window, SDL_TRUE);
+		SDL_SetWindowFullscreen(m_window, 0);
+	}
+	m_fullscreen = f;
+}
+
+bool Screen::toggle_fullscreen()
+{
+	set_fullscreen(!m_fullscreen);
+	return m_fullscreen;
 }
 
 void Screen::reset_virtual_screen_size()

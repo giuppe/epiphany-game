@@ -31,7 +31,7 @@ private:
     bool m_fire;
     bool m_pause;
     bool m_enter;
-    bool m_fullscreen;
+
 
     bool p_left;
     bool p_right;

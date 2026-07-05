@@ -19,8 +19,10 @@
 #include "menu_entry.h"
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
+#include "menu_entry_bool.h"
 #include "sfx.h"
 #include "music_manager.h"
+#include "screen.h"
 #include <vector>
 #include <cassert>
 
@@ -38,6 +40,7 @@ Menu_List_Options::Menu_List_Options()
 	//TODO insert music volume control
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", Music_Manager::instance()->get_volume()));
 	
+	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen", Screen::instance()->is_fullscreen()));
 	m_entries_list.push_back(new Menu_Entry_Simple("Back"));
 	
 }
@@ -62,11 +65,13 @@ void Menu_List_Options::action_press()
 	
 	switch(m_selected)
 	{
-		case 2:
+		case 3:
 			m_return_action = MENU_OK;
 			Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
 			Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
 			break;
+		case 2:
+			Screen::instance()->toggle_fullscreen();
 		default:
 			m_return_action = MENU_NONE;
 	}

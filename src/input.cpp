@@ -98,7 +98,7 @@ void Input::reset_states()
 
 void Input::init()
 {
-	m_fullscreen = false;
+
 	m_pause = false;
 	reset_states();
 	SDL_SetEventFilter(sdl_event_filter, NULL);
@@ -134,6 +134,7 @@ void Input::update()
 
 	while(SDL_PollEvent(&event))
 	{
+		//DEBWARN(event.type<<":"<<event.key.keysym.scancode<<"\n");
 		switch( event.type )
 		{
 		case SDL_KEYDOWN:
@@ -149,13 +150,13 @@ void Input::update()
 			if (event.key.keysym.sym==SDLK_ESCAPE) { p_die=true; r_die=false; }
 			if (event.key.keysym.sym==SDLK_LALT) { p_alt=true; r_alt=false; }
 			if (event.key.keysym.sym==SDLK_RALT) { p_alt=true; r_alt=false; }
-			if (event.key.keysym.sym==SDLK_RETURN) { p_enter=true; r_enter=false; }
+			if (event.key.keysym.sym==SDLK_RETURN && !m_alt) { p_enter=true; r_enter=false; }
 			if (event.key.keysym.sym==SDLK_p) m_pause=!m_pause;
 			if (event.key.keysym.sym==SDLK_x && m_alt) m_quit=true;
 			if ((event.key.keysym.sym==SDLK_q) && m_alt) m_quit=true;
 			if (event.key.keysym.sym==SDLK_ESCAPE) m_quit=true;
 			if ((event.key.keysym.sym==SDLK_F4) && m_alt) m_quit=true;
-			if ((event.key.keysym.sym==SDLK_RETURN) && m_alt) m_fullscreen=!m_fullscreen;        
+			if ((event.key.keysym.sym==SDLK_RETURN) && m_alt) Screen::instance()->set_fullscreen(!Screen::instance()->is_fullscreen());        
 			break;
 
 		case SDL_KEYUP:
@@ -178,16 +179,8 @@ void Input::update()
 		case SDL_QUIT:
 			m_quit=true;
 			break;
-		case SDL_WINDOWEVENT:
-			switch (event.window.event) {
-				case SDL_WINDOWEVENT_SIZE_CHANGED:
-					int new_width = event.window.data1;
-					int new_height = event.window.data2;
-					Screen::instance()->update_window_size(new_width, new_height);
-					break;
-			}
-			break;
-
+		
+    
 		}
 	}
 
@@ -201,12 +194,12 @@ void Input::update()
 	m_die&=!r_die;
 	m_quit&=!r_quit;
 	m_alt&=!r_alt;
-
+	//DEBWARN("p_down: "<<p_down<<", p_left: "<<p_left<<"\n");
 	// If key was pressed, set state apropriately.
 	// left, right, up, down: the winner is the last key pressed
 	// I don't expect anyone to press more than one key per turn ;)
 	// Update 2026: I *do* now expect more than one key per turn, live and learn :D
-	
+
 	bool selected = false;
 	if (p_left)
 	{
@@ -240,7 +233,7 @@ void Input::update()
 		m_down=true;
 		selected = true;
 	}
-	DEBWARN("m_down: "<<m_down<<", m_left: "<<m_left<<"\n");
+	//DEBWARN("m_down: "<<m_down<<", m_left: "<<m_left<<"\n");
 	m_fire|=p_fire;
 	m_enter|=p_enter;
 	m_die|=p_die;
