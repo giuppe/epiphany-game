@@ -40,7 +40,7 @@ Menu_List_Options::Menu_List_Options()
 	//TODO insert music volume control
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", Music_Manager::instance()->get_volume()));
 	
-	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen", Screen::instance()->is_fullscreen()));
+	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", Screen::instance()->is_fullscreen()));
 	m_entries_list.push_back(new Menu_Entry_Simple("Back"));
 	
 }
@@ -72,6 +72,8 @@ void Menu_List_Options::action_press()
 			break;
 		case 2:
 			Screen::instance()->toggle_fullscreen();
+			Epiconfig::instance()->set_fullscreen(Screen::instance()->is_fullscreen());
+			break;
 		default:
 			m_return_action = MENU_NONE;
 	}

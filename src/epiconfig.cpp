@@ -27,6 +27,8 @@ void Epiconfig::set_default_values()
 	m_screen_size_y=360;
 	m_score_size_y=32;
 
+	m_fullscreen = false;
+
 	m_base_screen_size = {640,360};
 
 	//size in cells
@@ -230,6 +232,13 @@ void Epiconfig::read_values_from_file(char* filename)
 			DEBWARN("Setting music volume to: "<<m_volume_music<<"\n");
 		}
 
+		TiXmlText* fullscreen = docHandle.FirstChild("config").FirstChild("fullscreen").FirstChild().Text();
+		if(fullscreen)
+		{
+			m_fullscreen = atoi(fullscreen->Value()) != 0;
+			DEBWARN("Setting fullscreen to: "<<m_fullscreen<<"\n");
+		}
+
 		
 	}
 	else
@@ -277,6 +286,9 @@ void Epiconfig::save_values_to_file(char* filename)
 	
 	TiXmlElement * e_music_volume = new TiXmlElement( "music_volume" );
 	e_config->LinkEndChild( e_music_volume );
+
+	TiXmlElement * e_fullscreen = new TiXmlElement( "fullscreen" );
+	e_config->LinkEndChild( e_fullscreen );
 	
 	char* text_screen_size_x = new char[10];
 	
@@ -298,6 +310,10 @@ void Epiconfig::save_values_to_file(char* filename)
 	char* text_music_volume = new char[10];
 	
 	sprintf(text_music_volume, "%d", m_volume_music);
+
+	char* text_fullscreen = new char[1];
+	
+	sprintf(text_fullscreen, "%d", m_fullscreen?1:0);
 	
 	TiXmlText * screen_x = new TiXmlText( text_screen_size_x );
 	e_screen_x->LinkEndChild( screen_x );
@@ -311,6 +327,8 @@ void Epiconfig::save_values_to_file(char* filename)
 	e_sound_volume->LinkEndChild( new TiXmlText( text_sound_volume ) );
 	
 	e_music_volume->LinkEndChild( new TiXmlText( text_music_volume ) );
+
+	e_fullscreen->LinkEndChild( new TiXmlText(text_fullscreen));
 	
 	doc.SaveFile( filename );
 	

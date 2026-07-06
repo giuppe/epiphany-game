@@ -602,6 +602,8 @@ void Game::init()
 	DEBOUT("Initing Screen...\n");
 	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x()*k_sprite_size, m_config->get_map_size_y()*k_sprite_size);
 	
+	Screen::instance()->set_fullscreen(m_config->get_fullscreen());
+	
 	DEBOUT("Initing Surface Manager...\n");
 	Surface_Manager::instance();
 	

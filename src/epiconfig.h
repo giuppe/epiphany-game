@@ -50,6 +50,8 @@ private:
 	
 	Uint32 m_last_level;
 
+	bool m_fullscreen;
+
 public:
 
 	void set_default_values();
@@ -57,6 +59,8 @@ public:
 	Uint32 get_screen_size_x();
 
 	Uint32 get_screen_size_y();
+
+	bool get_fullscreen(){return m_fullscreen;};
 
 	Uint32 get_score_size_y();
 
@@ -89,6 +93,8 @@ public:
 	void set_volume_sound(Uint32 volume);
 	
 	void set_volume_music(Uint32 volume);
+
+	void set_fullscreen(bool fullscreen){m_fullscreen = fullscreen;}
 	
 	void read_values_from_file(char* filename);
 	
