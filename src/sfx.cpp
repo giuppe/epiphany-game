@@ -18,6 +18,7 @@
 #include "sfx.h"
 #include "sample.h"
 #include <vector>
+#include <math.h>
 
 #include "SDL2/SDL_mixer.h"
 

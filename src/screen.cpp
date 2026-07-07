@@ -16,6 +16,7 @@
 #include "dephine.h"
 #include <SDL2/SDL.h>
 #include <cassert>
+#include <math.h>
 #include "screen.h"
 #include "sprite.h"
 #include "entity.h"

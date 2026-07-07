@@ -16,6 +16,7 @@
 
 #include "dephine.h"
 #include <SDL2/SDL_mixer.h>
+#include <math.h>
 #include "music_manager.h"
 #include "resource_factory.h"
 #include "sfx.h"
