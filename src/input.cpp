@@ -102,6 +102,7 @@ void Input::init()
 	m_pause = false;
 	reset_states();
 	SDL_SetEventFilter(sdl_event_filter, NULL);
+
 }
 
 
@@ -120,6 +121,23 @@ void Input::update()
 	m_quit&=!r_quit;
 	m_alt&=!r_alt;
 
+	if(r_left){
+		t_left = 0;
+		DEBOUT("t_left: 0\n");
+	}
+	if(r_right){
+		t_right = 0;
+		DEBOUT("t_right: 0\n");
+	}
+	if(r_up){
+		t_up = 0;
+		DEBOUT("t_up: 0\n");
+	}
+	if(r_down){
+		t_down = 0;
+		DEBOUT("t_down: 0\n");
+	}
+
 	// Forget the saved release states
 	r_quit= false;
 	r_die = false;
@@ -134,7 +152,7 @@ void Input::update()
 
 	while(SDL_PollEvent(&event))
 	{
-		//DEBWARN(event.type<<":"<<event.key.keysym.scancode<<"\n");
+		DEBWARN((event.type==SDL_KEYDOWN?"keydown":"keyup")<<":"<<event.key.keysym.scancode<<"\n");
 		switch( event.type )
 		{
 		case SDL_KEYDOWN:
@@ -185,10 +203,10 @@ void Input::update()
 	}
 
 	// If key was released this turn, unset key state
-	m_left&=!r_left;
-	m_right&=!r_right;
-	m_up&=!r_up;
-	m_down&=!r_down;
+	//m_left&=!r_left;
+	//m_right&=!r_right;
+	//m_up&=!r_up;
+	//m_down&=!r_down;
 	m_fire&=!r_fire;
 	m_enter&=!r_enter;
 	m_die&=!r_die;
@@ -199,40 +217,90 @@ void Input::update()
 	// left, right, up, down: the winner is the last key pressed
 	// I don't expect anyone to press more than one key per turn ;)
 	// Update 2026: I *do* now expect more than one key per turn, live and learn :D
+	
+	if(r_left && !p_left){
+		t_left = 0;
+		DEBOUT("t_left: 0\n");
+	}
+	if(r_right && !p_right){
+		t_right = 0;
+		DEBOUT("t_right: 0\n");
+	}
+	if(r_up && !p_up){
+		t_up = 0;
+		DEBOUT("t_up: 0\n");
+	}
+	if(r_down && !p_down){
+		t_down = 0;
+		DEBOUT("t_down: 0\n");
+	}
 
-	bool selected = false;
-	if (p_left)
+	Uint64 time = SDL_GetTicks64();
+
+	if (p_left && t_left == 0)
 	{
-		m_left=true;
-		m_right=false;
-		m_up=false;
-		m_down=false;
-		selected = true;
+		t_left = time;
+		DEBOUT("setting t_left.\n");
 	}
-	if (p_right && !(p_last_right && selected))
+	if (p_right && t_right == 0)
 	{
-		m_left=false;
-		m_right=true;
-		m_up=false;
-		m_down=false;
-		selected = true;
+		t_right = time;
+		DEBOUT("setting t_right.\n");
 	}
-	if (p_up && !(p_last_up && selected))
+	if (p_up && t_up == 0)
 	{
-		m_left=false;
-		m_right=false;
-		m_up=true;
-		m_down=false;
-		selected = true;
+		t_up = time;
+		DEBOUT("setting t_up.\n");
 	}
-	if (p_down && !(p_last_down && selected))
+	if (p_down && t_down == 0)
 	{
-		m_left=false;
-		m_right=false;
-		m_up=false;
-		m_down=true;
-		selected = true;
+		t_down = time;
+		DEBOUT("setting t_down.\n");
 	}
+
+	if(t_down != 0 || t_up != 0 || t_left != 0 || t_right != 0)
+	{
+		
+
+
+		if (t_left > 0 && t_left>=t_right && t_left >= t_down && t_left >= t_up)
+		{
+			m_left=true;
+			m_right=false;
+			m_up=false;
+			m_down=false;
+			DEBOUT("t_left: wins\n");
+		}
+		if (t_right > 0 && t_right>=t_left && t_right >= t_down && t_right >= t_up)
+		{
+			m_left=false;
+			m_right=true;
+			m_up=false;
+			m_down=false;
+			DEBOUT("t_right: wins\n");
+		}
+		if (t_up > 0 && t_up>=t_right && t_up >= t_down && t_up >= t_left)
+		{
+			m_left=false;
+			m_right=false;
+			m_up=true;
+			m_down=false;
+			DEBOUT("t_up: wins\n");
+		}
+		if (t_down > 0 && t_down>=t_right && t_down >= t_left && t_down >= t_up)
+		{
+			m_left=false;
+			m_right=false;
+			m_up=false;
+			m_down=true;
+			DEBOUT("t_down: wins\n");
+		}
+		if(!m_down &&!m_up && !m_left && !m_right)
+		{
+			DEBOUT("Nobody wins\n");
+		}
+	}
+
 	//DEBWARN("m_down: "<<m_down<<", m_left: "<<m_left<<"\n");
 	m_fire|=p_fire;
 	m_enter|=p_enter;
@@ -241,10 +309,6 @@ void Input::update()
 	m_alt|=p_alt;
 
 	// Forget all key press events
-	p_last_down = p_down;
-	p_last_up = p_up;
-	p_last_right = p_right;
-	p_last_left = p_left;
 	p_quit= false;
 	p_die = false;
 	p_left = false;
@@ -256,6 +320,8 @@ void Input::update()
 	p_fire = false;
 	p_enter = false;
 }
+
+
 
 
 // begin Singleton stuff

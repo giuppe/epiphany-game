@@ -17,6 +17,9 @@
 #ifndef INPUT_H_
 #define INPUT_H_
 #include <SDL2/SDL.h>
+
+
+
 class Input
 {
 private:
@@ -45,10 +48,6 @@ private:
     bool p_enter;
     bool p_fullscreen;
 
-    bool p_last_left;
-    bool p_last_right;
-    bool p_last_up;
-    bool p_last_down;
 
     bool r_left;
     bool r_right;
@@ -61,6 +60,11 @@ private:
     bool r_pause;
     bool r_enter;
     bool r_fullscreen;
+
+    Uint64 t_left = 0;
+    Uint64 t_right = 0;
+    Uint64 t_up = 0;
+    Uint64 t_down = 0;
 
 
 public:
