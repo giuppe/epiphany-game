@@ -14,17 +14,19 @@ avoiding being hit by a falling boulder, or (worst :) by a bomb.
 
 Current version: 0.9.0
 
-It is a alpha version, but it is playable.
-It uses SDL 2.x and SDL_mixer 2.x (http://www.libsdl.org), so make sure it is properly installed
-before compiling Epiphany.
+*This is a beta version. Most of it works, but it's not yet a completed game.*
+
+[Download from GitHub](https://github.com/giuppe/epiphany-game/releases)
+
+It uses SDL 2.x and SDL_mixer 2.x (http://www.libsdl.org), so make sure it is properly installed before compiling Epiphany.
 
 Read "Tech" file for informations about how to write new maps.
 
 If you want to play contributed maps, just launch epiphany with the new map in the command line, e.g.:
-epiphany --map ./mylevel.map
+`epiphany --map ./mylevel.map`
 
 Use:
-epiphany --help
+`epiphany --help`
 for other usage information.
 
 In-Game Keys:

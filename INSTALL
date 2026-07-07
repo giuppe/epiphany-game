@@ -1,6 +1,6 @@
 Epiphany 0.9 Install:
 
-*This is an alpha version. Use at your own risk ;)*
+*This is a beta version. Most of it works, but it's not yet completed ;)*
 
 To compile and install, simply run 
 ./autogen.sh
