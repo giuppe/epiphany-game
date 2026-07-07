@@ -704,11 +704,12 @@ void Game::show_credits()
 	credits.push_back(" ");
 	credits.push_back("Giuseppe Martino:");
 	credits.push_back("    Coding, Level Design");
-	//credits.push_back("Antonio Malara: Graphics");
+	credits.push_back(" ");
+	credits.push_back("Antonio Malara: Graphics");
 	credits.push_back(" ");
 	credits.push_back("Thanks to:");
-	credits.push_back("  Joerg Jaspert, for Debian Packages");
-	credits.push_back("  Eric Mangold, for Level Editor");
+	credits.push_back("  Joerg Jaspert & Ricardo Mones, for Debian Packages");
+	credits.push_back("  Eric Mangold, for the Level Editor");
 	credits.push_back("  Stefan for gameplay related patches");
 	credits.push_back(" ");
 	credits.push_back("Released under General Public License v2");
