@@ -51,7 +51,7 @@ COMPILER_FLAGS = -O2  -w -Wl,-subsystem,windows -I.. -I./src -Dmain=SDL_main
 LINKER_FLAGS =  -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -mwindows
 
 #OBJ_NAME specifies the name of our executable
-OBJ_NAME = epiphany-game.exe
+OBJ_NAME = epiphany-game-win64.exe
 
 #This is the target that compiles our executable
 all : $(OBJS)

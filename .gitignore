@@ -36,3 +36,5 @@ config.log
 *~
 epiphany-game*
 build/
+build-win32/
+build-win64/
