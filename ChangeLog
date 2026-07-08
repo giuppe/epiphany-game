@@ -1,30 +1,35 @@
 Version 0.9.0:
-upgrade SDL to 2.x
-Fixed: font rendering in menu and game HUD printing only the first letter of strings
+- upgrade SDL to 2.x
+- Fixed: font rendering in menu and game HUD printing only the first letter of strings
+- Freely resize the window screen
+- Fullscreen option in the menu
+- Fixed credit page font positioning & letter spacing
+- Fixed unresponsive input when rapidly changing direction
+- Better volume scaling 
 
 Version 0.8.0:
-code refactoring (sprite-related)
-code refactoring (introduced FSM in entities)
-Fixed: will not crash if sound system is absent
+- code refactoring (sprite-related)
+- code refactoring (introduced FSM in entities)
+- Fixed: will not crash if sound system is absent
 
 Version 0.7.1:
-Renamed binary to "epiphany-game"
+- Renamed binary to "epiphany-game"
 
 Version 0.7.0:
-Added frame skipping (command line: --frame-skip <int>)
-Added loading of external levels (command line: --map <path>)
-Frame limiter could be disabled (command line: --disable-frame-limiter)
-Added XML configuration file
-Added options menu;
-Added sound and music volume change;
-Added Music;
-Changed menu screen;
-Edited samples to match with music tune;
-Fixed several memory leaks.
+- Added frame skipping (command line: --frame-skip <int>)
+- Added loading of external levels (command line: --map <path>)
+- Frame limiter could be disabled (command line: --disable-frame-limiter)
+- Added XML configuration file
+- Added options menu;
+- Added sound and music volume change;
+- Added Music;
+- Changed menu screen;
+- Edited samples to match with music tune;
+- Fixed several memory leaks.
 
 Version 0.6.1:
-Fixed bug that prevented saving game progresses;
-Small fixes in autotools configuration, now "make distcheck" works. 
+- Fixed bug that prevented saving game progresses;
+- Small fixes in autotools configuration, now "make distcheck" works. 
 
 Version 0.6.0:
 Fixed "random exploding flintstone/monster" bug;
