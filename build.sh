@@ -1,3 +1,3 @@
 mkdir -p build && cd build
-../configure --enable-debug
+../configure 
 make
