@@ -152,7 +152,7 @@ void Input::update()
 
 	while(SDL_PollEvent(&event))
 	{
-		DEBWARN((event.type==SDL_KEYDOWN?"keydown":"keyup")<<":"<<event.key.keysym.scancode<<"\n");
+		DEBOUT((event.type==SDL_KEYDOWN?"keydown":"keyup")<<":"<<event.key.keysym.scancode<<"\n");
 		switch( event.type )
 		{
 		case SDL_KEYDOWN:
