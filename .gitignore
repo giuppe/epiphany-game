@@ -28,6 +28,10 @@ src/epiphany
 **/Makefile.in
 src/Makefile
 src/.deps
+src/entities/.deps
+src/fonts/.deps
+src/tinyxml/.deps
+.dirstamp
 src/epiphany-game
 **/*.o
 /Default/
@@ -38,3 +42,5 @@ epiphany-game*
 build/
 build-win32/
 build-win64/
+AppDir/
+*.AppImage
