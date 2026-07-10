@@ -155,15 +155,23 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		break;
 	case Surface_Manager::SRF_KEY_RED_THUMB:
 		surface_path+=  "key_red_thumb.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_KEY_BLUE_THUMB:
 		surface_path+=  "key_blue_thumb.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_KEY_GREEN_THUMB:
 		surface_path+=  "key_green_thumb.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_KEY_YELLOW_THUMB:
 		surface_path+=  "key_yellow_thumb.bmp";
+		frame_size_x=0;
+		frame_size_y=0;
 		break;
 	case Surface_Manager::SRF_MENU_BACK_TILE:
 		surface_path+=  "menu_back_tile.bmp";
