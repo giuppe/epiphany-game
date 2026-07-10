@@ -40,19 +40,27 @@ void Resource_Factory::init()
  	 if (pFile==NULL)
   	{
    		DEBWARN("Warning: "<<res_path_string<<" not found.\n");
-		res_path_string="./data";
+		char* appdir_path = std::getenv("APPDIR");
+		std::string appdir_path_string = appdir_path;
+		res_path_string=appdir_path_string+res_path_string;
 		pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
- 	 	if (pFile==NULL)
-  		{
-   			DEBWARN("Warning: "<<res_path_string<<" not found.\n");
-			res_path_string="../data";
+		 if (pFile==NULL)
+		{
+			DEBWARN("Warning: (AppImage Path) "<<res_path_string<<" not found.\n");
+			res_path_string="./data";
 			pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
- 	 		if (pFile==NULL)
-  			{
-   				DEBWARN("Warning: "<<res_path_string<<" not found.\n");
-				assert(!"Error: epiphany.scr not found.\n");
-  			}
-  		}
+			if (pFile==NULL)
+			{
+				DEBWARN("Warning: "<<res_path_string<<" not found.\n");
+				res_path_string="../data";
+				pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
+				if (pFile==NULL)
+				{
+					DEBWARN("Warning: "<<res_path_string<<" not found.\n");
+					assert(!"Error: epiphany.scr not found.\n");
+				}
+			}
+		}
   	}
   	
   	if(pFile!=NULL)
