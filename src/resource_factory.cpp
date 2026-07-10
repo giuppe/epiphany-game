@@ -37,11 +37,11 @@ void Resource_Factory::init()
 	
 	
   	pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
- 	 if (pFile==NULL)
+ 	if (pFile==NULL)
   	{
    		DEBWARN("Warning: "<<res_path_string<<" not found.\n");
 		char* appdir_path = std::getenv("APPDIR");
-		std::string appdir_path_string = appdir_path;
+		std::string appdir_path_string= appdir_path!=NULL?appdir_path:"";
 		res_path_string=appdir_path_string+res_path_string;
 		pFile = fopen ((res_path_string+"/epiphany.scr").c_str(),"r");
 		 if (pFile==NULL)
