@@ -120,22 +120,22 @@ void Input::update()
 	m_die&=!r_die;
 	m_quit&=!r_quit;
 	m_alt&=!r_alt;
-
+	//DEBOUT("Input update start.\n");
 	if(r_left){
 		t_left = 0;
-		DEBOUT("t_left: 0\n");
+		//DEBOUT("t_left released last: 0\n");
 	}
 	if(r_right){
 		t_right = 0;
-		DEBOUT("t_right: 0\n");
+		//DEBOUT("t_right released last: 0\n");
 	}
 	if(r_up){
 		t_up = 0;
-		DEBOUT("t_up: 0\n");
+		//DEBOUT("t_up released last: 0\n");
 	}
 	if(r_down){
 		t_down = 0;
-		DEBOUT("t_down: 0\n");
+		//DEBOUT("t_down released last: 0\n");
 	}
 
 	// Forget the saved release states
@@ -152,7 +152,7 @@ void Input::update()
 
 	while(SDL_PollEvent(&event))
 	{
-		DEBOUT((event.type==SDL_KEYDOWN?"keydown":"keyup")<<":"<<event.key.keysym.scancode<<"\n");
+		//DEBOUT((event.type==SDL_KEYDOWN?"keydown":"keyup")<<":"<<event.key.keysym.scancode<<"\n");
 		switch( event.type )
 		{
 		case SDL_KEYDOWN:
@@ -220,19 +220,23 @@ void Input::update()
 	
 	if(r_left && !p_left){
 		t_left = 0;
-		DEBOUT("t_left: 0\n");
+		m_left = false;
+		//DEBOUT("t_left: 0\n");
 	}
 	if(r_right && !p_right){
 		t_right = 0;
-		DEBOUT("t_right: 0\n");
+		m_right = false;
+		//DEBOUT("t_right: 0\n");
 	}
 	if(r_up && !p_up){
 		t_up = 0;
-		DEBOUT("t_up: 0\n");
+		m_up = false;
+		//DEBOUT("t_up: 0\n");
 	}
 	if(r_down && !p_down){
 		t_down = 0;
-		DEBOUT("t_down: 0\n");
+		m_down = false;
+		//DEBOUT("t_down: 0\n");
 	}
 
 	Uint64 time = SDL_GetTicks64();
@@ -240,22 +244,22 @@ void Input::update()
 	if (p_left && t_left == 0)
 	{
 		t_left = time;
-		DEBOUT("setting t_left.\n");
+		//DEBOUT("setting t_left.\n");
 	}
 	if (p_right && t_right == 0)
 	{
 		t_right = time;
-		DEBOUT("setting t_right.\n");
+		//DEBOUT("setting t_right.\n");
 	}
 	if (p_up && t_up == 0)
 	{
 		t_up = time;
-		DEBOUT("setting t_up.\n");
+		//DEBOUT("setting t_up.\n");
 	}
 	if (p_down && t_down == 0)
 	{
 		t_down = time;
-		DEBOUT("setting t_down.\n");
+		//DEBOUT("setting t_down.\n");
 	}
 
 	if(t_down != 0 || t_up != 0 || t_left != 0 || t_right != 0)
