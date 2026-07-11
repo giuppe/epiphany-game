@@ -1,3 +1,8 @@
+Version 0.9.1:
+- fixed crash on level 8 when picking up the blue key
+- fixed keys thumbnails not showing up in the info bar
+- fixed double key event launching on short keypresses
+
 Version 0.9.0:
 - upgrade SDL to 2.x
 - Fixed: font rendering in menu and game HUD printing only the first letter of strings
