@@ -1,3 +1,6 @@
+Version 0.9.2:
+- fixed music and sound volume wrongly saved and reloaded
+
 Version 0.9.1:
 - fixed crash on level 8 when picking up the blue key
 - fixed keys thumbnails not showing up in the info bar

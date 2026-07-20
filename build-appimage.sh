@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION=0.9.1
+VERSION=0.9.2
 make distclean
 ./configure --prefix=/usr
 make DESTDIR=$PWD/AppDir install

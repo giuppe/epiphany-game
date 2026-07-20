@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION=0.9.1
+VERSION=0.9.2
 mkdir -p build-win32
 make -f Makefile.cross.win32
 mv epiphany-game-win32.exe build-win32

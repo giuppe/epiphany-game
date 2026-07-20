@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION=0.9.1
+VERSION=0.9.2
 mkdir -p build-win64
 make -f Makefile.cross.win64
 mv epiphany-game-win64.exe build-win64
