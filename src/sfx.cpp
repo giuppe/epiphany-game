@@ -224,7 +224,7 @@ Uint32 Sample_Manager::get_volume()
 			DEBOUT("Sound system disabled, returning null volume\n");
 			return 0;
 		}
-	return (Uint32)(sqrt(Mix_Volume(-1, -1))/2);
+	return (Uint32)(sqrt(Mix_Volume(-1, -1)/2));
 }
 
 

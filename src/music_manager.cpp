@@ -80,7 +80,8 @@ void Music_Manager::deinit()
 	Mix_FreeMusic(m_musics[MUS_CREDITS]);
 	Mix_FreeMusic(m_musics[MUS_GAME]);
 	Mix_FreeMusic(m_musics[MUS_READY]);
-	Epiconfig::instance()->set_volume_music(this->get_volume());
+	int currentVolume = this->get_volume();
+	Epiconfig::instance()->set_volume_music(currentVolume);
 }
 
 Mix_Music* Music_Manager::get_music(Music_Type music)
@@ -141,11 +142,12 @@ void Music_Manager::set_volume(Uint32 value)
 Uint32 Music_Manager::get_volume()
 {
 	if(m_disabled==true)
-		{
-			DEBOUT("Sound system disabled, volume is always zero\n");
-			return 0;
-		}
-	return (Uint32)(sqrt(Mix_VolumeMusic(-1))/2);
+	{
+		DEBOUT("Sound system disabled, volume is always zero\n");
+		return 0;
+	}
+	int current_volume = Mix_VolumeMusic(-1);
+	return (Uint32)(sqrt(current_volume/2));
 }
 
 
