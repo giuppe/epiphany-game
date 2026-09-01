@@ -21,6 +21,7 @@
 #include "dephine.h"
 #include "surface.h"
 #include "world_coord.h"
+#include "screen_coord.h"
 
 
 
@@ -57,7 +58,9 @@ private:
 
 	Anim_State m_state;	
 	
-	Uint32 m_total_frames; 
+	Uint32 m_total_frames;
+
+	ScreenCoord m_offset;
 	
 	void put_screen(ScreenCoord scr_coord, Uint32 frame_num);
 	
@@ -73,7 +76,6 @@ private:
 	void set_pos_x(Uint32 x);
 	
 	void set_pos_y(Uint32 y);
-	
 	
 	void move_to_pos_x(Uint32 x);
 	
@@ -110,7 +112,9 @@ public:
 	
 	void set_position_on_screen(ScreenCoord scr_coord);
 	
-
+	void set_offset_x(Sint32 x);
+	
+	void set_offset_y(Sint32 y);
 	
 	Uint32 get_frame_number() const;
 	

@@ -54,6 +54,9 @@ void Sprite::init(Surface* surf)
 	m_initialized=true;
 	
 	m_total_frames = 8;
+
+	m_offset.x = 0.0;
+	m_offset.y = 0.0;
 	
 	this->set_is_changed();
 	
@@ -83,7 +86,10 @@ void Sprite::put_screen(ScreenCoord scr_coord, Uint32 frame_num)
 
 void Sprite::put_screen(ScreenCoord scr_coord)
 {
-	m_surface->put_screen(scr_coord, m_curr_frame+m_state);
+	ScreenCoord final_coord;
+	final_coord.x = scr_coord.x + m_offset.x;
+	final_coord.y = scr_coord.y + m_offset.y;
+	m_surface->put_screen(final_coord, m_curr_frame+m_state);
 }
 
 
@@ -106,6 +112,17 @@ void Sprite::set_pos_y(Uint32 pos_y)
 }
 
 
+void Sprite::set_offset_x(Sint32 x)
+{
+	m_offset.x=x;
+	set_is_changed();
+}
+
+void Sprite::set_offset_y(Sint32 y)
+{
+	m_offset.y=y;
+	set_is_changed();
+}
 
 
 void Sprite::set_curr_frame(Uint32 frame)

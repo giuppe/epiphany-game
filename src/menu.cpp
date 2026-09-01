@@ -22,6 +22,7 @@
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
 #include <SDL2/SDL.h>
+#include <cmath>
 #include <string>
 #include "input.h"
 #include "screen.h"
@@ -234,6 +235,8 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 	input->reset_states();
 
 	input->update();
+
+	Uint32 menu_offset_x = 10;
 	
 	while(menu_list->get_return_action() == Menu_List::MENU_NONE)
 	{
@@ -249,7 +252,7 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 				
 		for(Uint32 i=0; i<menu_list->get_list_size(); i++)
 		{
-			menu_font->write(menu_left_point-50, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i).c_str());
+			menu_font->write(menu_left_point-50+menu_offset_x*i, menu_top_point+menu_vertical_distance*i, menu_list->get_menu_entry_string(i).c_str());
 		}	
 		
 	
@@ -295,14 +298,29 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 		
 		
 		//m_selector.update_frame();
-		
-		//animated menu selector drawing
+		static Sint32 selector_y_current = 4+menu_top_point;
+		static Sint32 selector_y_target = 4+menu_top_point;
+
+		float phase = static_cast<float>(current_time) * 0.006f; // frequency
+    	int x_offset = static_cast<int>(4.0f * sin(phase)); // max pixels of offset
+    
+    	m_selector.set_offset_x(x_offset);
 		
 		ScreenCoord scr_coord;
 		
-		scr_coord.x = menu_left_point-90;
+		scr_coord.x = menu_left_point-90 + menu_list->get_selected()*menu_offset_x;
 		
-		scr_coord.y = menu_top_point+menu_list->get_selected()*menu_vertical_distance;
+		selector_y_target = 4+menu_top_point+menu_list->get_selected()*menu_vertical_distance;
+		
+		if(abs(selector_y_current - selector_y_target) > 4 )
+		{
+			selector_y_current += (selector_y_target-selector_y_current)/3; 
+		}
+		else
+		{
+			selector_y_current = selector_y_target;
+		}
+		scr_coord.y = selector_y_current;
 		
 		m_selector.set_position_on_screen(scr_coord);
 		
@@ -312,19 +330,22 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 
 		screen->flip_display();
 
+		
+
 		do
 		{
 			
-			if((SDL_GetTicks()-current_time)<90)
+			if((SDL_GetTicks()-current_time)<65)
 			{
 
-				SDL_Delay(10);
+				SDL_Delay(5);
 
 			}
 
 		}
+		while((SDL_GetTicks()-current_time)<70);
 
-		while((SDL_GetTicks()-current_time)<100);
+		
 
 		input->update();
 
