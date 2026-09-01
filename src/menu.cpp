@@ -257,14 +257,14 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 		
 	
 
-		if(input->get_up())
+		if(input->up().get_just_pressed())
 		{
 
 			menu_list->action_up();
 
 		}
 		
-		if(input->get_down())
+		if(input->down().get_just_pressed())
 		{
 
 			menu_list->action_down();

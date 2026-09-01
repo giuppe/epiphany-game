@@ -17,6 +17,7 @@
 #ifndef INPUT_H_
 #define INPUT_H_
 #include <SDL2/SDL.h>
+#include "inputbase.h"
 
 
 
@@ -61,6 +62,9 @@ private:
     bool r_enter;
     bool r_fullscreen;
 
+    InputBase i_up;
+    InputBase i_down;
+
     Uint64 t_left = 0;
     Uint64 t_right = 0;
     Uint64 t_up = 0;
@@ -74,6 +78,8 @@ public:
     bool get_right(){return m_right;}
     bool get_up(){return m_up;}
     bool get_down(){return m_down;}
+    InputBase down(){return i_down;}
+    InputBase up(){return i_up;}
     bool get_quit(){return m_quit;}
     bool get_die(){return m_die;}
     bool get_fire(){return m_fire;}
