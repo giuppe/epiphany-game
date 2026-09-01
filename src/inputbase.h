@@ -86,28 +86,6 @@ public:
 		last = RELEASED;
 	}
 
-	bool has_state(InputState state)
-	{
-        bool result;
-		switch (state)
-		{
-			case JUST_RELEASED: 
-                result = just_released ;
-                break;
-			case RELEASED: 
-                result = released;
-                break;
-			case PRESSED: 
-                result = pressed;
-                break;
-			case JUST_PRESSED: 
-                result = just_pressed;
-                break;
-            default: 
-                result = RELEASED;
-		}
-        return result;
-	}
 
 	inline bool get_just_released()
 	{
@@ -116,15 +94,15 @@ public:
 
 	inline bool get_released()
 	{
-		return current == RELEASED || just_released;
+		return current == RELEASED || current == JUST_RELEASED;
 	}
 
 	inline bool get_pressed()
 	{
-		return current == PRESSED || just_pressed;
+		return current == PRESSED || current == JUST_PRESSED;
 	}
 
-	bool get_just_pressed()
+	inline bool get_just_pressed()
 	{
 		return current == JUST_PRESSED;
 	}
