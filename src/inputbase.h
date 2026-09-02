@@ -35,10 +35,6 @@ class InputBase
 private:
 	int ID;
 
-	bool just_released;
-	bool released;
-	bool pressed;
-	bool just_pressed;
 
 	InputState current = RELEASED;
 	InputState last = RELEASED;
@@ -52,16 +48,19 @@ public:
 	InputBase(int ID)
 	{
 		this->ID = ID;
+
 	}
 
 	void press()
 	{
+		bool pressed = last == PRESSED || last == JUST_PRESSED;
 		last = current;
 		current = pressed ? PRESSED : JUST_PRESSED;
 	}
 
 	void release()
 	{
+		bool pressed = last == PRESSED || last == JUST_PRESSED;
 		last = current;
 		current = pressed ? JUST_RELEASED : RELEASED;
 	}

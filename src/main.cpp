@@ -153,11 +153,13 @@
 		}
 		
 		DEBOUT("Exiting game::go().\n");
-			
+		
+		game->save_config();
+		
+		delete game;
 	
 		deinit_modules();
 		
-		delete game;
 
 		
 		DEBOUT("\tExiting.\n");

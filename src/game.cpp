@@ -677,6 +677,11 @@ void Game::load_fonts()
 
 Game::~Game()
 {
+	
+}
+
+void Game::save_config()
+{
 	Epiconfig::instance()->save_values_to_file(m_ini_path);
 }
 

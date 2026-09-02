@@ -311,7 +311,7 @@ void Epiconfig::save_values_to_file(char* filename)
 	
 	sprintf(text_music_volume, "%d", m_volume_music);
 
-	char* text_fullscreen = new char[1];
+	char* text_fullscreen = new char[2];
 	
 	sprintf(text_fullscreen, "%d", m_fullscreen?1:0);
 	

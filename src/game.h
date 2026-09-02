@@ -2,7 +2,7 @@
                           game.h  -  description
                              -------------------
     begin                : Tue Aug 28 2001
-    copyright            : (C) 2001 by Giuseppe D'Aquì
+    copyright            : (C) 2001 by Giuseppe D'Aquï¿½
     email                : kumber@tiscalinet.it
  ***************************************************************************/
 
@@ -106,6 +106,7 @@ public:
 	
 	void set_frame_skip(Uint32 frame_skip){m_frame_skip = frame_skip;}
 	
+	void save_config();
 
 	// begin Singleton stuff
 
