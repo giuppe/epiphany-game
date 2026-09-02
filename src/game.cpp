@@ -46,7 +46,7 @@ bool Game::main_loop()
 	
 	Music_Manager::instance()->play(MUS_GAME);
 	
-	Uint32 current_frame_time=0;
+	Uint32 current_frame_time = 0;
 	
 	bool exit_state=false;
 	
@@ -105,14 +105,14 @@ bool Game::main_loop()
 		
 		move_all();
 
-		Uint32 msec_per_frame=m_config->get_msec_per_frame();
+		Uint32 msec_per_frame = Epiconfig::instance()->get_msec_per_frame();
 		
-		Uint32 valid_frames = m_frame_skip+1;
+		Uint32 valid_frames = Epiconfig::instance()->get_frame_skip()+1;
 		
-		for(Uint32 j=0;j<m_config->get_max_anim_drawn();j++)
+		for(Uint32 j=0;j < Epiconfig::instance()->get_max_anim_drawn();j++)
 		{
 			current_frame_time=SDL_GetTicks();
-			if((j%valid_frames)==0)
+			if((j % valid_frames)==0)
 			{
 				draw(j, false);
 			}
@@ -121,7 +121,7 @@ bool Game::main_loop()
 				draw(j, true);
 			}
 
-			if(m_frame_limiter_enabled==true)
+			if(Epiconfig::instance()->is_frame_limiter_enabled())
 			{
 				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
 				{
@@ -214,6 +214,8 @@ void Game::move_all()
 	Entity_Manager* entity_manager = Entity_Manager::instance();
 	
 	Uint32 entity_manager_size = entity_manager->size();
+
+	Epiconfig* m_config = Epiconfig::instance();
 
 	std::vector< std::vector<Entity_Handle> >& matrix=m_level->get_entities_matrix();
 
@@ -385,7 +387,8 @@ void Game::draw(Uint32 frame_number, bool update_only)
 
 void Game::draw_score()
 {
-	
+	Epiconfig* m_config = Epiconfig::instance();
+
 	Sint32 real_game_size_y = m_config->get_base_screen_size_y()-m_config->get_score_size_y();
 	Sint32 game_size_x=m_config->get_base_screen_size_x();
 	Sint32 game_size_y=m_config->get_base_screen_size_y();
@@ -480,10 +483,14 @@ void Game::go()
 {
 
 	Input::instance()->reset_states();
-	Menu menu(m_max_num_of_levels,m_unsolved_level);
+
+	Menu menu;
 
 	Music_Manager::instance()->play(MUS_MENU);
-	
+	double elapsed = 0;
+
+	menu.update(elapsed);
+
 	Sint32 play=menu.go();
 	
 	while(play!=Menu::MENU_EPIPHANY_QUIT)
@@ -526,7 +533,7 @@ void Game::go()
   				
   				if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
 				{
-					save_last_level(menu.get_unsolved_level());
+					Epiconfig::instance()->set_last_level(menu.get_unsolved_level());
 				
 					menu.set_current_level(menu.get_unsolved_level());
 				
@@ -561,59 +568,6 @@ void Game::go()
 
 
 
-void Game::init()
-{
-
-	DEBOUT("Entering Game::init()...\n");
-	DEBOUT("Loading default configuration values...\n");
-	
-	m_config = Epiconfig::instance();
-	
-	m_frame_limiter_enabled = true;
-	
-	m_frame_skip = 0;
-	
-	#ifdef _WIN32
-	sprintf(m_ini_path, "%s", "./epiphany.ini");
-	#else
-	std::string user_home(getenv("HOME"));
-	if(user_home=="")
-	{
-		assert(!"Unable to find HOME environment variable");
-	}
-	else
-	{
-		user_home+="/.epiphany";
-		sprintf(m_ini_path, "%s", user_home.c_str());
-	}
-	#endif
-
-
-	m_config->read_values_from_file(m_ini_path);
-
-	Sample_Manager::instance()->set_volume(m_config->get_volume_sound());
-	
-	Music_Manager::instance()->set_volume(m_config->get_volume_music());
-	
-	
-	DEBOUT("Loading config...\n");
-	load_config();	
-	
-	DEBOUT("Initing Screen...\n");
-	Screen::instance()->init(m_config->get_screen_size_x(),m_config->get_screen_size_y(),m_config->get_map_size_x()*k_sprite_size, m_config->get_map_size_y()*k_sprite_size);
-	
-	Screen::instance()->set_fullscreen(m_config->get_fullscreen());
-	
-	DEBOUT("Initing Surface Manager...\n");
-	Surface_Manager::instance();
-	
-	
-	DEBOUT("Loading fonts...\n");
-	load_fonts();
-	
-
-	
-}
 
 
 void Game::play_level(const char *level_path)
@@ -628,34 +582,6 @@ void Game::play_level(const char *level_path)
 }
 
 
-void Game::load_config()
-{
-	
-	m_unsolved_level = Epiconfig::instance()->get_last_level();
-	
-	m_max_num_of_levels=find_levels_in_dir();
-}
-
-Uint32 Game::find_levels_in_dir()
-{
-	Uint32 result = 0;
-	char base_path[255];
-	char level_path[255];
-	
-	sprintf(base_path, "%s%s", Resource_Factory::instance()->get_resource_path().c_str(), "/maps/level");
-	
-	sprintf(level_path, "%s%d%s", base_path, result, ".map");
-	FILE* pFile = fopen (level_path,"r");
-	while(pFile != NULL)
-	{
-		DEBOUT("Found "<<level_path<<".\n");
-		fclose(pFile);
-		result++;
-		sprintf(level_path, "%s%d%s", base_path, result, ".map");
-		pFile = fopen (level_path,"r");
-	}
-	return result;
-}
 
 void Game::load_fonts()
 {
@@ -680,17 +606,6 @@ Game::~Game()
 	
 }
 
-void Game::save_config()
-{
-	Epiconfig::instance()->save_values_to_file(m_ini_path);
-}
-
-void Game::save_last_level(Uint32 last_level)
-{
-	
-	Epiconfig::instance()->set_last_level(last_level);
-	
-}
 
 
 void Game::show_credits()
@@ -787,19 +702,19 @@ void Game::show_loading()
 	
 }
 
-
-
-Game* Game::_instance = 0;
-
-Game* Game::instance()
+void Game::create()
 {
-	if(_instance==0)
-	{
-		_instance=new Game();
-		_instance->init();
+	
+}
 
-	}
-	return _instance;
+void Game::update(double elapsed)
+{
+	
+}
+
+void Game::deinit()
+{
+	
 }
 
 

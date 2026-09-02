@@ -24,6 +24,7 @@
 #include "fonts/font_manager.h"
 #include "game.h"
 #include "screen.h"
+#include "game_manager.h"
 
 
 
@@ -132,31 +133,31 @@
 			Music_Manager::instance()->disable_music();
 		}
 		
-		Game* game = Game::instance();
+		GameManager* game_manager = GameManager::instance();
 		
-		game->set_frame_skip(frame_skip);
+		Epiconfig::instance()->set_frame_skip(frame_skip);
 		
 		if(disable_frame_limiter == true)
 		{
-			game->set_frame_limiter_enabled(false);
+			Epiconfig::instance()->set_frame_limiter_enabled(false);
 		}
 		
 		if(using_another_map == true)
 		{
 			printf("Map name: %s\n", map_name.c_str());
 			
-			game->play_level(map_name.c_str());
+			game_manager->play_level(map_name.c_str());
 		}
 		else
 		{
-			game->go();
+			game_manager->go();
 		}
 		
 		DEBOUT("Exiting game::go().\n");
 		
-		game->save_config();
+		game_manager->save_config();
 		
-		delete game;
+		delete game_manager;
 	
 		deinit_modules();
 		

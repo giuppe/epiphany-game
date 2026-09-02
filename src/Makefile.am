@@ -16,7 +16,7 @@ epiphany_game_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	menu_entry_ranged.cpp menu_list_epiphany.cpp menu_list_options.cpp \
 	tinyxml/tinystr.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp \
 	tinyxml/tinyxml.cpp menu_entry_bool.cpp music_manager.cpp xml_configuration.cpp \
-	commandline_configuration.cpp
+	commandline_configuration.cpp game_manager.cpp credits_state.cpp
 
 epiphany_game_LDADD = -lSDL2 -lSDL2_mixer
 
@@ -38,4 +38,4 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
 	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h abstract_configuration.h \
 	xml_configuration.h commandline_configuration.h world_coord.h screen_coord.h \
-	inputbase.h
+	inputbase.h game_manager.h screenstate.h credits_state.h

@@ -20,7 +20,7 @@
 #include "fonts/font_manager.h"
 
 #include "game_timer.h"
-
+#include "screenstate.h"
 
 
 
@@ -31,11 +31,10 @@ class Level;
 
 
 
-class Game
+class Game : public ScreenState
 {
 
 private:
-
 
 	Game_Timer m_time;
 	
@@ -46,30 +45,23 @@ private:
 	Font_Handle m_time_font;
 	
 	Font_Handle m_credits_font;
-	
-	bool m_frame_limiter_enabled;
 
-	Epiconfig* m_config;
-	
-	Uint32 m_unsolved_level;
-	
-	Uint32 m_max_num_of_levels;
-	
-	char m_ini_path[255];
-	
-	Uint32 m_frame_skip;
-
-	
-	Uint32 find_levels_in_dir();
 
 public:
 
+	void create();
+
+    void update(double elapsed);
+
+    void deinit();
 	
 	void init();
 	
 	void go();
 	
 	bool main_loop();
+
+	void play_level(const char *);
 	
 	Level* get_current_level(){return m_level;}
 	
@@ -84,8 +76,6 @@ public:
 	
 	void load_surfaces();
 	
-	void play_level(const char *);
-	
 	void move_all();
 	
 	void draw(Uint32 frame_number, bool update_only=false);
@@ -96,31 +86,6 @@ public:
 	
 	void show_loading();
 	
-	void save_last_level(Uint32 last_level);
-	
-	bool is_frame_limiter_enabled(){return m_frame_limiter_enabled;}
-	
-	void set_frame_limiter_enabled(bool enable){m_frame_limiter_enabled = enable;}
-	
-	Uint32 get_frame_skip(){return m_frame_skip;}
-	
-	void set_frame_skip(Uint32 frame_skip){m_frame_skip = frame_skip;}
-	
-	void save_config();
-
-	// begin Singleton stuff
-
-private:
-
-	static Game* _instance;
-
-protected:
-
-	Game(){};
-
-public:
-
-	static Game* instance();
 
 };
 

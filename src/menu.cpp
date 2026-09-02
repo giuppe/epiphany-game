@@ -31,12 +31,17 @@
 #include "menu_list_options.h"
 #include "menu_list_epiphany.h"
 
+#include "game_manager.h"
 
 
 
-Menu::Menu(Uint32 total_levels, Uint32 unsolved_level)
+Menu::Menu()
 {
   
+	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
+	
+	Uint32 total_levels = GameManager::instance()->find_levels_in_dir();
+
 	m_total_levels=total_levels;
 
 	set_unsolved_level(unsolved_level);
@@ -149,7 +154,10 @@ bool Menu::increase_unsolved_level()
 }
 
 
+void Menu::update(double elapsed)
+{
 
+}
 
 Sint32 Menu::go()
 {

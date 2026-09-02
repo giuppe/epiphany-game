@@ -18,6 +18,7 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
+#include "screenstate.h"
 
 
 #ifndef MENU_H
@@ -26,7 +27,7 @@ class Game;
 
 class Menu_List;
 
-class Menu
+class Menu : public ScreenState
 {
 	
 public:
@@ -54,9 +55,15 @@ private:
 
 public:
 
-	Menu(Uint32 total_levels, Uint32 unsolved_level);
+	Menu();
 
 	~Menu();
+
+	void create(){};
+
+    void update(double elapsed);
+
+    void deinit(){};
 
 	void set_unsolved_level(Uint32 unsolved_level);
 

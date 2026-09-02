@@ -52,6 +52,10 @@ private:
 
 	bool m_fullscreen;
 
+	Uint32 m_frame_skip;
+
+	bool m_frame_limiter_enabled;
+
 public:
 
 	void set_default_values();
@@ -101,6 +105,14 @@ public:
 	void save_values_to_file(char* filename);
 	
 	void refresh_game_window_parameters();
+
+	bool is_frame_limiter_enabled(){return m_frame_limiter_enabled;}
+        
+	void set_frame_limiter_enabled(bool enable){m_frame_limiter_enabled = enable;}
+	
+	Uint32 get_frame_skip(){return m_frame_skip;}
+	
+	void set_frame_skip(Uint32 frame_skip){m_frame_skip = frame_skip;}
 	
 // begin Singleton stuff
 
