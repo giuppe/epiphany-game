@@ -46,8 +46,11 @@ private:
 	
 	Font_Handle m_credits_font;
 
+	Uint32 m_current_level_number;
 
 public:
+	
+	Game(Uint32 level_number);
 
 	void create();
 
@@ -80,11 +83,9 @@ public:
 	
 	void move_all();
 	
-	void draw(Uint32 frame_number, bool update_only=false);
+	void _draw(Uint32 frame_number, bool update_only=false);
 	
 	void draw_score();
-	
-	void show_credits();
 	
 	void show_loading();
 	

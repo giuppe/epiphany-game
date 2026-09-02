@@ -46,101 +46,9 @@
 bool Game::main_loop()
 {
 	
-	Music_Manager::instance()->play(MUS_GAME);
 	
-	Uint32 current_frame_time = 0;
-	
-	bool exit_state=false;
-	
-	m_time.set_total_time(m_level->get_max_time());
-
-	m_time.start();
-
-	Screen::instance()->resize_world_screen(m_level->get_size_x()*k_sprite_size, m_level->get_size_y()*k_sprite_size);
-	
-	Screen::instance()->set_camera_position(m_level->get_player_sprite_position());
 
 	
-	Input* input = Input::instance();
-	
-	input->update();
-
-	while((m_level->is_player_alive())||
-				((!input->get_fire())&&(!input->get_enter())&&(!input->get_die()))
-				)
-	{
-
-		if(input->get_pause())
-		{
-			SDL_Delay(200);
-			input->update();
-			while(!input->get_pause())
-			{
-				input->update();
-			}
-		}
-		
-		if(m_level->is_player_alive())
-		{
-
-			m_time.update();
-
-			if(m_time.get_time()<10)
-			{
-				
-				Sample_Manager::instance()->play(SFX_GAME_TIMEALARM);
-
-			}
-
-			if(m_time.is_zero())
-			{
-
-				m_level->do_explode_player();
-
-			}
-
-		}
-		
-		current_frame_time=SDL_GetTicks();
-		
-		get_keys();
-		
-		move_all();
-
-		Uint32 msec_per_frame = Epiconfig::instance()->get_msec_per_frame();
-		
-		Uint32 valid_frames = Epiconfig::instance()->get_frame_skip()+1;
-		
-		for(Uint32 j=0;j < Epiconfig::instance()->get_max_anim_drawn();j++)
-		{
-			current_frame_time=SDL_GetTicks();
-			if((j % valid_frames)==0)
-			{
-				draw(j, false);
-			}
-			else
-			{
-				draw(j, true);
-			}
-
-			if(Epiconfig::instance()->is_frame_limiter_enabled())
-			{
-				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
-				{
-					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-5))
-					{
-						SDL_Delay(5);
-					}
-				}
-			}
-		
-		}
-		//input->update();
-	}
-	
-	exit_state=m_level->is_player_exited();	
-	
-	return exit_state;
 	
 }
 
@@ -264,7 +172,7 @@ void Game::move_all()
 
 
 
-void Game::draw(Uint32 frame_number, bool update_only)
+void Game::_draw(Uint32 frame_number, bool update_only)
 {
 
 	Entity* curr_ntt;
@@ -481,94 +389,6 @@ void Game::draw_score()
 
 
 
-void Game::go()
-{
-
-	Input::instance()->reset_states();
-
-	Menu menu;
-
-	Music_Manager::instance()->play(MUS_MENU);
-	double elapsed = 0;
-
-	menu.update(elapsed);
-
-	Sint32 play=menu.go();
-	
-	while(play!=Menu::MENU_EPIPHANY_QUIT)
-	{
-		
-		if(play==Menu::MENU_EPIPHANY_START)
-  		{
-  		
-			m_level=new Level();
-  		
-			char current_level_path[255];
-
-			sprintf(current_level_path, "%s/maps/level%d.map",
-			        Resource_Factory::instance()->get_resource_path().c_str(),
-			        menu.get_current_level());
-  	
-			DEBOUT("Loading map: "<<current_level_path<<"\n");
-  	
-			m_level->load_map(current_level_path);
-  			
-  			show_loading();
-  			  	
-			bool result=main_loop();
-  	
-			SDL_Delay(500);
-    	 	
-			//APOI: Might add some Hiscores here...
-
-			delete m_level;
-  		
-			switch(result)
-			{
-			case false:
-				DEBWARN("Game_over!...");
-				Music_Manager::instance()->play(MUS_MENU);
-				play=menu.go();
-				break;
-			case true:
-				DEBWARN("Winner! ;)");
-  				
-  				if((menu.get_unsolved_level()==menu.get_current_level())&&(menu.increase_unsolved_level()))
-				{
-					Epiconfig::instance()->set_last_level(menu.get_unsolved_level());
-				
-					menu.set_current_level(menu.get_unsolved_level());
-				
-					play=Menu::MENU_EPIPHANY_START;
-				}
-				else
-				{
-         			//TODO: maybe a congratulation screen
-         			Music_Manager::instance()->play(MUS_MENU);
-         			play=menu.go();
-				}
-  			
-  				break;
-			}		
-		}
- /* 		else if(play==Menu::MENU_EPIPHANY_CREDITS)
-  		{
-  			show_credits();
-  			play=menu.go();
-		}
-*/		else if(play==Menu::MENU_EPIPHANY_NONE)
-		{
-			play=menu.go();
-		}
-  	
-	}
-	
-	GameManager::instance()->change_state(new CreditsState());
-	
-}
-
-
-
 
 
 void Game::play_level(const char *level_path)
@@ -608,19 +428,6 @@ Game::~Game()
 }
 
 
-
-void Game::show_credits()
-{
-	
-	
-
-	
-	
-	
-	
-
-}
-
 void Game::show_loading()
 {
 	Screen* screen = Screen::instance();
@@ -642,14 +449,158 @@ void Game::show_loading()
 	
 }
 
+Game::Game(Uint32 level_number)
+{
+	this->m_current_level_number = level_number;
+}
+
 void Game::create()
 {
+	load_fonts();
+
+	m_level=new Level();
+  		
+	char current_level_path[255];
+
+	sprintf(current_level_path, "%s/maps/level%d.map",
+			Resource_Factory::instance()->get_resource_path().c_str(),
+			m_current_level_number);
+
+	DEBOUT("Loading map: "<<current_level_path<<"\n");
+
+	m_level->load_map(current_level_path);
+	
+	show_loading();
+
+	Music_Manager::instance()->play(MUS_GAME);
+	
+	Uint32 current_frame_time = 0;
+	
+	bool exit_state=false;
+	
+	m_time.set_total_time(m_level->get_max_time());
+
+	m_time.start();
+
+	Screen::instance()->resize_world_screen(m_level->get_size_x()*k_sprite_size, m_level->get_size_y()*k_sprite_size);
+	
+	Screen::instance()->set_camera_position(m_level->get_player_sprite_position());
 	
 }
 
 void Game::update(double elapsed)
 {
+	Input* input = Input::instance();
 	
+	input->update();
+
+	if((m_level->is_player_alive())||
+				((!input->get_fire())&&(!input->get_enter())&&(!input->get_die()))
+				)
+	{
+
+		if(input->get_pause())
+		{
+			SDL_Delay(200);
+			input->update();
+			while(!input->get_pause())
+			{
+				input->update();
+			}
+		}
+		
+		if(m_level->is_player_alive())
+		{
+
+			m_time.update();
+
+			if(m_time.get_time()<10)
+			{
+				
+				Sample_Manager::instance()->play(SFX_GAME_TIMEALARM);
+
+			}
+
+			if(m_time.is_zero())
+			{
+
+				m_level->do_explode_player();
+
+			}
+
+		}
+		
+		double current_frame_time=SDL_GetTicks();
+		
+		get_keys();
+		
+		move_all();
+
+		Uint32 msec_per_frame = Epiconfig::instance()->get_msec_per_frame();
+		
+		Uint32 valid_frames = Epiconfig::instance()->get_frame_skip()+1;
+		
+		for(Uint32 j=0;j < Epiconfig::instance()->get_max_anim_drawn();j++)
+		{
+			current_frame_time=SDL_GetTicks();
+			if((j % valid_frames)==0)
+			{
+				_draw(j, false);
+			}
+			else
+			{
+				_draw(j, true);
+			}
+
+			if(Epiconfig::instance()->is_frame_limiter_enabled())
+			{
+				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
+				{
+					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-5))
+					{
+						SDL_Delay(5);
+					}
+				}
+			}
+		
+		}
+		//input->update();
+		return;
+	}
+	
+	bool exit_state=m_level->is_player_exited();	
+	
+	SDL_Delay(500);
+    	 	
+	delete m_level;
+
+	switch(exit_state)
+	{
+	case false:
+		DEBWARN("Game_over!...");
+		Music_Manager::instance()->play(MUS_MENU);
+		GameManager::instance()->change_state(new Menu());
+		break;
+	case true:
+		DEBWARN("Winner! ;)");
+		Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
+		Uint32 total_levels = GameManager::instance()->find_levels_in_dir();
+		bool next_level_exists = (unsolved_level==m_current_level_number)&&(unsolved_level+1>total_levels);
+		if(next_level_exists)
+		{
+			Epiconfig::instance()->set_last_level(unsolved_level+1);
+		
+			GameManager::instance()->change_state(new Game(unsolved_level+1));
+		}
+		else
+		{
+			//TODO: maybe a congratulation screen
+			Music_Manager::instance()->play(MUS_MENU);
+			GameManager::instance()->change_state(new Menu());
+		}
+	
+		break;
+	}		
 }
 
 void Game::deinit()

@@ -12,9 +12,7 @@ void GameManager::init()
 
 	DEBOUT("Entering Game::init()...\n");
 
-	m_game = new Game();
-	//m_game->init();
-
+	
 	DEBOUT("Loading default configuration values...\n");
 	
 	m_config = Epiconfig::instance();
@@ -56,8 +54,6 @@ void GameManager::init()
 	Surface_Manager::instance();
 	
 	
-	DEBOUT("Loading fonts...\n");
-	m_game->load_fonts();
 	
 
 	
@@ -93,6 +89,7 @@ void GameManager::save_config()
 void GameManager::change_state(ScreenState* new_state)
 {
 	m_current_state = new_state;
+	m_current_state_just_created = true;
 }
 
 void GameManager::return_to_system()
@@ -102,22 +99,22 @@ void GameManager::return_to_system()
 
 void GameManager::go()
 {
-	m_game->go();
 
-	if(m_current_state != NULL)
-	{
-		m_current_state->create();
-	}
 
 	Screen* screen = Screen::instance();
 
 	while(m_current_state != NULL)
 	{
+		if(m_current_state_just_created)
+		{
+			m_current_state->create();
+			m_current_state_just_created = false;
+		}
 		Sint32 current_frame_time=0;
 		current_frame_time=SDL_GetTicks();
 
 		ScreenState* temp_state = m_current_state;
-		
+
 		temp_state->update(0);
 
 		temp_state->draw();
@@ -138,7 +135,7 @@ void GameManager::go()
 
 void GameManager::play_level(const char* level)
 {
-	m_game->play_level(level);
+	//TODO: m_game->play_level(level);
 }
 
 

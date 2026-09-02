@@ -27,6 +27,8 @@ class Game;
 
 class Menu_List;
 
+class Menu_List_Epiphany;
+
 class Menu : public ScreenState
 {
 	
@@ -43,13 +45,13 @@ private:
 
 	Uint32 m_current_level;
 
-	Uint32 m_unsolved_level;
-
 	Uint32 m_total_levels;
 
 	Sprite m_selector;
 
 	Surface* m_background;
+
+	Menu_List_Epiphany* m_menu_list;
 	
 	//Menu_List_Epiphany* m_menu_list;
 
@@ -59,7 +61,7 @@ public:
 
 	~Menu();
 
-	void create(){};
+	void create();
 
     void update(double elapsed);
 
@@ -67,17 +69,9 @@ public:
 
 	void draw(){};
 
-	void set_unsolved_level(Uint32 unsolved_level);
-
-	Uint32 get_unsolved_level();
-
 	Uint32 get_current_level();
 
 	void set_current_level(Uint32 current_level);
-
-	int go();
-
-	bool increase_unsolved_level();
 	
 	void render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 menu_left_point, Sint32 menu_vertical_distance);
 	

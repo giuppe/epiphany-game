@@ -18,6 +18,8 @@
 #include "menu.h"
 #include "surface.h"
 #include "surface_manager.h"
+#include "music_manager.h"
+#include "credits_state.h"
 #include "fonts/font.h"
 #include "fonts/font_manager.h"
 #include "fonts/font_factory.h"
@@ -44,9 +46,7 @@ Menu::Menu()
 
 	m_total_levels=total_levels;
 
-	set_unsolved_level(unsolved_level);
-
-	m_current_level=m_unsolved_level;
+	m_current_level=unsolved_level;
 	
 	m_menu_font=Font_Factory::MENU_FONT;
 
@@ -98,109 +98,11 @@ void Menu::set_current_level(Uint32 current_level)
 
     DEBOUT("Alert: setting current_level outside range..."<<current_level<<"\n");
 
-    m_current_level=m_unsolved_level;
-
   }
 
 }
 
 
-
-
-Uint32 Menu::get_unsolved_level()
-{
-
-  return m_unsolved_level;
-
-}
-
-
-
-
-void Menu::set_unsolved_level(Uint32 unsolved_level)
-{
-
-  if(unsolved_level<m_total_levels)
-  {
-
-    m_unsolved_level=unsolved_level;
-
-  }
-  else
-  {
-
-    DEBOUT("Alert: setting unsolved level outside range!\n");
-
-    m_unsolved_level=0;
-
-  }
-
-}
-
-
-
-
-bool Menu::increase_unsolved_level()
-{
-
-  m_unsolved_level++;
-
-  if(m_unsolved_level==m_total_levels)
-  {
-    return false;
-  }
-
-  return true;
-}
-
-
-void Menu::update(double elapsed)
-{
-
-}
-
-Sint32 Menu::go()
-{
-
-	Epiconfig* config=Epiconfig::instance();
-	
-	Screen::instance()->resize_world_screen(0, 0);
-	
-	Menu_List_Epiphany* m_menu_list = new Menu_List_Epiphany(m_unsolved_level);
-
-	render_menu_list(m_menu_list, 150, config->get_base_screen_size_x()/2, config->get_base_screen_size_y()/9);
-
-	DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
-
-	Uint32 return_action;
-	
-	switch(m_menu_list->get_return_action())
-	{
-		case Menu_List_Epiphany::MENU_START:
-			return_action = MENU_EPIPHANY_START;
-			break;
-		case Menu_List_Epiphany::MENU_OPTIONS:
-		{
-			return_action = MENU_EPIPHANY_NONE;
-			Menu_List_Options menu_options;
-			render_menu_list(&menu_options, config->get_base_screen_size_y()/2, config->get_base_screen_size_x()/3, config->get_base_screen_size_y()/9);
-			break;
-		}
-		case Menu_List_Epiphany::MENU_QUIT:
-			return_action = MENU_EPIPHANY_QUIT;
-			break;
-		default:
-			DEBWARN("Warning: Selecting unhandled menu action: "<<m_menu_list->get_return_action()<<"; \n\tdefaulting to MENU_QUIT");
-			return_action = MENU_EPIPHANY_QUIT;
-	}
-
-	m_current_level = m_menu_list->get_selected_level();
-	
-	delete m_menu_list;
-
-	return return_action;
-
-}
 
 
 
@@ -357,6 +259,77 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 
 		input->update();
 
-	}	
+	}
 }
+
+
+void Menu::create()
+{
+	Input::instance()->reset_states();
+
+	Music_Manager::instance()->play(MUS_MENU);
+
+	Screen::instance()->resize_world_screen(0, 0);
+
+	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
+
+	m_menu_list = new Menu_List_Epiphany(unsolved_level);
+}
+
+void Menu::update(double elapsed)
+{
+	Epiconfig* config = Epiconfig::instance();
+	
+	
+
+	this->render_menu_list(m_menu_list, 150, config->get_base_screen_size_x()/2, config->get_base_screen_size_y()/9);
+
+	DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
+
+	Uint32 return_action;
+	
+	switch(m_menu_list->get_return_action())
+	{
+		case Menu_List_Epiphany::MENU_START:
+			return_action = MENU_EPIPHANY_START;
+			break;
+		case Menu_List_Epiphany::MENU_OPTIONS:
+		{
+			return_action = MENU_EPIPHANY_NONE;
+			Menu_List_Options menu_options;
+			this->render_menu_list(&menu_options, config->get_base_screen_size_y()/2, config->get_base_screen_size_x()/3, config->get_base_screen_size_y()/9);
+			break;
+		}
+		case Menu_List_Epiphany::MENU_QUIT:
+			return_action = MENU_EPIPHANY_QUIT;
+			break;
+		default:
+			DEBWARN("Warning: Selecting unhandled menu action: "<<m_menu_list->get_return_action()<<"; \n\tdefaulting to MENU_QUIT");
+			return_action = MENU_EPIPHANY_QUIT;
+	}
+
+	m_current_level = m_menu_list->get_selected_level();
+	
+	delete m_menu_list;
+
+
+
+	if(return_action!=Menu::MENU_EPIPHANY_QUIT)
+	{
+		
+		if(return_action==Menu::MENU_EPIPHANY_START)
+  		{ 	
+			GameManager::instance()->change_state(new Game(m_current_level));
+			return;			
+		}
+		else if(return_action==Menu::MENU_EPIPHANY_NONE)
+		{
+			return;
+		}
+  	
+	}
+	
+	GameManager::instance()->change_state(new CreditsState());
+}
+
 
