@@ -18,7 +18,7 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
-#include "screenstate.h"
+#include "screen_state.h"
 
 
 #ifndef MENU_H
@@ -64,6 +64,8 @@ public:
     void update(double elapsed);
 
     void deinit(){};
+
+	void draw(){};
 
 	void set_unsolved_level(Uint32 unsolved_level);
 

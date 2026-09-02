@@ -90,10 +90,50 @@ void GameManager::save_config()
 	Epiconfig::instance()->save_values_to_file(m_ini_path);
 }
 
+void GameManager::change_state(ScreenState* new_state)
+{
+	m_current_state = new_state;
+}
+
+void GameManager::return_to_system()
+{
+	m_current_state = NULL;
+}
 
 void GameManager::go()
 {
 	m_game->go();
+
+	if(m_current_state != NULL)
+	{
+		m_current_state->create();
+	}
+
+	Screen* screen = Screen::instance();
+
+	while(m_current_state != NULL)
+	{
+		Sint32 current_frame_time=0;
+		current_frame_time=SDL_GetTicks();
+
+		ScreenState* temp_state = m_current_state;
+		
+		temp_state->update(0);
+
+		temp_state->draw();
+
+		while(SDL_GetTicks()-current_frame_time<20)
+		{
+			if(SDL_GetTicks()-current_frame_time<15)
+			{
+				SDL_Delay(5);
+			}
+		}
+		screen->flip_display();
+		screen->clear();
+	}
+	
+
 }
 
 void GameManager::play_level(const char* level)

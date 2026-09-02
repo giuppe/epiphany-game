@@ -25,12 +25,14 @@
 #include "entities/entity_player.h"
 #include "surface_manager.h"
 #include "music_manager.h"
+#include "game_manager.h"
 #include "game.h"
 #include "screen.h"
 #include "menu.h"
 #include "input.h"
 #include "level.h"
 #include "game_timer.h"
+#include "credits_state.h"
 #include <cstdlib>
 #include <cstdio>
 #include <SDL2/SDL.h>
@@ -561,9 +563,8 @@ void Game::go()
   	
 	}
 	
-
+	GameManager::instance()->change_state(new CreditsState());
 	
-	this->show_credits();
 }
 
 
@@ -612,72 +613,11 @@ void Game::show_credits()
 {
 	
 	
-	
-	Sint32 current_frame_time=0;
 
-	std::vector<std::string> credits;
-
-	credits.push_back("Epiphany");
-	credits.push_back(" ");
-	credits.push_back("Giuseppe D'Aqui':");
-	credits.push_back("    Coding, Level Design, Graphics, Music");
-	credits.push_back(" ");
-	credits.push_back("Giuseppe Martino:");
-	credits.push_back("    Coding, Level Design");
-	credits.push_back(" ");
-	credits.push_back("Antonio Malara: Graphics");
-	credits.push_back(" ");
-	credits.push_back("Thanks to:");
-	credits.push_back("  Joerg Jaspert & Ricardo Mones, for Debian Packages");
-	credits.push_back("  Eric Mangold, for the Level Editor");
-	credits.push_back("  Stefan for gameplay related patches");
-	credits.push_back(" ");
-	credits.push_back("Released under General Public License v2");
-	credits.push_back("See COPYING for details.");
-
-	//standard method: text scrolling
-	
-	Uint32 i;
-	
-	Input* input =Input::instance();
-	input->reset_states();
-	//input->update(); 
-	
-	Screen* screen = Screen::instance();
-	
-	screen->resize_world_screen(0,0);
-	
-	Font* credits_font = Font_Manager::instance()->get_font(m_credits_font);
-	
-	Music_Manager::instance()->play(MUS_CREDITS);
 	
 	
-	while(!(input->get_quit()||input->get_enter()||input->get_fire()))
-	{
-		current_frame_time=SDL_GetTicks();
-		screen->clear();
-		
-		for(i=0; i<credits.size(); i++)
-		{
-			credits_font->write(32, 10+20*i,credits[i].c_str());
-			
-		}
-		
-  		// draws two black movie-like bands
-
-
-		while(SDL_GetTicks()-current_frame_time<20)
-		{
-			if(SDL_GetTicks()-current_frame_time<15)
-			{
-				SDL_Delay(5);
-			}
-		}
-		screen->flip_display();
-		
-
-		input->update();
-	}
+	
+	
 
 }
 
@@ -717,4 +657,7 @@ void Game::deinit()
 	
 }
 
+void Game::draw()
+{
 
+}

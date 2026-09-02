@@ -21,7 +21,7 @@
 #include "dephine.h"
 #include "game.h"
 #include "epiconfig.h"
-#include "screenstate.h"
+#include "screen_state.h"
 
 class GameManager 
 {
@@ -44,6 +44,8 @@ class GameManager
         void go();
 
         void change_state(ScreenState* new_state);
+
+        void return_to_system();
 
         void play_level(const char *);
 

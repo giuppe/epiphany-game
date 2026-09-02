@@ -1,5 +1,5 @@
 /***************************************************************************
-    screenstate.h  -  basic game state screen (e.g. menu, credits, etc.)
+    screen_state.h  -  basic game state screen (e.g. menu, credits, etc.)
                              -------------------
     begin                : Sep 02 2026
     copyright            : (C) 2026 by Giuseppe D'Aqui'
@@ -20,12 +20,14 @@
 
 class ScreenState
 {
+    public:
+        virtual void create() = 0;
 
-    virtual void create() = 0;
+        virtual void update(double elapsed) = 0;
 
-    virtual void update(double elapsed) = 0;
+        virtual void deinit() = 0;
 
-    virtual void deinit() = 0;
+        virtual void draw() = 0;
 };
 
 #endif //SCREENSTATE_H

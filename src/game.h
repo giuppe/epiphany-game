@@ -20,7 +20,7 @@
 #include "fonts/font_manager.h"
 
 #include "game_timer.h"
-#include "screenstate.h"
+#include "screen_state.h"
 
 
 
@@ -54,6 +54,8 @@ public:
     void update(double elapsed);
 
     void deinit();
+
+	void draw();
 	
 	void init();
 	
