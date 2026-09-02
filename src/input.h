@@ -64,6 +64,8 @@ private:
 
     InputBase i_up;
     InputBase i_down;
+    InputBase i_right;
+    InputBase i_left;
 
     Uint64 t_left = 0;
     Uint64 t_right = 0;
@@ -80,6 +82,8 @@ public:
     bool get_down(){return m_down;}
     InputBase down(){return i_down;}
     InputBase up(){return i_up;}
+    InputBase right(){return i_right;}
+    InputBase left(){return i_left;}
     bool get_quit(){return m_quit;}
     bool get_die(){return m_die;}
     bool get_fire(){return m_fire;}

@@ -271,14 +271,14 @@ void Menu::render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 
 
 		}
 		
-		if((input->get_left()))
+		if((input->left().get_just_pressed()))
 		{
 
 			menu_list->action_left();
 
 		}
 		
-		if((input->get_right()))
+		if((input->right().get_just_pressed()))
 		{
 
 			menu_list->action_right();

@@ -74,6 +74,8 @@ void Input::reset_states()
 
 	i_down.reset();
 	i_up.reset();
+	i_right.reset();
+	i_left.reset();
 
 	p_quit= false;
 	p_die = false;
@@ -105,6 +107,8 @@ void Input::init()
 	m_pause = false;
 	i_down = InputBase(0);
 	i_up = InputBase(1);
+	i_right = InputBase(2);
+	i_left = InputBase(3);
 	reset_states();
 	SDL_SetEventFilter(sdl_event_filter, NULL);
 
@@ -163,8 +167,8 @@ void Input::update()
 		case SDL_KEYDOWN:
 			// Just keep in mind, if a key was pressed this turn
 			// But in this case: Forget a key release in this turn
-			if (event.key.keysym.sym==SDLK_LEFT) { p_left=true; r_left=false; }
-			if (event.key.keysym.sym==SDLK_RIGHT) { p_right=true; r_right=false; }
+			if (event.key.keysym.sym==SDLK_LEFT) { p_left=true; r_left=false; i_left.press();}
+			if (event.key.keysym.sym==SDLK_RIGHT) { p_right=true; r_right=false; i_right.press();}
 			if (event.key.keysym.sym==SDLK_UP) { p_up=true; r_up=false; i_up.press();}
 			if (event.key.keysym.sym==SDLK_DOWN) { p_down=true; r_down=false; i_down.press(); }
 			if (event.key.keysym.sym==SDLK_RCTRL) { p_fire=true; r_fire=false; }
@@ -184,8 +188,8 @@ void Input::update()
 
 		case SDL_KEYUP:
 			// Just keep in mind, if a key was released this turn
-			if (event.key.keysym.sym==SDLK_LEFT) r_left=true;
-			if (event.key.keysym.sym==SDLK_RIGHT) r_right=true;
+			if (event.key.keysym.sym==SDLK_LEFT) {r_left=true; i_left.release();}
+			if (event.key.keysym.sym==SDLK_RIGHT) {r_right=true; i_right.release();}
 			if (event.key.keysym.sym==SDLK_UP) {r_up=true; i_up.release();}
 			if (event.key.keysym.sym==SDLK_DOWN) {r_down=true; i_down.release();}
 			if (event.key.keysym.sym==SDLK_RCTRL) r_fire=true;
@@ -208,6 +212,8 @@ void Input::update()
 	}
 	i_up.update();
 	i_down.update();
+	i_left.update();
+	i_right.update();
 
 	// If key was released this turn, unset key state
 	//m_left&=!r_left;
