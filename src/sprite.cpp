@@ -263,9 +263,11 @@ void Sprite::move_to_pos_y(Uint32 y)
 
 void Sprite::update_frame()
 {
-	if(m_is_animating==true){
+	Uint64 current_time = SDL_GetTicks64();
+	if(m_is_animating && current_time-m_time_of_last_frame > frame_duration*1000){
 		set_curr_frame(m_curr_frame+1);
 		set_is_changed();
+		m_time_of_last_frame = current_time;
 	}
 
 }
@@ -275,11 +277,11 @@ void Sprite::update_frame()
 void Sprite::draw()
 {
 	update_frame();
-	if(m_is_changed==true){
+	//if(m_is_changed==true){
 		
 		this->put_screen(Screen::instance()->coord_to_screen(m_pos));
 		m_is_changed=false;
-	}
+	//}
 	
 }
 

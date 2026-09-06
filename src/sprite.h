@@ -49,6 +49,8 @@ private:
 	Uint32 m_speed;
 		
 	Uint32 m_curr_frame;
+
+	Uint64 m_time_of_last_frame;
 	
 	bool m_is_animating;
 	
@@ -91,7 +93,7 @@ private:
 	
 public:
 
-	
+	double frame_duration = 1/30.0;
 	
 	Sprite():m_is_changed(true),m_initialized(false){};
 
