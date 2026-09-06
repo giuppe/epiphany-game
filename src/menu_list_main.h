@@ -45,14 +45,14 @@ public:
 	void action_up();
 	
 	void action_down();
-	
-	void action_press();
 
 	void action_quit();
 	
 	Uint32 get_list_size() const;
 	
 	std::string get_menu_entry_string(Uint32 entry) const;
+
+	Uint32 get_current_level(){return m_current_level;}
 	
 };
 

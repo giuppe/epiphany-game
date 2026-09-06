@@ -27,6 +27,8 @@
 #include <vector>
 #include <cassert>
 
+Menu_List_Main* callback_menumain_obj;
+
 void menu_callback_start()
 {
 	Uint32 current_level = Epiconfig::instance()->get_current_level();
@@ -43,6 +45,12 @@ void menu_callback_options()
 	Game_Manager::instance()->change_state(new Menu_Options_State());
 }
 
+void menu_callback_level()
+{
+	DEBWARN(callback_menumain_obj->get_current_level());
+	Epiconfig::instance()->set_current_level(callback_menumain_obj->get_current_level());
+}
+
 Menu_List_Main::Menu_List_Main()
 {
 	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
@@ -54,10 +62,12 @@ Menu_List_Main::Menu_List_Main()
 	m_current_level = unsolved_level;
 	
 	m_selected = 0;
+
+	callback_menumain_obj = this;
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Start", &menu_callback_start));
 	
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, unsolved_level, "Level: ", &m_current_level, NULL));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, unsolved_level, "Level: ", &m_current_level, &menu_callback_level));
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Options", &menu_callback_options));
 	
@@ -80,13 +90,6 @@ void Menu_List_Main::action_quit()
 	(*menu_callback_quit)();
 }
 
-void Menu_List_Main::action_press()
-{
-	Epiconfig::instance()->set_current_level(m_current_level);
-	
-	Menu_List::action_press();
-
-}
 
 
 

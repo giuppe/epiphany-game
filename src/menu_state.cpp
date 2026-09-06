@@ -86,7 +86,7 @@ void Menu_State::update(double elapsed)
 	Menu_Base_State::update(elapsed);
 	
 	
-	DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
+	//DEBOUT("Menu selected: "<<m_menu_list->get_selected()<<"\n");
 
 	
 
