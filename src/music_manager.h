@@ -24,6 +24,7 @@
 
 
 enum Music_Type{
+				MUS_NO,
 				MUS_MENU,
 				MUS_CREDITS,
 				MUS_GAME,
@@ -42,6 +43,8 @@ private:
 	bool m_disabled;
 	
 	bool music_enabled;
+
+	Music_Type m_current_music;
 	
 public:
 	

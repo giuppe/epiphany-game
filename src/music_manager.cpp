@@ -36,6 +36,8 @@ void Music_Manager::init()
 	m_musics.resize(25);
 	
 	music_enabled = true;
+
+	m_current_music = MUS_NO;
 	
 	load_musics();
 	
@@ -109,11 +111,25 @@ void Music_Manager::play(Music_Type type)
 	
 	if(music_enabled == false)
 		return;
+
+	if(m_current_music == type)
+		return;
+
+	if(type == MUS_NO)
+	{
+		Mix_HaltChannel(-1);
+		m_current_music = type;
+		return;
+	}
 		
 	Mix_Music* music = get_music(type);
 	
 	if(Mix_PlayMusic(music, -1)==-1) {
     	DEBWARN("Mix_PlayMusic: "<< Mix_GetError()<<"\n");
+	}
+	else
+	{
+		m_current_music = type;
 	}
 }
 
