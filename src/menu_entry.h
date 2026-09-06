@@ -19,11 +19,15 @@
 
 #include "dephine.h"
 
+typedef void (*Menu_Entry_Callback)();
+
 class Menu_Entry
 {
 protected:
 	
 //	std::string m_string;
+
+	Menu_Entry_Callback m_callback;
 
 public:
 
@@ -41,11 +45,16 @@ public:
 	
 	virtual void action_down() = 0;
 	
-	virtual void action_press() = 0;
+	void action_press(){execute_callback();};
 	
 	virtual Uint32 get_value() const = 0;
 	
-	virtual ~Menu_Entry(){};		
+	virtual ~Menu_Entry(){};
+	
+	void execute_callback(){
+		if(m_callback != NULL)
+			(*m_callback)();
+	};
 	
 };
 

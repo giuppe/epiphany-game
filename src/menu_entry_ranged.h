@@ -28,28 +28,26 @@ class Menu_Entry_Ranged : public Menu_Entry
 	
 		Uint32 m_range_end;
 		
-		Uint32 m_current_value;
+		Uint32* m_current_value;
 		
 		std::string m_string;
 	
 	public:
 
-		Menu_Entry_Ranged(Uint32 range_begin, Uint32 range_end):
-																m_range_begin(range_begin), 
-																m_range_end(range_end), 
-																m_current_value(range_begin)
-																{};
 																
-		Menu_Entry_Ranged(Uint32 range_begin, Uint32 range_end, const char* string, Uint32 current_value):
+		Menu_Entry_Ranged(Uint32 range_begin, Uint32 range_end, const char* string, Uint32* current_value, Menu_Entry_Callback callback):
 																m_range_begin(range_begin), 
 																m_range_end(range_end), 
 																m_current_value(current_value),
 																m_string(string)
-																{};
+																
+																{
+																	m_callback=callback;
+																};
 	
 		void set_current_value(Uint32 current_value);
 		
-		Uint32 get_value() const {return m_current_value;}
+		Uint32 get_value() const {return *m_current_value;}
 	
 		std::string get_string() const;
 	

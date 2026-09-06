@@ -19,15 +19,19 @@
 
 #include "menu_entry.h"
 
+
 class Menu_Entry_Simple : public Menu_Entry
 {
 	protected:
 		std::string m_string;
+
 		
 	public:
 	//	Menu_Entry_Simple(){};
 	
-		Menu_Entry_Simple(const char* string):m_string(string){};
+		Menu_Entry_Simple(const char* string, Menu_Entry_Callback callback):m_string(string){
+			 m_callback = callback;
+		};
 	
 		std::string get_string() const {return m_string;};
 	
@@ -42,8 +46,7 @@ class Menu_Entry_Simple : public Menu_Entry
 		void action_up(){};
 	
 		void action_down(){};
-	
-		void action_press(){};
+
 	
 		~Menu_Entry_Simple(){};		
 	

@@ -23,7 +23,7 @@
 #include "input.h"
 #include "fonts/font_manager.h"
 #include "game.h"
-#include "menu.h"
+#include "menu_state.h"
 #include "screen.h"
 #include "game_manager.h"
 
@@ -143,7 +143,7 @@
 			Epiconfig::instance()->set_frame_limiter_enabled(false);
 		}
 
-		game_manager->change_state(new Menu());
+		game_manager->change_state(new Menu_State());
 		
 		if(using_another_map == true)
 		{

@@ -15,19 +15,23 @@
  ***************************************************************************/
 
 #include "dephine.h"
+#include <vector>
 
 #ifndef MENU_LIST_H_
 #define MENU_LIST_H_
+
+class Menu_Entry;
+
 
 
 class Menu_List
 {
 public:
-	enum{
-		MENU_NONE = 0
-	};
+
 	
 protected:
+
+	std::vector<Menu_Entry*> m_entries_list;
 	
 	Uint32 m_selected;
 	
@@ -39,18 +43,20 @@ public:
 	
 	bool is_selected(Uint32 entry)const{if(m_selected == entry) return true; return false;}
 		
-	virtual Uint32 get_return_action() const = 0;
 	
-	virtual void action_left() = 0;
+	void action_left();
 	
-	virtual void action_right() = 0;
+	void action_right();
 	
-	virtual void action_up() = 0;
+	void action_up();
 	
-	virtual void action_down() = 0;
+	void action_down();
 	
-	virtual void action_press() = 0;
+	void action_press();
 
+	/**
+	* To be called when ESC is pressed or the window is closed
+	*/
 	virtual void action_quit() = 0;
 	
 	virtual std::string get_menu_entry_string(Uint32 entry) const = 0;

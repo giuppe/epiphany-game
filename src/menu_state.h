@@ -1,5 +1,5 @@
 /***************************************************************************
-                          menu.h  -  description
+                          menu_state.h  -  description
                              -------------------
     begin                : Mon Jul 29 2002
     copyright            : (C) 2002 by Giuseppe D'Aqui'
@@ -18,64 +18,35 @@
 #include "fonts/font_manager.h"
 #include "surface_manager.h"
 #include "sprite.h"
-#include "screen_state.h"
+#include "menu_base_state.h"
+#include <vector>
 
 
 #ifndef MENU_H
 #define MENU_H
-class Game;
 
-class Menu_List;
 
-class Menu_List_Epiphany;
 
-class Menu : public ScreenState
+
+class Menu_State : public Menu_Base_State
 {
 	
-public:
-	enum{
-		MENU_EPIPHANY_NONE,
-		MENU_EPIPHANY_START,
-		MENU_EPIPHANY_QUIT
-	};
-	
-private:
 
-	Font_Handle m_menu_font;
-
-	Uint32 m_current_level;
-
-	Uint32 m_total_levels;
-
-	Sprite m_selector;
-
-	Surface* m_background;
-
-	Menu_List_Epiphany* m_menu_list;
-	
-	//Menu_List_Epiphany* m_menu_list;
 
 public:
 
-	Menu();
+	Menu_State();
 
-	~Menu();
+	~Menu_State();
 
 	void create();
 
-    void update(double elapsed);
+	void update(double elapsed);
 
-    void deinit(){};
+	void deinit();
 
-	void draw(){};
+	void draw();
 
-	Uint32 get_current_level();
-
-	void set_current_level(Uint32 current_level);
-	
-	void render_menu_list(Menu_List* menu_list, Sint32 menu_top_point, Sint32 menu_left_point, Sint32 menu_vertical_distance);
-	
-	void print_menu_background();
 
 };
 

@@ -11,18 +11,19 @@ epiphany_game_SOURCES = sfx.cpp main.cpp level.cpp sample.cpp entity.cpp \
 	 entities/entity_flintstone.cpp  entities/entity_explosion.cpp  entities/entity_monster.cpp 	\
 	 entities/entity_boulder.cpp  entities/entity_tomato.cpp	fonts/SFont.c			\
          entities/entity_steel.cpp  entities/entity_grass.cpp  entities/entity_exit.cpp  entities/entity_key.cpp \
-	screen.cpp sprite.cpp menu.cpp game.cpp surface_manager.cpp input.cpp fonts/font.cpp \
+	screen.cpp sprite.cpp menu_state.cpp game.cpp surface_manager.cpp input.cpp fonts/font.cpp \
 	fonts/font_factory.cpp fonts/font_manager.cpp surface.cpp resource_factory.cpp \
-	menu_entry_ranged.cpp menu_list_epiphany.cpp menu_list_options.cpp \
+	menu_entry_ranged.cpp menu_list_main.cpp menu_list_options.cpp \
 	tinyxml/tinystr.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp \
 	tinyxml/tinyxml.cpp menu_entry_bool.cpp music_manager.cpp xml_configuration.cpp \
-	commandline_configuration.cpp game_manager.cpp credits_state.cpp
+	commandline_configuration.cpp game_manager.cpp credits_state.cpp menu_options_state.cpp \
+	menu_base_state.cpp menu_list.cpp
 
 epiphany_game_LDADD = -lSDL2 -lSDL2_mixer
 
 
 noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
-	game.h screen.h menu.h sfx.h except.h level.h entity_factory.h \
+	game.h screen.h menu_state.h sfx.h except.h level.h entity_factory.h \
 	fonts/font_manager.h fonts/font_factory.h fonts/font.h fonts/SFont.h \
 	input.h sample.h myparser.h epiconfig.h entity_all.h resource.h \
 	game_timer.h map_editor.h entity_manager.h direction.h \
@@ -35,7 +36,8 @@ noinst_HEADERS = entity_type.h emdlparser.h levelmap.h \
 	entities/entity_gem.h entities/entity_emerald.h entities/entity_tomato.h \
 	resource_factory.h sprite.h epimap.h entity.h \
 	menu_entry.h menu_entry_simple.h menu_entry_ranged.h menu_list.h \
-	menu_list_epiphany.h menu_list_options.h tinyxml/tinystr.h \
+	menu_list_main.h menu_list_options.h tinyxml/tinystr.h \
 	tinyxml/tinyxml.h menu_entry_bool.h music_manager.h abstract_configuration.h \
 	xml_configuration.h commandline_configuration.h world_coord.h screen_coord.h \
-	inputbase.h game_manager.h screen_state.h credits_state.h
+	inputbase.h game_manager.h screen_state.h credits_state.h menu_options_state.h \
+	menu_base_state.h

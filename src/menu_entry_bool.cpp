@@ -18,16 +18,16 @@
 
 void Menu_Entry_Bool::action_press()
 {
-	if(m_current_value == 0)
-		m_current_value = 1;
+	if(*m_current_value == 0)
+		*m_current_value = 1;
 	else
-		m_current_value = 0;
-		
+		*m_current_value = 0;
+	this->execute_callback();	
 }
 
 std::string Menu_Entry_Bool::get_string() const
 {
-	if(m_current_value == 0)
+	if(*m_current_value == 0)
 	{
 		return (m_string+std::string(" Off")).c_str();
 	}

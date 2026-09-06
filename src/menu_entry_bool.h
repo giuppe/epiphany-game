@@ -27,24 +27,21 @@ class Menu_Entry_Bool : public Menu_Entry
 	
 		std::string m_string;
 	
-		Uint32 m_current_value;
+		bool* m_current_value;
 		
 	
 	public:
-
-		Menu_Entry_Bool(const char* string):
-						m_string(string),
-						m_current_value(0)
-						{};
 																
-		Menu_Entry_Bool(const char* string, Uint32 current_value):
+		Menu_Entry_Bool(const char* string, bool* current_value, Menu_Entry_Callback callback):
 																m_string(string),
 																m_current_value(current_value)
-																{};
+																{
+																	m_callback=callback;
+																};
 	
-		void set_current_value(Uint32 current_value);
+		void set_current_value(Uint32* current_value);
 		
-		Uint32 get_value() const {return m_current_value;}
+		Uint32 get_value() const {return *m_current_value;}
 	
 		std::string get_string() const;
 	

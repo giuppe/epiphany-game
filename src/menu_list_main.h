@@ -1,5 +1,5 @@
 /***************************************************************************
-                          menu_list_epiphany.h  -  description
+                          menu_list_main.h  -  description
                              -------------------
     begin                : Jun 13 2007
     copyright            : (C) 2007 by Giuseppe D'Aqui'
@@ -22,30 +22,22 @@
 #ifndef MENU_LIST_EPIPHANY_H_
 #define MENU_LIST_EPIPHANY_H_
 
-class Menu_List_Epiphany : public Menu_List
+class Menu_List_Main : public Menu_List
 {
 private:
 
-	std::vector<Menu_Entry*> m_entries_list;
 	
-	Uint32 m_return_action;
+	
+	Uint32 m_current_level;
+
+	Uint32 m_total_levels;
 	
 public:
-	enum{
-		MENU_NONE,
-		MENU_START,
-		MENU_OPTIONS,
-		MENU_QUIT
-	};
 	
-	Menu_List_Epiphany(Uint32 unsolved_level);
+	Menu_List_Main();
 	
-	~Menu_List_Epiphany();
-	
-	Uint32 get_selected_level() const;
-	
-	Uint32 get_return_action() const;
-	
+	~Menu_List_Main();
+		
 	void action_left();
 	
 	void action_right();

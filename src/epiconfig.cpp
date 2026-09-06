@@ -52,6 +52,8 @@ void Epiconfig::set_default_values()
 	m_volume_music = 8;
 	
 	m_last_level = 0;
+
+	m_current_level = 0;
 	
 	refresh_game_window_parameters();
 	
@@ -163,11 +165,20 @@ Uint32 Epiconfig::get_last_level()
 }
 
 
-
-
 void Epiconfig::set_last_level(Uint32 level)
 {
 	m_last_level = level;
+}
+
+
+Uint32 Epiconfig::get_current_level()
+{
+	return m_current_level;
+}
+
+void Epiconfig::set_current_level(Uint32 level)
+{
+	m_current_level = level;
 }
 
 

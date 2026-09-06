@@ -26,7 +26,7 @@
 
 #ifndef GAME_H
 #define GAME_H
-class Menu;
+class Menu_State;
 class Level;
 
 

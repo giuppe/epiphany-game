@@ -50,6 +50,8 @@ private:
 	
 	Uint32 m_last_level;
 
+	Uint32 m_current_level;
+
 	bool m_fullscreen;
 
 	Uint32 m_frame_skip;
@@ -91,6 +93,10 @@ public:
 	Uint32 get_volume_music();
 	
 	Uint32 get_last_level();
+
+	Uint32 get_current_level();
+	
+	void set_current_level(Uint32 level);
 	
 	void set_last_level(Uint32 level);
 	

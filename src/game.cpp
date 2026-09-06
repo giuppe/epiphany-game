@@ -28,7 +28,7 @@
 #include "game_manager.h"
 #include "game.h"
 #include "screen.h"
-#include "menu.h"
+#include "menu_state.h"
 #include "input.h"
 #include "level.h"
 #include "game_timer.h"
@@ -579,7 +579,7 @@ void Game::update(double elapsed)
 	case false:
 		DEBWARN("Game_over!...");
 		Music_Manager::instance()->play(MUS_MENU);
-		GameManager::instance()->change_state(new Menu());
+		GameManager::instance()->change_state(new Menu_State());
 		break;
 	case true:
 		DEBWARN("Winner! ;)");
@@ -596,7 +596,7 @@ void Game::update(double elapsed)
 		{
 			//TODO: maybe a congratulation screen
 			Music_Manager::instance()->play(MUS_MENU);
-			GameManager::instance()->change_state(new Menu());
+			GameManager::instance()->change_state(new Menu_State());
 		}
 	
 		break;

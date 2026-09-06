@@ -26,32 +26,21 @@ class Menu_Entry;
 class Menu_List_Options : public Menu_List
 {
 private:
-
-	std::vector<Menu_Entry*> m_entries_list;
 	
-	Uint32 m_return_action;
+	bool m_fullscreen;
 
 public:
-	enum{
-		MENU_NONE,
-		MENU_OK
-	};
+	Uint32 sample_volume;
+	Uint32 music_volume;
 	
 	Menu_List_Options();
 	
 	~Menu_List_Options();
-	
-	Uint32 get_return_action() const;
-	
+		
 	void action_left();
 	
 	void action_right();
 	
-	void action_up();
-	
-	void action_down();
-	
-	void action_press();
 
 	void action_quit();
 	

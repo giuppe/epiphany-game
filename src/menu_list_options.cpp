@@ -20,28 +20,59 @@
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
 #include "menu_entry_bool.h"
+#include "menu_state.h"
 #include "sfx.h"
 #include "music_manager.h"
+#include "game_manager.h"
+#include "credits_state.h"
 #include "screen.h"
 #include <vector>
 #include <cassert>
 
+Menu_List_Options* callback_obj;
 
+void menu_options_callback_back()
+{
+	GameManager::instance()->change_state(new Menu_State());
+}
+
+void menu_options_callback_sample_volume()
+{
+	Sample_Manager::instance()->set_volume(callback_obj->sample_volume);
+}
+
+void menu_options_callback_music_volume()
+{
+	Music_Manager::instance()->set_volume(callback_obj->music_volume);
+}
+
+void menu_options_callback_fullscreen()
+{
+	Screen::instance()->toggle_fullscreen();
+	Epiconfig::instance()->set_fullscreen(Screen::instance()->is_fullscreen());
+			
+}
 
 
 Menu_List_Options::Menu_List_Options()
 {
-	m_return_action = Menu_List_Options::MENU_NONE;
-	
 	m_selected = 0;
+
+	sample_volume = Sample_Manager::instance()->get_volume();
+
+	music_volume = Music_Manager::instance()->get_volume();
+
+	m_fullscreen = Screen::instance()->is_fullscreen();
+
+	callback_obj = this;
 	
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", Sample_Manager::instance()->get_volume()));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_callback_sample_volume));
+
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", &music_volume, &menu_options_callback_music_volume));
 	
-	//TODO insert music volume control
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", Music_Manager::instance()->get_volume()));
+	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", &m_fullscreen, &menu_options_callback_fullscreen));
 	
-	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", Screen::instance()->is_fullscreen()));
-	m_entries_list.push_back(new Menu_Entry_Simple("Back"));
+	m_entries_list.push_back(new Menu_Entry_Simple("Back", &menu_options_callback_back));
 	
 }
 
@@ -59,61 +90,10 @@ Menu_List_Options::~Menu_List_Options()
 
 
 
-void Menu_List_Options::action_press()
-{
-	m_entries_list[m_selected]->action_press();
-	
-	switch(m_selected)
-	{
-		case 3:
-			m_return_action = MENU_OK;
-			Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
-			Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
-			break;
-		case 2:
-			Screen::instance()->toggle_fullscreen();
-			Epiconfig::instance()->set_fullscreen(Screen::instance()->is_fullscreen());
-			break;
-		default:
-			m_return_action = MENU_NONE;
-	}
-	
-}
-
 void Menu_List_Options::action_quit()
 {
-	m_selected = 2;
+	(*menu_options_callback_back)();
 	this->action_press();
-}
-
-
-
-
-void Menu_List_Options::action_down()
-{
-	
-	if(m_selected<m_entries_list.size()-1)
-	{
-
-		m_selected++;
-
-	}
-
-}
-
-
-
-
-void Menu_List_Options::action_up()
-{
-	
-	if(m_selected>0)
-	{
-
-		m_selected--;
-
-	}
-
 }
 
 
@@ -121,7 +101,7 @@ void Menu_List_Options::action_up()
 
 void Menu_List_Options::action_right()
 {
-	m_entries_list[m_selected]->action_right();
+	Menu_List::action_right();
 	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
 	Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
 			
@@ -132,7 +112,7 @@ void Menu_List_Options::action_right()
 
 void Menu_List_Options::action_left()
 {
-	m_entries_list[m_selected]->action_left();
+	Menu_List::action_left();
 	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
 	Music_Manager::instance()->set_volume(m_entries_list[1]->get_value());
 			
@@ -157,12 +137,5 @@ Uint32 Menu_List_Options::get_list_size() const
 		
 }
 
-
-
-
-Uint32 Menu_List_Options::get_return_action() const
-{
-	return m_return_action;
-}
 
 
