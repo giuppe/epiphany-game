@@ -42,9 +42,9 @@ void Game_Timer::set_total_time(Uint32 total_time)
 
 void Game_Timer::update()
 {
-	if(SDL_GetTicks()-m_last_time>1000)
+	if(SDL_GetTicks64()-m_last_time>1000)
 	{
-		m_last_time=SDL_GetTicks();
+		m_last_time=SDL_GetTicks64();
 		m_total_time--;
 	}
 	
@@ -63,7 +63,7 @@ bool Game_Timer::is_zero()
 
 void Game_Timer::start()
 {
-	m_last_time=SDL_GetTicks();
+	m_last_time=SDL_GetTicks64();
 }
 
 

@@ -110,8 +110,8 @@ void Game_Manager::go()
 			m_current_state->create();
 			m_current_state_just_created = false;
 		}
-		Sint32 current_frame_time=0;
-		current_frame_time=SDL_GetTicks();
+		Uint64 current_frame_time=0;
+		current_frame_time=SDL_GetTicks64();
 
 		ScreenState* temp_state = m_current_state;
 
@@ -119,9 +119,9 @@ void Game_Manager::go()
 
 		temp_state->draw();
 
-		while(SDL_GetTicks()-current_frame_time<20)
+		while(SDL_GetTicks64()-current_frame_time<20)
 		{
-			if(SDL_GetTicks()-current_frame_time<15)
+			if(SDL_GetTicks64()-current_frame_time<15)
 			{
 				SDL_Delay(5);
 			}

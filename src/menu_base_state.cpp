@@ -134,7 +134,7 @@ void Menu_Base_State::render_menu_list(Menu_List* menu_list, Sint32 menu_top_poi
 
 	Font* menu_font = Font_Manager::instance()->get_font(m_menu_font); 
 
-	Uint64 current_time=SDL_GetTicks();
+	Uint64 current_time=SDL_GetTicks64();
 
 	Uint32 menu_offset_x = 10;
 	

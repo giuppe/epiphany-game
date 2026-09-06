@@ -275,7 +275,7 @@ void Game::_draw(Uint32 frame_number, bool update_only)
 		}
 	}
 #endif	
-	if(update_only == false)
+	//if(update_only == false)
 	{
 		draw_score();
 	
@@ -519,7 +519,7 @@ void Game::update(double elapsed)
 
 		}
 		
-		double current_frame_time=SDL_GetTicks();
+		Uint64 current_frame_time=SDL_GetTicks64();
 		
 		get_keys();
 		
@@ -531,7 +531,7 @@ void Game::update(double elapsed)
 		
 		for(Uint32 j=0;j < Epiconfig::instance()->get_max_anim_drawn();j++)
 		{
-			current_frame_time=SDL_GetTicks();
+			current_frame_time=SDL_GetTicks64();
 			if((j % valid_frames)==0)
 			{
 				_draw(j, false);
@@ -543,9 +543,9 @@ void Game::update(double elapsed)
 
 			if(Epiconfig::instance()->is_frame_limiter_enabled())
 			{
-				while(SDL_GetTicks()-current_frame_time<msec_per_frame)
+				while(SDL_GetTicks64()-current_frame_time<msec_per_frame)
 				{
-					if((SDL_GetTicks()-current_frame_time)<(msec_per_frame-5))
+					if((SDL_GetTicks64()-current_frame_time)<(msec_per_frame-5))
 					{
 						SDL_Delay(5);
 					}
