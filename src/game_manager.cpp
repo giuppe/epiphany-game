@@ -64,7 +64,7 @@ Uint32 GameManager::find_levels_in_dir()
 {
 	Uint32 result = 0;
 	char base_path[255];
-	char level_path[255];
+	char level_path[300];
 	
 	sprintf(base_path, "%s%s", Resource_Factory::instance()->get_resource_path().c_str(), "/maps/level");
 	
