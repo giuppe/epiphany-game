@@ -579,24 +579,24 @@ void Game::update(double elapsed)
 	case false:
 		DEBWARN("Game_over!...");
 		Music_Manager::instance()->play(MUS_MENU);
-		GameManager::instance()->change_state(new Menu_State());
+		Game_Manager::instance()->change_state(new Menu_State());
 		break;
 	case true:
 		DEBWARN("Winner! ;)");
 		Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
-		Uint32 total_levels = GameManager::instance()->find_levels_in_dir();
+		Uint32 total_levels = Game_Manager::instance()->find_levels_in_dir();
 		bool next_level_exists = (unsolved_level==m_current_level_number)&&(unsolved_level+1>total_levels);
 		if(next_level_exists)
 		{
 			Epiconfig::instance()->set_last_level(unsolved_level+1);
 		
-			GameManager::instance()->change_state(new Game(unsolved_level+1));
+			Game_Manager::instance()->change_state(new Game(unsolved_level+1));
 		}
 		else
 		{
 			//TODO: maybe a congratulation screen
 			Music_Manager::instance()->play(MUS_MENU);
-			GameManager::instance()->change_state(new Menu_State());
+			Game_Manager::instance()->change_state(new Menu_State());
 		}
 	
 		break;

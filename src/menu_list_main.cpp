@@ -30,24 +30,24 @@
 void menu_callback_start()
 {
 	Uint32 current_level = Epiconfig::instance()->get_current_level();
-	GameManager::instance()->change_state(new Game(current_level));
+	Game_Manager::instance()->change_state(new Game(current_level));
 }
 
 void menu_callback_quit()
 {
-	GameManager::instance()->change_state(new CreditsState());
+	Game_Manager::instance()->change_state(new CreditsState());
 }
 
 void menu_callback_options()
 {
-	GameManager::instance()->change_state(new Menu_Options_State());
+	Game_Manager::instance()->change_state(new Menu_Options_State());
 }
 
 Menu_List_Main::Menu_List_Main()
 {
 	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
 	
-	Uint32 total_levels = GameManager::instance()->find_levels_in_dir();
+	Uint32 total_levels = Game_Manager::instance()->find_levels_in_dir();
 
 	m_total_levels = total_levels;
 

@@ -23,7 +23,7 @@
 #include "epiconfig.h"
 #include "screen_state.h"
 
-class GameManager 
+class Game_Manager 
 {
     private:
 
@@ -56,15 +56,15 @@ class GameManager
     // singleton stuff
     private:
 
-	    static GameManager* _instance;
+	    static Game_Manager* _instance;
 
     protected:
 
-        GameManager(){};
+        Game_Manager(){};
 
     public:
 
-        static GameManager* instance();
+        static Game_Manager* instance();
 };
 
 #endif //GAME_MANAGER_H

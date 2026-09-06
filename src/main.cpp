@@ -134,7 +134,7 @@
 			Music_Manager::instance()->disable_music();
 		}
 		
-		GameManager* game_manager = GameManager::instance();
+		Game_Manager* game_manager = Game_Manager::instance();
 		
 		Epiconfig::instance()->set_frame_skip(frame_skip);
 		

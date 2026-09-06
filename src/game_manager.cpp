@@ -7,7 +7,7 @@
 #include "resource_factory.h"
 #include <cassert>
 
-void GameManager::init()
+void Game_Manager::init()
 {
 
 	DEBOUT("Entering Game::init()...\n");
@@ -60,7 +60,7 @@ void GameManager::init()
 }
 
 
-Uint32 GameManager::find_levels_in_dir()
+Uint32 Game_Manager::find_levels_in_dir()
 {
 	Uint32 result = 0;
 	char base_path[255];
@@ -81,23 +81,23 @@ Uint32 GameManager::find_levels_in_dir()
 	return result;
 }
 
-void GameManager::save_config()
+void Game_Manager::save_config()
 {
 	Epiconfig::instance()->save_values_to_file(m_ini_path);
 }
 
-void GameManager::change_state(ScreenState* new_state)
+void Game_Manager::change_state(ScreenState* new_state)
 {
 	m_current_state = new_state;
 	m_current_state_just_created = true;
 }
 
-void GameManager::return_to_system()
+void Game_Manager::return_to_system()
 {
 	m_current_state = NULL;
 }
 
-void GameManager::go()
+void Game_Manager::go()
 {
 
 
@@ -133,7 +133,7 @@ void GameManager::go()
 
 }
 
-void GameManager::play_level(const char* level)
+void Game_Manager::play_level(const char* level)
 {
 	//TODO: m_game->play_level(level);
 }
@@ -143,13 +143,13 @@ void GameManager::play_level(const char* level)
 
 // singleton stuff
 
-GameManager* GameManager::_instance = 0;
+Game_Manager* Game_Manager::_instance = 0;
 
-GameManager* GameManager::instance()
+Game_Manager* Game_Manager::instance()
 {
 	if(_instance==0)
 	{
-		_instance=new GameManager();
+		_instance=new Game_Manager();
 		_instance->init();
 
 	}

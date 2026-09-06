@@ -53,7 +53,7 @@ void CreditsState::update(double elapsed)
 
     if((input->get_quit()||input->get_enter()||input->get_fire()))
 	{
-        GameManager::instance()->return_to_system();
+        Game_Manager::instance()->return_to_system();
         return;
     }
 
