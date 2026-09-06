@@ -48,9 +48,13 @@ private:
 
 	Uint32 m_current_level_number;
 
+	bool m_direct_map_loading = false;
+
 public:
 	
 	Game(Uint32 level_number);
+
+	Game(const char *level_path);
 
 	void create();
 
@@ -61,12 +65,6 @@ public:
 	void draw();
 	
 	void init();
-	
-	void go();
-	
-	bool main_loop();
-
-	void play_level(const char *);
 	
 	Level* get_current_level(){return m_level;}
 	

@@ -129,7 +129,7 @@
 		
 		cmdconf->get_bool(std::string("cmd"), std::string("disable-music"), disable_music);
 		
-		if(disable_music == true)
+		if(disable_music)
 		{
 			Music_Manager::instance()->disable_music();
 		}
@@ -138,23 +138,26 @@
 		
 		Epiconfig::instance()->set_frame_skip(frame_skip);
 		
-		if(disable_frame_limiter == true)
+		if(disable_frame_limiter)
 		{
 			Epiconfig::instance()->set_frame_limiter_enabled(false);
 		}
 
-		game_manager->change_state(new Menu_State());
 		
-		if(using_another_map == true)
+		
+		if(using_another_map)
 		{
 			printf("Map name: %s\n", map_name.c_str());
 			
-			game_manager->play_level(map_name.c_str());
+			game_manager->change_state(new Game(map_name.c_str()));
 		}
 		else
 		{
-			game_manager->go();
+			game_manager->change_state(new Menu_State());
+			
 		}
+		
+		game_manager->go();
 		
 		DEBOUT("Exiting game::go().\n");
 		

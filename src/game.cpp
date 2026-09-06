@@ -43,14 +43,6 @@
 
 
 
-bool Game::main_loop()
-{
-	
-	
-
-	
-	
-}
 
 
 
@@ -388,22 +380,6 @@ void Game::draw_score()
 
 
 
-
-
-
-void Game::play_level(const char *level_path)
-{
-	m_level=new Level();
-        
-	m_level->load_map(level_path);
-                                                        
-        
-	main_loop();
-	return;
-}
-
-
-
 void Game::load_fonts()
 {
 	
@@ -451,32 +427,45 @@ void Game::show_loading()
 
 Game::Game(Uint32 level_number)
 {
+	m_direct_map_loading = false;
+
 	this->m_current_level_number = level_number;
+}
+
+Game::Game(const char *level_path)
+{
+	m_direct_map_loading = true;
+
+	m_level=new Level();
+        
+	m_level->load_map(level_path);
+
+	this->m_current_level_number = -1;
 }
 
 void Game::create()
 {
 	load_fonts();
 
-	m_level=new Level();
-  		
-	char current_level_path[255];
+	if(!m_direct_map_loading)
+	{
+		m_level=new Level();
+			
+		char current_level_path[255];
 
-	sprintf(current_level_path, "%s/maps/level%d.map",
-			Resource_Factory::instance()->get_resource_path().c_str(),
-			m_current_level_number);
+		sprintf(current_level_path, "%s/maps/level%d.map",
+				Resource_Factory::instance()->get_resource_path().c_str(),
+				m_current_level_number);
 
-	DEBOUT("Loading map: "<<current_level_path<<"\n");
+		DEBOUT("Loading map: "<<current_level_path<<"\n");
 
-	m_level->load_map(current_level_path);
+		m_level->load_map(current_level_path);
+
+	}
 	
 	show_loading();
 
 	Music_Manager::instance()->play(MUS_GAME);
-	
-	Uint32 current_frame_time = 0;
-	
-	bool exit_state=false;
 	
 	m_time.set_total_time(m_level->get_max_time());
 
@@ -574,11 +563,18 @@ void Game::update(double elapsed)
     	 	
 	delete m_level;
 
+	if(m_direct_map_loading)
+	{
+		Game_Manager::instance()->return_to_system();
+		return;
+	}
+
 	switch(exit_state)
 	{
 	case false:
 		DEBWARN("Game_over!...");
 		Music_Manager::instance()->play(MUS_MENU);
+
 		Game_Manager::instance()->change_state(new Menu_State());
 		break;
 	case true:
