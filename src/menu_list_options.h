@@ -23,6 +23,8 @@
 
 class Menu_Entry;
 
+class Menu_Base_State;
+
 class Menu_List_Options : public Menu_List
 {
 private:
@@ -33,7 +35,7 @@ public:
 	Uint32 sample_volume;
 	Uint32 music_volume;
 	
-	Menu_List_Options();
+	Menu_List_Options(Menu_Base_State* parent);
 	
 	~Menu_List_Options();
 		

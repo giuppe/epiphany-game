@@ -22,6 +22,8 @@
 #ifndef MENU_LIST_EPIPHANY_H_
 #define MENU_LIST_EPIPHANY_H_
 
+class Menu_Base_State;
+
 class Menu_List_Main : public Menu_List
 {
 private:
@@ -34,7 +36,7 @@ private:
 	
 public:
 	
-	Menu_List_Main();
+	Menu_List_Main(Menu_Base_State* parent);
 	
 	~Menu_List_Main();
 		

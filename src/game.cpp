@@ -445,6 +445,8 @@ Game::Game(const char *level_path)
 
 void Game::create()
 {
+	Input::instance()->reset_states();
+
 	load_fonts();
 
 	if(!m_direct_map_loading)
@@ -601,7 +603,7 @@ void Game::update(double elapsed)
 
 void Game::deinit()
 {
-	
+	Input::instance()->reset_states();
 }
 
 void Game::draw()

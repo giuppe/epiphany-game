@@ -75,9 +75,9 @@ Menu_State::~Menu_State()
 void Menu_State::create()
 {
 	Menu_Base_State::create();
-
+	Input::instance()->reset_states();
 	Music_Manager::instance()->play(MUS_MENU);
-	m_menu_list = new Menu_List_Main();
+	m_menu_list = new Menu_List_Main(this);
 	
 }
 
@@ -96,12 +96,16 @@ void Menu_State::draw()
 {
 	Menu_Base_State::draw();
 	Epiconfig* config = Epiconfig::instance();
+	
+
+	this->print_menu_background();
 	this->render_menu_list(m_menu_list, 150, config->get_base_screen_size_x()/2, config->get_base_screen_size_y()/9);
 
 }
 
 void Menu_State::deinit()
 {
+	Input::instance()->reset_states();
 	Menu_Base_State::deinit();
 	delete m_menu_list;
 

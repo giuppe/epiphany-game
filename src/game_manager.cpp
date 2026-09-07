@@ -115,9 +115,9 @@ void Game_Manager::go()
 
 		ScreenState* temp_state = m_current_state;
 
-		temp_state->update(0);
+		temp_state->update_all(0);
 
-		temp_state->draw();
+		temp_state->draw_all();
 
 		while(SDL_GetTicks64()-current_frame_time<20)
 		{

@@ -51,7 +51,7 @@ class Menu_Base_State : public ScreenState
     public:
         Menu_Base_State();
 
-        ~Menu_Base_State();
+        virtual ~Menu_Base_State(){};
 
         void create();
 

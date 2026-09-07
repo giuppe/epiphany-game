@@ -22,10 +22,7 @@ Menu_Base_State::Menu_Base_State()
 	m_menu_list = NULL;
 }
 
-Menu_Base_State::~Menu_Base_State()
-{
 
-}
 
 void Menu_Base_State::create()
 {
@@ -138,10 +135,6 @@ void Menu_Base_State::render_menu_list(Menu_List* menu_list, Sint32 menu_top_poi
 
 	Uint32 menu_offset_x = 10;
 	
-	screen->clear();
-
-	this->print_menu_background();
-	
 	//printing menu
 	
 			
@@ -181,8 +174,6 @@ void Menu_Base_State::render_menu_list(Menu_List* menu_list, Sint32 menu_top_poi
 	m_selector.draw();
 	
 //	m_selector.put_screen(scr_coord);
-
-	screen->flip_display();
 
 
 	

@@ -15,14 +15,12 @@
  ***************************************************************************/
 
 #include "dephine.h"
-#include "menu_list_options.h"
+#include "menu_list_ingame_options.h"
 #include "menu_entry.h"
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
 #include "menu_entry_bool.h"
 #include "menu_state.h"
-#include "menu_base_state.h"
-#include "input.h"
 #include "sfx.h"
 #include "music_manager.h"
 #include "game_manager.h"
@@ -31,35 +29,33 @@
 #include <vector>
 #include <cassert>
 
-Menu_List_Options* callback_obj;
+Menu_List_Ingame_Options* callback_ingame_obj;
 
-void menu_options_callback_back()
+void menu_options_ingame_callback_back()
 {
-	callback_obj->get_parent_menu_state()->close();
+	Game_Manager::instance()->change_state(new Menu_State());
 }
 
-void menu_options_callback_sample_volume()
+void menu_options_ingame_callback_sample_volume()
 {
-	Sample_Manager::instance()->set_volume(callback_obj->sample_volume);
+	Sample_Manager::instance()->set_volume(callback_ingame_obj->sample_volume);
 }
 
-void menu_options_callback_music_volume()
+void menu_options_ingame_callback_music_volume()
 {
-	Music_Manager::instance()->set_volume(callback_obj->music_volume);
+	Music_Manager::instance()->set_volume(callback_ingame_obj->music_volume);
 }
 
-void menu_options_callback_fullscreen()
+void menu_options_ingame_callback_fullscreen()
 {
 	Screen::instance()->toggle_fullscreen();
 	Epiconfig::instance()->set_fullscreen(Screen::instance()->is_fullscreen());
-	Input::instance()->reset_states();
+			
 }
 
 
-Menu_List_Options::Menu_List_Options(Menu_Base_State* parent)
+Menu_List_Ingame_Options::Menu_List_Ingame_Options()
 {
-	m_parent_menu_state = parent;
-
 	m_selected = 0;
 
 	sample_volume = Sample_Manager::instance()->get_volume();
@@ -68,22 +64,22 @@ Menu_List_Options::Menu_List_Options(Menu_Base_State* parent)
 
 	m_fullscreen = Screen::instance()->is_fullscreen();
 
-	callback_obj = this;
+	callback_ingame_obj = this;
 	
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_callback_sample_volume));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_ingame_callback_sample_volume));
 
-	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", &music_volume, &menu_options_callback_music_volume));
+	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", &music_volume, &menu_options_ingame_callback_music_volume));
 	
-	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", &m_fullscreen, &menu_options_callback_fullscreen));
+	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", &m_fullscreen, &menu_options_ingame_callback_fullscreen));
 	
-	m_entries_list.push_back(new Menu_Entry_Simple("Back", &menu_options_callback_back));
+	m_entries_list.push_back(new Menu_Entry_Simple("Back", &menu_options_ingame_callback_back));
 	
 }
 
 
 
 
-Menu_List_Options::~Menu_List_Options()
+Menu_List_Ingame_Options::~Menu_List_Ingame_Options()
 {
 	for(Uint32 i=0; i<m_entries_list.size(); i++)
 	{
@@ -94,16 +90,16 @@ Menu_List_Options::~Menu_List_Options()
 
 
 
-void Menu_List_Options::action_quit()
+void Menu_List_Ingame_Options::action_quit()
 {
-	(*menu_options_callback_back)();
+	(*menu_options_ingame_callback_back)();
 	this->action_press();
 }
 
 
 
 
-void Menu_List_Options::action_right()
+void Menu_List_Ingame_Options::action_right()
 {
 	Menu_List::action_right();
 	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
@@ -114,7 +110,7 @@ void Menu_List_Options::action_right()
 
 
 
-void Menu_List_Options::action_left()
+void Menu_List_Ingame_Options::action_left()
 {
 	Menu_List::action_left();
 	Sample_Manager::instance()->set_volume(m_entries_list[0]->get_value());
@@ -125,7 +121,7 @@ void Menu_List_Options::action_left()
 
 
 
-std::string Menu_List_Options::get_menu_entry_string(Uint32 entry) const
+std::string Menu_List_Ingame_Options::get_menu_entry_string(Uint32 entry) const
 {
 	assert(entry<m_entries_list.size() && "Fatal: Accessing menu_entry outside limits");
 
@@ -135,7 +131,7 @@ std::string Menu_List_Options::get_menu_entry_string(Uint32 entry) const
 
 
 
-Uint32 Menu_List_Options::get_list_size() const
+Uint32 Menu_List_Ingame_Options::get_list_size() const
 {
 	return m_entries_list.size();
 		

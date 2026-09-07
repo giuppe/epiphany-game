@@ -14,13 +14,32 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "dephine.h"
 
 #ifndef SCREENSTATE_H
 #define SCREENSTATE_H
 
 class ScreenState
 {
+    private:
+        bool m_persistent_update = false;
+        bool m_persistent_draw = false;
+        
+        bool m_kill_substate_next = false;
+        ScreenState* m_substate_to_launch = NULL;
+        void real_kill_substate_();
+        void real_launch_substate_();
+
+    protected:
+        ScreenState* m_parent = NULL;
+        ScreenState* m_substate = NULL;
+        
+
+        void set_parent(ScreenState* parent);
+
     public:
+        virtual ~ScreenState(){};
+
         virtual void create() = 0;
 
         virtual void update(double elapsed) = 0;
@@ -28,6 +47,20 @@ class ScreenState
         virtual void deinit() = 0;
 
         virtual void draw() = 0;
+
+        void update_all(double elapsed);
+
+        void draw_all();
+
+        void kill_substate();
+
+        void close();
+
+        void launch_substate(ScreenState* substate);
+
+        void set_persistent_update(bool persistent_update){m_persistent_update = persistent_update;}
+
+        void set_persistent_draw(bool persistent_draw){m_persistent_draw = persistent_draw;}
 };
 
 #endif //SCREENSTATE_H

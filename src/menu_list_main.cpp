@@ -23,6 +23,7 @@
 #include "game.h"
 #include "credits_state.h"
 #include "menu_options_state.h"
+#include "menu_base_state.h"
 #include "game_manager.h"
 #include <vector>
 #include <cassert>
@@ -42,7 +43,7 @@ void menu_callback_quit()
 
 void menu_callback_options()
 {
-	Game_Manager::instance()->change_state(new Menu_Options_State());
+	callback_menumain_obj->get_parent_menu_state()->launch_substate(new Menu_Options_State());
 }
 
 void menu_callback_level()
@@ -51,8 +52,10 @@ void menu_callback_level()
 	Epiconfig::instance()->set_current_level(callback_menumain_obj->get_current_level());
 }
 
-Menu_List_Main::Menu_List_Main()
+Menu_List_Main::Menu_List_Main(Menu_Base_State* parent)
 {
+	m_parent_menu_state = parent;
+
 	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
 	
 	Uint32 total_levels = Game_Manager::instance()->find_levels_in_dir();
