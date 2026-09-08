@@ -38,7 +38,7 @@ class ScreenState
         void set_parent(ScreenState* parent);
 
     public:
-        virtual ~ScreenState(){};
+        virtual ~ScreenState();
 
         virtual void create() = 0;
 

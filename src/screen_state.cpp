@@ -98,3 +98,11 @@ void ScreenState::real_kill_substate_()
         m_substate = NULL;
     }
 }
+
+ScreenState::~ScreenState()
+{
+    if(m_substate != NULL)
+    {
+        real_kill_substate_();
+    }
+}
