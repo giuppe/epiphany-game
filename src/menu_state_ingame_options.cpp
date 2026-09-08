@@ -41,7 +41,6 @@ void Menu_State_Ingame_Options::draw()
     Menu_Base_State::draw();
 	Epiconfig* config = Epiconfig::instance();
     Screen* screen = Screen::instance();
-	screen->clear();
 
 	this->print_menu_background();
 	this->render_menu_list(m_menu_list, config->get_base_screen_size_y()/2, config->get_base_screen_size_x()/3, config->get_base_screen_size_y()/9);

@@ -33,7 +33,7 @@ Menu_List_Ingame_Options* callback_ingame_obj;
 
 void menu_options_ingame_callback_back()
 {
-	Game_Manager::instance()->change_state(new Menu_State());
+	callback_ingame_obj->get_parent_menu_state()->close();
 }
 
 void menu_options_ingame_callback_sample_volume()

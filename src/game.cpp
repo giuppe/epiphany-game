@@ -29,6 +29,7 @@
 #include "game.h"
 #include "screen.h"
 #include "menu_state.h"
+#include "menu_state_ingame_options.h"
 #include "input.h"
 #include "level.h"
 #include "game_timer.h"
@@ -59,8 +60,9 @@ void Game::get_keys()
 	
 	if((input->get_quit())&&(m_level->is_player_alive()))
 	{
-			
-		m_level->do_explode_player();
+		this->set_persistent_draw(true);
+		this->launch_substate(new Menu_State_Ingame_Options());
+		//m_level->do_explode_player();
 		return;
 				
 	}

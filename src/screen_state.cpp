@@ -2,7 +2,9 @@
 
 void ScreenState::update_fixed_all(Uint64 elapsed)
 {
-    this->update_fixed(elapsed);
+    if(m_substate == NULL || m_persistent_update)
+        this->update_fixed(elapsed);
+    
     if(m_substate != NULL)
     {
         m_substate->update_fixed(elapsed);
