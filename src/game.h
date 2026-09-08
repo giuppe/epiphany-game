@@ -60,6 +60,8 @@ public:
 
     void update(double elapsed);
 
+	void update_fixed(Uint64 elapsed);
+
     void deinit();
 
 	void draw();

@@ -1,5 +1,14 @@
 #include "screen_state.h"
 
+void ScreenState::update_fixed_all(Uint64 elapsed)
+{
+    this->update_fixed(elapsed);
+    if(m_substate != NULL)
+    {
+        m_substate->update_fixed(elapsed);
+    }
+}
+
 void ScreenState::update_all(double elapsed)
 {
     if(m_kill_substate_next)

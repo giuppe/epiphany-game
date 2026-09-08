@@ -164,125 +164,7 @@ void Game::move_all()
 
 
 
-void Game::_draw(Uint32 frame_number, bool update_only)
-{
 
-	Entity* curr_ntt;
-	Screen* screen = Screen::instance();
-	//screen->clear();
-	
-	Entity* player = &m_level->get_player();
-	
-	Entity_Manager* entity_manager = Entity_Manager::instance();
-	
-	Uint32 entity_manager_size = entity_manager->size();
-	
-	//centering screen on player
-//	screen->set_window_center(m_level->get_player().get_sprite().get_pos_x(),m_level->get_player().get_sprite().get_pos_y());
-
-	screen->set_camera_position(m_level->get_player_sprite_position());
-
-	//move sprites
-	if(player->exists())
-	{
-		player->move_sprite();
-	}
-	for(Uint32 i=1; i<entity_manager_size; i++)
-	{
-		curr_ntt=entity_manager->get_entity(i);
-		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-		{
-
-			curr_ntt->move_sprite();
-			
-		}
-	}
-	
-	//clearing background
-	screen->clear();
-	//TODO: we should clear only changed background
-#if 0
-	if(player->exists())
-	{
-		player->clear_bg();
-	}
-	for(Uint32 i=1; i<entity_manager_size; i++)
-	{
-		curr_ntt=entity_manager->get_entity(i);
-		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-		{
-
-			curr_ntt->clear_bg();
-			
-		}
-	}
-	//updating background
-	if(player->exists())
-	{
-		player->update_bg();
-	}
-	for(Uint32 i=1; i<entity_manager_size; i++)
-	{
-		curr_ntt=entity_manager->get_entity(i);
-		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-		{
-
-			curr_ntt->update_bg();
-			
-		}
-	}
-#endif
-	//drawing sprites
-	
-	if(player->exists())
-	{
-		player->draw_on_screen();
-	}
-	for(Uint32 i=1; i<entity_manager_size; i++)
-	{
-		curr_ntt=entity_manager->get_entity(i);
-		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-		{
-
-			curr_ntt->draw_on_screen();
-			
-		}
-	}
-#if 0
-	//drawing player
-	if(player->exists())
-	{
-		if(update_only == false)
-		{
-
-			player->draw_on_screen();
-		}
-	}
-
-	//draw other entities
-	for(Uint32 i=1; i<entity_manager_size; i++)
-	{
-		curr_ntt=entity_manager->get_entity(i);
-		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
-		{
-		//	curr_ntt->refresh_sprite();
-			curr_ntt->move_sprite();
-			if(update_only == false)
-			{
-				curr_ntt->draw_on_screen();
-
-			}
-		}
-	}
-#endif	
-	//if(update_only == false)
-	{
-		draw_score();
-	
-		screen->flip_display();
-	}
-	
-}
 
 
 
@@ -479,6 +361,40 @@ void Game::create()
 	
 }
 
+void Game::update_fixed(Uint64 elapsed)
+{
+	//DEBWARN("Update fixed\n");
+	Input* input = Input::instance();
+	
+	input->update();
+
+	if(m_level->is_player_alive())
+	{
+
+		m_time.update();
+
+		if(m_time.get_time()<10)
+		{
+			
+			Sample_Manager::instance()->play(SFX_GAME_TIMEALARM);
+
+		}
+
+		if(m_time.is_zero())
+		{
+
+			m_level->do_explode_player();
+
+		}
+
+	}
+	
+	
+	get_keys();
+	
+	move_all();
+}
+
 void Game::update(double elapsed)
 {
 	Input* input = Input::instance();
@@ -500,33 +416,38 @@ void Game::update(double elapsed)
 			}
 		}
 		
-		if(m_level->is_player_alive())
+		
+
+		Entity* curr_ntt;
+		Screen* screen = Screen::instance();
+
+		
+		Entity* player = &m_level->get_player();
+		
+		Entity_Manager* entity_manager = Entity_Manager::instance();
+		
+		Uint32 entity_manager_size = entity_manager->size();
+		
+		//centering screen on player
+
+		screen->set_camera_position(m_level->get_player_sprite_position());
+
+		//move sprites
+		if(player->exists())
 		{
-
-			m_time.update();
-
-			if(m_time.get_time()<10)
-			{
-				
-				Sample_Manager::instance()->play(SFX_GAME_TIMEALARM);
-
-			}
-
-			if(m_time.is_zero())
-			{
-
-				m_level->do_explode_player();
-
-			}
-
+			player->move_sprite();
 		}
-		
-		Uint64 current_frame_time=SDL_GetTicks64();
-		
-		get_keys();
-		
-		move_all();
+		for(Uint32 i=1; i<entity_manager_size; i++)
+		{
+			curr_ntt=entity_manager->get_entity(i);
+			if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+			{
 
+				curr_ntt->move_sprite();
+				
+			}
+		}
+		/*
 		Uint32 msec_per_frame = Epiconfig::instance()->get_msec_per_frame();
 		
 		Uint32 valid_frames = Epiconfig::instance()->get_frame_skip()+1;
@@ -555,6 +476,7 @@ void Game::update(double elapsed)
 			}
 		
 		}
+			*/
 		//input->update();
 		return;
 	}
@@ -608,5 +530,30 @@ void Game::deinit()
 
 void Game::draw()
 {
+	Entity* player = &m_level->get_player();
+	
+	Entity_Manager* entity_manager = Entity_Manager::instance();
+	
+	Uint32 entity_manager_size = entity_manager->size();
 
+	if(player->exists())
+	{
+		player->draw_on_screen();
+	}
+
+	Entity* curr_ntt;
+
+	for(Uint32 i=1; i<entity_manager_size; i++)
+	{
+		curr_ntt=entity_manager->get_entity(i);
+		if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
+		{
+
+			curr_ntt->draw_on_screen();
+			
+		}
+	}
+
+
+	draw_score();
 }

@@ -48,7 +48,11 @@ class ScreenState
 
         virtual void draw() = 0;
 
+        virtual void update_fixed(Uint64 elapsed){};
+
         void update_all(double elapsed);
+
+        void update_fixed_all(Uint64 elapsed);
 
         void draw_all();
 

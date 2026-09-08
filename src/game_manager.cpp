@@ -99,9 +99,31 @@ void Game_Manager::return_to_system()
 
 void Game_Manager::go()
 {
+	/*
+	const double dt = 1.0 / 60.0;
+	double current_time = get_time();
+	double accumulator = 0.0;
 
+	while (game_running) {
+		double new_time = get_time();
+		double frame_time = new_time - current_time;
+		current_time = new_time;
+
+		accumulator += frame_time;
+
+		while (accumulator >= dt) {
+			integrate_physics(current_state, dt);
+			accumulator -= dt;
+		}
+
+		render(current_state);
+	}
+	*/
 
 	Screen* screen = Screen::instance();
+	Uint64 current_frame_time=SDL_GetTicks64();
+	Uint64 accumulator = 0;
+	const Uint32 dt = 1000.0 / 6.0;
 
 	while(m_current_state != NULL)
 	{
@@ -110,10 +132,22 @@ void Game_Manager::go()
 			m_current_state->create();
 			m_current_state_just_created = false;
 		}
-		Uint64 current_frame_time=0;
-		current_frame_time=SDL_GetTicks64();
 
 		ScreenState* temp_state = m_current_state;
+
+		Uint64 new_time = SDL_GetTicks64();
+		Uint64 frame_time = new_time - current_frame_time;
+		current_frame_time = new_time;
+
+		accumulator += frame_time;
+
+		//DEBWARN("accumulator "<<accumulator<<"\n");
+
+		while (accumulator >= dt) {
+			temp_state->update_fixed_all(dt);
+			accumulator -= dt;
+		}
+
 
 		temp_state->update_all(0);
 
