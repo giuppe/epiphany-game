@@ -1,6 +1,6 @@
 #include "menu_state_ingame_options.h"
 
-#include "menu_list_options.h"
+#include "menu_list_ingame_options.h"
 #include "screen.h"
 #include "input.h"
 
@@ -20,7 +20,7 @@ void Menu_State_Ingame_Options::create()
 {
     Menu_Base_State::create();
     Input::instance()->reset_states();
-    m_menu_list = new Menu_List_Options(this);
+    m_menu_list = new Menu_List_Ingame_Options(this);
 }
 
 void Menu_State_Ingame_Options::update(double elapsed)
@@ -43,7 +43,7 @@ void Menu_State_Ingame_Options::draw()
     Screen* screen = Screen::instance();
 
 	this->print_menu_background();
-	this->render_menu_list(m_menu_list, config->get_base_screen_size_y()/2, config->get_base_screen_size_x()/3, config->get_base_screen_size_y()/9);
+	this->render_menu_list(m_menu_list, config->get_base_screen_size_y()/4, config->get_base_screen_size_x()/3, config->get_base_screen_size_y()/9);
 
 }
 

@@ -33,7 +33,7 @@ public:
 	Uint32 sample_volume;
 	Uint32 music_volume;
 	
-	Menu_List_Ingame_Options();
+	Menu_List_Ingame_Options(Menu_Base_State* parent);
 	
 	~Menu_List_Ingame_Options();
 		

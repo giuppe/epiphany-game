@@ -21,6 +21,7 @@
 #include "menu_entry_ranged.h"
 #include "menu_entry_bool.h"
 #include "menu_state.h"
+#include "input.h"
 #include "sfx.h"
 #include "music_manager.h"
 #include "game_manager.h"
@@ -34,6 +35,13 @@ Menu_List_Ingame_Options* callback_ingame_obj;
 void menu_options_ingame_callback_back()
 {
 	callback_ingame_obj->get_parent_menu_state()->close();
+	Input::instance()->reset_states();
+}
+
+void menu_options_ingame_callback_quit()
+{
+	callback_ingame_obj->get_parent_menu_state()->close();
+	Game_Manager::instance()->kill_game();
 }
 
 void menu_options_ingame_callback_sample_volume()
@@ -50,12 +58,14 @@ void menu_options_ingame_callback_fullscreen()
 {
 	Screen::instance()->toggle_fullscreen();
 	Epiconfig::instance()->set_fullscreen(Screen::instance()->is_fullscreen());
-			
+	Input::instance()->reset_states();
 }
 
 
-Menu_List_Ingame_Options::Menu_List_Ingame_Options()
+Menu_List_Ingame_Options::Menu_List_Ingame_Options(Menu_Base_State* parent)
 {
+	m_parent_menu_state = parent;
+
 	m_selected = 0;
 
 	sample_volume = Sample_Manager::instance()->get_volume();
@@ -66,13 +76,16 @@ Menu_List_Ingame_Options::Menu_List_Ingame_Options()
 
 	callback_ingame_obj = this;
 	
+	m_entries_list.push_back(new Menu_Entry_Simple("Resume game", &menu_options_ingame_callback_back));
+
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_ingame_callback_sample_volume));
 
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", &music_volume, &menu_options_ingame_callback_music_volume));
 	
 	m_entries_list.push_back(new Menu_Entry_Bool("Fullscreen: ", &m_fullscreen, &menu_options_ingame_callback_fullscreen));
 	
-	m_entries_list.push_back(new Menu_Entry_Simple("Back", &menu_options_ingame_callback_back));
+	m_entries_list.push_back(new Menu_Entry_Simple("Quit to Main Menu", &menu_options_ingame_callback_quit));
+
 	
 }
 
@@ -93,7 +106,6 @@ Menu_List_Ingame_Options::~Menu_List_Ingame_Options()
 void Menu_List_Ingame_Options::action_quit()
 {
 	(*menu_options_ingame_callback_back)();
-	this->action_press();
 }
 
 
