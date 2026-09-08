@@ -16,6 +16,7 @@
 
 #include "../dephine.h"
 #include "../sprite.h"
+#include "../input.h"
 #include "../entity.h"
 #include "../entity_manager.h"
 
@@ -173,6 +174,6 @@ void Entity_Player::kill()
 	{
 		Sample_Manager::instance()->play(SFX_GAME_GAMEOVER);
 	}
-
+	Input::instance()->reset_states();
 
 }
