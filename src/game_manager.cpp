@@ -5,6 +5,7 @@
 #include "surface_manager.h"
 #include "screen.h"
 #include "resource_factory.h"
+#include "menu_state.h"
 #include <cassert>
 
 void Game_Manager::init()
@@ -97,29 +98,19 @@ void Game_Manager::return_to_system()
 	m_current_state = NULL;
 }
 
+void Game_Manager::kill_game()
+{
+	if(m_current_state != NULL)
+	{
+		m_current_state->deinit();
+		m_state_to_delete_next = m_current_state;
+		m_current_state = NULL;
+	}
+	this->change_state(new Menu_State());
+}
+
 void Game_Manager::go()
 {
-	/*
-	const double dt = 1.0 / 60.0;
-	double current_time = get_time();
-	double accumulator = 0.0;
-
-	while (game_running) {
-		double new_time = get_time();
-		double frame_time = new_time - current_time;
-		current_time = new_time;
-
-		accumulator += frame_time;
-
-		while (accumulator >= dt) {
-			integrate_physics(current_state, dt);
-			accumulator -= dt;
-		}
-
-		render(current_state);
-	}
-	*/
-
 	Screen* screen = Screen::instance();
 	Uint64 current_frame_time=SDL_GetTicks64();
 	Uint64 accumulator = 0;
@@ -127,6 +118,7 @@ void Game_Manager::go()
 
 	while(m_current_state != NULL)
 	{
+
 		if(m_current_state_just_created)
 		{
 			m_current_state->create();
@@ -149,7 +141,7 @@ void Game_Manager::go()
 		}
 
 
-		temp_state->update_all(0);
+		temp_state->update_all(frame_time);
 
 		temp_state->draw_all();
 
@@ -162,15 +154,18 @@ void Game_Manager::go()
 		}
 		screen->flip_display();
 		screen->clear();
+
+		if(m_state_to_delete_next != NULL)
+		{
+			delete m_state_to_delete_next;
+			m_state_to_delete_next = NULL;
+		}
 	}
 	
 
 }
 
-void Game_Manager::play_level(const char* level)
-{
-	//TODO: m_game->play_level(level);
-}
+
 
 
 

@@ -35,6 +35,8 @@ class Game_Manager
 
         bool m_current_state_just_created = false;
 
+        ScreenState* m_state_to_delete_next = NULL;
+
     public:
 
         Uint32 find_levels_in_dir();
@@ -47,8 +49,7 @@ class Game_Manager
 
         void return_to_system();
 
-        void play_level(const char *);
-
+        void kill_game();
         
         void save_config();
 
