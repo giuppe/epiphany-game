@@ -286,7 +286,7 @@ void Input::update()
 			m_right=false;
 			m_up=false;
 			m_down=false;
-			DEBOUT("t_left: wins\n");
+			//DEBOUT("t_left: wins\n");
 		}
 		if (t_right > 0 && t_right>=t_left && t_right >= t_down && t_right >= t_up)
 		{
@@ -294,7 +294,7 @@ void Input::update()
 			m_right=true;
 			m_up=false;
 			m_down=false;
-			DEBOUT("t_right: wins\n");
+			//DEBOUT("t_right: wins\n");
 		}
 		if (t_up > 0 && t_up>=t_right && t_up >= t_down && t_up >= t_left)
 		{
@@ -302,7 +302,7 @@ void Input::update()
 			m_right=false;
 			m_up=true;
 			m_down=false;
-			DEBOUT("t_up: wins\n");
+			//DEBOUT("t_up: wins\n");
 		}
 		if (t_down > 0 && t_down>=t_right && t_down >= t_left && t_down >= t_up)
 		{
@@ -310,11 +310,11 @@ void Input::update()
 			m_right=false;
 			m_up=false;
 			m_down=true;
-			DEBOUT("t_down: wins\n");
+			//DEBOUT("t_down: wins\n");
 		}
 		if(!m_down &&!m_up && !m_left && !m_right)
 		{
-			DEBOUT("Nobody wins\n");
+			//DEBOUT("Nobody wins\n");
 		}
 	}
 
