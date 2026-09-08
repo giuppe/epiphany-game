@@ -66,6 +66,8 @@ Menu_List_Main::Menu_List_Main(Menu_Base_State* parent)
 	
 	m_selected = 0;
 
+	Epiconfig::instance()->set_current_level(m_current_level);
+
 	callback_menumain_obj = this;
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Start", &menu_callback_start));
