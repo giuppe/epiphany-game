@@ -1,6 +1,7 @@
 #include "dephine.h"
 
 #include "menu_base_state.h"
+#include "sprite_nine_slices.h"
 
 #ifndef MENU_STATE_INGAME_OPTIONS_H
 #define MENU_STATE_INGAME_OPTIONS_H
@@ -9,6 +10,8 @@ class Menu_List;
 
 class Menu_State_Ingame_Options : public Menu_Base_State
 {
+    private:
+        Sprite_Nine_Slice* m_background = NULL;
     protected:
         void print_menu_background();
 

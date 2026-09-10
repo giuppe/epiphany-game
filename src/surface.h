@@ -59,6 +59,11 @@ public:
 	
 	void init(SDL_Renderer* renderer, SDL_Surface* surface, Uint32 frame_size_x=32, Uint32 frame_size_y=32);
 	
+	SDL_Surface* get_surface(Uint32 frame_number)
+	{
+		return m_surfaces[frame_number].image;
+	}
+
 	~Surface();
 	
 };

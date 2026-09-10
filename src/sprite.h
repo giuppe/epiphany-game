@@ -85,11 +85,14 @@ private:
 	
 	void move_to_pos(Uint32 x, Uint32 y);
 	
-	void put_screen(ScreenCoord scr_coord);
+	
 	
 	void update_frame();
 	
 	void set_is_changed();
+
+protected:
+	void put_screen(ScreenCoord scr_coord);
 	
 public:
 
@@ -98,7 +101,7 @@ public:
 	Sprite():m_is_changed(true),m_initialized(false){};
 
 	
-	~Sprite();
+	virtual ~Sprite();
 	
 	void set_speed(Uint32 speed);
 	

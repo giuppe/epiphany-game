@@ -3,6 +3,7 @@
 #include "menu_list_ingame_options.h"
 #include "screen.h"
 #include "input.h"
+#include "surface_manager.h"
 
 
 Menu_State_Ingame_Options::Menu_State_Ingame_Options()
@@ -21,6 +22,8 @@ void Menu_State_Ingame_Options::create()
     Menu_Base_State::create();
     Input::instance()->reset_states();
     m_menu_list = new Menu_List_Ingame_Options(this);
+    m_background = new Sprite_Nine_Slice();
+    m_background->init(Surface_Manager::instance()->get_surface(Surface_Manager::SRF_DIALOG_BACKGROUND), 400+50+20, 260);
 }
 
 void Menu_State_Ingame_Options::update(double elapsed)
@@ -34,6 +37,7 @@ void Menu_State_Ingame_Options::deinit()
 {
     Menu_Base_State::deinit();
 	delete m_menu_list;
+    delete m_background;
 }
 
 void Menu_State_Ingame_Options::draw()
@@ -49,5 +53,10 @@ void Menu_State_Ingame_Options::draw()
 
 void Menu_State_Ingame_Options::print_menu_background()
 {
-    //TODO: draw a semi-transparent background
+    Epiconfig* config = Epiconfig::instance();
+    ScreenCoord coord;
+    coord.x = config->get_base_screen_size_x()/3 - 60 -50-10;
+    coord.y = config->get_base_screen_size_y()/4 - 30+5;
+    m_background->set_position_on_screen(coord);
+    m_background->draw();
 }

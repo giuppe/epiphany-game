@@ -183,6 +183,9 @@ Surface* Surface_Manager::create_surface(Surface_Manager::Surface_Type type)
 		frame_size_x=0;
 		frame_size_y=0;
 		break;
+	case Surface_Manager::SRF_DIALOG_BACKGROUND:
+		surface_path += "dialog_background.bmp";
+		break;
 	default:
 		assert(!"Trying to access a missing surface.");
 	}
@@ -275,7 +278,9 @@ void Surface_Manager::init()
 	
 	add_surface(SRF_MENU_BACK_TILE, this->create_surface(SRF_MENU_BACK_TILE));	
 	
-	add_surface(SRF_MENU_TITLE, this->create_surface(SRF_MENU_TITLE));	
+	add_surface(SRF_MENU_TITLE, this->create_surface(SRF_MENU_TITLE));
+
+	add_surface(SRF_DIALOG_BACKGROUND, this->create_surface(SRF_DIALOG_BACKGROUND));
 }
 
 void Surface_Manager::deinit()
