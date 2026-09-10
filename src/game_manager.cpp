@@ -141,7 +141,7 @@ void Game_Manager::go()
 		}
 
 
-		temp_state->update_all(frame_time);
+		temp_state->update_all((double)(frame_time/1000.0));
 
 		temp_state->draw_all();
 
