@@ -53,7 +53,7 @@ void Epiconfig::set_default_values()
 	
 	m_last_level = 0;
 
-	m_current_level = 0;
+	m_current_level = 999;
 	
 	refresh_game_window_parameters();
 	

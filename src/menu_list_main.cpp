@@ -47,7 +47,7 @@ void menu_callback_options()
 
 void menu_callback_level()
 {
-	DEBWARN(callback_menumain_obj->get_current_level());
+	DEBOUT(callback_menumain_obj->get_current_level());
 	Epiconfig::instance()->set_current_level(callback_menumain_obj->get_current_level());
 }
 
@@ -56,12 +56,17 @@ Menu_List_Main::Menu_List_Main(Menu_Base_State* parent)
 	m_parent_menu_state = parent;
 
 	Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
+
+	Uint32 last_selected_level = Epiconfig::instance()->get_current_level();
 	
 	Uint32 total_levels = Game_Manager::instance()->find_levels_in_dir();
 
 	m_total_levels = total_levels;
-
-	m_current_level = unsolved_level;
+	
+	if(last_selected_level == 999)
+		m_current_level = unsolved_level;
+	else
+		m_current_level = last_selected_level;
 	
 	m_selected = 0;
 
