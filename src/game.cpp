@@ -288,26 +288,6 @@ Game::~Game()
 }
 
 
-void Game::show_loading()
-{
-	Screen* screen = Screen::instance();
-	
-	screen->reset_virtual_screen_size();
-	
-	Font* ready_font = Font_Manager::instance()->get_font(Font_Factory::MENU_FONT);
-	
-	screen->clear();
-	
-	ready_font->write_center(100, "Ready!");
-	
-	screen->flip_display();
-	
-	Music_Manager::instance()->play(MUS_READY);
-	
-	//music duration
-	SDL_Delay(1940);
-	
-}
 
 Game::Game(Uint32 level_number)
 {
@@ -349,7 +329,6 @@ void Game::create()
 
 	}
 	
-	show_loading();
 
 	Music_Manager::instance()->play(MUS_GAME);
 	

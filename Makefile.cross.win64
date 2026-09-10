@@ -15,7 +15,7 @@ OBJS = src/sfx.cpp src/main.cpp src/level.cpp src/sample.cpp src/entity.cpp \
 	src/tinyxml/tinyxml.cpp src/menu_entry_bool.cpp src/music_manager.cpp src/xml_configuration.cpp \
 	src/commandline_configuration.cpp src/game_manager.cpp src/credits_state.cpp src/menu_options_state.cpp \
 	src/menu_base_state.cpp src/menu_list.cpp src/menu_list_ingame_options.cpp src/menu_state_ingame_options.cpp \
-	src/sprite_nine_slices.cpp
+	src/sprite_nine_slices.cpp src/loading_state.cpp
 
 HEADERS = entity_type.h emdlparser.h levelmap.h \
 	game.h screen.h menu_state.h sfx.h except.h level.h entity_factory.h \
@@ -36,7 +36,7 @@ HEADERS = entity_type.h emdlparser.h levelmap.h \
 	xml_configuration.h commandline_configuration.h world_coord.h screen_coord.h \
 	inputbase.h game_manager.h screen_state.h credits_state.h menu_options_state.h \
 	menu_base_state.h menu_list_ingame_options.h menu_state_ingame_options.h \
-	sprite_nine_slices.h
+	sprite_nine_slices.h loading_state.h
 
 #CC specifies which compiler we're using
 CC = x86_64-w64-mingw32-g++

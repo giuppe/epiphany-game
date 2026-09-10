@@ -20,7 +20,7 @@
 #include "menu_entry_simple.h"
 #include "menu_entry_ranged.h"
 #include "menu_list_options.h"
-#include "game.h"
+#include "loading_state.h"
 #include "credits_state.h"
 #include "menu_options_state.h"
 #include "menu_base_state.h"
@@ -32,8 +32,7 @@ Menu_List_Main* callback_menumain_obj;
 
 void menu_callback_start()
 {
-	Uint32 current_level = Epiconfig::instance()->get_current_level();
-	Game_Manager::instance()->change_state(new Game(current_level));
+	Game_Manager::instance()->change_state(new Loading_State());
 }
 
 void menu_callback_quit()

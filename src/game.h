@@ -87,7 +87,6 @@ public:
 	
 	void draw_score();
 	
-	void show_loading();
 	
 
 };
