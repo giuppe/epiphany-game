@@ -25,6 +25,7 @@ void Font_Manager::init()
 	add_font(Font_Factory::instance()->create_font(Font_Factory::GAME_FONT));
 	add_font(Font_Factory::instance()->create_font(Font_Factory::CREDITS_FONT));
 	add_font(Font_Factory::instance()->create_font(Font_Factory::TIME_FONT));
+	add_font(Font_Factory::instance()->create_font(Font_Factory::MENU_SMALL_FONT));
 }
 
 Font_Handle Font_Manager::add_font(Font* font)

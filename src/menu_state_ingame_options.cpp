@@ -4,6 +4,7 @@
 #include "screen.h"
 #include "input.h"
 #include "surface_manager.h"
+#include "fonts/font_factory.h"
 
 
 Menu_State_Ingame_Options::Menu_State_Ingame_Options()
@@ -20,10 +21,19 @@ Menu_State_Ingame_Options::~Menu_State_Ingame_Options()
 void Menu_State_Ingame_Options::create()
 {
     Menu_Base_State::create();
+    m_menu_font = Font_Factory::MENU_FONT;
     Input::instance()->reset_states();
     m_menu_list = new Menu_List_Ingame_Options(this);
+    
+    Font* menu_font = Font_Manager::instance()->get_font(m_menu_font); 
+
+    Uint32 menu_height = menu_font->get_text_height() * (6+1);
     m_background = new Sprite_Nine_Slice();
-    m_background->init(Surface_Manager::instance()->get_surface(Surface_Manager::SRF_DIALOG_BACKGROUND), 400+50+20, 260);
+    m_background->init(
+        Surface_Manager::instance()->get_surface(Surface_Manager::SRF_DIALOG_BACKGROUND), 
+        400+50+20, 
+        menu_height
+    );
 }
 
 void Menu_State_Ingame_Options::update(double elapsed)

@@ -33,5 +33,7 @@ public:
     void deinit(){if(m_initialized==true) SFont_FreeFont(m_font);};
     void write(Sint32 x, Sint32 y, const char* text);
     void write_center(Sint32 y, const char* text);
+    Uint32 get_text_width(const char* text);
+    Uint32 get_text_height();
 };
 #endif /*FONT_H_*/

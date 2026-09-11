@@ -136,6 +136,10 @@ void Menu_Base_State::render_menu_list(Menu_List* menu_list, Sint32 menu_top_poi
 	Uint32 menu_offset_x = 10;
 	
 	//printing menu
+
+	Uint32 text_height = menu_font->get_text_height();
+	
+	menu_vertical_distance = text_height;
 	
 			
 	for(Uint32 i=0; i<menu_list->get_list_size(); i++)

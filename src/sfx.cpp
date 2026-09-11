@@ -212,6 +212,7 @@ void Sample_Manager::set_volume(Uint32 value)
 		}
 	
 	Mix_Volume(-1, value*value*2);
+	Epiconfig::instance()->set_volume_sound(this->get_volume());
 }
 
 
