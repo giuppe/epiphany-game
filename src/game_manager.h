@@ -31,7 +31,9 @@ class Game_Manager
         
         char m_ini_path[255];
 
-        ScreenState* m_current_state;
+        ScreenState* m_current_state = NULL;
+
+        ScreenState* m_incoming_state = NULL;
 
         bool m_current_state_just_created = false;
 

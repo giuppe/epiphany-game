@@ -34,6 +34,7 @@
 #include "level.h"
 #include "game_timer.h"
 #include "credits_state.h"
+#include "loading_state.h"
 #include <cstdlib>
 #include <cstdio>
 #include <SDL2/SDL.h>
@@ -477,13 +478,12 @@ void Game::update(double elapsed)
 	switch(exit_state)
 	{
 	case false:
-		DEBWARN("Game_over!...");
-		Music_Manager::instance()->play(MUS_MENU);
-
-		Game_Manager::instance()->change_state(new Menu_State());
+		DEBWARN("Game_over!...\n");
+		
+		Game_Manager::instance()->change_state(new Loading_State());
 		break;
 	case true:
-		DEBWARN("Winner! ;)");
+		DEBWARN("Winner! ;)\n");
 		Uint32 unsolved_level = Epiconfig::instance()->get_last_level();
 		Uint32 total_levels = Game_Manager::instance()->find_levels_in_dir();
 		bool next_level_exists = (unsolved_level==m_current_level_number)&&(unsolved_level+1>total_levels);

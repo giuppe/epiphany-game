@@ -89,7 +89,9 @@ void Game_Manager::save_config()
 
 void Game_Manager::change_state(ScreenState* new_state)
 {
-	m_current_state = new_state;
+	m_incoming_state = new_state;
+	if(m_current_state != NULL)
+		m_state_to_delete_next = m_current_state;
 	m_current_state_just_created = true;
 }
 
@@ -100,12 +102,6 @@ void Game_Manager::return_to_system()
 
 void Game_Manager::kill_game()
 {
-	if(m_current_state != NULL)
-	{
-		m_current_state->deinit();
-		m_state_to_delete_next = m_current_state;
-		m_current_state = NULL;
-	}
 	this->change_state(new Menu_State());
 }
 
@@ -116,8 +112,13 @@ void Game_Manager::go()
 	Uint64 accumulator = 0;
 	const Uint32 dt = 1000.0 / 6.0;
 
-	while(m_current_state != NULL)
+	while(m_current_state != NULL || m_incoming_state != NULL)
 	{
+		if(m_incoming_state != NULL)
+		{
+			m_current_state = m_incoming_state;
+			m_incoming_state = NULL;
+		}
 
 		if(m_current_state_just_created)
 		{
@@ -157,9 +158,13 @@ void Game_Manager::go()
 
 		if(m_state_to_delete_next != NULL)
 		{
+			m_state_to_delete_next->deinit();
 			delete m_state_to_delete_next;
 			m_state_to_delete_next = NULL;
+			m_current_state = NULL;
 		}
+
+		
 	}
 	
 
