@@ -32,6 +32,16 @@ void Font::write_center(Sint32 y, const char* text)
 	SFont_WriteCenter(Screen::instance()->get_screen(), m_font, y, text);
 }
 
+Uint32 Font::get_text_width(const char* text)
+{
+	return SFont_TextWidth(m_font, text);
+}
+
+Uint32 Font::get_text_height()
+{
+	return SFont_TextHeight(m_font);
+}
+
 void Font::init(SFont_Font* font)
 {
 	if(font!=NULL)

@@ -36,7 +36,8 @@ public:
 		MENU_FONT,
 		GAME_FONT,
 		CREDITS_FONT,
-		TIME_FONT
+		TIME_FONT,
+		MENU_SMALL_FONT
 	};
 
 

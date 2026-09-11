@@ -41,6 +41,9 @@ Font* Font_Factory::create_font(Font_Type type)
 		case MENU_FONT:
 			m_res_factory += "/gfx/menu_font.bmp";
 			break;
+		case MENU_SMALL_FONT:
+			m_res_factory += "/gfx/menu_small_font.bmp";
+			break;
 		default:
 			assert(!"Error: Selected non-existing font type.");
 	}
