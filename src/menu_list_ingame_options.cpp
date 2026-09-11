@@ -26,6 +26,7 @@
 #include "music_manager.h"
 #include "game_manager.h"
 #include "credits_state.h"
+#include "loading_state.h"
 #include "screen.h"
 #include <vector>
 #include <cassert>
@@ -36,6 +37,11 @@ void menu_options_ingame_callback_back()
 {
 	callback_ingame_obj->get_parent_menu_state()->close();
 	Input::instance()->reset_states();
+}
+
+void menu_options_ingame_callback_restart()
+{
+	Game_Manager::instance()->change_state(new Loading_State());
 }
 
 void menu_options_ingame_callback_quit()
@@ -78,7 +84,7 @@ Menu_List_Ingame_Options::Menu_List_Ingame_Options(Menu_Base_State* parent)
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Resume game", &menu_options_ingame_callback_back));
 
-	m_entries_list.push_back(new Menu_Entry_Simple("Restart game", &menu_options_ingame_callback_back));
+	m_entries_list.push_back(new Menu_Entry_Simple("Restart game", &menu_options_ingame_callback_restart));
 
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_ingame_callback_sample_volume));
 

@@ -47,7 +47,7 @@ void menu_callback_options()
 
 void menu_callback_level()
 {
-	DEBOUT(callback_menumain_obj->get_current_level());
+	//DEBOUT(callback_menumain_obj->get_current_level());
 	Epiconfig::instance()->set_current_level(callback_menumain_obj->get_current_level());
 }
 
