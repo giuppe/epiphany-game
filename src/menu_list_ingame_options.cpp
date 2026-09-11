@@ -78,6 +78,8 @@ Menu_List_Ingame_Options::Menu_List_Ingame_Options(Menu_Base_State* parent)
 	
 	m_entries_list.push_back(new Menu_Entry_Simple("Resume game", &menu_options_ingame_callback_back));
 
+	m_entries_list.push_back(new Menu_Entry_Simple("Restart game", &menu_options_ingame_callback_back));
+
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Sample_Manager::instance()->get_max_volume(), "Sound Volume: ", &sample_volume, &menu_options_ingame_callback_sample_volume));
 
 	m_entries_list.push_back(new Menu_Entry_Ranged(0, Music_Manager::instance()->get_max_volume(), "Music Volume: ", &music_volume, &menu_options_ingame_callback_music_volume));
