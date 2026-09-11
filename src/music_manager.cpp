@@ -133,6 +133,32 @@ void Music_Manager::play(Music_Type type)
 	}
 }
 
+void Music_Manager::pause()
+{
+	if(m_disabled==true)
+	{
+		return;
+	}
+	
+	if(music_enabled == false)
+		return;
+
+	Mix_PauseMusic();
+}
+
+void Music_Manager::unpause()
+{
+	if(m_disabled==true)
+	{
+		return;
+	}
+	
+	if(music_enabled == false)
+		return;
+
+	Mix_ResumeMusic();
+}
+
 
 Uint32 Music_Manager::get_max_volume()
 {

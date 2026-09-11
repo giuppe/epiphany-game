@@ -5,6 +5,7 @@
 #include "input.h"
 #include "surface_manager.h"
 #include "fonts/font_factory.h"
+#include "music_manager.h"
 
 
 Menu_State_Ingame_Options::Menu_State_Ingame_Options()
@@ -34,6 +35,7 @@ void Menu_State_Ingame_Options::create()
         400+50+20, 
         menu_height
     );
+    Music_Manager::instance()->pause();
 }
 
 void Menu_State_Ingame_Options::update(double elapsed)
@@ -48,6 +50,7 @@ void Menu_State_Ingame_Options::deinit()
     Menu_Base_State::deinit();
 	delete m_menu_list;
     delete m_background;
+    Music_Manager::instance()->unpause();
 }
 
 void Menu_State_Ingame_Options::draw()
