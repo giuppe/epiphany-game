@@ -150,6 +150,7 @@ void Music_Manager::set_volume(Uint32 value)
 			return;
 		}
 	Mix_VolumeMusic(value*value*2);
+	Epiconfig::instance()->set_volume_music(this->get_volume());
 }
 
 
