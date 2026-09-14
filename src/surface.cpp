@@ -94,7 +94,8 @@ void Surface::put_screen(ScreenCoord scr_coord, int frame_no)
 
 	if(frame_no == -1)
 	{
-		screen->blit_surface(m_surfaces[0].image, NULL,  scr_coord);
+		SDL_Rect src = {.x=0, .y=0, .w=m_surfaces[0].image->w, .h=m_surfaces[0].image->h};
+		screen->blit_surface(m_surfaces[0].image, &src,  scr_coord);
 
 	}
 	else

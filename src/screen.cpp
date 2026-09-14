@@ -148,7 +148,7 @@ void Screen::update_window_size(Uint32 size_x, Uint32 size_y)
 	SDL_SetTextureScaleMode(m_scaling_texture, SDL_ScaleModeNearest);
 	//DEBWARN("New window: ("<<size_x<<","<<size_y<<")\n");
 	//DEBWARN("Intermediate screen: ("<<intermediate_w<<","<<intermediate_h<<")\n");
-	//DEBWARN("New window: ("<<size_x<<","<<size_y<<")\n");
+	DEBOUT("Base screen size: ("<<base_w<<","<<base_h<<")\n");
 }
 
 void Screen::set_fullscreen(bool f)
@@ -210,6 +210,7 @@ void Screen::resize_world_screen(Uint32 size_x, Uint32 size_y)
 	
 	m_world_size_x=size_x;
 	m_world_size_y=size_y;
+	DEBOUT("World screen size: "<<size_x<<", "<<size_y<<"\n");
 }
 
 
@@ -378,8 +379,8 @@ void Screen::draw_rect(Sint32 x, Sint32 y, Uint32 size_x, Uint32 size_y, Uint8 r
 void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 {
 	SDL_Surface* dest_surf = m_virtual_screen;
-	
-	SDL_BlitSurface(surface, src,  dest_surf, dest);
+
+	SDL_BlitSurface(surface, src,  dest_surf, dest) == 0?total_draw_calls++:false;
 }
 
 void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
@@ -387,6 +388,8 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, ScreenCoord dest)
 	SDL_Rect rect_dest;
 	rect_dest.x=dest.x;
 	rect_dest.y=dest.y;
+	rect_dest.w=src->w;
+	rect_dest.h=src->h;
 	blit_surface(surface, src,&rect_dest);
 }
 

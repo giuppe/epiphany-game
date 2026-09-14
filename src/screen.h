@@ -58,8 +58,11 @@ private:
 	
 	void blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest);
 
+	
 
 public:
+
+	Uint32 total_draw_calls = 0;
 
 	void init(Uint32 resolution_x, Uint32 resolution_y, Uint32 world_size_x, Uint32 world_size_y);
 	

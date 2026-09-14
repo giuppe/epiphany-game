@@ -132,7 +132,9 @@ void Game_Manager::go()
 			fps_counter = 0;
 			fps_counter_fixed = 0;
 			fps_accumulator -= 1000;
-			DEBOUT("Fps: "<<m_fps_last_second<<", fixed: "<<m_fps_fixed_last_second<<"\n");
+			double draws = Screen::instance()->total_draw_calls / m_fps_last_second;
+			DEBOUT("Fps: "<<m_fps_last_second<<", fixed: "<<m_fps_fixed_last_second<<", draws: "<<draws<<"\n");
+			Screen::instance()->total_draw_calls = 0;
 		}
 
 		if(m_incoming_state != NULL)
@@ -166,6 +168,7 @@ void Game_Manager::go()
 
 		fps_counter++;
 
+		/* //frame limiter (currently disabled)
 		while(SDL_GetTicks64()-current_frame_time<20)
 		{
 			if(SDL_GetTicks64()-current_frame_time<15)
@@ -173,6 +176,7 @@ void Game_Manager::go()
 				SDL_Delay(5);
 			}
 		}
+		*/
 		screen->flip_display();
 		screen->clear();
 

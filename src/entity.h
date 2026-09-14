@@ -163,7 +163,7 @@ public:
 		
 		virtual ~Entity(){
 
-			DEBOUT("Killing entity of type: "<<m_type);
+			//DEBOUT("Killing entity of type: "<<m_type<<"\n");
 		}
 };
 	
