@@ -110,10 +110,31 @@ void Game_Manager::go()
 	Screen* screen = Screen::instance();
 	Uint64 current_frame_time=SDL_GetTicks64();
 	Uint64 accumulator = 0;
+	Uint32 fps_counter_fixed = 0;
+	Uint32 fps_counter = 0;
+	
+	Uint32 fps_accumulator = 0;
 	const Uint32 dt = 1000.0 / 6.0;
 
 	while(m_current_state != NULL || m_incoming_state != NULL)
 	{
+		Uint64 new_time = SDL_GetTicks64();
+		Uint64 frame_time = new_time - current_frame_time;
+		current_frame_time = new_time;
+
+		accumulator += frame_time;
+		fps_accumulator += frame_time;
+
+		if(fps_accumulator >= 1000)
+		{
+			m_fps_last_second = fps_counter;
+			m_fps_fixed_last_second = fps_counter_fixed;
+			fps_counter = 0;
+			fps_counter_fixed = 0;
+			fps_accumulator -= 1000;
+			DEBOUT("Fps: "<<m_fps_last_second<<", fixed: "<<m_fps_fixed_last_second<<"\n");
+		}
+
 		if(m_incoming_state != NULL)
 		{
 			m_current_state = m_incoming_state;
@@ -128,23 +149,22 @@ void Game_Manager::go()
 
 		ScreenState* temp_state = m_current_state;
 
-		Uint64 new_time = SDL_GetTicks64();
-		Uint64 frame_time = new_time - current_frame_time;
-		current_frame_time = new_time;
-
-		accumulator += frame_time;
+		
 
 		//DEBWARN("accumulator "<<accumulator<<"\n");
 
 		while (accumulator >= dt) {
 			temp_state->update_fixed_all(dt);
 			accumulator -= dt;
+			fps_counter_fixed++;
 		}
 
 
 		temp_state->update_all((double)(frame_time/1000.0));
 
 		temp_state->draw_all();
+
+		fps_counter++;
 
 		while(SDL_GetTicks64()-current_frame_time<20)
 		{

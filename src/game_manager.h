@@ -39,6 +39,9 @@ class Game_Manager
 
         ScreenState* m_state_to_delete_next = NULL;
 
+        Uint32 m_fps_last_second = 0;
+        Uint32 m_fps_fixed_last_second = 0;
+
     public:
 
         Uint32 find_levels_in_dir();
@@ -54,6 +57,10 @@ class Game_Manager
         void kill_game();
         
         void save_config();
+
+        Uint32 get_fps_last_second(){return m_fps_last_second;}
+
+        Uint32 get_fps_fixed_last_second(){return m_fps_fixed_last_second;}
 
 
     // singleton stuff
