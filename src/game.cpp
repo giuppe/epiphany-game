@@ -417,7 +417,7 @@ void Game::update(double elapsed)
 		//move sprites
 		if(player->exists())
 		{
-			player->move_sprite();
+			player->move_sprite(elapsed);
 		}
 		for(Uint32 i=1; i<entity_manager_size; i++)
 		{
@@ -425,7 +425,7 @@ void Game::update(double elapsed)
 			if((curr_ntt->exists())&&(curr_ntt->get_type()!=PLAYER))
 			{
 
-				curr_ntt->move_sprite();
+				curr_ntt->move_sprite(elapsed);
 				
 			}
 		}

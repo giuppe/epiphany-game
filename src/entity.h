@@ -100,9 +100,9 @@ public:
 
 
 	
-	void move_sprite()
+	void move_sprite(double elapsed)
 	{
-		m_sprite.move();
+		m_sprite.move(elapsed);
 	}
 	
 	WorldCoord get_sprite_position()

@@ -64,6 +64,11 @@ public:
 		return m_surfaces[frame_number].image;
 	}
 
+	Uint32 get_duration(Uint32 frame_number)
+	{
+		return m_surfaces[frame_number].pause;
+	}
+
 	~Surface();
 	
 };

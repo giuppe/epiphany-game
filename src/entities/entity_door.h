@@ -53,7 +53,7 @@ public:
 	
 	void refresh_sprite(){};
 	
-	void move_sprite(){};
+	void move_sprite(double elapsed){};
 	
 };
 

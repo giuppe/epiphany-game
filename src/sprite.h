@@ -52,11 +52,11 @@ private:
 
 	Uint64 m_time_of_last_frame;
 	
-	bool m_is_animating;
+	bool m_is_animating=false;
 	
-	bool m_is_changed;
+	bool m_is_changed=true;
 	
-	bool m_initialized;
+	bool m_initialized=false;
 
 	Anim_State m_state;	
 	
@@ -69,7 +69,7 @@ private:
 	
 	void set_curr_frame(Uint32 frame);
 	
-	void move(Uint32 n_pixel);
+	void move_pixels(Uint32 n_pixel);
 	
 	Sprite(const Sprite& sprite);
 	
@@ -98,7 +98,7 @@ public:
 
 	double frame_duration = 1/30.0;
 	
-	Sprite():m_is_changed(true),m_initialized(false){};
+	Sprite(){};
 
 	
 	virtual ~Sprite();
@@ -113,7 +113,7 @@ public:
 	
 	void move_to_position(WorldCoord pos);
 	
-	void move();
+	void move(double elapsed);
 	
 	void set_position_on_screen(ScreenCoord scr_coord);
 	

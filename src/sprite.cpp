@@ -19,6 +19,7 @@
 
 #include "sprite.h"
 #include "screen.h"
+#include <cmath>
 
 
 void Sprite::start_animation()
@@ -150,7 +151,7 @@ void Sprite::set_speed(Uint32 speed)
 
 
 
-void Sprite::move(Uint32 n_pixel)
+void Sprite::move_pixels(Uint32 n_pixel)
 {
 	
 	if(n_pixel==0){
@@ -214,12 +215,13 @@ void Sprite::move(Uint32 n_pixel)
 	
 }
 
-void Sprite::move()
+void Sprite::move(double elapsed)
 {
-	
-	Sint32 n_pixel = k_sprite_size/m_total_frames;
-		
-	move(n_pixel);
+
+	//Sint32 n_pixel = k_sprite_size/m_total_frames;
+	double velocity = 5.1;
+	Uint32 n_pixels = (Uint32)floor(elapsed*1000.0/velocity + 0.5);
+	move_pixels(n_pixels);
 
 	
 
@@ -264,7 +266,9 @@ void Sprite::move_to_pos_y(Uint32 y)
 void Sprite::update_frame()
 {
 	Uint64 current_time = SDL_GetTicks64();
-	if(m_is_animating && current_time-m_time_of_last_frame > frame_duration*1000){
+	Uint64 elapsed = current_time - m_time_of_last_frame;
+	Uint32 current_frame_duration = m_surface->get_duration(m_curr_frame);
+	if(m_is_animating && current_time-m_time_of_last_frame > current_frame_duration){
 		set_curr_frame(m_curr_frame+1);
 		set_is_changed();
 		m_time_of_last_frame = current_time;

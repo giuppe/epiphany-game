@@ -78,7 +78,7 @@ void Surface::init(SDL_Renderer* renderer, SDL_Surface* surface, Uint32 frame_si
 			//Set pink as transparent color
 			SDL_SetColorKey(m_surfaces[k*num_frames_x+i].image, SDL_TRUE, SDL_MapRGB(m_surfaces[k*num_frames_x+i].image->format, 255, 0, 255));
 
-			m_surfaces[k*num_frames_x+i].pause=1;
+			m_surfaces[k*num_frames_x+i].pause=20;
 
 		}
 
