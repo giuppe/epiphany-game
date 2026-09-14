@@ -161,7 +161,10 @@ public:
 		virtual bool explode()=0;
 		virtual bool roll_on_me()=0;
 		
-		virtual ~Entity(){}
+		virtual ~Entity(){
+
+			DEBOUT("Killing entity of type: "<<m_type);
+		}
 };
 	
 

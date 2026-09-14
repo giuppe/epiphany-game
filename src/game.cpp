@@ -285,7 +285,7 @@ void Game::load_fonts()
 
 Game::~Game()
 {
-	
+	delete m_level;
 }
 
 
@@ -467,7 +467,7 @@ void Game::update(double elapsed)
 	
 	SDL_Delay(500);
     	 	
-	delete m_level;
+	
 
 	if(m_direct_map_loading)
 	{

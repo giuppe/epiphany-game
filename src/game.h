@@ -38,7 +38,7 @@ private:
 
 	Game_Timer m_time;
 	
-	Level* m_level;
+	Level* m_level = NULL;
 	
 	Font_Handle m_game_font;
 	
