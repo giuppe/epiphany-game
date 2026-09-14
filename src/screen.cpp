@@ -380,6 +380,9 @@ void Screen::blit_surface(SDL_Surface* surface, SDL_Rect* src, SDL_Rect* dest)
 {
 	SDL_Surface* dest_surf = m_virtual_screen;
 
+	if(dest->x>m_camera.w || dest->y>m_camera.h || dest->x+dest->w<0 || dest->y+dest->h<0)
+		return;
+	
 	SDL_BlitSurface(surface, src,  dest_surf, dest) == 0?total_draw_calls++:false;
 }
 
