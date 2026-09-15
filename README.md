@@ -1,11 +1,11 @@
-
+```
      _____ ____ __ ____ __   __ _____ _      __    _
     /  ___) _  \  ) _  \  ) /  ) __  \ \    / )\  / )
    /  /_ / /_) / / /_) / /_/  / /__) /  \  / /\ \/ /
   /  ___)  ___/ /  ___/ __   / ___  / /\ \/ /  \  /
  /  /__/  / /  /  / /  / /  / /  / / /  \  /   / /
 (______)_/ (__/__/ (__/ (__/_/  (_/_/   (_/   (_/
-
+```
 
 Epiphany is a GPL'ed (free software) multi-platform clone of BoulderDash.
 The player must collect all valuable minerals scattered in levels,
@@ -14,10 +14,15 @@ avoiding being hit by a falling boulder, or (worst :) by a bomb.
 
 Current version: 0.9.2
 
-*This is a beta version. Most of it works, but it's not yet a completed game.*
-
+# Play
 [Download from GitHub](https://github.com/giuppe/epiphany-game/releases)
 
+In-Game Keys:
+Arrow keys -> move player;
+Space bar -> snap (eat without move);
+P or Pause -> pause game;
+
+# Compile from scratch
 It uses SDL 2.x and SDL_mixer 2.x (http://www.libsdl.org), so make sure it is properly installed before compiling Epiphany.
 
 Read "Tech" file for informations about how to write new maps.
@@ -29,13 +34,10 @@ Use:
 `epiphany --help`
 for other usage information.
 
-In-Game Keys:
-Arrow keys -> move player;
-Space bar -> snap (eat without move);
-P or Pause -> pause game;
+
 ---
 
-You can find Epiphany source on:
+You can find the Epiphany source on:
 Github:						https://github.com/giuppe/epiphany-game
 Debian package:				http://packages.debian.org/epiphany
 
@@ -52,6 +54,5 @@ You can find it on epiphany-editor project page:
 See COPYING for license.
 ---
 
-For any comment, bugs, ideas or <whatever you want>, write to:
-Giuseppe D'Aqui' <giuseppe.da@gmail.com>
+For any comment, bugs, ideas or <whatever you want>: feel free to open a GitHub issue.
 
